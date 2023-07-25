@@ -25,7 +25,9 @@
  */
 package org.alfresco.repo.web.filter.beans;
 
-import java.io.IOException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -34,9 +36,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import java.io.IOException;
 
 /**
  * An adapter from the servlet filter world into the Spring dependency injected world. Simply looks up a
@@ -83,7 +83,7 @@ public class BeanProxyFilter implements Filter
     /* (non-Javadoc)
      * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
      */
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+    public void doFilter(@RUntainted ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException
     {
         this.filter.doFilter(this.context, request, response, chain);

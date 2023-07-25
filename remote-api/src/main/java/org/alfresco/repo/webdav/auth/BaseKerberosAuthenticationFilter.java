@@ -26,11 +26,21 @@
 
 package org.alfresco.repo.webdav.auth;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.security.Principal;
-import java.util.Vector;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import org.alfresco.jlan.server.auth.kerberos.KerberosDetails;
+import org.alfresco.jlan.server.auth.kerberos.SessionSetupPrivilegedAction;
+import org.alfresco.jlan.server.auth.spnego.NegTokenInit;
+import org.alfresco.jlan.server.auth.spnego.NegTokenTarg;
+import org.alfresco.jlan.server.auth.spnego.OID;
+import org.alfresco.jlan.server.auth.spnego.SPNEGO;
+import org.alfresco.repo.SessionUser;
+import org.alfresco.repo.security.authentication.AuthenticationException;
+import org.alfresco.repo.security.authentication.AuthenticationUtil;
+import org.alfresco.repo.web.auth.KerberosCredentials;
+import org.alfresco.repo.web.auth.TicketCredentials;
+import org.alfresco.repo.web.auth.WebCredentials;
+import org.apache.commons.codec.binary.Base64;
+import org.ietf.jgss.Oid;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -46,21 +56,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.alfresco.jlan.server.auth.kerberos.KerberosDetails;
-import org.alfresco.jlan.server.auth.kerberos.SessionSetupPrivilegedAction;
-import org.alfresco.jlan.server.auth.spnego.NegTokenInit;
-import org.alfresco.jlan.server.auth.spnego.NegTokenTarg;
-import org.alfresco.jlan.server.auth.spnego.OID;
-import org.alfresco.jlan.server.auth.spnego.SPNEGO;
-import org.alfresco.repo.SessionUser;
-import org.alfresco.repo.security.authentication.AuthenticationException;
-import org.alfresco.repo.security.authentication.AuthenticationUtil;
-import org.alfresco.repo.web.auth.KerberosCredentials;
-import org.alfresco.repo.web.auth.TicketCredentials;
-import org.alfresco.repo.web.auth.WebCredentials;
-import org.apache.commons.codec.binary.Base64;
-import org.ietf.jgss.Oid;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.security.Principal;
+import java.util.Vector;
 
 /**
  * Base class with common code and initialisation for Kerberos authentication filters.
@@ -255,7 +255,7 @@ public abstract class BaseKerberosAuthenticationFilter extends BaseSSOAuthentica
     }
 
     
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest req, HttpServletResponse resp)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException
     {
         // Check if there is an authorization header with an SPNEGO security blob

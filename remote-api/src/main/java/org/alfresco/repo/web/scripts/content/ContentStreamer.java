@@ -25,6 +25,35 @@
  */
 package org.alfresco.repo.web.scripts.content;
 
+import org.alfresco.model.ContentModel;
+import org.alfresco.repo.content.MimetypeMap;
+import org.alfresco.repo.content.filestore.FileContentReader;
+import org.alfresco.repo.web.scripts.MimeTypeUtil;
+import org.alfresco.repo.web.util.HttpRangeProcessor;
+import org.alfresco.rest.framework.resource.content.CacheDirective;
+import org.alfresco.service.cmr.repository.ArchivedIOException;
+import org.alfresco.service.cmr.repository.ContentIOException;
+import org.alfresco.service.cmr.repository.ContentReader;
+import org.alfresco.service.cmr.repository.ContentService;
+import org.alfresco.service.cmr.repository.MimetypeService;
+import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.cmr.site.SiteService;
+import org.alfresco.service.namespace.QName;
+import org.alfresco.sync.repo.events.EventPublisher;
+import org.alfresco.util.TempFileProvider;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.cxf.attachment.Rfc5987Util;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.extensions.webscripts.Cache;
+import org.springframework.extensions.webscripts.WebScriptException;
+import org.springframework.extensions.webscripts.WebScriptRequest;
+import org.springframework.extensions.webscripts.WebScriptResponse;
+import org.springframework.util.FileCopyUtils;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,36 +67,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.alfresco.model.ContentModel;
-import org.alfresco.repo.content.MimetypeMap;
-import org.alfresco.repo.content.filestore.FileContentReader;
-import org.alfresco.repo.web.scripts.MimeTypeUtil;
-import org.alfresco.sync.repo.events.EventPublisher;
-import org.alfresco.repo.web.util.HttpRangeProcessor;
-import org.alfresco.rest.framework.resource.content.CacheDirective;
-import org.alfresco.service.cmr.repository.ArchivedIOException;
-import org.alfresco.service.cmr.repository.ContentIOException;
-import org.alfresco.service.cmr.repository.ContentReader;
-import org.alfresco.service.cmr.repository.ContentService;
-import org.alfresco.service.cmr.repository.MimetypeService;
-import org.alfresco.service.cmr.repository.NodeRef;
-import org.alfresco.service.cmr.repository.NodeService;
-import org.alfresco.service.cmr.site.SiteService;
-import org.alfresco.service.namespace.QName;
-import org.alfresco.util.TempFileProvider;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.cxf.attachment.Rfc5987Util;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.extensions.webscripts.Cache;
-import org.springframework.extensions.webscripts.WebScriptException;
-import org.springframework.extensions.webscripts.WebScriptRequest;
-import org.springframework.extensions.webscripts.WebScriptResponse;
-import org.springframework.util.FileCopyUtils;
 
 
 /**

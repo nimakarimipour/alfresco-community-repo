@@ -25,11 +25,25 @@
  */
 package org.alfresco.repo.webdav.auth;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.regex.Pattern;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import org.alfresco.error.AlfrescoRuntimeException;
+import org.alfresco.filesys.ExtendedServerConfigurationAccessor;
+import org.alfresco.jlan.server.auth.ntlm.NTLM;
+import org.alfresco.jlan.server.config.SecurityConfigSection;
+import org.alfresco.repo.SessionUser;
+import org.alfresco.repo.management.subsystems.ActivateableBean;
+import org.alfresco.repo.security.authentication.AuthenticationException;
+import org.alfresco.repo.web.auth.WebCredentials;
+import org.alfresco.repo.web.filter.beans.DependencyInjectedFilter;
+import org.alfresco.rest.api.PublicApiTenantWebScriptServletRequest;
+import org.alfresco.rest.framework.core.exceptions.NotFoundException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.extensions.surf.util.URLDecoder;
+import org.springframework.extensions.webscripts.Description.RequiredAuthentication;
+import org.springframework.extensions.webscripts.Match;
+import org.springframework.extensions.webscripts.RuntimeContainer;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
@@ -40,26 +54,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-
-import org.alfresco.error.AlfrescoRuntimeException;
-import org.alfresco.filesys.ExtendedServerConfigurationAccessor;
-import org.alfresco.jlan.server.auth.ntlm.NTLM;
-import org.alfresco.jlan.server.config.SecurityConfigSection;
-import org.alfresco.jlan.util.IPAddress;
-import org.alfresco.repo.SessionUser;
-import org.alfresco.repo.management.subsystems.ActivateableBean;
-import org.alfresco.repo.security.authentication.AuthenticationException;
-import org.alfresco.repo.web.auth.WebCredentials;
-import org.alfresco.repo.web.filter.beans.DependencyInjectedFilter;
-import org.alfresco.rest.api.PublicApiTenantWebScriptServletRequest;
-import org.alfresco.rest.framework.core.exceptions.NotFoundException;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.extensions.webscripts.RuntimeContainer;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.extensions.webscripts.Description.RequiredAuthentication;
-import org.springframework.extensions.surf.util.URLDecoder;
-import org.springframework.extensions.webscripts.Match;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 
 /**
  * Base class with common code and initialisation for single signon authentication filters.
@@ -77,7 +76,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
     
     // Various services required by NTLM authenticator
 
-    private String m_loginPage;
+    private @RUntainted String m_loginPage;
     
     // Indicate whether ticket based logons are supported
     
@@ -192,7 +191,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * @see org.alfresco.repo.web.filter.beans.DependencyInjectedFilter#doFilter(javax.servlet.ServletContext,
      * javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
      */
-    public void doFilter(ServletContext context, ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletContext context, @RUntainted ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException
     {
     	// Get the publicapi.container bean.
@@ -421,7 +420,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * 
      * @return String
      */
-    protected final String getLoginPage()
+    protected final @RUntainted String getLoginPage()
     {
         return m_loginPage;
     }
@@ -431,7 +430,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * 
      * @param loginPage String
      */
-    protected final void setLoginPage( String loginPage)
+    protected final void setLoginPage( @RUntainted String loginPage)
     {
         m_loginPage = loginPage;
     }
@@ -655,7 +654,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * @throws IOException
      * @throws ServletException
      */
-    protected boolean performFallbackAuthentication(ServletContext context, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
+    protected boolean performFallbackAuthentication(ServletContext context, @RUntainted HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException
     {
         if (getLogger().isTraceEnabled())
         {
