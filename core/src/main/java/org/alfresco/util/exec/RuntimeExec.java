@@ -414,7 +414,7 @@ public class RuntimeExec
         
         if (!set)
         {
-          String[] existedProperties = this.processProperties;
+          @RUntainted String[] existedProperties = this.processProperties;
           int epl = existedProperties.length; 
           @RUntainted String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
           newProperties[epl] = property;
