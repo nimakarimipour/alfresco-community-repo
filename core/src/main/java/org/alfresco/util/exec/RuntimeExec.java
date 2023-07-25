@@ -18,6 +18,11 @@
  */
 package org.alfresco.util.exec;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import org.alfresco.error.AlfrescoRuntimeException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -36,10 +41,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import org.alfresco.error.AlfrescoRuntimeException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * This acts as a session similar to the <code>java.lang.Process</code>, but
@@ -108,8 +109,8 @@ public class RuntimeExec
     private Charset charset;
     private boolean waitForCompletion;
     private Map<String, String> defaultProperties;
-    private String[] processProperties;
-    private File processDirectory;
+    private @RUntainted String[] processProperties;
+    private @RUntainted File processDirectory;
     private Set<Integer> errCodes;
     private Timer timer = new Timer(true);
 
@@ -380,7 +381,7 @@ public class RuntimeExec
      * @param name - property name
      * @param value - property value 
      */
-    public void setProcessProperty(String name, String value)
+    public void setProcessProperty(@RUntainted String name, @RUntainted String value)
     {
         boolean set = false;
         
@@ -393,7 +394,7 @@ public class RuntimeExec
         if (name.isEmpty() || value.isEmpty()) 
             return; 
         
-        String property = name + "=" + value;
+        @RUntainted String property = name + "=" + value;
              
         for (String prop : this.processProperties)
         {
@@ -415,7 +416,7 @@ public class RuntimeExec
         {
           String[] existedProperties = this.processProperties;
           int epl = existedProperties.length; 
-          String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
+          @RUntainted String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
           newProperties[epl] = property;
           this.processProperties = newProperties;      
           set = true;
@@ -431,7 +432,7 @@ public class RuntimeExec
      * 
      * @param processDirectory          the runtime location from which to execute the command
      */
-    public void setProcessDirectory(String processDirectory)
+    public void setProcessDirectory(@RUntainted String processDirectory)
     {
         if (processDirectory.startsWith(VAR_OPEN) && processDirectory.endsWith(VAR_CLOSE))
         {
@@ -526,7 +527,7 @@ public class RuntimeExec
         // create the properties
         Runtime runtime = Runtime.getRuntime();
         Process process = null;
-        String[] commandToExecute = null;
+        @RUntainted String[] commandToExecute = null;
         try
         {
             // execute the command with full property replacement
@@ -676,7 +677,7 @@ public class RuntimeExec
      * @return Returns the command that will be executed should the additional properties
      *      be supplied
      */
-    public String[] getCommand(Map<String, String> properties)
+    public @RUntainted String[] getCommand(Map<String, String> properties)
     {
         Map<String, String> execProperties = null;
         if (properties == defaultProperties)

@@ -215,10 +215,10 @@
                         <arg>-AannotatedPackages=org.alfresco</arg>
                         <arg>-AenableCustomCheck</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/tmp/ucr-tainting/alfresco/core/taint.xml</arg>
+                        <arg>-AserializationConfigPath=/tmp/ucr-tainting/alfresco-core/taint.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/tmp/ucr-tainting/alfresco/core/scanner.xml</arg>
+                        <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/tmp/ucr-tainting/alfresco-core/scanner.xml</arg>
                      </compilerArgs>
                   </configuration>
                </plugin>
