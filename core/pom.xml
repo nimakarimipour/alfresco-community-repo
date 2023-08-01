@@ -213,8 +213,8 @@
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                         <arg>-Awarns</arg>
                         <arg>-AannotatedPackages=org.alfresco</arg>
-                        <arg>-AenableCustomCheck</arg>
-<!--                        <arg>-AenableSerialization</arg>-->
+                        <arg>-AenableLibraryCheck</arg>
+                        <arg>-AenableSerialization</arg>
                         <arg>-AserializationConfigPath=/tmp/ucr-tainting/alfresco-core/taint.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>

@@ -320,12 +320,12 @@ public class RuntimeExec
      * 
      * @see Runtime#exec(String, String[], java.io.File)
      */
-    public void setProcessProperties(Map<String, String> processProperties)
+    public void setProcessProperties(Map<@RUntainted String, @RUntainted String> processProperties)
     {
-        ArrayList<String> processPropList = new ArrayList<String>(processProperties.size());
+        ArrayList<@RUntainted String> processPropList = new ArrayList<@RUntainted String>(processProperties.size());
         boolean hasPath = false;
         String systemPath = System.getenv("PATH");
-        for (Map.Entry<String, String> entry : processProperties.entrySet())
+        for (Map.Entry<@RUntainted String, @RUntainted String> entry : processProperties.entrySet())
         {
             String key = entry.getKey();
             String value = entry.getValue();
@@ -423,7 +423,7 @@ public class RuntimeExec
         }           
     }
     
-    
+
     /**
      * Set the runtime location from which the command is executed.
      * <p>
@@ -692,7 +692,7 @@ public class RuntimeExec
             execProperties.putAll(properties);
         }
         // Perform the substitution for each element of the command
-        ArrayList<String> adjustedCommandElements = new ArrayList<String>(20);
+        ArrayList<String> adjustedCommandElements = new ArrayList<>(20);
         for (int i = 0; i < command.length; i++)
         {
             StringBuilder sb = new StringBuilder(command[i]);
