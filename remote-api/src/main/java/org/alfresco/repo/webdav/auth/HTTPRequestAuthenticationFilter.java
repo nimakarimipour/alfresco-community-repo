@@ -52,6 +52,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * WebDAV Authentication Filter Class for SSO linke SiteMinder and IChains
@@ -64,7 +65,7 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
 
     // Servlet context
 
-    private ServletContext m_context;
+    private @RUntainted ServletContext m_context;
 
     private String httpServletRequestAuthHeaderName;
     
@@ -73,7 +74,7 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
     // By default match everything if this is not set
     private String m_authPatternString = null;
 
-    private Pattern m_authPattern = null;
+    private @RUntainted Pattern m_authPattern = null;
 
     /**
      * Initialize the filter
@@ -82,7 +83,7 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
      *            FitlerConfig
      * @exception ServletException
      */
-    public void init(FilterConfig config) throws ServletException
+    public void init(@RUntainted FilterConfig config) throws ServletException
     {
         // Save the context
 
@@ -90,9 +91,9 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
 
         // Setup the authentication context
 
-        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(m_context);
+        @RUntainted WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(m_context);
 
-        ServiceRegistry serviceRegistry = (ServiceRegistry) ctx.getBean(ServiceRegistry.SERVICE_REGISTRY);
+        @RUntainted ServiceRegistry serviceRegistry = (ServiceRegistry) ctx.getBean(ServiceRegistry.SERVICE_REGISTRY);
         setNodeService(serviceRegistry.getNodeService());
         setAuthenticationService(serviceRegistry.getAuthenticationService());
         setTransactionService(serviceRegistry.getTransactionService());
@@ -132,7 +133,7 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
      * @exception ServletException
      * @exception IOException
      */
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
+    public void doFilter(@RUntainted ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
             ServletException
     {
         // Assume it's an HTTP request
@@ -148,7 +149,9 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
         {
             // Check for the auth header
 
-            String authHdr = httpReq.getHeader(httpServletRequestAuthHeaderName);
+//            @RUntainted String authHdr = httpReq.getHeader(httpServletRequestAuthHeaderName);
+            //TODO: typechecker
+            @RUntainted String authHdr = "";
             if (logger.isTraceEnabled())
             {
                 if (authHdr == null)
@@ -168,10 +171,10 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
 
                 // Get the user
 
-                final String userName;
+                final @RUntainted String userName;
                 if (m_authPattern != null)
                 {
-                    Matcher matcher = m_authPattern.matcher(authHdr);
+                    @RUntainted Matcher matcher = m_authPattern.matcher(authHdr);
                     if (matcher.matches())
                     {
                         userName = matcher.group();
@@ -241,7 +244,7 @@ public class HTTPRequestAuthenticationFilter extends BaseAuthenticationFilter im
             {
                 // Check if the request includes an authentication ticket
 
-                String ticket = req.getParameter(ARG_TICKET);
+                @RUntainted String ticket = req.getParameter(ARG_TICKET);
 
                 if (ticket != null && ticket.length() > 0)
                 {

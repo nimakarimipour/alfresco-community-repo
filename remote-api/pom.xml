@@ -358,7 +358,7 @@
                                 <arg>-AserializationConfigPath=/tmp/ucr-tainting/alfresco-remote-api/taint.xml</arg>
                                 <arg>-XDcompilePolicy=simple</arg>
                                 <arg>-parameters</arg>
-<!--                                <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/tmp/ucr-tainting/alfresco-remote-api/scanner.xml</arg>-->
+                                <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/tmp/ucr-tainting/alfresco-remote-api/scanner.xml</arg>
                             </compilerArgs>
                         </configuration>
                     </plugin>

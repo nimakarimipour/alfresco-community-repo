@@ -58,6 +58,7 @@ import org.alfresco.service.cmr.security.NoSuchPersonException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * WebDAV Authentication Filter Class
@@ -107,7 +108,7 @@ public class AuthenticationFilter extends BaseAuthenticationFilter implements De
      * @exception IOException
      */
     @Override
-    public void doFilter(ServletContext context, ServletRequest req, ServletResponse resp, FilterChain chain)
+    public void doFilter(ServletContext context, @RUntainted ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException
     {
         try
@@ -123,7 +124,7 @@ public class AuthenticationFilter extends BaseAuthenticationFilter implements De
             AuthenticationUtil.clearCurrentSecurityContext();
         }
     }
-    protected void doFilterInternal(ServletContext context, ServletRequest req, ServletResponse resp, FilterChain chain)
+    protected void doFilterInternal(ServletContext context, @RUntainted ServletRequest req, ServletResponse resp, FilterChain chain)
         throws IOException, ServletException
     {
         if (logger.isTraceEnabled())
@@ -242,7 +243,7 @@ public class AuthenticationFilter extends BaseAuthenticationFilter implements De
             {
                 // Check if the request includes an authentication ticket
 
-                String ticket = req.getParameter(ARG_TICKET);
+                @RUntainted String ticket = req.getParameter(ARG_TICKET);
 
                 if (ticket != null && ticket.length() > 0)
                 {

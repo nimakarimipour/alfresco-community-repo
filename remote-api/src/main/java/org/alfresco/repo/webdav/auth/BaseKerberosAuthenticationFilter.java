@@ -592,8 +592,8 @@ public abstract class BaseKerberosAuthenticationFilter extends BaseSSOAuthentica
     {
         //  Authenticate the user
         
-        KerberosDetails krbDetails = null;
-        String userName = null;
+        @RUntainted KerberosDetails krbDetails = null;
+        @RUntainted String userName = null;
         NegTokenTarg negTokenTarg = null;
         
         try
@@ -601,7 +601,7 @@ public abstract class BaseKerberosAuthenticationFilter extends BaseSSOAuthentica
             //  Run the session setup as a privileged action
             
             SessionSetupPrivilegedAction sessSetupAction = new SessionSetupPrivilegedAction( m_accountName, negToken.getMechtoken());
-            Object result = Subject.doAs( m_loginContext.getSubject(), sessSetupAction);
+            @RUntainted Object result = Subject.doAs( m_loginContext.getSubject(), sessSetupAction);
     
             if ( result != null)
             {

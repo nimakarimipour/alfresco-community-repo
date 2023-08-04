@@ -72,13 +72,13 @@ public abstract class BaseAuthenticationFilter
     protected static final String ARG_TICKET = "ticket";
     
     /** The authentication service. */
-    protected AuthenticationService authenticationService;
+    protected @RUntainted AuthenticationService authenticationService;
     
     /** The person service. */
-    protected PersonService personService;
+    protected @RUntainted PersonService personService;
     
     /** The node service. */
-    protected NodeService nodeService;
+    protected @RUntainted NodeService nodeService;
     
     /** The transaction service. */
     protected TransactionService transactionService;
@@ -103,7 +103,7 @@ public abstract class BaseAuthenticationFilter
      * @param authenticationService
      *            the authService to set
      */
-    public void setAuthenticationService(AuthenticationService authenticationService)
+    public void setAuthenticationService(@RUntainted AuthenticationService authenticationService)
     {
         this.authenticationService = authenticationService;
     }
@@ -114,7 +114,7 @@ public abstract class BaseAuthenticationFilter
      * @param personService
      *            the personService to set
      */
-    public void setPersonService(PersonService personService)
+    public void setPersonService(@RUntainted PersonService personService)
     {
         this.personService = personService;
     }
@@ -125,7 +125,7 @@ public abstract class BaseAuthenticationFilter
      * @param nodeService
      *            the nodeService to set
      */
-    public void setNodeService(NodeService nodeService)
+    public void setNodeService(@RUntainted NodeService nodeService)
     {
         this.nodeService = nodeService;
     }
@@ -186,7 +186,7 @@ public abstract class BaseAuthenticationFilter
      *            NodeRef
      * @return SessionUser
      */
-    protected SessionUser createUserObject(String userName, String ticket, NodeRef personNode, NodeRef homeSpaceRef)
+    protected @RUntainted SessionUser createUserObject(@RUntainted String userName, @RUntainted String ticket, NodeRef personNode, @RUntainted NodeRef homeSpaceRef)
     {
         return new WebDAVUser(userName, ticket, homeSpaceRef);
     }
@@ -361,23 +361,23 @@ public abstract class BaseAuthenticationFilter
      * @throws ServletException
      *             the servlet exception
      */
-    protected SessionUser createUserEnvironment(HttpSession session, final String userName, final String ticket, boolean externalAuth)
+    protected SessionUser createUserEnvironment(HttpSession session, final @RUntainted String userName, final @RUntainted String ticket, boolean externalAuth)
             throws IOException, ServletException
     {
         if (getLogger().isTraceEnabled())
         {
             getLogger().trace("Create the User environment for: " + AuthenticationUtil.maskUsername(userName));
         }
-        @RUntainted SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
+        @RUntainted SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<@RUntainted SessionUser>()
         {
-            public SessionUser execute() throws Throwable
+            public @RUntainted SessionUser execute() throws Throwable
             {
                 // Setup User object and Home space ID etc.
-                final NodeRef personNodeRef = personService.getPerson(userName);
+                final @RUntainted NodeRef personNodeRef = personService.getPerson(userName);
 
-                String name = (String) nodeService.getProperty(personNodeRef, ContentModel.PROP_USERNAME);
+                @RUntainted String name = (String) nodeService.getProperty(personNodeRef, ContentModel.PROP_USERNAME);
 
-                NodeRef homeSpaceRef = (NodeRef) nodeService.getProperty(personNodeRef, ContentModel.PROP_HOMEFOLDER);
+                @RUntainted NodeRef homeSpaceRef = (NodeRef) nodeService.getProperty(personNodeRef, ContentModel.PROP_HOMEFOLDER);
 
                 return createUserObject(name, ticket, personNodeRef, homeSpaceRef);
             }
@@ -412,7 +412,7 @@ public abstract class BaseAuthenticationFilter
      * @throws IOException
      * @throws ServletException
      */
-    protected SessionUser createUserEnvironment(final HttpSession session, final String userName) throws IOException,
+    protected SessionUser createUserEnvironment(final HttpSession session, final @RUntainted String userName) throws IOException,
             ServletException
     {
         return this.transactionService.getRetryingTransactionHelper().doInTransaction(
