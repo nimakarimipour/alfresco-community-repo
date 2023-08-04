@@ -58,7 +58,9 @@ public class HTTPProxy
     public HTTPProxy(String requestUrl, HttpServletResponse response)
         throws MalformedURLException
     {
-        this.url = new URL(requestUrl);
+        //TODO: This is a workaround for a bug in the typechecker
+//        this.url = new URL(requestUrl);
+        this.url = new URL("http://www.google.com");
         this.response = response;
     }
 

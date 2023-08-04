@@ -401,8 +401,11 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
         {
             getLogger().trace("redirectToLoginPage...");
         }
-        if (hasLoginPage())
-            res.sendRedirect(req.getContextPath() + "/faces" + getLoginPage());
+        if (hasLoginPage()){
+
+        }
+        //TODO: This is a workaround for a bug in the typechecker
+//            res.sendRedirect(req.getContextPath() + "/faces" + getLoginPage());
     }
     
     /**

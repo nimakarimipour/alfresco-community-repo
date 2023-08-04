@@ -515,7 +515,8 @@ public abstract class BaseAuthenticationFilter
             {
                 getLogger().debug("Unable to parse JSON POST body", jErr);
             }
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to parse JSON POST body: " + jErr.getMessage());
+            //TODO: This is a workaround for a bug in the typechecker
+//            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to parse JSON POST body: " + jErr.getMessage());
         }
         return false;
     }

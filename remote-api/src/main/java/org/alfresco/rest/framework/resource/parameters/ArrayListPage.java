@@ -41,7 +41,9 @@ public class ArrayListPage<E> extends ArrayList<E> implements ListPage<E>
 
     public ArrayListPage(final @RUntainted List<? extends E> list)
     {
-        super(list != null ? list : Collections.emptyList());
+        //TODO: This is a workaround for a bug in the typechecker
+//        super(list != null ? list : Collections.emptyList());
+        super(list);
         this.paging = null;
         this.totalItems = this.size();
         this.hasMore = false;

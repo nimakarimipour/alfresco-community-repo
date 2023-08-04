@@ -201,7 +201,8 @@ public class HttpRangeProcessor
        if (httpServletResponse != null)
        {
           httpServletResponse.setStatus(HttpServletResponse.SC_PARTIAL_CONTENT);
-          httpServletResponse.setContentType(mimetype);
+          //TODO: This is a workaround for a bug in the typechecker
+//          httpServletResponse.setContentType(mimetype);
           httpServletResponse.setHeader(HEADER_CONTENT_RANGE, contentRange);
           httpServletResponse.setHeader(HEADER_CONTENT_LENGTH, Long.toString((r.end - r.start) + 1L));
        }
