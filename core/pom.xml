@@ -213,12 +213,12 @@
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                         <arg>-Awarns</arg>
                         <arg>-AannotatedPackages=org.alfresco</arg>
-                        <arg>-AenableCustomCheck</arg>
+                        <arg>-AenableLibraryCheck</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/tmp/ucr-tainting/alfresco-core/taint.xml</arg>
+                        <arg>-AserializationConfigPath=/Users/nima/Developer/alfresco-community-repo/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/tmp/ucr-tainting/alfresco-core/scanner.xml</arg>
+                        <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/nima/Developer/alfresco-community-repo/annotator-out/core/scanner.xml</arg>
                      </compilerArgs>
                   </configuration>
                </plugin>
