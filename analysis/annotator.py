@@ -19,9 +19,9 @@ import shutil
 from pathlib import Path
 
 VERSION = '1.3.8-SNAPSHOT'
-MODULE = 'core'
+MODULE = 'remote-api'
 BENCHMARK = 'alfresco-{}'.format(MODULE)
-OUT_DIR = '/tmp/ucr-tainting/{}'.format(BENCHMARK)
+OUT_DIR = '/Users/nima/Developer/alfresco-community-repo/annotator-out/remote-api'
 ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 
