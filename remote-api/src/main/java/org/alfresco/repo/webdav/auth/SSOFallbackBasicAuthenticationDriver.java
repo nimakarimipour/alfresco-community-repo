@@ -25,14 +25,13 @@
  */
 package org.alfresco.repo.webdav.auth;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.SessionUser;
 import org.alfresco.repo.security.authentication.AuthenticationException;
@@ -64,7 +63,7 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
     private NodeService nodeService;
     private TransactionService transactionService;
     
-    private String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
 
     public void setAuthenticationService(AuthenticationService authenticationService)
     {
@@ -86,18 +85,18 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
         this.transactionService = transactionService;
     }
 
-    public void setUserAttributeName(String userAttributeName)
+    public void setUserAttributeName(@RUntainted String userAttributeName)
     {
         this.userAttributeName = userAttributeName;
     }
     
     @Override
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest request, HttpServletResponse response)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException
     {
         String authHdr = request.getHeader("Authorization");
-        HttpSession session = request.getSession(false);
-        SessionUser user = session == null ? null : (SessionUser) session.getAttribute(userAttributeName);
+        @RUntainted HttpSession session = request.getSession(false);
+        @RUntainted SessionUser user = session == null ? null : (SessionUser) session.getAttribute(userAttributeName);
         if (user == null)
         {
             if (authHdr != null && authHdr.length() > 5 && authHdr.substring(0, 5).equalsIgnoreCase("Basic"))

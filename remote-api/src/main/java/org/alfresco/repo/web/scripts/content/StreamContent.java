@@ -31,7 +31,6 @@ import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.model.Repository;
 import org.alfresco.service.cmr.repository.ContentReader;

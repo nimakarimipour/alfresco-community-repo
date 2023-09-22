@@ -26,12 +26,12 @@
 
 package org.alfresco.repo.webdav.auth;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.Principal;
 import java.util.Vector;
-
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
@@ -46,7 +46,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.alfresco.jlan.server.auth.kerberos.KerberosDetails;
 import org.alfresco.jlan.server.auth.kerberos.SessionSetupPrivilegedAction;
 import org.alfresco.jlan.server.auth.spnego.NegTokenInit;
@@ -255,7 +254,7 @@ public abstract class BaseKerberosAuthenticationFilter extends BaseSSOAuthentica
     }
 
     
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest req, HttpServletResponse resp)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException
     {
         // Check if there is an authorization header with an SPNEGO security blob

@@ -25,8 +25,8 @@
  */
 package org.alfresco.repo.webdav.auth;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +56,7 @@ public interface AuthenticationDriver
      * @throws IOException
      * @throws ServletException
      */
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest request, HttpServletResponse response)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 
     /**

@@ -25,19 +25,20 @@
  */
 package org.alfresco.opencmis;
 
-import org.alfresco.error.AlfrescoRuntimeException;
-import org.springframework.extensions.webscripts.WebScriptResponse;
-import org.springframework.extensions.webscripts.servlet.WebScriptServletRuntime;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import org.alfresco.error.AlfrescoRuntimeException;
+import org.springframework.extensions.webscripts.WebScriptResponse;
+import org.springframework.extensions.webscripts.servlet.WebScriptServletRuntime;
 
 /**
  * Wraps an OpenCMIS HttpServletResponse for specific mapping to the Alfresco implementation of OpenCMIS.
@@ -98,7 +99,7 @@ public class CMISHttpServletResponse implements HttpServletResponse
     }
 
     @Override
-    public void sendError(int sc, String msg) throws IOException
+    public void sendError(int sc, @RUntainted String msg) throws IOException
     {
         httpResp.sendError(sc, msg);
     }
@@ -110,38 +111,38 @@ public class CMISHttpServletResponse implements HttpServletResponse
     }
 
     @Override
-    public void sendRedirect(String location) throws IOException
+    public void sendRedirect(@RUntainted String location) throws IOException
     {
         httpResp.sendRedirect(location);
     }
 
     @Override
-    public void setDateHeader(String name, long date)
+    public void setDateHeader(@RUntainted String name, long date)
     {
         httpResp.setDateHeader(name, date);
     }
 
     @Override
-    public void addDateHeader(String name, long date)
+    public void addDateHeader(@RUntainted String name, long date)
     {
         httpResp.addDateHeader(name, date);
     }
 
     @Override
-    public void setHeader(String name, String value)
+    public void setHeader(@RUntainted String name, String value)
     {
         httpResp.setHeader(name, getStringHeaderValue(name, value, httpResp.getContentType()));
     }
 
     @Override
-    public void addHeader(String name, String value)
+    public void addHeader(@RUntainted String name, @RUntainted String value)
     {
         httpResp.addHeader(name, getStringHeaderValue(name, value, httpResp.getContentType()));
     }
     
     
 
-    private String getStringHeaderValue(String name, String value, String contentType)
+    private @RPolyTainted String getStringHeaderValue(String name, @RPolyTainted String value, String contentType)
     {
         if (HDR_CONTENT_DISPOSITION.equals(name))
         {
@@ -163,13 +164,13 @@ public class CMISHttpServletResponse implements HttpServletResponse
     }
 
     @Override
-    public void setIntHeader(String name, int value)
+    public void setIntHeader(@RUntainted String name, int value)
     {
         httpResp.setIntHeader(name, value);
     }
 
     @Override
-    public void addIntHeader(String name, int value)
+    public void addIntHeader(@RUntainted String name, int value)
     {
         httpResp.addIntHeader(name, value);
     }
@@ -235,7 +236,7 @@ public class CMISHttpServletResponse implements HttpServletResponse
     }
 
     @Override
-    public void setCharacterEncoding(String charset)
+    public void setCharacterEncoding(@RUntainted String charset)
     {
         httpResp.setCharacterEncoding(charset);
     }
@@ -247,7 +248,7 @@ public class CMISHttpServletResponse implements HttpServletResponse
     }
 
     @Override
-    public void setContentType(String type)
+    public void setContentType(@RUntainted String type)
     {
         httpResp.setContentType(type);
     }

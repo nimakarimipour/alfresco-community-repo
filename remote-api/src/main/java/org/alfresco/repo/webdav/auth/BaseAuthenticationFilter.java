@@ -25,15 +25,14 @@
  */
 package org.alfresco.repo.webdav.auth;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.IOException;
 import java.io.Reader;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.SessionUser;
 import org.alfresco.repo.management.subsystems.ActivateableBean;
@@ -93,7 +92,7 @@ public abstract class BaseAuthenticationFilter
     protected AuthenticationListener authenticationListener;
 
     /** The configured user attribute name. */
-    private String userAttributeName = AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AUTHENTICATION_USER;
 
     
 
@@ -328,7 +327,7 @@ public abstract class BaseAuthenticationFilter
      * 
      * @return the user object session attribute name
      */
-    protected final String getUserAttributeName()
+    protected final @RUntainted String getUserAttributeName()
     {
     	return userAttributeName;
     }
@@ -339,7 +338,7 @@ public abstract class BaseAuthenticationFilter
      * @param userAttr
      *            the user object session attribute name
      */
-    protected final void setUserAttributeName(String userAttr)
+    protected final void setUserAttributeName(@RUntainted String userAttr)
     {
     	userAttributeName = userAttr;
     }
@@ -368,7 +367,7 @@ public abstract class BaseAuthenticationFilter
         {
             getLogger().trace("Create the User environment for: " + AuthenticationUtil.maskUsername(userName));
         }
-        SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
+        @RUntainted SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
         {
             public SessionUser execute() throws Throwable
             {
