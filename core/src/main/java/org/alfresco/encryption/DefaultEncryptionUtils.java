@@ -18,6 +18,7 @@
  */
 package org.alfresco.encryption;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,10 +26,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.AlgorithmParameters;
 import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.alfresco.encryption.MACUtils.MACInput;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.util.IPUtils;
@@ -50,9 +49,9 @@ public class DefaultEncryptionUtils implements EncryptionUtils
     // Logger
     protected static Log logger = LogFactory.getLog(Encryptor.class);
 
-    protected static String HEADER_ALGORITHM_PARAMETERS = "XAlfresco-algorithmParameters";
-    protected static String HEADER_MAC = "XAlfresco-mac";
-    protected static String HEADER_TIMESTAMP = "XAlfresco-timestamp";
+    protected static @RUntainted String HEADER_ALGORITHM_PARAMETERS = "XAlfresco-algorithmParameters";
+    protected static @RUntainted String HEADER_MAC = "XAlfresco-mac";
+    protected static @RUntainted String HEADER_TIMESTAMP = "XAlfresco-timestamp";
 
     protected Encryptor encryptor;
     protected MACUtils macUtils;

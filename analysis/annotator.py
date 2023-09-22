@@ -18,10 +18,10 @@ import os
 import shutil
 from pathlib import Path
 
-VERSION = '1.3.8-SNAPSHOT'
-MODULE = 'remote-api'
+VERSION = '1.3.9-SNAPSHOT'
+MODULE = 'core'
 BENCHMARK = 'alfresco-{}'.format(MODULE)
-OUT_DIR = '/Users/nima/Developer/alfresco-community-repo/annotator-out/remote-api'
+OUT_DIR = '/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core'
 ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 
