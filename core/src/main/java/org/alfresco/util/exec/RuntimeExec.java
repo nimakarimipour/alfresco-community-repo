@@ -40,6 +40,7 @@ import java.util.TimerTask;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This acts as a session similar to the <code>java.lang.Process</code>, but
@@ -109,7 +110,7 @@ public class RuntimeExec
     private boolean waitForCompletion;
     private Map<String, String> defaultProperties;
     private String[] processProperties;
-    private File processDirectory;
+    private @RUntainted File processDirectory;
     private Set<Integer> errCodes;
     private Timer timer = new Timer(true);
 
@@ -431,7 +432,7 @@ public class RuntimeExec
      * 
      * @param processDirectory          the runtime location from which to execute the command
      */
-    public void setProcessDirectory(String processDirectory)
+    public void setProcessDirectory(@RUntainted String processDirectory)
     {
         if (processDirectory.startsWith(VAR_OPEN) && processDirectory.endsWith(VAR_CLOSE))
         {
@@ -526,7 +527,7 @@ public class RuntimeExec
         // create the properties
         Runtime runtime = Runtime.getRuntime();
         Process process = null;
-        String[] commandToExecute = null;
+        @RUntainted String[] commandToExecute = null;
         try
         {
             // execute the command with full property replacement
@@ -676,7 +677,7 @@ public class RuntimeExec
      * @return Returns the command that will be executed should the additional properties
      *      be supplied
      */
-    public String[] getCommand(Map<String, String> properties)
+    public @RUntainted String[] getCommand(Map<String, String> properties)
     {
         Map<String, String> execProperties = null;
         if (properties == defaultProperties)

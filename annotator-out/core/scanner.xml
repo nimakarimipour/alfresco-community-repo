@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<scanner>
-    <serialization active="false"/>
-    <uuid>be59b6fe-1673-4b4d-8c7e-c03016472e9b</uuid>
-    <path>/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/0</path>
-    <processor>
-        <LOMBOK active="true"/>
-    </processor>
-    <annotations/>
-</scanner>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><scanner><serialization active="false"/><uuid>60e845e3-745f-4122-a3f7-9da2f08c9308</uuid><path>/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/0</path><processor><LOMBOK active="true"/></processor><annotations/></scanner>

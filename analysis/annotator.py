@@ -19,10 +19,10 @@ import shutil
 from pathlib import Path
 
 VERSION = '1.3.9-SNAPSHOT'
-MODULE = 'remote-api'
-OUT_DIR = '/Users/nima/Developer/alfresco-community-repo/annotator-out/{}'.format(MODULE)
-ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
+MODULE = 'core'
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
+OUT_DIR = '{}/annotator-out/{}'.format(REPO, MODULE)
+ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
 
 def prepare():
     os.makedirs(OUT_DIR, exist_ok=True)
