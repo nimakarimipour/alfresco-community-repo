@@ -1,0 +1,40 @@
+2023-10-16T10:12:55.028283788:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:13:40.608376143:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:14:30.322775794:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:15:18.291892370:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:16:05.543768612:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:16:52.681923693:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:17:39.719258525:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:18:27.208006443:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:19:14.140110226:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:20:00.475236535:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:20:47.855292587:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:21:33.478796887:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:22:18.611126465:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:23:06.013809430:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:23:52.996506855:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:24:41.257447733:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:25:28.774449112:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:26:15.890231314:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:27:02.215023857:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
+2023-10-16T10:27:48.016404657:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && mvn clean compile -DskipTests -pl remote-api -am
+
