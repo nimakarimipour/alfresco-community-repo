@@ -18,7 +18,7 @@ import os
 import shutil
 from pathlib import Path
 
-VERSION = '1.3.9-SNAPSHOT'
+VERSION = '1.3.9-LOGISIM-SNAPSHOT'
 MODULE = 'remote-api'
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 OUT_DIR = '{}/annotator-out/{}'.format(REPO, MODULE)
@@ -26,7 +26,6 @@ ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/
 
 def prepare():
     os.makedirs(OUT_DIR, exist_ok=True)
-    shutil.rmtree('{}/0'.format(OUT_DIR), ignore_errors=True)
     with open('{}/paths.tsv'.format(OUT_DIR), 'w') as o:
         o.write("{}\t{}\n".format('{}/checker.xml'.format(OUT_DIR), '{}/scanner.xml'.format(OUT_DIR)))
 
