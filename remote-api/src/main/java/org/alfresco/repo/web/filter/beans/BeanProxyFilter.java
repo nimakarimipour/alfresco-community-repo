@@ -37,6 +37,7 @@ import javax.servlet.ServletResponse;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An adapter from the servlet filter world into the Spring dependency injected world. Simply looks up a
@@ -83,7 +84,7 @@ public class BeanProxyFilter implements Filter
     /* (non-Javadoc)
      * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
      */
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+    public void doFilter(@RUntainted ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException
     {
         this.filter.doFilter(this.context, request, response, chain);

@@ -1,2 +1,2 @@
-rm -rvf core/target
-mvn compile -DskipTests -pl core -am
+rm -rvf remote-api/target
+mvn compile -DskipTests -pl remote-api -am

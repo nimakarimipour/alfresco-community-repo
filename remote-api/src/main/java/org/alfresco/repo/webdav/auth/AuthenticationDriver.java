@@ -31,6 +31,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A general interface for servlet-based authentication. Allows code to be shared by Web Client, WebDAV and Sharepoint
@@ -56,7 +57,7 @@ public interface AuthenticationDriver
      * @throws IOException
      * @throws ServletException
      */
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest request, HttpServletResponse response)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException;
 
     /**

@@ -61,6 +61,7 @@ import org.alfresco.repo.web.auth.TicketCredentials;
 import org.alfresco.repo.web.auth.WebCredentials;
 import org.apache.commons.codec.binary.Base64;
 import org.ietf.jgss.Oid;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Base class with common code and initialisation for Kerberos authentication filters.
@@ -255,7 +256,7 @@ public abstract class BaseKerberosAuthenticationFilter extends BaseSSOAuthentica
     }
 
     
-    public boolean authenticateRequest(ServletContext context, HttpServletRequest req, HttpServletResponse resp)
+    public boolean authenticateRequest(ServletContext context, @RUntainted HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException
     {
         // Check if there is an authorization header with an SPNEGO security blob

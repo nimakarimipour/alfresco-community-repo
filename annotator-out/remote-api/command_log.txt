@@ -1,0 +1,100 @@
+2023-11-26T13:08:08.486458:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:08:48.996152:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:09:28.617848:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:10:09.164919:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:10:49.823784:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:11:30.424825:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:12:10.598014:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:12:51.420510:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:13:32.295510:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:14:13.033013:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:14:54.550337:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:15:35.150426:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:16:16.122722:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:16:57.296403:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:17:37.765008:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:18:18.516923:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:18:59.864020:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:19:39.788598:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:20:21.906384:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:21:03.840222:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:21:44.305851:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:22:24.751224:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:23:04.978900:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:23:46.535105:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:24:27.799377:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:25:09.159651:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:25:50.435363:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:26:31.712174:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:27:12.714600:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:27:53.084832:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:28:33.825673:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:29:14.051691:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:29:54.831040:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:30:36.147062:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:31:16.916382:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:31:57.660618:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:32:37.171884:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:33:17.491839:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:33:57.141207:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:34:37.452257:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:35:18.021567:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:35:58.854672:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:36:40.342464:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:37:20.083930:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:38:00.924237:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:38:42.775547:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:39:23.792365:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:40:34.541160:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:41:14.009099:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+
+2023-11-26T13:41:55.062507:cd /home/nima/Developer/taint-benchmarks/alfresco-community-repo && ./annotator-command.sh
+

@@ -32,6 +32,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A bean-like equivalent of a servlet filter, designed to be managed by a Spring container.
@@ -58,6 +59,6 @@ public interface DependencyInjectedFilter
      * the request processing<br>
      * 5. Directly set headers on the response after invocation of the next entity in the filter chain.
      **/
-    public void doFilter(ServletContext context, ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+    public void doFilter(ServletContext context, @RUntainted ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException;
 }
