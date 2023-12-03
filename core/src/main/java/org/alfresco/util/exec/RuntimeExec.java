@@ -40,7 +40,6 @@ import java.util.TimerTask;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This acts as a session similar to the <code>java.lang.Process</code>, but
@@ -109,8 +108,8 @@ public class RuntimeExec
     private Charset charset;
     private boolean waitForCompletion;
     private Map<String, String> defaultProperties;
-    private @RUntainted String[] processProperties;
-    private @RUntainted File processDirectory;
+    private String[] processProperties;
+    private File processDirectory;
     private Set<Integer> errCodes;
     private Timer timer = new Timer(true);
 
@@ -320,15 +319,15 @@ public class RuntimeExec
      * 
      * @see Runtime#exec(String, String[], java.io.File)
      */
-    public void setProcessProperties(Map<@RUntainted String, @RUntainted String> processProperties)
+    public void setProcessProperties(Map<String, String> processProperties)
     {
-        ArrayList<@RUntainted String> processPropList = new ArrayList<@RUntainted String>(processProperties.size());
+        ArrayList<String> processPropList = new ArrayList<String>(processProperties.size());
         boolean hasPath = false;
         String systemPath = System.getenv("PATH");
-        for (Map.Entry<@RUntainted String, @RUntainted String> entry : processProperties.entrySet())
+        for (Map.Entry<String, String> entry : processProperties.entrySet())
         {
-            @RUntainted String key = entry.getKey();
-            @RUntainted String value = entry.getValue();
+            String key = entry.getKey();
+            String value = entry.getValue();
             if (key == null)
             {
                 continue;
@@ -381,7 +380,7 @@ public class RuntimeExec
      * @param name - property name
      * @param value - property value 
      */
-    public void setProcessProperty(@RUntainted String name, @RUntainted String value)
+    public void setProcessProperty(String name, String value)
     {
         boolean set = false;
         
@@ -394,7 +393,7 @@ public class RuntimeExec
         if (name.isEmpty() || value.isEmpty()) 
             return; 
         
-        @RUntainted String property = name + "=" + value;
+        String property = name + "=" + value;
              
         for (String prop : this.processProperties)
         {
@@ -414,9 +413,9 @@ public class RuntimeExec
         
         if (!set)
         {
-          @RUntainted String[] existedProperties = this.processProperties;
+          String[] existedProperties = this.processProperties;
           int epl = existedProperties.length; 
-          @RUntainted String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
+          String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
           newProperties[epl] = property;
           this.processProperties = newProperties;      
           set = true;
@@ -432,7 +431,7 @@ public class RuntimeExec
      * 
      * @param processDirectory          the runtime location from which to execute the command
      */
-    public void setProcessDirectory(@RUntainted String processDirectory)
+    public void setProcessDirectory(String processDirectory)
     {
         if (processDirectory.startsWith(VAR_OPEN) && processDirectory.endsWith(VAR_CLOSE))
         {
@@ -527,7 +526,7 @@ public class RuntimeExec
         // create the properties
         Runtime runtime = Runtime.getRuntime();
         Process process = null;
-        @RUntainted String[] commandToExecute = null;
+        String[] commandToExecute = null;
         try
         {
             // execute the command with full property replacement
@@ -677,7 +676,7 @@ public class RuntimeExec
      * @return Returns the command that will be executed should the additional properties
      *      be supplied
      */
-    public @RUntainted String[] getCommand(Map<String, String> properties)
+    public String[] getCommand(Map<String, String> properties)
     {
         Map<String, String> execProperties = null;
         if (properties == defaultProperties)
