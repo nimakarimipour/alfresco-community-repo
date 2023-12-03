@@ -352,8 +352,10 @@
                                 <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                                 <!-- <arg>-Awarns</arg> -->
                                 <arg>-AannotatedPackages=org.alfresco</arg>
-                                <arg>-AenableLibraryCheck</arg>
                                 <arg>-AenableSerialization</arg>
+                                <arg>-AenableLibraryCheck=${env.ANNOTATOR_POLY}</arg>
+                                <arg>-AenablePolyTaintInference=${env.ANNOTATOR_LIBRARY}</arg>
+                                <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
                                 <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/remote-api/checker.xml</arg>
                                 <arg>-XDcompilePolicy=simple</arg>
                                 <arg>-parameters</arg>

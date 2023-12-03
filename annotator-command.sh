@@ -1,2 +1,5 @@
+lib=true
+arg=false
+poly=true
 rm -rvf core/target
-mvn compile -DskipTests -pl core -am
+ANNOTATOR_POLY=$poly ANNOTATOR_LIBRARY=$lib ANNOTATOR_TYPE_ARG=$arg mvn compile -DskipTests -pl core -am
