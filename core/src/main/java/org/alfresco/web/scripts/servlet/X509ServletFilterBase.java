@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *
@@ -52,7 +53,7 @@ public abstract class X509ServletFilterBase implements Filter
 {
 
     protected boolean enforce;
-    private String httpsPort;
+    private @RUntainted String httpsPort;
     private String certContains;
    
     /**
@@ -110,18 +111,18 @@ public abstract class X509ServletFilterBase implements Filter
         }
     }
 
-    public void setHttpsPort(int port)
+    public void setHttpsPort(@RUntainted int port)
     {
         this.httpsPort = Integer.toString(port);
     }
 
-    public void doFilter(ServletRequest request,
+    public void doFilter(@RUntainted ServletRequest request,
                          ServletResponse response,
                          FilterChain chain) throws IOException,
             ServletException
     {
 
-        HttpServletRequest httpRequest = (HttpServletRequest)request;
+        @RUntainted HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         /*
@@ -160,12 +161,12 @@ public abstract class X509ServletFilterBase implements Filter
                 {
                     if(this.httpsPort != null)
                     {
-                        String redirectUrl = httpRequest.getRequestURL().toString();
-                        int port = httpRequest.getLocalPort();
-                        String httpPort = Integer.toString(port);
+                        @RUntainted String redirectUrl = httpRequest.getRequestURL().toString();
+                        @RUntainted int port = httpRequest.getLocalPort();
+                        @RUntainted String httpPort = Integer.toString(port);
                         redirectUrl = redirectUrl.replace(httpPort, httpsPort);
                         redirectUrl = redirectUrl.replace("http", "https");
-                        String query = httpRequest.getQueryString();
+                        @RUntainted String query = httpRequest.getQueryString();
                         if(query != null)
                         {
                             redirectUrl = redirectUrl+"?"+query;
@@ -277,7 +278,7 @@ public abstract class X509ServletFilterBase implements Filter
     }
     
     
-    private String sanitize(String redirectUrl)
+    private @RUntainted String sanitize(@RUntainted String redirectUrl)
     {
         if (redirectUrl != null)
         {
