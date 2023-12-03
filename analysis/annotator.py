@@ -19,7 +19,7 @@ import shutil
 from pathlib import Path
 
 VERSION = '1.3.9-LOGISIM-SNAPSHOT'
-MODULE = 'remote-api'
+MODULE = 'core'
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 OUT_DIR = '{}/annotator-out/{}'.format(REPO, MODULE)
 ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
@@ -51,7 +51,6 @@ def run_annotator():
     # commands += ['-dol']
     # Uncomment to disable parallel processing
     # commands += ['--disable-parallel-processing']
-
     subprocess.call(commands)
 
 
