@@ -1,5 +1,5 @@
 lib=true
-arg=true
+arg=false
 poly=true
-rm -rvf core/target
-ANNOTATOR_POLY=$poly ANNOTATOR_LIBRARY=$lib ANNOTATOR_TYPE_ARG=$arg mvn compile -DskipTests -pl core -am
+rm -rvf remote-api/target
+ANNOTATOR_POLY=$poly ANNOTATOR_LIBRARY=$lib ANNOTATOR_TYPE_ARG=$arg mvn compile -DskipTests -pl remote-api -am
