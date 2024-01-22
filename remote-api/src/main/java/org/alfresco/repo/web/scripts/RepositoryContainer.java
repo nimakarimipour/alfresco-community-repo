@@ -71,6 +71,7 @@ import org.springframework.extensions.webscripts.WebScript;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -93,7 +94,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     private DescriptorService descriptorService;
 
     private boolean encryptTempFiles = false;
-    private String tempDirectoryName = null;
+    private @RUntainted String tempDirectoryName = null;
     private int memoryThreshold = 4 * 1024 * 1024; // 4mb
     private long maxContentSize = (long) 4 * 1024 * 1024 * 1024; // 4gb
     private Supplier<TempOutputStream> streamFactory = null;
@@ -120,7 +121,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
 		}
 	}
 
-	public void setTempDirectoryName(String tempDirectoryName)
+	public void setTempDirectoryName(@RUntainted String tempDirectoryName)
 	{
 		this.tempDirectoryName = tempDirectoryName;
 	}
@@ -497,7 +498,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     protected void transactionedExecute(final WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
         throws IOException
     {
-        final Description description = script.getDescription();
+        final @RUntainted Description description = script.getDescription();
 
         try
         {
@@ -516,7 +517,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
             handleIOException(e);
         }
 
-        final RequiredTransactionParameters trxParams = description.getRequiredTransactionParameters();
+        final @RUntainted RequiredTransactionParameters trxParams = description.getRequiredTransactionParameters();
 
         try (final BufferedRequest bufferedReq = newBufferedRequest(trxParams, scriptReq, streamFactory);
              final BufferedResponse bufferedRes = newBufferedResponse(trxParams, scriptRes, streamFactory))
@@ -808,7 +809,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     }
 
     private static BufferedResponse newBufferedResponse(
-        final RequiredTransactionParameters trxParams,
+        final @RUntainted RequiredTransactionParameters trxParams,
         final WebScriptResponse scriptRes,
         final Supplier<TempOutputStream> streamFactory)
     {

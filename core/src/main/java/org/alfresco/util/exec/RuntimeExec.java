@@ -40,6 +40,7 @@ import java.util.TimerTask;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This acts as a session similar to the <code>java.lang.Process</code>, but
@@ -108,7 +109,7 @@ public class RuntimeExec
     private Charset charset;
     private boolean waitForCompletion;
     private Map<String, String> defaultProperties;
-    private String[] processProperties;
+    private @RUntainted String[] processProperties;
     private File processDirectory;
     private Set<Integer> errCodes;
     private Timer timer = new Timer(true);
@@ -431,7 +432,7 @@ public class RuntimeExec
      * 
      * @param processDirectory          the runtime location from which to execute the command
      */
-    public void setProcessDirectory(String processDirectory)
+    public void setProcessDirectory(@RUntainted String processDirectory)
     {
         if (processDirectory.startsWith(VAR_OPEN) && processDirectory.endsWith(VAR_CLOSE))
         {

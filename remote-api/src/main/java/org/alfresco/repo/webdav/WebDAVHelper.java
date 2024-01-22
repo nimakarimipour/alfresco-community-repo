@@ -77,6 +77,8 @@ import org.springframework.extensions.surf.util.URLDecoder;
 import org.springframework.extensions.surf.util.URLEncoder;
 import org.springframework.util.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * WebDAV Protocol Helper Class
@@ -106,8 +108,8 @@ public class WebDAVHelper
     private ServiceRegistry m_serviceRegistry;
 
     // Services
-    private NodeService m_nodeService;
-    private FileFolderService m_fileFolderService;
+    private @RUntainted NodeService m_nodeService;
+    private @RUntainted FileFolderService m_fileFolderService;
     private SearchService m_searchService;
     private NamespaceService m_namespaceService;
     private DictionaryService m_dictionaryService;
@@ -130,7 +132,7 @@ public class WebDAVHelper
         
     private BehaviourFilter m_policyBehaviourFilter;
 
-    private String m_urlPathPrefix;
+    private @RUntainted String m_urlPathPrefix;
         
     private long sizeLimit = -1L;
     
@@ -197,12 +199,12 @@ public class WebDAVHelper
     /**
      * @return          Return the node service
      */
-    public final NodeService getNodeService()
+    public final @RUntainted NodeService getNodeService()
     {
         return m_nodeService;
     }
     
-    public FileFolderService getFileFolderService()
+    public @RUntainted FileFolderService getFileFolderService()
     {
         return m_fileFolderService;
     }
@@ -306,7 +308,7 @@ public class WebDAVHelper
     /**
      * @param nodeService the node service
      */
-    public void setNodeService(NodeService nodeService)
+    public void setNodeService(@RUntainted NodeService nodeService)
     {
         this.m_nodeService = nodeService;
     }
@@ -314,7 +316,7 @@ public class WebDAVHelper
     /**
      * @param fileFolderService the fileFolder service
      */
-    public void setFileFolderService(FileFolderService fileFolderService)
+    public void setFileFolderService(@RUntainted FileFolderService fileFolderService)
     {
         this.m_fileFolderService = fileFolderService;
     }
@@ -468,7 +470,7 @@ public class WebDAVHelper
      * @param path          the string to split
      * @return              an array of all the path components
      */
-    public List<String> splitAllPaths(String path)
+    public @RUntainted List<String> splitAllPaths(String path)
     {
         if (path == null || path.length() == 0)
         {
@@ -490,10 +492,10 @@ public class WebDAVHelper
         return getURLForPath(request, path, isCollection, null);
     }
     
-    public String getURLForPath(HttpServletRequest request, String path, boolean isCollection, String userAgent)
+    public @RUntainted String getURLForPath(HttpServletRequest request, String path, boolean isCollection, String userAgent)
     {
-        String urlPathPrefix = getUrlPathPrefix(request);
-        StringBuilder urlStr = new StringBuilder(urlPathPrefix);
+        @RUntainted String urlPathPrefix = getUrlPathPrefix(request);
+        @RUntainted StringBuilder urlStr = new StringBuilder(urlPathPrefix);
         
         if (path.equals(WebDAV.RootPath) == false)
         {
@@ -529,7 +531,7 @@ public class WebDAVHelper
      * @throws FileNotFoundException
      *                          if the path doesn't refer to a valid node
      */
-    public FileInfo getNodeForPath(NodeRef rootNodeRef, String path) throws FileNotFoundException
+    public @RPolyTainted FileInfo getNodeForPath(@RPolyTainted NodeRef rootNodeRef, String path) throws FileNotFoundException
     {
         if (rootNodeRef == null)
         {
@@ -637,7 +639,7 @@ public class WebDAVHelper
         return m_fileFolderService.create(parentNodeInfo.getNodeRef(), path, ContentModel.TYPE_CONTENT);
     }
 
-    public List<FileInfo> getChildren(FileInfo fileInfo) throws WebDAVServerException
+    public @RPolyTainted List<FileInfo> getChildren(@RPolyTainted FileInfo fileInfo) throws WebDAVServerException
     {
         return m_fileFolderService.list(fileInfo.getNodeRef());
     }
@@ -703,7 +705,7 @@ public class WebDAVHelper
         return encodeURL(s, null);
     }
     
-    public final static String encodeURL(String s, String userAgent)
+    public final static @RPolyTainted String encodeURL(@RPolyTainted String s, String userAgent)
     {
           return URLEncoder.encode(s);
     }
@@ -718,7 +720,7 @@ public class WebDAVHelper
      * 
      * @param string        the String to convert
      */
-    public final static String encodeHTML(String string)
+    public final static @RPolyTainted String encodeHTML(@RPolyTainted String string)
     {
         if (string == null)
         {
@@ -957,7 +959,7 @@ public class WebDAVHelper
      * @param urlStr String
      * @exception WebDAVServerException
      */
-    public void checkDestinationURL(HttpServletRequest request, String urlStr) throws WebDAVServerException
+    public void checkDestinationURL(HttpServletRequest request, @RUntainted String urlStr) throws WebDAVServerException
     {
         try
         {
@@ -1059,14 +1061,14 @@ public class WebDAVHelper
     }
     
 
-    public void setUrlPathPrefix(String urlPathPrefix)
+    public void setUrlPathPrefix(@RUntainted String urlPathPrefix)
     {
         m_urlPathPrefix = urlPathPrefix;
     }
     
-    public String getUrlPathPrefix(HttpServletRequest request)
+    public @RUntainted String getUrlPathPrefix(HttpServletRequest request)
     {
-        StringBuilder urlStr = null;
+        @RUntainted StringBuilder urlStr = null;
         if (StringUtils.hasText(m_urlPathPrefix))
         {
             // A specific prefix has been configured in, so use it.
@@ -1125,7 +1127,7 @@ public class WebDAVHelper
         }
     }
     
-    public String getRepositoryPath(HttpServletRequest request)
+    public @RUntainted String getRepositoryPath(HttpServletRequest request)
     {
         // Try and get the path
 

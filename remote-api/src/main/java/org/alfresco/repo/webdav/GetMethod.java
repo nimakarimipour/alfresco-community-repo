@@ -55,6 +55,8 @@ import org.alfresco.service.cmr.repository.datatype.TypeConverter;
 import org.alfresco.service.namespace.QName;
 import org.springframework.extensions.surf.util.I18NUtil;
 import org.springframework.extensions.surf.util.URLEncoder;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Implements the WebDAV GET method
@@ -175,7 +177,7 @@ public class GetMethod extends WebDAVMethod
     protected void executeImpl() throws WebDAVServerException, Exception
     {
         FileFolderService fileFolderService = getFileFolderService();
-        NodeRef rootNodeRef = getRootNodeRef();
+        @RUntainted NodeRef rootNodeRef = getRootNodeRef();
         String path = getPath();
 
         if (!m_returnContent)
@@ -185,7 +187,7 @@ public class GetMethod extends WebDAVMethod
             m_response.setContentLength(0);
         }
         
-        FileInfo nodeInfo = null;
+        @RUntainted FileInfo nodeInfo = null;
         try
         {
             nodeInfo = getDAVHelper().getNodeForPath(rootNodeRef, path);
@@ -479,10 +481,10 @@ public class GetMethod extends WebDAVMethod
      * 
      * @param fileInfo the file to use
      */
-    private void generateDirectoryListing(FileInfo fileInfo)
+    private void generateDirectoryListing(@RUntainted FileInfo fileInfo)
     {
         MimetypeService mimeTypeService = getMimetypeService();
-        NodeService nodeService = getNodeService();
+        @RUntainted NodeService nodeService = getNodeService();
 
         Writer writer = null;
 
@@ -498,7 +500,7 @@ public class GetMethod extends WebDAVMethod
             }
             
             // Get the list of child nodes for the parent node
-            List<FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
+            List<@RUntainted FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
 
             // Send back the start of the HTML
             writer.write("<html><head><title>");
@@ -543,7 +545,7 @@ public class GetMethod extends WebDAVMethod
             writer.write("</tr>\n");
 
             // Get the URL for the root path
-            String rootURL = getURLForPath(m_request, getPath(), true);
+            @RUntainted String rootURL = getURLForPath(m_request, getPath(), true);
             if (rootURL.endsWith(WebDAVHelper.PathSeperator) == false)
             {
                 rootURL = rootURL + WebDAVHelper.PathSeperator;
@@ -572,7 +574,7 @@ public class GetMethod extends WebDAVMethod
                 writer.write("<td colspan='4' class='textData'><a href=\"");
 
                 // Strip the last folder from the path
-                String parentFolderUrl = parentFolder(rootURL);
+                @RUntainted String parentFolderUrl = parentFolder(rootURL);
                 writer.write(parentFolderUrl);
 
                 writer.write("\">");
@@ -586,7 +588,7 @@ public class GetMethod extends WebDAVMethod
             writer.flush();
             int rowId = 0;
             
-            for (FileInfo childNodeInfo : childNodeInfos)
+            for (@RUntainted FileInfo childNodeInfo : childNodeInfos)
             {
                 // Output the details for the current node
                 writer.write("<tr class='");
@@ -602,7 +604,7 @@ public class GetMethod extends WebDAVMethod
                 writer.write(rootURL);
 
                 // name field
-                String fname = childNodeInfo.getName();
+                @RUntainted String fname = childNodeInfo.getName();
 
                 writer.write(WebDAVHelper.encodeURL(fname, m_userAgent));
                 writer.write("\">");
@@ -612,18 +614,18 @@ public class GetMethod extends WebDAVMethod
                 // size field
                 writer.write("</td><td class='textData'>");
 
-                ContentData contentData = null;
+                @RUntainted ContentData contentData = null;
                 if (!childNodeInfo.isFolder())
                 {
                     Serializable contentPropertyName = nodeService.getProperty(childNodeInfo.getNodeRef(), ContentModel.PROP_CONTENT_PROPERTY_NAME);
-                    QName contentPropertyQName = DefaultTypeConverter.INSTANCE.convert(QName.class, contentPropertyName);
+                    @RUntainted QName contentPropertyQName = DefaultTypeConverter.INSTANCE.convert(QName.class, contentPropertyName);
 
                     if (null == contentPropertyQName)
                     {
                         contentPropertyQName = ContentModel.PROP_CONTENT;
                     }
 
-                    Serializable contentProperty = nodeService.getProperty(childNodeInfo.getNodeRef(), contentPropertyQName);
+                    @RUntainted Serializable contentProperty = nodeService.getProperty(childNodeInfo.getNodeRef(), contentPropertyQName);
 
                     if (contentProperty instanceof ContentData)
                     {
@@ -656,11 +658,11 @@ public class GetMethod extends WebDAVMethod
                 }
                 else
                 {
-                    String mimetype = "&nbsp;";
+                    @RUntainted String mimetype = "&nbsp;";
                     if (null != contentData)
                     {
                         mimetype = contentData.getMimetype();
-                        String displayType = mimeTypeService.getDisplaysByMimetype().get(mimetype);
+                        @RUntainted String displayType = mimeTypeService.getDisplaysByMimetype().get(mimetype);
 
                         if (displayType != null)
                         {
@@ -672,7 +674,7 @@ public class GetMethod extends WebDAVMethod
                 writer.write("</td><td class='textData'>");
                 
                 // modified date field
-                Date modifiedDate = childNodeInfo.getModifiedDate();
+                @RUntainted Date modifiedDate = childNodeInfo.getModifiedDate();
                 if (modifiedDate != null)
                 {
                     writer.write(WebDAV.formatHeaderDate(DefaultTypeConverter.INSTANCE.longValue(modifiedDate)));
@@ -741,7 +743,7 @@ public class GetMethod extends WebDAVMethod
      * @param strSize The content size
      * @return The formatted size
      */
-    private String formatSize(String strSize)
+    private @RPolyTainted String formatSize(@RPolyTainted String strSize)
     {
         String strFormattedSize = strSize;
 

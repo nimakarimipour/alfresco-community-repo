@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *
@@ -160,7 +161,7 @@ public abstract class X509ServletFilterBase implements Filter
                 {
                     if(this.httpsPort != null)
                     {
-                        String redirectUrl = httpRequest.getRequestURL().toString();
+                        @RUntainted String redirectUrl = httpRequest.getRequestURL().toString();
                         int port = httpRequest.getLocalPort();
                         String httpPort = Integer.toString(port);
                         redirectUrl = redirectUrl.replace(httpPort, httpsPort);

@@ -43,6 +43,7 @@ import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Generates HTTP response for "Range" scoped HTTP requests for content.
@@ -625,7 +626,7 @@ public class HttpRangeProcessor
        /**
         * @return the Content-Range header string value for this byte range
         */
-       private String getContentRange()
+       private @RUntainted String getContentRange()
        {
           if (this.contentRange == null)
           {

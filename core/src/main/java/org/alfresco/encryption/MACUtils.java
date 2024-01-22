@@ -33,6 +33,7 @@ import javax.crypto.Mac;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Provides support for generating and checking MACs (Message Authentication Codes) using Alfresco's
@@ -138,7 +139,7 @@ public class MACUtils
      * @param macInput MACInput
      * @return boolean
      */
-    public boolean validateMAC(String keyAlias, byte[] expectedMAC, MACInput macInput)
+    public boolean validateMAC(String keyAlias, @RUntainted byte[] expectedMAC, MACInput macInput)
     {
         try
         {

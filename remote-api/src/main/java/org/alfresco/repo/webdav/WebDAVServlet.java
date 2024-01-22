@@ -54,6 +54,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Servlet that accepts WebDAV requests for the hub. The request is served by the hub's content
@@ -79,22 +80,22 @@ public class WebDAVServlet extends HttpServlet
     private ServiceRegistry serviceRegistry;
     
     private TransactionService transactionService;
-    private static TenantService tenantService;
-    private static NodeService nodeService;
-    private static SearchService searchService;
-    private static NamespaceService namespaceService;
+    private static @RUntainted TenantService tenantService;
+    private static @RUntainted NodeService nodeService;
+    private static @RUntainted SearchService searchService;
+    private static @RUntainted NamespaceService namespaceService;
     
     // WebDAV method handlers
     protected Hashtable<String,Class<? extends WebDAVMethod>> m_davMethods;
     
     // note: cache is tenant-aware (if using TransctionalCache impl)
     
-    private static SimpleCache<String, NodeRef> singletonCache; // eg. for webdavRootNodeRef
+    private static SimpleCache<String, @RUntainted NodeRef> singletonCache; // eg. for webdavRootNodeRef
     private static final String KEY_WEBDAV_ROOT_NODEREF = "key.webdavRoot.noderef";
     
-    private static String rootPath;
+    private static @RUntainted String rootPath;
     
-    private static NodeRef defaultRootNode; // for default domain
+    private static @RUntainted NodeRef defaultRootNode; // for default domain
     
     // WebDAV helper class
     private WebDAVHelper m_davHelper;
@@ -106,7 +107,7 @@ public class WebDAVServlet extends HttpServlet
      * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    protected void service(@RUntainted HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException
     {
         if (!initParams.getEnabled())
@@ -184,7 +185,7 @@ public class WebDAVServlet extends HttpServlet
      * @param response HttpServletResponse
      * @return WebDAVMethod
      */
-    protected WebDAVMethod createMethod(HttpServletRequest request, HttpServletResponse response)
+    protected WebDAVMethod createMethod(@RUntainted HttpServletRequest request, HttpServletResponse response)
     {
         // Get the type of the current request
         
@@ -226,9 +227,9 @@ public class WebDAVServlet extends HttpServlet
         return method;
     }
     
-    private static NodeRef getRootNodeRef()
+    private static @RUntainted NodeRef getRootNodeRef()
     {
-        NodeRef rootNodeRef = singletonCache.get(KEY_WEBDAV_ROOT_NODEREF);
+        @RUntainted NodeRef rootNodeRef = singletonCache.get(KEY_WEBDAV_ROOT_NODEREF);
         
         if (rootNodeRef == null)
         {
@@ -272,7 +273,7 @@ public class WebDAVServlet extends HttpServlet
         
         // Get root paths
         
-        String storeValue = initParams.getStoreName();
+        @RUntainted String storeValue = initParams.getStoreName();
         
         rootPath = initParams.getRootPath();
         
@@ -335,8 +336,8 @@ public class WebDAVServlet extends HttpServlet
      * @param tenantService TenantService
      * @param m_transactionService TransactionService
      */
-    private void initializeRootNode(String storeValue, String rootPath, WebApplicationContext context, NodeService nodeService, SearchService searchService,
-            NamespaceService namespaceService, TenantService tenantService, TransactionService m_transactionService)
+    private void initializeRootNode(@RUntainted String storeValue, @RUntainted String rootPath, WebApplicationContext context, @RUntainted NodeService nodeService, @RUntainted SearchService searchService,
+            @RUntainted NamespaceService namespaceService, TenantService tenantService, TransactionService m_transactionService)
     {
 
         // Use the system user as the authenticated context for the filesystem initialization
@@ -355,16 +356,16 @@ public class WebDAVServlet extends HttpServlet
             if (tx != null)
                 tx.begin();
             
-            StoreRef storeRef = new StoreRef(storeValue);
+            @RUntainted StoreRef storeRef = new StoreRef(storeValue);
             
             if (nodeService.exists(storeRef) == false)
             {
                 throw new RuntimeException("No store for path: " + storeRef);
             }
             
-            NodeRef storeRootNodeRef = nodeService.getRootNode(storeRef);
+            @RUntainted NodeRef storeRootNodeRef = nodeService.getRootNode(storeRef);
             
-            List<NodeRef> nodeRefs = searchService.selectNodes(storeRootNodeRef, rootPath, null, namespaceService, false);
+            List<@RUntainted NodeRef> nodeRefs = searchService.selectNodes(storeRootNodeRef, rootPath, null, namespaceService, false);
             
             if (nodeRefs.size() > 1)
             {
@@ -411,8 +412,8 @@ public class WebDAVServlet extends HttpServlet
     public static class WebDAVInitParameters
     {
         private boolean enabled = false;
-        private String storeName;
-        private String rootPath;
+        private @RUntainted String storeName;
+        private @RUntainted String rootPath;
         private String urlPathPrefix;
         private boolean allowInsecurePOSTMethod = false;
         
@@ -428,7 +429,7 @@ public class WebDAVServlet extends HttpServlet
          * @return              Returns the name of the store
          * @throws ServletException if the store name was not set
          */
-        public String getStoreName() throws ServletException
+        public @RUntainted String getStoreName() throws ServletException
         {
             if (!PropertyCheck.isValidPropertyString(storeName))
             {
@@ -436,7 +437,7 @@ public class WebDAVServlet extends HttpServlet
             }
             return storeName;
         }
-        public void setStoreName(String storeName)
+        public void setStoreName(@RUntainted String storeName)
         {
             this.storeName = storeName;
         }
@@ -444,7 +445,7 @@ public class WebDAVServlet extends HttpServlet
          * @return              Returns the WebDAV root path within the store
          * @throws ServletException if the root path was not set
          */
-        public String getRootPath() throws ServletException
+        public @RUntainted String getRootPath() throws ServletException
         {
             if (!PropertyCheck.isValidPropertyString(rootPath))
             {
@@ -452,7 +453,7 @@ public class WebDAVServlet extends HttpServlet
             }
             return rootPath;
         }
-        public void setRootPath(String rootPath)
+        public void setRootPath(@RUntainted String rootPath)
         {
             this.rootPath = rootPath;
         }

@@ -42,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Entry point for API webscript.  Supports version/scope as well
@@ -54,8 +55,8 @@ public abstract class ApiWebScript extends AbstractWebScript
     private static Log logger = LogFactory.getLog(ApiWebScript.class);
     protected ApiAssistant assistant;
     protected boolean encryptTempFiles = false;
-    protected String tempDirectoryName = null;
-    protected int memoryThreshold = 4 * 1024 * 1024; // 4mb
+    protected @RUntainted String tempDirectoryName = null;
+    protected @RUntainted int memoryThreshold = 4 * 1024 * 1024; // 4mb
     protected long maxContentSize = (long) 4 * 1024 * 1024 * 1024; // 4gb
     protected Supplier<TempOutputStream> streamFactory = null;
     protected TransactionService transactionService;
@@ -69,7 +70,7 @@ public abstract class ApiWebScript extends AbstractWebScript
         this.assistant = assistant;
     }
 
-    public void setTempDirectoryName(String tempDirectoryName)
+    public void setTempDirectoryName(@RUntainted String tempDirectoryName)
     {
         this.tempDirectoryName = tempDirectoryName;
     }
@@ -79,7 +80,7 @@ public abstract class ApiWebScript extends AbstractWebScript
         this.encryptTempFiles = encryptTempFiles;
     }
 
-    public void setMemoryThreshold(int memoryThreshold)
+    public void setMemoryThreshold(@RUntainted int memoryThreshold)
     {
         this.memoryThreshold = memoryThreshold;
     }

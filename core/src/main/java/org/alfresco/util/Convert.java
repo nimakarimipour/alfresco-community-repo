@@ -45,6 +45,7 @@ import org.alfresco.encoding.CharactersetFinder;
 import org.alfresco.encoding.GuessEncodingCharsetFinder;
 import org.alfresco.util.exec.RuntimeExec;
 import org.alfresco.util.exec.RuntimeExec.ExecutionResult;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Utility to convert text files.
@@ -140,7 +141,7 @@ public class Convert
             printUsage();
         }
         // Convert args to a list
-        List<String> argList = new ArrayList<String>(args.length);
+        List<@RUntainted String> argList = new ArrayList<@RUntainted String>(args.length);
         List<String> argListFixed = Arrays.asList(args);
         argList.addAll(argListFixed);
         // Extract all the options
@@ -343,7 +344,7 @@ public class Convert
                 {
                     continue;
                 }
-                String filename = line.substring(7).trim();
+                @RUntainted String filename = line.substring(7).trim();
                 if (filename.length() < 1)
                 {
                     continue;
@@ -429,7 +430,7 @@ public class Convert
             // Calculate the MD5 for the file
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             md5.update(fileBytes);
-            byte[] fileMd5 = md5.digest();
+            @RUntainted byte[] fileMd5 = md5.digest();
             // Guess the charset now
             Charset fileCharset = guessCharset(fileBytes, charset);
             
