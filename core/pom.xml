@@ -215,14 +215,14 @@
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                         <!-- <arg>-Awarns</arg> -->
                         <arg>-AannotatedPackages=org.alfresco</arg>
-                        <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
-                        <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
-                        <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
+                        <arg>-AenableLibraryCheck</arg>
+                        <arg>-AenablePolyTaintInference</arg>
+                        <arg>-AenableTypeArgumentInference</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/checker.xml</arg>
+                        <arg>-AserializationConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
+                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
                      </compilerArgs>
                   </configuration>
                </plugin>

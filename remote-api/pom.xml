@@ -353,13 +353,13 @@
                                 <!-- <arg>-Awarns</arg> -->
                                 <arg>-AannotatedPackages=org.alfresco</arg>
                                 <arg>-AenableSerialization</arg>
-                                <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
-                                <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
-                                <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
-                                <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/remote-api/checker.xml</arg>
+                                <arg>-AenableLibraryCheck</arg>
+                                <arg>-AenablePolyTaintInference</arg>
+                                <arg>-AenableTypeArgumentInference</arg>
+                                <arg>-AserializationConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/remote-api/checker.xml</arg>
                                 <arg>-XDcompilePolicy=simple</arg>
                                 <arg>-parameters</arg>
-                                <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/remote-api/scanner.xml</arg> -->
+                                <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/remote-api/scanner.xml</arg> -->
                             </compilerArgs>
                         </configuration>
                     </plugin>
