@@ -23,6 +23,7 @@ import java.io.InputStream;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 
@@ -31,9 +32,9 @@ import org.apache.commons.httpclient.HttpMethod;
  */
 public class HttpMethodResponse implements Response
 {
-    protected HttpMethod method;
+    protected @RUntainted HttpMethod method;
 
-    public HttpMethodResponse(HttpMethod method) throws IOException
+    public HttpMethodResponse(@RUntainted HttpMethod method) throws IOException
     {
         this.method = method;
     }

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.alfresco.util.Pair;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This class is used to tokenize strings used as parameters for {@link RuntimeExec} objects.
@@ -78,7 +79,7 @@ public class ExecParameterTokenizer
      * 
      * @throws NullPointerException if the string to be tokenized was null.
      */
-    public List<String> getAllTokens()
+    public List<@RUntainted String> getAllTokens()
     {
         if (this.str == null)
         {

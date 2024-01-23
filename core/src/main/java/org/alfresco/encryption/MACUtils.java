@@ -143,7 +143,7 @@ public class MACUtils
     {
         try
         {
-            byte[] mac = generateMAC(keyAlias, macInput);
+            @RUntainted byte[] mac = generateMAC(keyAlias, macInput);
 
             if(logger.isDebugEnabled())
             {

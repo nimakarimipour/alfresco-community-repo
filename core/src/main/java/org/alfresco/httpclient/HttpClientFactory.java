@@ -61,6 +61,7 @@ import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A factory to create HttpClients and AlfrescoHttpClients based on the setting of the 'secureCommsType' property.
@@ -471,7 +472,7 @@ public class HttpClientFactory
          */
         public Response sendRequest(Request req) throws AuthenticationException, IOException
         {
-            HttpMethod method = super.sendRemoteRequest(req);
+            @RUntainted HttpMethod method = super.sendRemoteRequest(req);
             return new HttpMethodResponse(method);
         }
     }
@@ -493,7 +494,7 @@ public class HttpClientFactory
          */
         public Response sendRequest(Request req) throws AuthenticationException, IOException
         {
-            HttpMethod method = super.sendRemoteRequest(req);
+            @RUntainted HttpMethod method = super.sendRemoteRequest(req);
             return new HttpMethodResponse(method);
         }
     }
@@ -508,7 +509,7 @@ public class HttpClientFactory
         // and again by the web service.
         protected byte[] decryptedBody;
 
-        public SecureHttpMethodResponse(HttpMethod method, HostConfiguration hostConfig, 
+        public SecureHttpMethodResponse(@RUntainted HttpMethod method, HostConfiguration hostConfig, 
                 EncryptionUtils encryptionUtils) throws AuthenticationException, IOException
         {
             super(method);

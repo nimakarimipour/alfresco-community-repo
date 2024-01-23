@@ -93,7 +93,7 @@ public class TempFileProvider
      * 
      * @return Returns the system temporary directory i.e. <code>isDir == true</code>
      */
-    public static File getSystemTempDir()
+    public static @RUntainted File getSystemTempDir()
     {
         @RUntainted String systemTempDirPath = System.getProperty(SYSTEM_KEY_TEMP_DIR);
         if (systemTempDirPath == null)
@@ -114,7 +114,7 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir()
+    public static @RUntainted File getTempDir()
     {
         return getTempDir(ALFRESCO_TEMP_FILE_DIR);
     }
@@ -127,9 +127,9 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir(@RUntainted String dirName)
+    public static @RUntainted File getTempDir(@RUntainted String dirName)
     {
-        File systemTempDir = getSystemTempDir();
+        @RUntainted File systemTempDir = getSystemTempDir();
         // append the Alfresco directory
         File tempDir = new File(systemTempDir, dirName);
         // ensure that the temp directory exists
@@ -174,7 +174,7 @@ public class TempFileProvider
      * the client can simply delete the entire temporary folder.  
      * @return the long life temporary directory
      */
-    public static File getLongLifeTempDir(String key)
+    public static File getLongLifeTempDir(@RUntainted String key)
     {
         /**
          * Long life temporary directories have a prefix at the start of the 
@@ -182,7 +182,7 @@ public class TempFileProvider
          */
         @RUntainted String folderName = ALFRESCO_LONG_LIFE_FILE_DIR + "_" + key;
         
-        File tempDir = getTempDir();
+        @RUntainted File tempDir = getTempDir();
         
         // append the Alfresco directory
         File longLifeDir = new File(tempDir, folderName);
@@ -389,7 +389,7 @@ public class TempFileProvider
                 throw new JobExecutionException("Hours to protect temp files must be 0 <= x <= 8760");
             }
 
-            String directoryName = (String) context.getJobDetail().getJobDataMap().get(KEY_DIRECTORY_NAME);
+            @RUntainted String directoryName = (String) context.getJobDetail().getJobDataMap().get(KEY_DIRECTORY_NAME);
 
             try
             {

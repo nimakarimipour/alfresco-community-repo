@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.surf.util.Base64;
 import org.springframework.util.FileCopyUtils;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Various encryption utility methods.
@@ -147,9 +148,9 @@ public class DefaultEncryptionUtils implements EncryptionUtils
      * @return the MAC
      * @throws IOException
      */
-    protected byte[] getMac(HttpServletRequest req) throws IOException
+    protected @RUntainted byte[] getMac(HttpServletRequest req) throws IOException
     {
-        String header = req.getHeader(HEADER_MAC);
+        @RUntainted String header = req.getHeader(HEADER_MAC);
         if(header != null)
         {
             return Base64.decode(header);
@@ -167,7 +168,7 @@ public class DefaultEncryptionUtils implements EncryptionUtils
      * @return the MAC
      * @throws IOException
      */
-    protected byte[] getResponseMac(HttpMethod res) throws IOException
+    protected @RPolyTainted byte[] getResponseMac(@RPolyTainted HttpMethod res) throws IOException
     {
         Header header = res.getResponseHeader(HEADER_MAC);
         if(header != null)
@@ -374,11 +375,11 @@ public class DefaultEncryptionUtils implements EncryptionUtils
      * {@inheritDoc}
      */
     @Override
-    public boolean authenticateResponse(HttpMethod method, String remoteIP, byte[] decryptedBody)
+    public boolean authenticateResponse(@RUntainted HttpMethod method, String remoteIP, byte[] decryptedBody)
     {
         try
         {
-            byte[] expectedMAC = getResponseMac(method);
+            @RUntainted byte[] expectedMAC = getResponseMac(method);
             Long timestamp = getResponseTimestamp(method);
             if(timestamp == null)
             {
@@ -401,7 +402,7 @@ public class DefaultEncryptionUtils implements EncryptionUtils
     {
         try
         {
-            byte[] expectedMAC = getMac(req);
+            @RUntainted byte[] expectedMAC = getMac(req);
             Long timestamp = getTimestamp(req);
             if(timestamp == null)
             {
@@ -463,7 +464,7 @@ public class DefaultEncryptionUtils implements EncryptionUtils
         setTimestamp(httpResponse, responseTimestamp);
     }
 
-    protected boolean authenticate(byte[] expectedMAC, MACInput macInput)
+    protected boolean authenticate(@RUntainted byte[] expectedMAC, MACInput macInput)
     {
         // check the MAC and, if valid, check that the timestamp is under the threshold and that the remote IP is
         // the expected IP

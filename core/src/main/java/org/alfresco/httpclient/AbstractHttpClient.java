@@ -37,6 +37,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public abstract class AbstractHttpClient implements AlfrescoHttpClient
 {
@@ -97,7 +98,7 @@ public abstract class AbstractHttpClient implements AlfrescoHttpClient
     /**
      * Send Request to the repository
      */
-    protected HttpMethod sendRemoteRequest(Request req) throws AuthenticationException, IOException
+    protected @RUntainted HttpMethod sendRemoteRequest(Request req) throws AuthenticationException, IOException
     {
         if (logger.isDebugEnabled())
         {
@@ -105,7 +106,7 @@ public abstract class AbstractHttpClient implements AlfrescoHttpClient
             logger.debug("* Request: " + req.getMethod() + " " + req.getFullUri() + (req.getBody() == null ? "" : "\n" + new String(req.getBody(), "UTF-8")));
         }
 
-        HttpMethod method = createMethod(req);
+        @RUntainted HttpMethod method = createMethod(req);
 
         // execute method
         executeMethod(method);
@@ -137,7 +138,7 @@ public abstract class AbstractHttpClient implements AlfrescoHttpClient
         return System.currentTimeMillis() - startTime;
     }
 
-    protected HttpMethod createMethod(Request req) throws IOException
+    protected @RUntainted HttpMethod createMethod(Request req) throws IOException
     {
         StringBuilder url = new StringBuilder(128);
         url.append(baseUrl);

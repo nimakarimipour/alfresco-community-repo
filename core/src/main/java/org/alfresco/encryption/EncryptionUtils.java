@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Various encryption utility methods.
@@ -60,7 +61,7 @@ public interface EncryptionUtils
      * @param decryptedBody
      * @return true if the method reponse is authentic, false otherwise
      */
-    public boolean authenticateResponse(HttpMethod method, String remoteIP, byte[] decryptedBody);
+    public boolean authenticateResponse(@RUntainted HttpMethod method, String remoteIP, byte[] decryptedBody);
 
     /**
      * Authenticate the http request: validate the MAC, check that the remote IP is
