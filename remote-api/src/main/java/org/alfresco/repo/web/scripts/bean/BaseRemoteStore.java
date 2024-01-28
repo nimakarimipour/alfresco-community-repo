@@ -45,6 +45,7 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Remote Store service.
@@ -145,13 +146,13 @@ public abstract class BaseRemoteStore extends AbstractWebScript
     /**
      * Execute the webscript based on the request parameters
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // NOTE: This web script must be executed in a HTTP Servlet environment
 
         // Unwrap to a WebScriptServletRequest if we have one
-        WebScriptServletRequest webScriptServletRequest = null;
-        WebScriptRequest current = req;
+        @RUntainted WebScriptServletRequest webScriptServletRequest = null;
+        @RUntainted WebScriptRequest current = req;
         do
         {
             if (current instanceof WebScriptServletRequest)
@@ -175,7 +176,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
             throw new WebScriptException("Remote Store access must be executed in HTTP Servlet environment");
         }
         
-        HttpServletRequest httpReq = webScriptServletRequest.getHttpServletRequest();
+        @RUntainted HttpServletRequest httpReq = webScriptServletRequest.getHttpServletRequest();
                 
         // the request path for the remote store
         String extPath = req.getExtensionPath();
@@ -426,7 +427,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * @param content       content of the document to write
      * 
      */
-    protected abstract void createDocuments(WebScriptResponse res, String store, InputStream content);
+    protected abstract void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream content);
 
     /**
      * Updates an existing document.

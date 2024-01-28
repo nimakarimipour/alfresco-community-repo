@@ -68,6 +68,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.util.FileCopyUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -364,7 +365,7 @@ public class ContentStreamer implements ResourceLoaderAware
         setAttachment(req, res, attach, attachFileName);
     
         // establish mimetype
-        String mimetype = MimeTypeUtil.determineMimetype(reader, req, mimetypeService);
+        @RUntainted String mimetype = MimeTypeUtil.determineMimetype(reader, req, mimetypeService);
         
         res.setHeader(HEADER_ACCEPT_RANGES, "bytes");
         try

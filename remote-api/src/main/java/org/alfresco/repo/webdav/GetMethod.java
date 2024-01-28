@@ -55,6 +55,8 @@ import org.alfresco.service.cmr.repository.datatype.TypeConverter;
 import org.alfresco.service.namespace.QName;
 import org.springframework.extensions.surf.util.I18NUtil;
 import org.springframework.extensions.surf.util.URLEncoder;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Implements the WebDAV GET method
@@ -543,7 +545,7 @@ public class GetMethod extends WebDAVMethod
             writer.write("</tr>\n");
 
             // Get the URL for the root path
-            String rootURL = getURLForPath(m_request, getPath(), true);
+            @RUntainted String rootURL = getURLForPath(m_request, getPath(), true);
             if (rootURL.endsWith(WebDAVHelper.PathSeperator) == false)
             {
                 rootURL = rootURL + WebDAVHelper.PathSeperator;
@@ -572,7 +574,7 @@ public class GetMethod extends WebDAVMethod
                 writer.write("<td colspan='4' class='textData'><a href=\"");
 
                 // Strip the last folder from the path
-                String parentFolderUrl = parentFolder(rootURL);
+                @RUntainted String parentFolderUrl = parentFolder(rootURL);
                 writer.write(parentFolderUrl);
 
                 writer.write("\">");
@@ -602,7 +604,7 @@ public class GetMethod extends WebDAVMethod
                 writer.write(rootURL);
 
                 // name field
-                String fname = childNodeInfo.getName();
+                @RUntainted String fname = childNodeInfo.getName();
 
                 writer.write(WebDAVHelper.encodeURL(fname, m_userAgent));
                 writer.write("\">");
@@ -656,11 +658,11 @@ public class GetMethod extends WebDAVMethod
                 }
                 else
                 {
-                    String mimetype = "&nbsp;";
+                    @RUntainted String mimetype = "&nbsp;";
                     if (null != contentData)
                     {
                         mimetype = contentData.getMimetype();
-                        String displayType = mimeTypeService.getDisplaysByMimetype().get(mimetype);
+                        @RUntainted String displayType = mimeTypeService.getDisplaysByMimetype().get(mimetype);
 
                         if (displayType != null)
                         {
@@ -741,7 +743,7 @@ public class GetMethod extends WebDAVMethod
      * @param strSize The content size
      * @return The formatted size
      */
-    private String formatSize(String strSize)
+    private @RPolyTainted String formatSize(@RPolyTainted String strSize)
     {
         String strFormattedSize = strSize;
 

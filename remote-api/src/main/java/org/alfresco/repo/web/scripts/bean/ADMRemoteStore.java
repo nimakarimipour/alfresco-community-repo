@@ -93,6 +93,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * ADM Remote Store service.
@@ -366,7 +367,7 @@ public class ADMRemoteStore extends BaseRemoteStore
             public Void doWork() throws Exception
             {
                 final String encpath = encodePath(path);
-                final FileInfo fileInfo = resolveFilePath(encpath);
+                final @RUntainted FileInfo fileInfo = resolveFilePath(encpath);
                 
                 Writer out = res.getWriter();
                 out.write(Boolean.toString(fileInfo != null && !fileInfo.isFolder()));
@@ -414,7 +415,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param in       XML document containing multiple document contents to write
      */
     @Override
-    protected void createDocuments(WebScriptResponse res, String store, InputStream in)
+    protected void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream in)
     {
         try
         {
@@ -794,7 +795,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location
      *         or null if the supplied path does not exist in the store
      */
-    private FileInfo resolveFilePath(final String path)
+    private @RUntainted FileInfo resolveFilePath(final String path)
     {
         return resolveNodePath(path, false, false);
     }
@@ -811,7 +812,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final String path, final boolean create, final boolean isFolder)
     {
         return resolveNodePath(path, null, create, isFolder);
     }
@@ -830,7 +831,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final String pattern, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final String path, final String pattern, final boolean create, final boolean isFolder)
     {
         if (logger.isDebugEnabled())
             logger.debug("Resolving path: " + path);

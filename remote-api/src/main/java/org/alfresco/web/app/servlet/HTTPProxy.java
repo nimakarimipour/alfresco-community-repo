@@ -34,6 +34,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -43,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HTTPProxy
 {
-    protected URL url;
+    protected @RUntainted URL url;
     protected HttpServletResponse response;
 
     
@@ -54,7 +55,7 @@ public class HTTPProxy
      * @param response  response to write request back to
      * @throws MalformedURLException
      */
-    public HTTPProxy(String requestUrl, HttpServletResponse response)
+    public HTTPProxy(@RUntainted String requestUrl, HttpServletResponse response)
         throws MalformedURLException
     {
         this.url = new URL(requestUrl);
@@ -69,7 +70,7 @@ public class HTTPProxy
     public void service()
         throws IOException
     {
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        @RUntainted HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         setRequestHeaders(connection);
         initialiseResponse(connection);
         InputStream input = connection.getInputStream();
@@ -106,15 +107,15 @@ public class HTTPProxy
      * 
      * @param urlConnection  url connection
      */
-    protected void initialiseResponse(URLConnection urlConnection)
+    protected void initialiseResponse(@RUntainted URLConnection urlConnection)
     {
-        String type = urlConnection.getContentType();
+        @RUntainted String type = urlConnection.getContentType();
         if (type != null)
         {
             int encodingIdx = type.lastIndexOf("charset=");
             if (encodingIdx == -1)
             {
-                String encoding = urlConnection.getContentEncoding();
+                @RUntainted String encoding = urlConnection.getContentEncoding();
                 if (encoding != null && encoding.length() > 0)
                 {
                     type += ";charset=" + encoding;

@@ -1,0 +1,462 @@
+2024-01-28T02:50:02.906336:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:50:53.011396:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:51:32.321704:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:52:09.604904:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:52:47.107992:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:53:24.750765:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:54:00.578807:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:54:34.460560:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:55:10.062656:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:55:46.251901:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:56:21.896547:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:57:04.587455:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:57:47.055602:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:58:25.854364:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:59:06.929756:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T02:59:47.131099:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:00:28.965026:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:01:09.628504:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:01:52.138279:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:02:31.987370:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:03:11.196947:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:03:55.841290:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:04:42.645718:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:05:30.103750:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:06:17.700368:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:07:00.503172:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:07:44.278236:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:08:28.874296:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:09:12.448703:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:09:55.792508:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:10:38.282106:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:11:20.477932:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:12:02.224125:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:12:45.758243:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:13:26.793783:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:14:08.415898:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:14:49.470637:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:15:30.675803:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:16:12.481852:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:16:53.228822:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:17:31.445905:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:18:08.349457:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:18:45.750177:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:19:22.241503:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:19:58.531183:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:20:34.208282:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:21:10.445984:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:21:51.288189:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:22:34.299794:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:23:21.280645:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:24:09.215716:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:24:56.150286:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:25:37.088520:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:26:17.594481:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:26:59.272344:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:27:41.836003:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:28:24.023570:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:29:53.197922:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:30:33.316228:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:31:12.116766:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:31:51.917650:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:32:31.194783:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:33:12.902204:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:33:51.551171:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:34:29.801949:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:35:05.277784:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:35:40.729905:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:36:15.807526:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:36:50.291829:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:37:25.653871:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:38:01.218034:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:38:37.224769:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:39:12.702829:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:39:47.896734:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:40:31.677399:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:41:06.686500:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:41:43.853728:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:42:19.097904:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:42:53.471644:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:43:27.934731:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:44:02.701266:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:44:36.719082:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:45:10.965983:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:45:45.699498:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:46:20.618039:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:46:56.741574:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:47:31.636366:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:48:06.234369:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:48:40.187056:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:49:15.570374:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:49:49.228540:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:50:23.399350:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:50:57.484632:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:51:31.974767:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:52:09.503431:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:52:46.004566:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:53:23.226043:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:53:59.394421:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:54:36.931439:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:55:13.277975:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:55:51.369752:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:56:27.405958:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:57:05.119362:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:57:43.416630:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:58:23.434326:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:59:02.146872:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T03:59:45.271942:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:00:22.634228:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:00:56.777971:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:01:31.937689:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:02:06.111457:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:02:39.958198:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:03:13.835422:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:03:47.466763:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:04:22.451238:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:04:57.787116:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:05:32.321866:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:06:06.341786:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:06:42.482300:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:07:16.756004:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:07:52.480527:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:08:27.056478:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:09:01.254168:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:09:36.532035:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:10:11.533051:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:10:46.111262:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:11:20.976731:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:11:55.124067:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:12:29.856578:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:13:06.615980:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:13:43.481126:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:14:19.828859:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:14:54.472548:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:15:30.835630:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:16:09.927637:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:16:48.488942:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:17:25.399493:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:18:01.550835:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:18:38.774800:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:19:14.522919:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:19:50.929355:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:20:26.215885:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:21:01.313162:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:21:36.961846:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:22:12.367987:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:22:47.784565:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:23:24.209302:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:24:00.017146:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:24:35.505395:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:25:13.126118:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:25:53.620233:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:26:33.915136:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:27:13.480774:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:27:52.674371:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:28:32.090163:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:29:11.361817:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:29:51.501088:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:30:30.669321:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:31:07.485458:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:31:44.451428:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:32:24.085374:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:33:00.833503:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:33:35.974416:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:34:10.237588:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:34:45.203099:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:35:21.807149:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:35:57.762124:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:36:32.883036:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:37:08.467382:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:37:44.631400:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:38:20.207521:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:38:56.375788:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:39:32.754033:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:40:08.508465:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:40:44.386913:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:41:20.374434:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:41:56.390279:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:42:33.937456:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:43:11.087852:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:43:47.582996:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:44:23.357378:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:45:01.498186:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:45:37.220861:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:46:13.927941:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:46:48.835655:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:47:24.181430:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:47:59.725366:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:48:35.098198:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:49:10.186017:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:49:50.723416:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:50:29.487545:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:51:10.730022:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:51:51.260969:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:52:30.606815:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:53:12.431576:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:53:52.185564:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:54:30.979936:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:55:07.428590:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:55:42.656646:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:56:18.154289:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:56:53.538488:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:57:29.305075:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:58:05.394472:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:58:46.611115:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T04:59:25.196467:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:00:04.224895:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:00:43.252961:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:01:22.693627:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:02:02.332539:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:02:43.325792:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:03:23.391248:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:04:05.094165:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:04:45.408315:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:05:26.038876:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:06:06.299213:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:06:46.121913:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:07:20.756755:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:07:56.562728:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:08:32.994556:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:09:14.680842:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:09:53.891965:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:10:30.435760:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:11:12.511404:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:11:54.843069:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:12:32.522398:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:13:08.345852:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:13:44.482022:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:14:19.637324:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:14:54.745581:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:15:29.843013:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
+2024-01-28T05:16:05.420980:cd /Users/kknock/RIPLE/taint/summer/alfresco-community-repo && ./annotator-command.sh
+
