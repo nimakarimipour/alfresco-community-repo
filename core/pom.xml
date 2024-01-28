@@ -189,7 +189,7 @@
                         <path>
                            <groupId>edu.ucr.cs.riple.taint</groupId>
                            <artifactId>ucrtainting-checker</artifactId>
-                           <version>0.1</version>
+                           <version>0.1-alpha-2</version>
                         </path>
                         <!-- <path>
                            <groupId>edu.ucr.cs.riple.annotator</groupId>
@@ -219,10 +219,10 @@
                         <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
                         <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/checker.xml</arg>
+                        <arg>-AserializationConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
+                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/kknock/RIPLE/taint/summer/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
                      </compilerArgs>
                   </configuration>
                </plugin>
