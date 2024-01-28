@@ -45,6 +45,7 @@ import org.alfresco.encoding.CharactersetFinder;
 import org.alfresco.encoding.GuessEncodingCharsetFinder;
 import org.alfresco.util.exec.RuntimeExec;
 import org.alfresco.util.exec.RuntimeExec.ExecutionResult;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Utility to convert text files.
@@ -119,7 +120,7 @@ public class Convert
      */
     private static final CharactersetFinder CHARACTER_ENCODING_FINDER = new GuessEncodingCharsetFinder();
 
-    private File startDir = null;
+    private @RUntainted File startDir = null;
     
     private boolean svnStatus = false;
     private boolean dryRun = false;
@@ -133,15 +134,15 @@ public class Convert
     private boolean verbose = false;
     private boolean quiet = false;
     
-    public static void main(String[] args)
+    public static void main(@RUntainted String[] args)
     {
         if (args.length < 1)
         {
             printUsage();
         }
         // Convert args to a list
-        List<String> argList = new ArrayList<String>(args.length);
-        List<String> argListFixed = Arrays.asList(args);
+        List<@RUntainted String> argList = new ArrayList<@RUntainted String>(args.length);
+        List<@RUntainted String> argListFixed = Arrays.asList(args);
         argList.addAll(argListFixed);
         // Extract all the options
         Map<String, String> optionValues = extractOptions(argList);
@@ -178,7 +179,7 @@ public class Convert
     /**
      * Private constructor for use by the main method.
      */
-    private Convert(Map<String, String> optionValues, File startDir)
+    private Convert(Map<String, String> optionValues, @RUntainted File startDir)
     {
         this.startDir = startDir;
         
@@ -326,14 +327,14 @@ public class Convert
             System.out.println("svn status command failed:" + exec);
         }
         // Get the output
-        String dump = result.getStdOut();
-        BufferedReader reader = null;
+        @RUntainted String dump = result.getStdOut();
+        @RUntainted BufferedReader reader = null;
         try
         {
             reader = new BufferedReader(new StringReader(dump));
             while (true)
             {
-                String line = reader.readLine();
+                @RUntainted String line = reader.readLine();
                 if (line == null)
                 {
                     break;
@@ -343,7 +344,7 @@ public class Convert
                 {
                     continue;
                 }
-                String filename = line.substring(7).trim();
+                @RUntainted String filename = line.substring(7).trim();
                 if (filename.length() < 1)
                 {
                     continue;
@@ -369,11 +370,11 @@ public class Convert
     /**
      * Recursive method to do the conversion work.
      */
-    private void convertDir(File currentDir) throws Throwable
+    private void convertDir(@RUntainted File currentDir) throws Throwable
     {
         // Get all children of the folder
-        File[] childFiles = currentDir.listFiles();
-        for (File childFile : childFiles)
+        @RUntainted File[] childFiles = currentDir.listFiles();
+        for (@RUntainted File childFile : childFiles)
         {
             if (childFile.isDirectory())
             {
@@ -392,7 +393,7 @@ public class Convert
         }
     }
     
-    private void convertFile(File file) throws Throwable
+    private void convertFile(@RUntainted File file) throws Throwable
     {
         // We have a file, but does the pattern match
         String filePath = file.getAbsolutePath();
@@ -472,7 +473,7 @@ public class Convert
             {
                 if (!noBackup && !dryRun)
                 {
-                    String backupFilename = file.getAbsolutePath() + ".bak";
+                    @RUntainted String backupFilename = file.getAbsolutePath() + ".bak";
                     File backupFilePre = new File(backupFilename);
                     // Write the original file contents to the backup file
                     writeMemoryIntoFile(fileBytes, backupFilePre);
@@ -702,7 +703,7 @@ public class Convert
      * @return          Returns a map of arguments and their values.  Where the arguments have
      *                  no values, an empty string is returned.
      */
-    private static Map<String, String> extractOptions(List<String> args)
+    private static Map<String, String> extractOptions(List<@RUntainted String> args)
     {
         Map<String, String> optionValues = new HashMap<String, String>(13);
         // Iterate until we find a non-option

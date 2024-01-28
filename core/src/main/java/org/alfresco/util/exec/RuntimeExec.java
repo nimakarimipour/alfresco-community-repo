@@ -40,6 +40,7 @@ import java.util.TimerTask;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This acts as a session similar to the <code>java.lang.Process</code>, but
@@ -108,8 +109,8 @@ public class RuntimeExec
     private Charset charset;
     private boolean waitForCompletion;
     private Map<String, String> defaultProperties;
-    private String[] processProperties;
-    private File processDirectory;
+    private @RUntainted String[] processProperties;
+    private @RUntainted File processDirectory;
     private Set<Integer> errCodes;
     private Timer timer = new Timer(true);
 
@@ -319,15 +320,15 @@ public class RuntimeExec
      * 
      * @see Runtime#exec(String, String[], java.io.File)
      */
-    public void setProcessProperties(Map<String, String> processProperties)
+    public void setProcessProperties(Map<@RUntainted String, @RUntainted String> processProperties)
     {
-        ArrayList<String> processPropList = new ArrayList<String>(processProperties.size());
+        ArrayList<@RUntainted String> processPropList = new ArrayList<@RUntainted String>(processProperties.size());
         boolean hasPath = false;
         String systemPath = System.getenv("PATH");
-        for (Map.Entry<String, String> entry : processProperties.entrySet())
+        for (Map.Entry<@RUntainted String, @RUntainted String> entry : processProperties.entrySet())
         {
-            String key = entry.getKey();
-            String value = entry.getValue();
+            @RUntainted String key = entry.getKey();
+            @RUntainted String value = entry.getValue();
             if (key == null)
             {
                 continue;
@@ -380,7 +381,7 @@ public class RuntimeExec
      * @param name - property name
      * @param value - property value 
      */
-    public void setProcessProperty(String name, String value)
+    public void setProcessProperty(@RUntainted String name, @RUntainted String value)
     {
         boolean set = false;
         
@@ -393,7 +394,7 @@ public class RuntimeExec
         if (name.isEmpty() || value.isEmpty()) 
             return; 
         
-        String property = name + "=" + value;
+        @RUntainted String property = name + "=" + value;
              
         for (String prop : this.processProperties)
         {
@@ -413,9 +414,9 @@ public class RuntimeExec
         
         if (!set)
         {
-          String[] existedProperties = this.processProperties;
+          @RUntainted String[] existedProperties = this.processProperties;
           int epl = existedProperties.length; 
-          String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
+          @RUntainted String[] newProperties = Arrays.copyOf(existedProperties, epl + 1);
           newProperties[epl] = property;
           this.processProperties = newProperties;      
           set = true;
@@ -431,7 +432,7 @@ public class RuntimeExec
      * 
      * @param processDirectory          the runtime location from which to execute the command
      */
-    public void setProcessDirectory(String processDirectory)
+    public void setProcessDirectory(@RUntainted String processDirectory)
     {
         if (processDirectory.startsWith(VAR_OPEN) && processDirectory.endsWith(VAR_CLOSE))
         {
@@ -526,7 +527,7 @@ public class RuntimeExec
         // create the properties
         Runtime runtime = Runtime.getRuntime();
         Process process = null;
-        String[] commandToExecute = null;
+        @RUntainted String[] commandToExecute = null;
         try
         {
             // execute the command with full property replacement
@@ -603,7 +604,7 @@ public class RuntimeExec
         }
 
         // get the stream values
-        String execOut = stdOutGobbler.getBuffer();
+        @RUntainted String execOut = stdOutGobbler.getBuffer();
         String execErr = stdErrGobbler.getBuffer();
         
         // construct the return value
@@ -676,7 +677,7 @@ public class RuntimeExec
      * @return Returns the command that will be executed should the additional properties
      *      be supplied
      */
-    public String[] getCommand(Map<String, String> properties)
+    public @RUntainted String[] getCommand(Map<String, String> properties)
     {
         Map<String, String> execProperties = null;
         if (properties == defaultProperties)
@@ -746,7 +747,7 @@ public class RuntimeExec
         private final String[] command;
         private final Set<Integer> errCodes;
         private final int exitValue;
-        private final String stdOut;
+        private final @RUntainted String stdOut;
         private final String stdErr;
        
         /**
@@ -758,7 +759,7 @@ public class RuntimeExec
                 final String[] command,
                 final Set<Integer> errCodes,
                 final int exitValue,
-                final String stdOut,
+                final @RUntainted String stdOut,
                 final String stdErr)
         {
             this.process = process;
@@ -876,7 +877,7 @@ public class RuntimeExec
             return exitValue;
         }
         
-        public String getStdOut()
+        public @RUntainted String getStdOut()
         {
             return stdOut;
         }
@@ -897,7 +898,7 @@ public class RuntimeExec
     {
         private final InputStream is;
         private final Charset charset;
-        private final StringBuffer buffer;          // we require the synchronization
+        private final @RUntainted StringBuffer buffer;          // we require the synchronization
         private boolean completed;
 
         /**
@@ -997,7 +998,7 @@ public class RuntimeExec
         /**
          * @return Returns the current state of the buffer
          */
-        public String getBuffer()
+        public @RUntainted String getBuffer()
         {
             return buffer.toString();
         }
