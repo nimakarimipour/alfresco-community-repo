@@ -18,7 +18,7 @@ import os
 import shutil
 from pathlib import Path
 
-VERSION = '1.3.9-LOGISIM-SNAPSHOT'
+VERSION = '1.3.9-TAINT-SNAPSHOT'
 MODULE = 'remote-api'
 REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
 OUT_DIR = '{}/annotator-out/{}'.format(REPO, MODULE)
