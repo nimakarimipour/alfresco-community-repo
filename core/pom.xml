@@ -189,7 +189,7 @@
                         <path>
                            <groupId>edu.ucr.cs.riple.taint</groupId>
                            <artifactId>ucrtainting-checker</artifactId>
-                           <version>0.1</version>
+                           <version>${env.UCRT_VERSION}</version>
                         </path>
                         <!-- <path>
                            <groupId>edu.ucr.cs.riple.annotator</groupId>
@@ -214,12 +214,13 @@
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                         <!-- <arg>-Awarns</arg> -->
-                        <arg>-AannotatedPackages=org.alfresco</arg>
+                        <arg>-nowarn</arg>
+                        <arg>-AannotatedPackages=org.alfresco.api,org.alfresco.config,org.alfresco.encoding,org.alfresco.encryption,org.alfresco.encryption,org.alfresco.error,org.alfresco.httpclient,org.alfresco.i18n,org.alfresco.processor,org.alfresco.query,org.alfresco.scripts,org.alfresco.util,org.alfresco.web</arg>
                         <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
                         <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
                         <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/checker.xml</arg>
+                        <arg>-AserializationConfigPath=/Users/nima/Developer/alfresco-community-repo/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
                         <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
@@ -232,7 +233,7 @@
             <dependency>
                <groupId>org.checkerframework</groupId>
                <artifactId>checker</artifactId>
-               <version>3.40.0</version>
+               <version>${env.CF_VERSION}</version>
             </dependency>
          </dependencies>
       </profile>
