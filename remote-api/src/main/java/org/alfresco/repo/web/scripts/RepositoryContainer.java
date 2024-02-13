@@ -71,6 +71,7 @@ import org.springframework.extensions.webscripts.WebScript;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -808,7 +809,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     }
 
     private static BufferedResponse newBufferedResponse(
-        final RequiredTransactionParameters trxParams,
+        final @RUntainted RequiredTransactionParameters trxParams,
         final WebScriptResponse scriptRes,
         final Supplier<TempOutputStream> streamFactory)
     {

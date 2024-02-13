@@ -45,6 +45,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Remote Store service.
@@ -145,7 +147,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
     /**
      * Execute the webscript based on the request parameters
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // NOTE: This web script must be executed in a HTTP Servlet environment
 
@@ -351,7 +353,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * @param store the store id
      * @param path  document path to an existing document
      */
-    protected abstract void lastModified(WebScriptResponse res, String store, String path)
+    protected abstract void lastModified(WebScriptResponse res, String store, @RUntainted String path)
         throws IOException;
     
     /**
@@ -362,7 +364,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * @param store the store id
      * @param path  document path
      */
-    protected abstract void hasDocument(WebScriptResponse res, String store, String path)
+    protected abstract void hasDocument(WebScriptResponse res, String store, @RUntainted String path)
         throws IOException;
 
     /**
@@ -390,7 +392,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * 
      * @throws IOException if an error occurs listing the documents
      */
-    protected abstract void listDocuments(WebScriptResponse res, String store, String path, boolean recurse)
+    protected abstract void listDocuments(WebScriptResponse res, String store, @RUntainted String path, boolean recurse)
         throws IOException;
     
     /**
@@ -405,7 +407,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * 
      * @throws IOException if an error occurs listing the documents
      */
-    protected abstract void listDocuments(WebScriptResponse res, String store, String path, String pattern)
+    protected abstract void listDocuments(WebScriptResponse res, String store, @RUntainted String path, @RUntainted String pattern)
         throws IOException;
     
     /**
@@ -426,7 +428,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * @param content       content of the document to write
      * 
      */
-    protected abstract void createDocuments(WebScriptResponse res, String store, InputStream content);
+    protected abstract void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream content);
 
     /**
      * Updates an existing document.
@@ -466,7 +468,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
     };
     
     
-    protected static String encodePath(final String s)
+    protected static @RPolyTainted String encodePath(final @RPolyTainted String s)
     {
         StringBuilder sb = null;      //create on demand
         char ch;
