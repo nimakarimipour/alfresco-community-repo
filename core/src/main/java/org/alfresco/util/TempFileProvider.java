@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicLong;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.api.AlfrescoPublicApi;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.apache.commons.logging.Log;
@@ -66,7 +67,7 @@ public class TempFileProvider
     /** 
      * subdirectory in the temp directory where Alfresco temporary files will go 
      */
-    public static final String ALFRESCO_TEMP_FILE_DIR = "Alfresco";
+    public static final @RUntainted String ALFRESCO_TEMP_FILE_DIR = "Alfresco";
     
     /**
      * The prefix for the long life temporary files.
@@ -74,7 +75,7 @@ public class TempFileProvider
     public static final String ALFRESCO_LONG_LIFE_FILE_DIR = "longLife";
 
     /** the system property key giving us the location of the temp directory */
-    public static final String SYSTEM_KEY_TEMP_DIR = "java.io.tmpdir";
+    public static final @RUntainted String SYSTEM_KEY_TEMP_DIR = "java.io.tmpdir";
 
     private static final Log logger = LogFactory.getLog(TempFileProvider.class);
     
@@ -92,7 +93,7 @@ public class TempFileProvider
      * 
      * @return Returns the system temporary directory i.e. <code>isDir == true</code>
      */
-    public static File getSystemTempDir()
+    public static @RUntainted File getSystemTempDir()
     {
         String systemTempDirPath = System.getProperty(SYSTEM_KEY_TEMP_DIR);
         if (systemTempDirPath == null)
@@ -113,7 +114,7 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir()
+    public static @RUntainted File getTempDir()
     {
         return getTempDir(ALFRESCO_TEMP_FILE_DIR);
     }
@@ -126,7 +127,7 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir(String dirName)
+    public static @RUntainted File getTempDir(@RUntainted String dirName)
     {
         File systemTempDir = getSystemTempDir();
         // append the Alfresco directory
@@ -173,7 +174,7 @@ public class TempFileProvider
      * the client can simply delete the entire temporary folder.  
      * @return the long life temporary directory
      */
-    public static File getLongLifeTempDir(String key)
+    public static File getLongLifeTempDir(@RUntainted String key)
     {
         /**
          * Long life temporary directories have a prefix at the start of the 
@@ -366,7 +367,7 @@ public class TempFileProvider
          * Gets a list of all files in the {@link TempFileProvider#ALFRESCO_TEMP_FILE_DIR temp directory}
          * and deletes all those that are older than the given number of hours.
          */
-        public void execute(JobExecutionContext context) throws JobExecutionException
+        public void execute(@RUntainted JobExecutionContext context) throws JobExecutionException
         {
             // get the number of hours to protect the temp files
             String strProtectHours = (String) context.getJobDetail().getJobDataMap().get(KEY_PROTECT_HOURS);

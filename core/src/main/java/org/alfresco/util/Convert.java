@@ -120,7 +120,7 @@ public class Convert
      */
     private static final CharactersetFinder CHARACTER_ENCODING_FINDER = new GuessEncodingCharsetFinder();
 
-    private File startDir = null;
+    private @RUntainted File startDir = null;
     
     private boolean svnStatus = false;
     private boolean dryRun = false;
@@ -179,7 +179,7 @@ public class Convert
     /**
      * Private constructor for use by the main method.
      */
-    private Convert(Map<String, String> optionValues, File startDir)
+    private Convert(Map<String, String> optionValues, @RUntainted File startDir)
     {
         this.startDir = startDir;
         
@@ -317,7 +317,7 @@ public class Convert
         }
     }
     
-    private void convertSvn(File currentDir) throws Throwable
+    private void convertSvn(@RUntainted File currentDir) throws Throwable
     {
         RuntimeExec exec = new RuntimeExec();
         exec.setCommand(new String[] {"svn", "status", currentDir.toString()});
