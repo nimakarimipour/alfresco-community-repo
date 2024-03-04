@@ -24,6 +24,7 @@ import java.security.AlgorithmParameters;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.apache.commons.httpclient.HttpMethod;
 
 /**
@@ -91,7 +92,7 @@ public interface EncryptionUtils
      * @throws IOException
      */
     public void setResponseAuthentication(HttpServletRequest httpRequest, HttpServletResponse httpResponse,
-            byte[] responseBody, AlgorithmParameters params) throws IOException;
+            byte[] responseBody, @RUntainted AlgorithmParameters params) throws IOException;
     
     /**
      * Set the algorithm parameters header on the method request

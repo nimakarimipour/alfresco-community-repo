@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.encoding.CharactersetFinder;
 import org.alfresco.encoding.GuessEncodingCharsetFinder;
 import org.alfresco.util.exec.RuntimeExec;
@@ -369,10 +370,10 @@ public class Convert
     /**
      * Recursive method to do the conversion work.
      */
-    private void convertDir(File currentDir) throws Throwable
+    private void convertDir(@RUntainted File currentDir) throws Throwable
     {
         // Get all children of the folder
-        File[] childFiles = currentDir.listFiles();
+        @RUntainted File[] childFiles = currentDir.listFiles();
         for (File childFile : childFiles)
         {
             if (childFile.isDirectory())
@@ -392,7 +393,7 @@ public class Convert
         }
     }
     
-    private void convertFile(File file) throws Throwable
+    private void convertFile(@RUntainted File file) throws Throwable
     {
         // We have a file, but does the pattern match
         String filePath = file.getAbsolutePath();

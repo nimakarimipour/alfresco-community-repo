@@ -29,6 +29,7 @@ import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.encryption.MACUtils.MACInput;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.util.IPUtils;
@@ -50,9 +51,9 @@ public class DefaultEncryptionUtils implements EncryptionUtils
     // Logger
     protected static Log logger = LogFactory.getLog(Encryptor.class);
 
-    protected static String HEADER_ALGORITHM_PARAMETERS = "XAlfresco-algorithmParameters";
-    protected static String HEADER_MAC = "XAlfresco-mac";
-    protected static String HEADER_TIMESTAMP = "XAlfresco-timestamp";
+    protected static @RUntainted String HEADER_ALGORITHM_PARAMETERS = "XAlfresco-algorithmParameters";
+    protected static @RUntainted String HEADER_MAC = "XAlfresco-mac";
+    protected static @RUntainted String HEADER_TIMESTAMP = "XAlfresco-timestamp";
 
     protected Encryptor encryptor;
     protected MACUtils macUtils;
@@ -258,7 +259,7 @@ public class DefaultEncryptionUtils implements EncryptionUtils
      * @param params AlgorithmParameters
      * @throws IOException
      */
-    protected void setAlgorithmParameters(HttpServletResponse response, AlgorithmParameters params) throws IOException
+    protected void setAlgorithmParameters(HttpServletResponse response, @RUntainted AlgorithmParameters params) throws IOException
     {
         if(params != null)
         {
@@ -443,7 +444,7 @@ public class DefaultEncryptionUtils implements EncryptionUtils
      */
     @Override
     public void setResponseAuthentication(HttpServletRequest httpRequest, HttpServletResponse httpResponse,
-            byte[] responseBody, AlgorithmParameters params) throws IOException
+            byte[] responseBody, @RUntainted AlgorithmParameters params) throws IOException
     {
         long responseTimestamp = System.currentTimeMillis();
         byte[] mac = macUtils.generateMAC(KeyProvider.ALIAS_SOLR,

@@ -22,6 +22,7 @@ package org.alfresco.util;
 import java.io.File;
 import java.io.IOException;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -37,7 +38,7 @@ public class Deleter
      * Delete by path.
      * @param path
      */
-    public static void Delete(String path)
+    public static void Delete(@RUntainted String path)
     {
         File toDelete = new File(path);
         Delete(toDelete);
