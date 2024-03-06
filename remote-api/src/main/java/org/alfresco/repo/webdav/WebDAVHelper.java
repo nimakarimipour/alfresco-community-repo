@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.sync.events.types.ContentEvent;
 import org.alfresco.sync.events.types.ContentEventImpl;
@@ -719,7 +720,7 @@ public class WebDAVHelper
      * 
      * @param string        the String to convert
      */
-    public final static String encodeHTML(String string)
+    public final static @RPolyTainted String encodeHTML(@RPolyTainted String string)
     {
         if (string == null)
         {
