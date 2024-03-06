@@ -39,6 +39,7 @@ import java.util.function.Supplier;
 
 import com.google.common.primitives.Ints;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.repo.bulkimport.BulkFilesystemImporter;
 import org.alfresco.repo.bulkimport.BulkImportParameters;
 import org.alfresco.repo.bulkimport.NodeImporter;
@@ -76,7 +77,7 @@ public class AbstractBulkFileSystemImportWebScript extends DeclarativeWebScript
 	protected static final String PARAMETER_REPLACE_EXISTING        = "replaceExisting";
 	protected static final String PARAMETER_EXISTING_FILE_MODE      = "existingFileMode";
 	protected static final String PARAMETER_VALUE_REPLACE_EXISTING 	= "true";
-	protected static final String PARAMETER_SOURCE_DIRECTORY       	= "sourceDirectory";
+	protected static final @RUntainted String PARAMETER_SOURCE_DIRECTORY       	= "sourceDirectory";
 	protected static final String PARAMETER_DISABLE_RULES		    = "disableRules";
 	protected static final String PARAMETER_VALUE_DISABLE_RULES		= "true";
 
