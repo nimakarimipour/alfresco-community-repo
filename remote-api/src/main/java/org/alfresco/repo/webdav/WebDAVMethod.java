@@ -51,6 +51,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.content.LimitedStreamCopier;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
@@ -123,7 +124,7 @@ public abstract class WebDAVMethod
     protected HttpServletResponse m_response;
     private File m_requestBody;
     private ServletInputStream m_inputStream;
-    private CharArrayWriter m_xmlWriter;
+    private @RUntainted CharArrayWriter m_xmlWriter;
     private BufferedReader m_reader;
 
     // WebDAV helper

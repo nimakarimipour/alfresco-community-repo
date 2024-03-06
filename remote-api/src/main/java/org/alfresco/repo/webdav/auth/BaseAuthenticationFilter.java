@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.SessionUser;
 import org.alfresco.repo.management.subsystems.ActivateableBean;
@@ -63,7 +64,7 @@ public abstract class BaseAuthenticationFilter
     protected static final String NO_AUTH_REQUIRED = "alfNoAuthRequired"; 
 
     /** The default session attribute used to cache the user. Subclasses may override this with {@link #setUserAttributeName(String)}. */
-    public static final String AUTHENTICATION_USER = "_alfDAVAuthTicket";
+    public static final @RUntainted String AUTHENTICATION_USER = "_alfDAVAuthTicket";
     
     /** The session attribute that indicates external authentication. */
     private static final String LOGIN_EXTERNAL_AUTH = "_alfExternalAuth";
@@ -93,7 +94,7 @@ public abstract class BaseAuthenticationFilter
     protected AuthenticationListener authenticationListener;
 
     /** The configured user attribute name. */
-    private String userAttributeName = AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AUTHENTICATION_USER;
 
     
 
@@ -186,7 +187,7 @@ public abstract class BaseAuthenticationFilter
      *            NodeRef
      * @return SessionUser
      */
-    protected SessionUser createUserObject(String userName, String ticket, NodeRef personNode, NodeRef homeSpaceRef)
+    protected @RUntainted SessionUser createUserObject(String userName, String ticket, NodeRef personNode, NodeRef homeSpaceRef)
     {
         return new WebDAVUser(userName, ticket, homeSpaceRef);
     }
@@ -328,7 +329,7 @@ public abstract class BaseAuthenticationFilter
      * 
      * @return the user object session attribute name
      */
-    protected final String getUserAttributeName()
+    protected final @RUntainted String getUserAttributeName()
     {
     	return userAttributeName;
     }
@@ -339,7 +340,7 @@ public abstract class BaseAuthenticationFilter
      * @param userAttr
      *            the user object session attribute name
      */
-    protected final void setUserAttributeName(String userAttr)
+    protected final void setUserAttributeName(@RUntainted String userAttr)
     {
     	userAttributeName = userAttr;
     }
@@ -368,9 +369,9 @@ public abstract class BaseAuthenticationFilter
         {
             getLogger().trace("Create the User environment for: " + AuthenticationUtil.maskUsername(userName));
         }
-        SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
+        SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<@RUntainted SessionUser>()
         {
-            public SessionUser execute() throws Throwable
+            public @RUntainted SessionUser execute() throws Throwable
             {
                 // Setup User object and Home space ID etc.
                 final NodeRef personNodeRef = personService.getPerson(userName);

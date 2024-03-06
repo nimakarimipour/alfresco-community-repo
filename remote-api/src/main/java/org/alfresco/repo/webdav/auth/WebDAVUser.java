@@ -26,6 +26,7 @@
 
 package org.alfresco.repo.webdav.auth;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.repo.SessionUser;
 import org.alfresco.service.cmr.repository.NodeRef;
 
@@ -59,7 +60,7 @@ public class WebDAVUser implements SessionUser
      * @param ticket String
      * @param homeNode NodeRef
      */
-    public WebDAVUser(String user, String ticket, NodeRef homeNode)
+    public @RUntainted WebDAVUser(String user, String ticket, NodeRef homeNode)
     {
         m_userName = user;
         m_ticket   = ticket;

@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.sync.events.types.ContentEvent;
 import org.alfresco.sync.events.types.ContentEventImpl;
 import org.alfresco.sync.events.types.Event;
@@ -957,7 +958,7 @@ public class WebDAVHelper
      * @param urlStr String
      * @exception WebDAVServerException
      */
-    public void checkDestinationURL(HttpServletRequest request, String urlStr) throws WebDAVServerException
+    public void checkDestinationURL(HttpServletRequest request, @RUntainted String urlStr) throws WebDAVServerException
     {
         try
         {

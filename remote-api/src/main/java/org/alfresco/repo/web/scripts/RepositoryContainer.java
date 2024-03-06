@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.error.ExceptionStackUtil;
 import org.alfresco.repo.model.Repository;
@@ -301,7 +302,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.RuntimeContainer#executeScript(org.alfresco.web.scripts.WebScriptRequest, org.alfresco.web.scripts.WebScriptResponse, org.alfresco.web.scripts.Authenticator)
      */
-    public void executeScript(WebScriptRequest scriptReq, WebScriptResponse scriptRes, final Authenticator auth)
+    public void executeScript(@RUntainted WebScriptRequest scriptReq, WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         try
@@ -335,7 +336,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
         }
     }
     
-    protected void executeScriptInternal(final WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
+    protected void executeScriptInternal(final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         final WebScript script = scriptReq.getServiceMatch().getWebScript();
@@ -494,7 +495,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param scriptRes WebScriptResponse
      * @throws IOException
      */
-    protected void transactionedExecute(final WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
+    protected void transactionedExecute(final @RUntainted WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
         throws IOException
     {
         final Description description = script.getDescription();
@@ -676,7 +677,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param scriptRes WebScriptResponse
      * @throws IOException
      */
-    private void transactionedExecuteAs(final WebScript script, final WebScriptRequest scriptReq,
+    private void transactionedExecuteAs(final @RUntainted WebScript script, final WebScriptRequest scriptReq,
             final WebScriptResponse scriptRes) throws IOException
     {
         final String runAs = script.getDescription().getRunAs();
@@ -808,7 +809,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     }
 
     private static BufferedResponse newBufferedResponse(
-        final RequiredTransactionParameters trxParams,
+        final @RUntainted RequiredTransactionParameters trxParams,
         final WebScriptResponse scriptRes,
         final Supplier<TempOutputStream> streamFactory)
     {

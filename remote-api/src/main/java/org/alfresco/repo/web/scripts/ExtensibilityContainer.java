@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 
-
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.apache.commons.logging.Log;
 
 import org.apache.commons.logging.LogFactory;
@@ -131,7 +131,7 @@ public class ExtensibilityContainer extends RepositoryContainer implements Handl
 
     @Override
 
-    public void executeScript(WebScriptRequest scriptReq, 
+    public void executeScript(@RUntainted WebScriptRequest scriptReq,
 
                               WebScriptResponse scriptRes, 
 
