@@ -40,6 +40,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.repo.content.MimetypeMap;
 import org.alfresco.repo.exporter.ACPExportPackageHandler;
 import org.alfresco.repo.management.subsystems.ChildApplicationContextManager;
@@ -171,7 +172,7 @@ public class SiteExportGet extends AbstractWebScript
         mainZip.close();
     }
     
-    protected void doSiteACPExport(SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
+    protected void doSiteACPExport(@RUntainted SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
     {
         // Build the parameters
         ExporterCrawlerParameters parameters = new ExporterCrawlerParameters();

@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.SessionUser;
 import org.alfresco.repo.security.authentication.AuthenticationException;
@@ -64,7 +65,7 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
     private NodeService nodeService;
     private TransactionService transactionService;
     
-    private String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
 
     public void setAuthenticationService(AuthenticationService authenticationService)
     {
@@ -86,7 +87,7 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
         this.transactionService = transactionService;
     }
 
-    public void setUserAttributeName(String userAttributeName)
+    public void setUserAttributeName(@RUntainted String userAttributeName)
     {
         this.userAttributeName = userAttributeName;
     }

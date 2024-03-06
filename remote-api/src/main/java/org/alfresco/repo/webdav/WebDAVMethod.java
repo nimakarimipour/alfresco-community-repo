@@ -137,7 +137,7 @@ public abstract class WebDAVMethod
 
     // Repository path
 
-    protected String m_strPath = null;
+    protected @RUntainted String m_strPath = null;
 
     // User Agent
     
@@ -732,7 +732,7 @@ public abstract class WebDAVMethod
      * 
      * @return NodeService
      */
-    protected final NodeService getNodeService()
+    protected final @RUntainted NodeService getNodeService()
     {
         return m_davHelper.getNodeService();
     }
@@ -856,7 +856,7 @@ public abstract class WebDAVMethod
      * 
      * @return String
      */
-    public String getPath()
+    public @RUntainted String getPath()
     {
         return m_strPath;
     }

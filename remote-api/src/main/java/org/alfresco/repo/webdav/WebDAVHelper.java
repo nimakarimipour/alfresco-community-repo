@@ -108,7 +108,7 @@ public class WebDAVHelper
     private ServiceRegistry m_serviceRegistry;
 
     // Services
-    private NodeService m_nodeService;
+    private @RUntainted NodeService m_nodeService;
     private FileFolderService m_fileFolderService;
     private SearchService m_searchService;
     private NamespaceService m_namespaceService;
@@ -199,7 +199,7 @@ public class WebDAVHelper
     /**
      * @return          Return the node service
      */
-    public final NodeService getNodeService()
+    public final @RUntainted NodeService getNodeService()
     {
         return m_nodeService;
     }
@@ -308,7 +308,7 @@ public class WebDAVHelper
     /**
      * @param nodeService the node service
      */
-    public void setNodeService(NodeService nodeService)
+    public void setNodeService(@RUntainted NodeService nodeService)
     {
         this.m_nodeService = nodeService;
     }

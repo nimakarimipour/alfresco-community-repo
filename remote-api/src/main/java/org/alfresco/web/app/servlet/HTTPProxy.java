@@ -25,6 +25,8 @@
  */
 package org.alfresco.web.app.servlet;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,7 +56,7 @@ public class HTTPProxy
      * @param response  response to write request back to
      * @throws MalformedURLException
      */
-    public HTTPProxy(String requestUrl, HttpServletResponse response)
+    public HTTPProxy(@RUntainted String requestUrl, HttpServletResponse response)
         throws MalformedURLException
     {
         this.url = new URL(requestUrl);

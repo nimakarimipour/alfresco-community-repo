@@ -35,6 +35,7 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.ContentData;
@@ -318,7 +319,7 @@ public class WebDAV
      * @param ldate long
      * @return String
      */
-    public static String formatHeaderDate(long ldate)
+    public static @RPolyTainted String formatHeaderDate(@RPolyTainted long ldate)
     {
         // HTTP header date/time format
         // NOTE: According to RFC2616 dates should always be in English and in

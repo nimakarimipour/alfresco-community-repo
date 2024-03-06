@@ -38,6 +38,7 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.content.filestore.FileContentReader;
 import org.alfresco.repo.web.util.HttpRangeProcessor;
@@ -498,7 +499,7 @@ public class GetMethod extends WebDAVMethod
             }
             
             // Get the list of child nodes for the parent node
-            List<FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
+            List<@RUntainted FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
 
             // Send back the start of the HTML
             writer.write("<html><head><title>");
@@ -586,7 +587,7 @@ public class GetMethod extends WebDAVMethod
             writer.flush();
             int rowId = 0;
             
-            for (FileInfo childNodeInfo : childNodeInfos)
+            for (@RUntainted FileInfo childNodeInfo : childNodeInfos)
             {
                 // Output the details for the current node
                 writer.write("<tr class='");
