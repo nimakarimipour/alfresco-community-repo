@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.springframework.extensions.config.Config;
 import org.springframework.extensions.config.ConfigService;
 import org.springframework.extensions.surf.util.I18NUtil;
@@ -121,8 +122,8 @@ public class SearchEngines extends DeclarativeWebScript
         OpenSearchConfigElement searchConfig = (OpenSearchConfigElement)config.getConfigElement(OpenSearchConfigElement.CONFIG_ELEMENT_ID);
         for (OpenSearchConfigElement.EngineConfig engineConfig : searchConfig.getEngines())
         {
-            Map<String, String> engineUrls = engineConfig.getUrls();
-            for (Map.Entry<String, String> engineUrl : engineUrls.entrySet())
+            Map<String, @RUntainted String> engineUrls = engineConfig.getUrls();
+            for (Map.Entry<String, @RUntainted String> engineUrl : engineUrls.entrySet())
             {
                 String type = engineUrl.getKey();
                 String url = searchProxy.createUrl(engineConfig, type);

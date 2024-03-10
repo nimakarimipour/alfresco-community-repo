@@ -54,6 +54,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.model.ContentModel;
 import org.alfresco.query.CannedQueryPageDetails;
@@ -223,7 +224,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path to an existing document
      */
     @Override
-    protected void lastModified(final WebScriptResponse res, final String store, final String path)
+    protected void lastModified(final WebScriptResponse res, final String store, final @RUntainted String path)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -256,7 +257,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void getDocument(final WebScriptResponse res, final String store, final String path)
+    protected void getDocument(final WebScriptResponse res, final String store, final @RUntainted String path)
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
         {
@@ -358,7 +359,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void hasDocument(final WebScriptResponse res, final String store, final String path) throws IOException
+    protected void hasDocument(final WebScriptResponse res, final String store, final @RUntainted String path) throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
         {
@@ -388,7 +389,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param content       content of the document to write
      */
     @Override
-    protected void createDocument(final WebScriptResponse res, final String store, final String path, final InputStream content)
+    protected void createDocument(final WebScriptResponse res, final String store, final @RUntainted String path, final InputStream content)
     {
         try
         {
@@ -414,7 +415,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param in       XML document containing multiple document contents to write
      */
     @Override
-    protected void createDocuments(WebScriptResponse res, String store, InputStream in)
+    protected void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream in)
     {
         try
         {
@@ -429,7 +430,7 @@ public class ADMRemoteStore extends BaseRemoteStore
                 {
                     continue;
                 }
-                final String path = ((Element) n).getAttribute("path");
+                final String path = ((@RUntainted Element) n).getAttribute("path");
                 
                 // Turn the first element child into a document
                 Document doc = documentBuilder.newDocument();
@@ -469,7 +470,7 @@ public class ADMRemoteStore extends BaseRemoteStore
         }
     }
     
-    protected void writeDocument(final String path, final InputStream content)
+    protected void writeDocument(final @RUntainted String path, final InputStream content)
     {
         final String encpath = encodePath(path);
         final int off = encpath.lastIndexOf('/');
@@ -574,7 +575,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param content       content to update the document with
      */
     @Override
-    protected void updateDocument(final WebScriptResponse res, String store, final String path, final InputStream content)
+    protected void updateDocument(final WebScriptResponse res, String store, final @RUntainted String path, final InputStream content)
     {
         final String runAsUser = getPathRunAsUser(path);
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -616,7 +617,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void deleteDocument(final WebScriptResponse res, final String store, final String path)
+    protected void deleteDocument(final WebScriptResponse res, final String store, final @RUntainted String path)
     {
         final String encpath = encodePath(path);
         final FileInfo fileInfo = resolveFilePath(encpath);
@@ -676,7 +677,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @throws IOException if an error occurs listing the documents
      */
     @Override
-    protected void listDocuments(final WebScriptResponse res, final String store, final String path, final boolean recurse)
+    protected void listDocuments(final WebScriptResponse res, final String store, final @RUntainted String path, final boolean recurse)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -723,7 +724,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @throws IOException if an error occurs listing the documents
      */
     @Override
-    protected void listDocuments(final WebScriptResponse res, final String store, final String path, final String pattern)
+    protected void listDocuments(final WebScriptResponse res, final String store, final @RUntainted String path, final String pattern)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -794,7 +795,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location
      *         or null if the supplied path does not exist in the store
      */
-    private FileInfo resolveFilePath(final String path)
+    private @RUntainted FileInfo resolveFilePath(final @RUntainted String path)
     {
         return resolveNodePath(path, false, false);
     }
@@ -811,7 +812,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final @RUntainted String path, final boolean create, final boolean isFolder)
     {
         return resolveNodePath(path, null, create, isFolder);
     }
@@ -830,7 +831,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final String pattern, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final @RUntainted String path, final String pattern, final boolean create, final boolean isFolder)
     {
         if (logger.isDebugEnabled())
             logger.debug("Resolving path: " + path);
@@ -869,7 +870,7 @@ public class ADMRemoteStore extends BaseRemoteStore
                             prop.put(ContentModel.PROP_IS_CONTENT_INDEXED, false);
                             for (String element : folders)
                             {
-                                Map<QName, Map<QName, Serializable>> aspects = Collections.singletonMap(ContentModel.ASPECT_INDEX_CONTROL, prop);
+                                Map< QName, Map< QName, Serializable>> aspects = Collections.singletonMap(ContentModel.ASPECT_INDEX_CONTROL, prop);
                                 folderDetails.add(new FileFolderUtil.PathElementDetails(element, aspects));
                             }
                             // ensure folders exist down to the specified parent

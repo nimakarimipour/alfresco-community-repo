@@ -27,6 +27,7 @@ package org.alfresco.repo.web.scripts.config;
 
 import java.util.Iterator;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.springframework.extensions.config.ConfigElement;
 import org.springframework.extensions.config.ConfigException;
 import org.springframework.extensions.config.xml.elementreader.ConfigElementReader;
@@ -43,9 +44,9 @@ import org.dom4j.Element;
 public class OpenSearchElementReader implements ConfigElementReader
 {
     public static final String ELEMENT_OPENSEARCH = "opensearch";
-    public static final String ELEMENT_ENGINES = "engines";
-    public static final String ELEMENT_ENGINE = "engine";
-    public static final String ELEMENT_URL = "url";
+    public static final @RUntainted String ELEMENT_ENGINES = "engines";
+    public static final @RUntainted String ELEMENT_ENGINE = "engine";
+    public static final @RUntainted String ELEMENT_URL = "url";
     public static final String ELEMENT_PROXY = "proxy";
     public static final String ATTR_TYPE = "type";
     public static final String ATTR_LABEL = "label";
@@ -57,7 +58,7 @@ public class OpenSearchElementReader implements ConfigElementReader
      * @see org.springframework.extensions.config.xml.elementreader.ConfigElementReader#parse(org.dom4j.Element)
      */
     @SuppressWarnings("unchecked")
-    public ConfigElement parse(Element element)
+    public ConfigElement parse(@RUntainted Element element)
     {
         OpenSearchConfigElement configElement = null;
 
@@ -75,7 +76,7 @@ public class OpenSearchElementReader implements ConfigElementReader
             Element pluginsElem = element.element(ELEMENT_ENGINES);
             if (pluginsElem != null)
             {
-                Iterator<Element> engines = pluginsElem.elementIterator(ELEMENT_ENGINE);
+                Iterator<@RUntainted Element> engines = pluginsElem.elementIterator(ELEMENT_ENGINE);
                 while(engines.hasNext())
                 {
                     // construct engine
@@ -86,10 +87,10 @@ public class OpenSearchElementReader implements ConfigElementReader
                     EngineConfig engineCfg = new EngineConfig(label, labelId, proxy);
                 
                     // construct urls for engine
-                    Iterator<Element> urlsConfig = engineElem.elementIterator(ELEMENT_URL);
+                    Iterator<@RUntainted Element> urlsConfig = engineElem.elementIterator(ELEMENT_URL);
                     while (urlsConfig.hasNext())
                     {
-                        Element urlConfig = urlsConfig.next();
+                        @RUntainted Element urlConfig = urlsConfig.next();
                         String type = urlConfig.attributeValue(ATTR_TYPE);
                         String url = urlConfig.getTextTrim();
                         engineCfg.addUrl(type, url);

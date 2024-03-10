@@ -80,7 +80,7 @@ public class SiteExportGet extends AbstractWebScript
     private ChildApplicationContextManager authenticationContextManager;
     
     @Override
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // Grab the site
         String siteName = 
@@ -192,7 +192,7 @@ public class SiteExportGet extends AbstractWebScript
         exporterService.exportView(handler, parameters, null);
     }
     
-    protected void doPeopleACPExport(final List<NodeRef> peopleNodes, SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
+    protected void doPeopleACPExport(final List<NodeRef> peopleNodes, @RUntainted SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
     {
         if (!peopleNodes.isEmpty())
         {
@@ -333,7 +333,7 @@ public class SiteExportGet extends AbstractWebScript
         out.close();
     }
     
-    protected void doUserACPExport(List<NodeRef> userNodes, SiteInfo site,
+    protected void doUserACPExport(List<NodeRef> userNodes, @RUntainted SiteInfo site,
             CloseIgnoringOutputStream writeTo) throws IOException
     {
         // Build the parameters

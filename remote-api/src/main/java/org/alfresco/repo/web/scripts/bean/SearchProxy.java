@@ -38,6 +38,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.repo.content.MimetypeMap;
 import org.alfresco.repo.web.scripts.config.OpenSearchConfigElement;
 import org.alfresco.repo.web.scripts.config.OpenSearchConfigElement.EngineConfig;
@@ -78,7 +79,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
     private static final Log logger = LogFactory.getLog(SearchProxy.class);
 
     // dependencies
-    protected FormatRegistry formatRegistry;
+    protected @RUntainted FormatRegistry formatRegistry;
     protected ConfigService configService;
     protected OpenSearchConfigElement searchConfig; 
     protected String proxyPath;
@@ -86,7 +87,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
     /**
      * @param formatRegistry FormatRegistry
      */
-    public void setFormatRegistry(FormatRegistry formatRegistry)
+    public void setFormatRegistry(@RUntainted FormatRegistry formatRegistry)
     {
         this.formatRegistry = formatRegistry;
     }
@@ -121,11 +122,11 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.WebScript#execute(org.alfresco.web.scripts.WebScriptRequest, org.alfresco.web.scripts.WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res)
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res)
         throws IOException
     {
         String extensionPath = req.getExtensionPath();
-        String[] extensionPaths = extensionPath.split("/");
+        @RUntainted String[] extensionPaths = extensionPath.split("/");
         if (extensionPaths.length != 2)
         {
             throw new WebScriptException("OpenSearch engine has not been specified as /{engine}/{format}");
@@ -146,7 +147,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
         {
             throw new WebScriptException("Format '" + format + "' does not map to a registered mimetype");
         }
-        Map<String, String> engineUrls = engineConfig.getUrls();
+        Map<String, @RUntainted String> engineUrls = engineConfig.getUrls();
         String engineUrl = engineUrls.get(mimetype);
         if (engineUrl == null)
         {
@@ -206,7 +207,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
          * @param headers request headers
          * @throws MalformedURLException
          */
-        public SearchEngineHttpProxy(String rootPath, String engine, String engineUrl, HttpServletResponse response, Map<String, String> headers)
+        public SearchEngineHttpProxy(@RUntainted String rootPath, String engine, @RUntainted String engineUrl, HttpServletResponse response, Map<String, String> headers)
             throws MalformedURLException
         {
             super(engineUrl.startsWith("/") ? rootPath + engineUrl : engineUrl, response);
@@ -298,7 +299,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
      */
     public String createUrl(OpenSearchConfigElement.EngineConfig engine, String mimetype)
     {
-        Map<String, String> urls = engine.getUrls();
+        Map<String, @RUntainted String> urls = engine.getUrls();
         String url = urls.get(mimetype);
         if (url != null)
         {
