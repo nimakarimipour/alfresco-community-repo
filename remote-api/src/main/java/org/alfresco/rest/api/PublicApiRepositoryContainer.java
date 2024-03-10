@@ -27,6 +27,7 @@ package org.alfresco.rest.api;
 
 import java.io.IOException;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.alfresco.repo.tenant.TenantService;
 import org.alfresco.repo.tenant.TenantUtil;
@@ -49,7 +50,7 @@ public class PublicApiRepositoryContainer extends TenantRepositoryContainer
     protected static final Log logger = LogFactory.getLog(PublicApiRepositoryContainer.class);
 
     @Override
-    public void executeScript(final WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
+    public void executeScript(final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         String tenant = ((PublicApiTenantWebScriptServletRequest)scriptReq).getTenant();

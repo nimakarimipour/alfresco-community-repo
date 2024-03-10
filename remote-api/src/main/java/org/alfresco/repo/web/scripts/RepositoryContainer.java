@@ -495,7 +495,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param scriptRes WebScriptResponse
      * @throws IOException
      */
-    protected void transactionedExecute(final @RUntainted WebScript script, final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
+    protected void transactionedExecute(final @RUntainted WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
         throws IOException
     {
         final Description description = script.getDescription();
@@ -747,7 +747,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @see org.alfresco.web.scripts.AbstractRuntimeContainer#getRequiredAuthentication()
      */
     @Override
-    public RequiredAuthentication getRequiredAuthentication()
+    public @RUntainted RequiredAuthentication getRequiredAuthentication()
     {
         if (AuthenticationUtil.isMtEnabled())
         {
