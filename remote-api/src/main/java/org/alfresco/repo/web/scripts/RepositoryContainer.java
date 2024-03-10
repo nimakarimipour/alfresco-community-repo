@@ -703,7 +703,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param requiredAuthentication Required authentication
      * @throws IOException
      */
-    private void transactionedExecuteAs(final WebScript script, final @RUntainted WebScriptRequest scriptReq,
+    private void transactionedExecuteAs(final @RUntainted WebScript script, final @RUntainted WebScriptRequest scriptReq,
                                         final WebScriptResponse scriptRes, RequiredAuthentication requiredAuthentication) throws IOException
     {
         // Execute as System if and only if, the current user is a member of System-Admin group, and he is not a super admin.
