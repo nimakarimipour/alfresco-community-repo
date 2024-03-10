@@ -27,6 +27,7 @@ package org.alfresco.rest.api.search;
 import java.io.IOException;
 import java.util.Locale;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.repo.search.QueryParserException;
 import org.alfresco.repo.search.impl.solr.SolrSQLJSONResultSet;
@@ -67,8 +68,8 @@ public class SearchSQLApiWebscript extends AbstractWebScript implements Recogniz
                                                                         ResponseWriter,
                                                                         InitializingBean
 {
-    private ServiceRegistry serviceRegistry;
-    private SearchService searchService;
+    private @RUntainted ServiceRegistry serviceRegistry;
+    private @RUntainted SearchService searchService;
     private SearchMapper searchMapper;
     private ResultMapper resultMapper;
     protected ApiAssistant assistant;
@@ -120,7 +121,7 @@ public class SearchSQLApiWebscript extends AbstractWebScript implements Recogniz
         ParameterCheck.mandatory("resultMapper", this.resultMapper);
     }
     
-    public SearchParameters buildSearchParameters(SearchSQLQuery searchQuery)
+    public @RUntainted SearchParameters buildSearchParameters(SearchSQLQuery searchQuery)
     {
         SearchParameters sparams = new SearchParameters();
         sparams.setLanguage(SearchService.LANGUAGE_INDEX_SQL);
@@ -148,12 +149,12 @@ public class SearchSQLApiWebscript extends AbstractWebScript implements Recogniz
         return sparams;
     }
     
-    public void setServiceRegistry(ServiceRegistry serviceRegistry)
+    public void setServiceRegistry(@RUntainted ServiceRegistry serviceRegistry)
     {
         this.serviceRegistry = serviceRegistry;
     }
 
-    public void setSearchService(SearchService searchService)
+    public void setSearchService(@RUntainted SearchService searchService)
     {
         this.searchService = searchService;
     }
