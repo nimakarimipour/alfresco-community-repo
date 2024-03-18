@@ -45,6 +45,7 @@ import org.alfresco.encoding.CharactersetFinder;
 import org.alfresco.encoding.GuessEncodingCharsetFinder;
 import org.alfresco.util.exec.RuntimeExec;
 import org.alfresco.util.exec.RuntimeExec.ExecutionResult;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Utility to convert text files.
@@ -119,7 +120,7 @@ public class Convert
      */
     private static final CharactersetFinder CHARACTER_ENCODING_FINDER = new GuessEncodingCharsetFinder();
 
-    private File startDir = null;
+    private @RUntainted File startDir = null;
     
     private boolean svnStatus = false;
     private boolean dryRun = false;
@@ -140,8 +141,8 @@ public class Convert
             printUsage();
         }
         // Convert args to a list
-        List<String> argList = new ArrayList<String>(args.length);
-        List<String> argListFixed = Arrays.asList(args);
+        List<@RUntainted String> argList = new ArrayList<@RUntainted String>(args.length);
+        List<@RUntainted String> argListFixed = Arrays.asList(args);
         argList.addAll(argListFixed);
         // Extract all the options
         Map<String, String> optionValues = extractOptions(argList);
@@ -178,7 +179,7 @@ public class Convert
     /**
      * Private constructor for use by the main method.
      */
-    private Convert(Map<String, String> optionValues, File startDir)
+    private Convert(Map<String, String> optionValues, @RUntainted File startDir)
     {
         this.startDir = startDir;
         
@@ -369,10 +370,10 @@ public class Convert
     /**
      * Recursive method to do the conversion work.
      */
-    private void convertDir(File currentDir) throws Throwable
+    private void convertDir(@RUntainted File currentDir) throws Throwable
     {
         // Get all children of the folder
-        File[] childFiles = currentDir.listFiles();
+        @RUntainted File[] childFiles = currentDir.listFiles();
         for (File childFile : childFiles)
         {
             if (childFile.isDirectory())
@@ -392,7 +393,7 @@ public class Convert
         }
     }
     
-    private void convertFile(File file) throws Throwable
+    private void convertFile(@RUntainted File file) throws Throwable
     {
         // We have a file, but does the pattern match
         String filePath = file.getAbsolutePath();
@@ -702,7 +703,7 @@ public class Convert
      * @return          Returns a map of arguments and their values.  Where the arguments have
      *                  no values, an empty string is returned.
      */
-    private static Map<String, String> extractOptions(List<String> args)
+    private static Map<String, String> extractOptions(List<@RUntainted String> args)
     {
         Map<String, String> optionValues = new HashMap<String, String>(13);
         // Iterate until we find a non-option

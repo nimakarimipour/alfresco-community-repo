@@ -23,6 +23,7 @@ import java.util.Random;
 
 import org.safehaus.uuid.UUIDGenerator;
 import org.alfresco.api.AlfrescoPublicApi;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A wrapper class to serve up GUIDs
@@ -50,9 +51,9 @@ public final class GUID
     private static final Random RANDOM = new Random();
     
 
-    private static SecureRandom[] initSecureRandomArray()
+    private static @RUntainted SecureRandom[] initSecureRandomArray()
     {
-        SecureRandom[] array = new SecureRandom[SECURE_RANDOM_POOL_MAX_ITEMS];
+        @RUntainted SecureRandom[] array = new SecureRandom[SECURE_RANDOM_POOL_MAX_ITEMS];
         for (int i = 0; i < SECURE_RANDOM_POOL_MAX_ITEMS; i++)
         {
             array[i] = new SecureRandom();
