@@ -21,6 +21,7 @@ package org.alfresco.util;
 import java.security.SecureRandom;
 import java.util.Random;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.safehaus.uuid.UUIDGenerator;
 import org.alfresco.api.AlfrescoPublicApi;
 
@@ -50,9 +51,9 @@ public final class GUID
     private static final Random RANDOM = new Random();
     
 
-    private static SecureRandom[] initSecureRandomArray()
+    private static @RUntainted SecureRandom[] initSecureRandomArray()
     {
-        SecureRandom[] array = new SecureRandom[SECURE_RANDOM_POOL_MAX_ITEMS];
+        @RUntainted SecureRandom[] array = new SecureRandom[SECURE_RANDOM_POOL_MAX_ITEMS];
         for (int i = 0; i < SECURE_RANDOM_POOL_MAX_ITEMS; i++)
         {
             array[i] = new SecureRandom();
