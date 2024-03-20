@@ -700,12 +700,12 @@ public class WebDAVHelper
      * 
      * @param s             the String to convert
      */
-    public final static String encodeURL(String s)
+    public final static @RPolyTainted String encodeURL(@RPolyTainted String s)
     {
         return encodeURL(s, null);
     }
     
-    public final static String encodeURL(String s, String userAgent)
+    public final static @RPolyTainted String encodeURL(@RPolyTainted String s, String userAgent)
     {
           return URLEncoder.encode(s);
     }

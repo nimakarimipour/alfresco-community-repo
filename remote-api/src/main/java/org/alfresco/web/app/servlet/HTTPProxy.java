@@ -45,7 +45,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HTTPProxy
 {
-    protected URL url;
+    protected @RUntainted URL url;
     protected HttpServletResponse response;
 
     
@@ -108,7 +108,7 @@ public class HTTPProxy
      * 
      * @param urlConnection  url connection
      */
-    protected void initialiseResponse(URLConnection urlConnection)
+    protected void initialiseResponse(@RUntainted URLConnection urlConnection)
     {
         String type = urlConnection.getContentType();
         if (type != null)
