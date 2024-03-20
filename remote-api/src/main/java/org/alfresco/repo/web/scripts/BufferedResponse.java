@@ -51,9 +51,9 @@ public class BufferedResponse implements WrappingWebScriptResponse, AutoCloseabl
 
     private final Supplier<TempOutputStream> streamFactory;
     private final WebScriptResponse res;
-    private final int bufferSize;
+    private final @RUntainted int bufferSize;
     private TempOutputStream outputStream;
-    private StringBuilderWriter outputWriter;
+    private @RUntainted StringBuilderWriter outputWriter;
 
     /**
      * Construct
@@ -61,7 +61,7 @@ public class BufferedResponse implements WrappingWebScriptResponse, AutoCloseabl
      * @param res        WebScriptResponse
      * @param bufferSize int
      */
-    public BufferedResponse(WebScriptResponse res, int bufferSize, Supplier<TempOutputStream> streamFactory)
+    public BufferedResponse(WebScriptResponse res, @RUntainted int bufferSize, Supplier<TempOutputStream> streamFactory)
     {
         this.res = res;
         this.bufferSize = bufferSize;

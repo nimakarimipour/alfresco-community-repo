@@ -50,7 +50,7 @@ public class PublicApiRepositoryContainer extends TenantRepositoryContainer
     protected static final Log logger = LogFactory.getLog(PublicApiRepositoryContainer.class);
 
     @Override
-    public void executeScript(final WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
+    public void executeScript(final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         String tenant = ((PublicApiTenantWebScriptServletRequest)scriptReq).getTenant();

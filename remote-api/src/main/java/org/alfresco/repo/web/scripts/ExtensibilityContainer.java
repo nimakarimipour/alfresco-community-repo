@@ -131,7 +131,7 @@ public class ExtensibilityContainer extends RepositoryContainer implements Handl
 
     @Override
 
-    public void executeScript(WebScriptRequest scriptReq,
+    public void executeScript(@RUntainted WebScriptRequest scriptReq,
 
                               WebScriptResponse scriptRes, 
 
