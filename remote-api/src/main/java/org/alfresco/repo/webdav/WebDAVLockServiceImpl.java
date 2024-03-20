@@ -31,6 +31,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.lock.mem.Lifetime;
 import org.alfresco.repo.lock.mem.LockState;
@@ -401,7 +402,7 @@ public class WebDAVLockServiceImpl implements WebDAVLockService
      * @param object the object to store in session list
      */
     @SuppressWarnings("unchecked")
-    private static final void storeObjectInSessionList(HttpSession session, String listName, Object object)
+    private static final void storeObjectInSessionList(HttpSession session, @RUntainted String listName, Object object)
     {
         List<Object> list = null;
 
