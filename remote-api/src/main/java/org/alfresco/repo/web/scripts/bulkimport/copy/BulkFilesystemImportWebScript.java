@@ -37,6 +37,7 @@ import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Web Script class that invokes a BulkFilesystemImporter implementation.
@@ -62,14 +63,14 @@ public class BulkFilesystemImportWebScript extends AbstractBulkFileSystemImportW
      * @see org.springframework.extensions.webscripts.DeclarativeWebScript#executeImpl(org.springframework.extensions.webscripts.WebScriptRequest, org.springframework.extensions.webscripts.Status, org.springframework.extensions.webscripts.Cache)
      */
     @Override
-    protected Map<String, Object> executeImpl(final WebScriptRequest request, final Status status, final Cache cache)
+    protected Map<String, Object> executeImpl(final @RUntainted WebScriptRequest request, final Status status, final Cache cache)
     {
         final MultithreadedImportWebScriptLogic importLogic = new MultithreadedImportWebScriptLogic(bulkImporter,
                 () -> createNodeImporter(request), request, status, cache);
         return importLogic.executeImport();
     }
 
-    private NodeImporter createNodeImporter(WebScriptRequest request)
+    private NodeImporter createNodeImporter(@RUntainted WebScriptRequest request)
     {
         final String sourceDirectoryStr = request.getParameter(PARAMETER_SOURCE_DIRECTORY);
         if (sourceDirectoryStr == null || sourceDirectoryStr.trim().length() == 0)

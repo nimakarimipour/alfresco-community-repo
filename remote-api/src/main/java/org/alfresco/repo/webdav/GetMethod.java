@@ -55,6 +55,8 @@ import org.alfresco.service.cmr.repository.datatype.TypeConverter;
 import org.alfresco.service.namespace.QName;
 import org.springframework.extensions.surf.util.I18NUtil;
 import org.springframework.extensions.surf.util.URLEncoder;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Implements the WebDAV GET method
@@ -275,7 +277,7 @@ public class GetMethod extends WebDAVMethod
     }
 
 
-    protected void readContent(FileInfo realNodeInfo, ContentReader reader) throws IOException,
+    protected void readContent(FileInfo realNodeInfo, @RUntainted ContentReader reader) throws IOException,
                 WebDAVServerException
     {
         try
@@ -319,7 +321,7 @@ public class GetMethod extends WebDAVMethod
         }
     }
 
-    protected void attemptReadContent(FileInfo realNodeInfo, ContentReader reader) throws IOException
+    protected void attemptReadContent(FileInfo realNodeInfo, @RUntainted ContentReader reader) throws IOException
     {
         if (byteRanges != null && byteRanges.startsWith(RANGE_HEADER_UNIT_SPECIFIER))
         {
@@ -479,7 +481,7 @@ public class GetMethod extends WebDAVMethod
      * 
      * @param fileInfo the file to use
      */
-    private void generateDirectoryListing(FileInfo fileInfo)
+    private void generateDirectoryListing(@RUntainted FileInfo fileInfo)
     {
         MimetypeService mimeTypeService = getMimetypeService();
         NodeService nodeService = getNodeService();
@@ -498,7 +500,7 @@ public class GetMethod extends WebDAVMethod
             }
             
             // Get the list of child nodes for the parent node
-            List<FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
+            List<@RUntainted FileInfo> childNodeInfos = getDAVHelper().getChildren(fileInfo);
 
             // Send back the start of the HTML
             writer.write("<html><head><title>");
@@ -741,7 +743,7 @@ public class GetMethod extends WebDAVMethod
      * @param strSize The content size
      * @return The formatted size
      */
-    private String formatSize(String strSize)
+    private @RPolyTainted String formatSize(@RPolyTainted String strSize)
     {
         String strFormattedSize = strSize;
 

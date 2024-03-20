@@ -33,6 +33,7 @@ import org.springframework.extensions.config.xml.elementreader.ConfigElementRead
 import org.alfresco.repo.web.scripts.config.OpenSearchConfigElement.EngineConfig;
 import org.alfresco.repo.web.scripts.config.OpenSearchConfigElement.ProxyConfig;
 import org.dom4j.Element;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -57,7 +58,7 @@ public class OpenSearchElementReader implements ConfigElementReader
      * @see org.springframework.extensions.config.xml.elementreader.ConfigElementReader#parse(org.dom4j.Element)
      */
     @SuppressWarnings("unchecked")
-    public ConfigElement parse(Element element)
+    public ConfigElement parse(@RUntainted Element element)
     {
         OpenSearchConfigElement configElement = null;
 
