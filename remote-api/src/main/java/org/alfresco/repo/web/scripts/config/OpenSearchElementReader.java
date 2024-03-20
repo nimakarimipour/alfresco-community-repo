@@ -90,7 +90,7 @@ public class OpenSearchElementReader implements ConfigElementReader
                     Iterator<@RUntainted Element> urlsConfig = engineElem.elementIterator(ELEMENT_URL);
                     while (urlsConfig.hasNext())
                     {
-                        @RUntainted Element urlConfig = urlsConfig.next();
+                        Element urlConfig = urlsConfig.next();
                         String type = urlConfig.attributeValue(ATTR_TYPE);
                         String url = urlConfig.getTextTrim();
                         engineCfg.addUrl(type, url);
