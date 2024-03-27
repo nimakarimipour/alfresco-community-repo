@@ -34,6 +34,7 @@ import org.alfresco.repo.policy.PolicyComponent;
 import org.alfresco.repo.web.scripts.bean.ADMRemoteStore;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.NodeRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Delete Node Policy to remove surf-config files for a deleted user.

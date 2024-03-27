@@ -40,6 +40,7 @@ import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -121,8 +122,8 @@ public class SearchEngines extends DeclarativeWebScript
         OpenSearchConfigElement searchConfig = (OpenSearchConfigElement)config.getConfigElement(OpenSearchConfigElement.CONFIG_ELEMENT_ID);
         for (OpenSearchConfigElement.EngineConfig engineConfig : searchConfig.getEngines())
         {
-            Map<String, String> engineUrls = engineConfig.getUrls();
-            for (Map.Entry<String, String> engineUrl : engineUrls.entrySet())
+            Map<String, @RUntainted String> engineUrls = engineConfig.getUrls();
+            for (Map.Entry<String, @RUntainted String> engineUrl : engineUrls.entrySet())
             {
                 String type = engineUrl.getKey();
                 String url = searchProxy.createUrl(engineConfig, type);

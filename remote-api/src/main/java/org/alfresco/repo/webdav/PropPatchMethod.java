@@ -42,6 +42,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Implements the WebDAV PROPPATCH method
@@ -54,7 +55,7 @@ public class PropPatchMethod extends PropFindMethod
     protected ArrayList<PropertyAction> m_propertyActions = null;
     private String strHRef;
     private WebDAVProperty failedProperty;
-    private String basePath;
+    private @RUntainted String basePath;
     
     /**
      * @return          Returns <tt>false</tt> always
