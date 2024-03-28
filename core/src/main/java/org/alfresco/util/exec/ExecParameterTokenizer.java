@@ -46,7 +46,7 @@ import org.alfresco.util.Pair;
  * are preserved in the extracted token.
  * <p/>
  * The class does not understand escaped quotes such as <tt>p1 p2 "a b c \"hello\" d" p4</tt>
- * 
+ *
  * @author Neil Mc Erlean
  * @since 3.4.2
  */
@@ -56,12 +56,12 @@ public class ExecParameterTokenizer
      * The string to be tokenized.
      */
     private final String str;
-    
+
     /**
      * The list of tokens, which will take account of quoted sections.
      */
     private List<String> tokens;
-    
+
     public ExecParameterTokenizer(String str)
     {
         this.str = str;
@@ -75,7 +75,7 @@ public class ExecParameterTokenizer
      * String instances and will have their quote marks removed.
      * <p/>
      * See above for examples.
-     * 
+     *
      * @throws NullPointerException if the string to be tokenized was null.
      */
     public List<String> getAllTokens()
@@ -84,11 +84,11 @@ public class ExecParameterTokenizer
         {
             throw new NullPointerException("Illegal null string cannot be tokenized.");
         }
-        
+
         if (tokens == null)
         {
-            tokens = new ArrayList<String>();
-            
+            tokens = new ArrayList<>();
+
             // Preserve original behaviour from RuntimeExec.
             if (str.indexOf('\'') == -1 && str.indexOf('"') == -1)
             {
@@ -102,28 +102,28 @@ public class ExecParameterTokenizer
             {
                 // There are either single or double quotes or both.
                 // So we need to identify the quoted regions within the string.
-                List<Pair<Integer, Integer>> quotedRegions = new ArrayList<Pair<Integer, Integer>>();
-                
+                List<Pair<Integer, Integer>> quotedRegions = new ArrayList<>();
+
                 for (Pair<Integer, Integer> next = identifyNextQuotedRegion(str, 0); next != null; )
                 {
                     quotedRegions.add(next);
                     next = identifyNextQuotedRegion(str, next.getSecond() + 1);
                 }
-                
+
                 // Now we've got a List of index pairs identifying the quoted regions.
                 // We need to get substrings of quoted and unquoted blocks, whilst maintaining order.
                 List<Substring> substrings = getSubstrings(str, quotedRegions);
-                
+
                 for (Substring r : substrings)
                 {
                     tokens.addAll(r.getTokens());
                 }
             }
         }
-        
+
         return this.tokens;
     }
-    
+
     /**
      * The substrings will be a list of quoted and unquoted substrings.
      * The unquoted ones need to be further tokenized in the normal way.
@@ -151,15 +151,15 @@ public class ExecParameterTokenizer
         {
             result.add(new UnquotedSubstring(str.substring(cursorPosition, str.length() - 1)));
         }
-        
+
         return result;
     }
-    
+
     private Pair<Integer, Integer> identifyNextQuotedRegion(String str, int startingIndex)
     {
         int indexOfNextSingleQuote = str.indexOf('\'', startingIndex);
         int indexOfNextDoubleQuote = str.indexOf('"', startingIndex);
-        
+
         if (indexOfNextSingleQuote == -1 && indexOfNextDoubleQuote == -1)
         {
             // If there are no more quoted regions
@@ -171,16 +171,16 @@ public class ExecParameterTokenizer
             // Then select the closest quote.
             int indexOfNextQuote = Math.min(indexOfNextSingleQuote, indexOfNextDoubleQuote);
             char quoteChar = str.charAt(indexOfNextQuote);
-            
+
             return findIndexOfClosingQuote(str, indexOfNextQuote, quoteChar);
         }
         else
         {
             // Only one of the quote characters is present.
-            
+
             int indexOfNextQuote = Math.max(indexOfNextSingleQuote, indexOfNextDoubleQuote);
             char quoteChar = str.charAt(indexOfNextQuote);
-            
+
             return findIndexOfClosingQuote(str, indexOfNextQuote, quoteChar);
         }
     }
@@ -190,14 +190,14 @@ public class ExecParameterTokenizer
         // So we know which type of quote char we're dealing with. Either ' or ".
         // Now we need to find the closing quote.
         int indexAfterClosingQuote = str.indexOf(quoteChar, indexOfStartingQuote + 1) + 1; // + 1 to search after opening quote. + 1 to give result including closing quote.
-        
+
         if (indexAfterClosingQuote == 0) // -1 + 1
         {
             // If no closing quote.
             throw new IllegalArgumentException("No closing " + quoteChar + "quote in" + str);
         }
-        
-        return new Pair<Integer, Integer>(indexOfStartingQuote, indexAfterClosingQuote);
+
+        return new Pair<>(indexOfStartingQuote, indexAfterClosingQuote);
     }
 
     /**
@@ -210,7 +210,7 @@ public class ExecParameterTokenizer
          */
         public List<String> getTokens();
     }
-    
+
     /**
      * A substring that is not surrounded by (single or double) quotes.
      */
@@ -221,18 +221,18 @@ public class ExecParameterTokenizer
         {
             this.regionString = str;
         }
-        
+
         public List<String> getTokens()
         {
             StringTokenizer t = new StringTokenizer(regionString);
-            List<String> result = new ArrayList<String>();
+            List<String> result = new ArrayList<>();
             while (t.hasMoreTokens())
             {
                 result.add(t.nextToken());
             }
             return result;
         }
-        
+
         public String toString()
         {
             return UnquotedSubstring.class.getSimpleName() + ": '" + regionString + '\'';
@@ -249,13 +249,13 @@ public class ExecParameterTokenizer
         {
             this.regionString = str;
         }
-        
+
         public List<String> getTokens()
         {
             String stringWithoutQuotes = regionString.substring(1, regionString.length() -1);
-            return Arrays.asList(new String[] {stringWithoutQuotes});
+            return Arrays.asList(stringWithoutQuotes);
         }
-        
+
         public String toString()
         {
             return QuotedSubstring.class.getSimpleName() + ": '" + regionString + '\'';
