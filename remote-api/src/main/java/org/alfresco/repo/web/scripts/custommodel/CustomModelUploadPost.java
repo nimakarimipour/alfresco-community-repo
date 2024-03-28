@@ -61,6 +61,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.FormData;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Custom model upload POST. This class is the controller for the
@@ -89,7 +91,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
     }
 
     @Override
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache)
+    protected Map<String, Object> executeImpl(@RUntainted WebScriptRequest req, Status status, Cache cache)
     {
         if (!customModelService.isModelAdmin(AuthenticationUtil.getFullyAuthenticatedUser()))
         {
@@ -146,7 +148,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         return model;
     }
 
-    protected File createTempFile(InputStream inputStream)
+    protected @RPolyTainted File createTempFile(@RPolyTainted InputStream inputStream)
     {
         try
         {
@@ -159,7 +161,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         }
     }
 
-    protected ImportResult processUpload(ZipFile zipFile, String filename) throws IOException
+    protected ImportResult processUpload(@RUntainted ZipFile zipFile, String filename) throws IOException
     {
         if (zipFile.size() > 2)
         {
@@ -168,7 +170,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
 
         CustomModel customModel = null;
         String shareExtModule = null;
-        Enumeration<? extends ZipEntry> entries = zipFile.entries();
+        Enumeration<? extends @RUntainted ZipEntry> entries = zipFile.entries();
         while (entries.hasMoreElements())
         {
             ZipEntry entry = entries.nextElement();
@@ -253,7 +255,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         return model;
     }
 
-    protected String getExtensionModule(InputStream inputStream, String fileName)
+    protected String getExtensionModule(@RUntainted InputStream inputStream, String fileName)
     {
         Element rootElement = null;
         try

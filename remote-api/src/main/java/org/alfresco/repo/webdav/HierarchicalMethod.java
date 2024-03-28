@@ -26,6 +26,7 @@
 package org.alfresco.repo.webdav;
 
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Abstract base class for the hierarchical methods COPY and MOVE
