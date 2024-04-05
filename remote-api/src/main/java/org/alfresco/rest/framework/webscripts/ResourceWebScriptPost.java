@@ -54,6 +54,7 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptRequestImpl;
 import org.springframework.extensions.webscripts.servlet.FormData;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles the HTTP POST for a Resource, equivalent to CRUD Create
@@ -72,7 +73,7 @@ public class ResourceWebScriptPost extends AbstractResourceWebScript implements 
     }
     
     @Override
-    public Params extractParams(ResourceMetadata resourceMeta, WebScriptRequest req)
+    public Params extractParams(ResourceMetadata resourceMeta, @RUntainted WebScriptRequest req)
     {
         final Map<String, String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
         final String entityId = resourceVars.get(ResourceLocator.ENTITY_ID);

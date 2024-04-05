@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "ratings", entityResource = NodesEntityResource.class, title = "Document or folder ratings")
 public class NodeRatingsRelation implements RelationshipResourceAction.Read<NodeRating>, RelationshipResourceAction.ReadById<NodeRating>, RelationshipResourceAction.Delete,

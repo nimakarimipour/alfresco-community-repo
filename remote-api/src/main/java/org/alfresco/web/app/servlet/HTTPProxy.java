@@ -34,6 +34,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -54,7 +55,7 @@ public class HTTPProxy
      * @param response  response to write request back to
      * @throws MalformedURLException
      */
-    public HTTPProxy(String requestUrl, HttpServletResponse response)
+    public HTTPProxy(@RUntainted String requestUrl, HttpServletResponse response)
         throws MalformedURLException
     {
         this.url = new URL(requestUrl);
@@ -106,7 +107,7 @@ public class HTTPProxy
      * 
      * @param urlConnection  url connection
      */
-    protected void initialiseResponse(URLConnection urlConnection)
+    protected void initialiseResponse(@RUntainted URLConnection urlConnection)
     {
         String type = urlConnection.getContentType();
         if (type != null)

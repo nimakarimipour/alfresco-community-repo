@@ -38,6 +38,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.*;
 
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Assists you in creating a great Rest API.

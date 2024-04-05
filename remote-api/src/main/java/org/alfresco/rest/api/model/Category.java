@@ -27,6 +27,7 @@
 package org.alfresco.rest.api.model;
 
 import java.util.Objects;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class Category
 {

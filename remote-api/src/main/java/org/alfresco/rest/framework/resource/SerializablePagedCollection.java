@@ -30,6 +30,7 @@ import org.alfresco.rest.api.search.context.SearchContext;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 
 import java.util.Collection;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A specialist representation of a Collection that can be serialized to json with paging information

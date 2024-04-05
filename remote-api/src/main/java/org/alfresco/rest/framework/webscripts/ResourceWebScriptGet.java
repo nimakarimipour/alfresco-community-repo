@@ -48,6 +48,7 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.http.HttpMethod;
 
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles the HTTP Get for a Resource
@@ -66,7 +67,7 @@ public class ResourceWebScriptGet extends AbstractResourceWebScript implements P
     }
 
     @Override
-    public Params extractParams(ResourceMetadata resourceMeta, WebScriptRequest req)
+    public Params extractParams(ResourceMetadata resourceMeta, @RUntainted WebScriptRequest req)
     {
         final Map<String, String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
 

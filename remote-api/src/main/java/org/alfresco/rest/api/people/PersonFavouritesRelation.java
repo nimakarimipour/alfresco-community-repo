@@ -40,6 +40,7 @@ import org.alfresco.util.ParameterCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "favorites", entityResource = PeopleEntityResource.class, title = "Person Favorites")
 public class PersonFavouritesRelation implements RelationshipResourceAction.Read<Favourite>, RelationshipResourceAction.ReadById<Favourite>,

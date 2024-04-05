@@ -33,6 +33,7 @@ import org.alfresco.rest.api.model.Tag;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.StoreRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Tags
 {
