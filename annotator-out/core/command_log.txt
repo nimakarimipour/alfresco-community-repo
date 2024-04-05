@@ -1,0 +1,18 @@
+2024-04-05T00:31:33.280178:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:31:50.929855:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:32:05.462537:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:32:19.862728:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:32:34.078972:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:32:48.399994:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:33:02.702613:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:33:17.105679:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-05T00:33:31.416674:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
