@@ -45,6 +45,7 @@ import org.alfresco.encoding.CharactersetFinder;
 import org.alfresco.encoding.GuessEncodingCharsetFinder;
 import org.alfresco.util.exec.RuntimeExec;
 import org.alfresco.util.exec.RuntimeExec.ExecutionResult;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Utility to convert text files.
@@ -140,8 +141,8 @@ public class Convert
             printUsage();
         }
         // Convert args to a list
-        List<String> argList = new ArrayList<String>(args.length);
-        List<String> argListFixed = Arrays.asList(args);
+        List<@RUntainted String> argList = new ArrayList<@RUntainted String>(args.length);
+        List<@RUntainted String> argListFixed = Arrays.asList(args);
         argList.addAll(argListFixed);
         // Extract all the options
         Map<String, String> optionValues = extractOptions(argList);
@@ -702,7 +703,7 @@ public class Convert
      * @return          Returns a map of arguments and their values.  Where the arguments have
      *                  no values, an empty string is returned.
      */
-    private static Map<String, String> extractOptions(List<String> args)
+    private static Map<String, String> extractOptions(List<@RUntainted String> args)
     {
         Map<String, String> optionValues = new HashMap<String, String>(13);
         // Iterate until we find a non-option
