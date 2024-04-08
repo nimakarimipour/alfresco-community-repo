@@ -41,6 +41,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptRequest;
 import org.springframework.extensions.webscripts.json.JSONWriter;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This command processor is used to record the start a transfer. No other transfer can be started after this command
