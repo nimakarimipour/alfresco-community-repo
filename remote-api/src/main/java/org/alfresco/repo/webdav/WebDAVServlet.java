@@ -54,6 +54,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Servlet that accepts WebDAV requests for the hub. The request is served by the hub's content
@@ -106,7 +107,7 @@ public class WebDAVServlet extends HttpServlet
      * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    protected void service(@RUntainted HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException
     {
         if (!initParams.getEnabled())
@@ -184,7 +185,7 @@ public class WebDAVServlet extends HttpServlet
      * @param response HttpServletResponse
      * @return WebDAVMethod
      */
-    protected WebDAVMethod createMethod(HttpServletRequest request, HttpServletResponse response)
+    protected WebDAVMethod createMethod(@RUntainted HttpServletRequest request, HttpServletResponse response)
     {
         // Get the type of the current request
         
@@ -226,7 +227,7 @@ public class WebDAVServlet extends HttpServlet
         return method;
     }
     
-    private static NodeRef getRootNodeRef()
+    private static @RUntainted NodeRef getRootNodeRef()
     {
         NodeRef rootNodeRef = singletonCache.get(KEY_WEBDAV_ROOT_NODEREF);
         

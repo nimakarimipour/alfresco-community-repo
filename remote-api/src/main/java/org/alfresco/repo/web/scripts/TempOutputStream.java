@@ -48,6 +48,7 @@ import org.alfresco.repo.content.ContentLimitViolationException;
 import org.alfresco.util.TempFileProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An output stream implementation that keeps the data in memory if is less then

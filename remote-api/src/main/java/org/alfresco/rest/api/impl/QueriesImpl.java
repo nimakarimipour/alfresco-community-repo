@@ -79,6 +79,7 @@ import org.alfresco.util.ParameterCheck;
 import org.alfresco.util.SearchLanguageConversion;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.surf.util.I18NUtil;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Queries implementation
