@@ -57,6 +57,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Implements the WebDAV PROPFIND method
@@ -272,7 +273,7 @@ public class PropFindMethod extends WebDAVMethod
                 for (FileInfo curNodeInfo : nodeInfos)
                 {
                     // Get the list of child nodes for the current node
-                    List<FileInfo> childNodeInfos = getDAVHelper().getChildren(curNodeInfo);
+                    List<@RUntainted FileInfo> childNodeInfos = getDAVHelper().getChildren(curNodeInfo);
                     
                     // can skip the current node if it doesn't have children
                     if (childNodeInfos.size() == 0)

@@ -44,6 +44,7 @@ import org.alfresco.util.ISO9075;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Helper class used by the WebDAV protocol handling classes
@@ -271,7 +272,7 @@ public class WebDAV
      * @param ldate long
      * @return The formatted date string
      */
-    public static String formatModifiedDate(long ldate)
+    public static String formatModifiedDate(@RUntainted long ldate)
     {
         return formatHeaderDate(ldate);
     }
@@ -318,7 +319,7 @@ public class WebDAV
      * @param ldate long
      * @return String
      */
-    public static String formatHeaderDate(long ldate)
+    public static @RUntainted String formatHeaderDate(@RUntainted long ldate)
     {
         // HTTP header date/time format
         // NOTE: According to RFC2616 dates should always be in English and in

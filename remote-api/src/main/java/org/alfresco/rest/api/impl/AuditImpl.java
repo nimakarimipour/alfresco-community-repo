@@ -71,6 +71,7 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.util.ISO8601DateFormat;
 import org.alfresco.util.ISO9075;
 import org.alfresco.util.Pair;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles audit (applications & entries)

@@ -42,6 +42,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.workflow.api.Processes;
 import org.alfresco.rest.workflow.api.model.ProcessInfo;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name="processes", title = "Processes")
 public class ProcessesRestEntityResource implements EntityResourceAction.Read<ProcessInfo>, 

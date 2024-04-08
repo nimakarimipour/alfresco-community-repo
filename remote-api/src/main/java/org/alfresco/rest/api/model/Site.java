@@ -31,6 +31,7 @@ import org.alfresco.service.cmr.site.SiteVisibility;
 
 import java.util.HashMap;
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents a site.
