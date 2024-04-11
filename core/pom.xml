@@ -181,21 +181,11 @@
                         <Xmaxwarns>10000</Xmaxwarns>
                      </compilerArguments>
                      <annotationProcessorPaths>
-                        <!-- <path>
-                           <groupId>com.google.errorprone</groupId>
-                           <artifactId>error_prone_core</artifactId>
-                           <version>2.20.0</version>
-                        </path> -->
                         <path>
                            <groupId>com.example.x</groupId>
                            <artifactId>checker</artifactId>
                            <version>${env.C_VERSION}</version>
                         </path>
-                        <!-- <path>
-                           <groupId>edu.ucr.cs.riple.annotator</groupId>
-                           <artifactId>annotator-scanner</artifactId>
-                           <version>1.3.9-SNAPSHOT</version>
-                        </path> -->
                      </annotationProcessorPaths>
                         <annotationProcessors>
                         <!-- Add all the checkers you want to enable here -->
@@ -213,17 +203,17 @@
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-                        <!-- <arg>-Awarns</arg> -->
+                        <arg>-Awarns</arg>
                         <arg>-nowarn</arg>
                         <arg>-AannotatedPackages=org.alfresco.api,org.alfresco.config,org.alfresco.encoding,org.alfresco.encryption,org.alfresco.encryption,org.alfresco.error,org.alfresco.httpclient,org.alfresco.i18n,org.alfresco.processor,org.alfresco.query,org.alfresco.scripts,org.alfresco.util,org.alfresco.web</arg>
                         <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
                         <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
                         <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/Users/nima/Developer/alfresco-remote-api/annotator-out/core/checker.xml</arg>
+                        <arg>-AserializationConfigPath=/var/alfresco-remote-api/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/nima/Developer/alfresco-remote-api/annotator-out/core/scanner.xml</arg> -->
+                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/var/alfresco-remote-api/annotator-out/core/scanner.xml</arg> -->
                      </compilerArgs>
                   </configuration>
                </plugin>
