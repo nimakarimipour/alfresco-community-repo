@@ -18,11 +18,10 @@ import os
 import shutil
 from pathlib import Path
 
-VERSION = '1.3.9-TAINT-SNAPSHOT'
 MODULE = 'remote-api'
-REPO = subprocess.check_output(['git', 'rev-parse', '--show-toplevel']).strip().decode('utf-8')
+REPO = str(Path(__file__).resolve().parents[1])
 OUT_DIR = '{}/annotator-out/{}'.format(REPO, MODULE)
-ANNOTATOR_JAR = "{}/.m2/repository/edu/ucr/cs/riple/annotator/annotator-core/{}/annotator-core-{}.jar".format(str(Path.home()), VERSION, VERSION)
+ANNOTATOR_JAR = "/var/core.jar".format(str(Path.home()))
 
 def prepare():
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -37,16 +36,16 @@ def run_annotator():
     commands += ['-d', OUT_DIR]
     commands += ['-bc', 'cd {} && ./annotator-command.sh'.format(REPO, MODULE)]
     commands += ['-cp', '{}/paths.tsv'.format(OUT_DIR)]
-    commands += ['-i', 'edu.ucr.Initializer']
-    commands += ['-n', 'edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted']
-    commands += ['-cn', 'UCRTaint']
-    commands += ["--depth", "20"]
+    commands += ['-i', 'edu.Initializer']
+    commands += ['-n', 'com.taint.tainting.qual.RUntainted']
+    commands += ['-cn', 'Taint']
+    commands += ["--depth", "25"]
     # Uncomment to see build output
     # commands += ['-rboserr']
     # Comment to inject root at a time
     commands += ['-ch']
     # Uncomment to disable cache
-    commands += ['-dc']
+    # commands += ['-dc']
     # Uncomment to disable outer loop
     # commands += ['-dol']
     # Uncomment to disable parallel processing

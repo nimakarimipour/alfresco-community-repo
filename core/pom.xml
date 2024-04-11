@@ -187,9 +187,9 @@
                            <version>2.20.0</version>
                         </path> -->
                         <path>
-                           <groupId>edu.ucr.cs.riple.taint</groupId>
-                           <artifactId>ucrtainting-checker</artifactId>
-                           <version>${env.UCRT_VERSION}</version>
+                           <groupId>com.example.x</groupId>
+                           <artifactId>checker</artifactId>
+                           <version>${env.C_VERSION}</version>
                         </path>
                         <!-- <path>
                            <groupId>edu.ucr.cs.riple.annotator</groupId>
@@ -199,7 +199,7 @@
                      </annotationProcessorPaths>
                         <annotationProcessors>
                         <!-- Add all the checkers you want to enable here -->
-                           <annotationProcessor>edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker</annotationProcessor>
+                           <annotationProcessor>com.taint.tainting.XTaintingChecker</annotationProcessor>
                         <!-- original checker -->
                         <!-- <annotationProcessor>org.checkerframework.checker.tainting.TaintingChecker</annotationProcessor> -->
                         </annotationProcessors>
@@ -220,10 +220,10 @@
                         <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
                         <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
                         <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/checker.xml</arg>
+                        <arg>-AserializationConfigPath=/Users/nima/Developer/alfresco-remote-api/annotator-out/core/checker.xml</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
+                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/Users/nima/Developer/alfresco-remote-api/annotator-out/core/scanner.xml</arg> -->
                      </compilerArgs>
                   </configuration>
                </plugin>
