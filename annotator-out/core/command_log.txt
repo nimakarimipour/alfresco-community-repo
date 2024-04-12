@@ -4,3 +4,37 @@
 
 2024-04-11T22:50:59.539043:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
 
+2024-04-11T22:53:48.002216:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:54:03.505767:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:54:18.146322:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:54:32.781034:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:54:47.189775:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:55:01.743361:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:55:16.346536:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:55:30.947242:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:55:45.480827:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:56:00.371147:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:56:14.995165:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:56:29.471355:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:56:44.019168:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:56:58.676933:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:57:13.248269:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:57:27.960793:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+
+2024-04-11T22:57:42.656517:cd /home/kdas006/annotation_dataset/alfresco-community-repo && ./annotator-command.sh
+

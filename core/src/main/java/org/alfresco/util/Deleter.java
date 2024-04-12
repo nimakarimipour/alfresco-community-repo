@@ -24,6 +24,7 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Utility to delete a file or directory recursively.
@@ -37,7 +38,7 @@ public class Deleter
      * Delete by path.
      * @param path
      */
-    public static void Delete(String path)
+    public static void Delete(@RUntainted String path)
     {
         File toDelete = new File(path);
         Delete(toDelete);
