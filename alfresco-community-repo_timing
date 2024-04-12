@@ -1,0 +1,7 @@
+Timing execution of annotator.py on branch gcp-anno-core-7 for project alfresco-community-repo
+Annotator extended search version 2
+Preprocessing...
+Max Depth level: 25, chain: true
+Triggered Errors in this iteration: 15
+Analyzing at level 1, Scheduling for: 3 builds for: 15 fixes
+Processing  33% [=============================>                                                          ] 1/3 (0:00:00 / 0:00:00) 
