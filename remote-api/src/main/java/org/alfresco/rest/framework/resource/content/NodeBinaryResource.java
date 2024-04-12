@@ -27,6 +27,7 @@ package org.alfresco.rest.framework.resource.content;
 
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A binary resource based on a Node reference.
@@ -36,16 +37,16 @@ import org.alfresco.service.namespace.QName;
 public class NodeBinaryResource extends AbstractBinaryResource
 {
 
-    final NodeRef nodeRef;
-    final QName propertyQName;
+    final @RUntainted NodeRef nodeRef;
+    final @RUntainted QName propertyQName;
     final ContentInfo contentInfo;
 
-    public NodeBinaryResource(NodeRef nodeRef, QName propertyQName, ContentInfo contentInfo, String attachFileName)
+    public NodeBinaryResource(@RUntainted NodeRef nodeRef, @RUntainted QName propertyQName, ContentInfo contentInfo, String attachFileName)
     {
         this(nodeRef, propertyQName, contentInfo, attachFileName, null);
     }
 
-    public NodeBinaryResource(NodeRef nodeRef, QName propertyQName, ContentInfo contentInfo, String attachFileName, CacheDirective cacheDirective)
+    public NodeBinaryResource(@RUntainted NodeRef nodeRef, @RUntainted QName propertyQName, ContentInfo contentInfo, String attachFileName, @RUntainted CacheDirective cacheDirective)
     {
         super(attachFileName, cacheDirective);
         this.nodeRef = nodeRef;
@@ -53,12 +54,12 @@ public class NodeBinaryResource extends AbstractBinaryResource
         this.contentInfo = contentInfo;
     }
 
-    public NodeRef getNodeRef()
+    public @RUntainted NodeRef getNodeRef()
     {
         return this.nodeRef;
     }
 
-    public QName getPropertyQName()
+    public @RUntainted QName getPropertyQName()
     {
         return this.propertyQName;
     }

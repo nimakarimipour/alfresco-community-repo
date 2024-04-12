@@ -62,6 +62,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRuntime;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -121,7 +122,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.WebScript#execute(org.alfresco.web.scripts.WebScriptRequest, org.alfresco.web.scripts.WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res)
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res)
         throws IOException
     {
         String extensionPath = req.getExtensionPath();
@@ -206,7 +207,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
          * @param headers request headers
          * @throws MalformedURLException
          */
-        public SearchEngineHttpProxy(String rootPath, String engine, String engineUrl, HttpServletResponse response, Map<String, String> headers)
+        public SearchEngineHttpProxy(@RUntainted String rootPath, String engine, @RUntainted String engineUrl, HttpServletResponse response, Map<String, String> headers)
             throws MalformedURLException
         {
             super(engineUrl.startsWith("/") ? rootPath + engineUrl : engineUrl, response);

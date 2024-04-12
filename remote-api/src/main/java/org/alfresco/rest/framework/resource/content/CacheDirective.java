@@ -27,6 +27,7 @@
 package org.alfresco.rest.framework.resource.content;
 
 import java.util.Date;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An immutable builder for setting the HTTP cache.
@@ -132,7 +133,7 @@ public class CacheDirective
             return this;
         }
 
-        public CacheDirective build()
+        public @RUntainted CacheDirective build()
         {
             return new CacheDirective(this);
         }

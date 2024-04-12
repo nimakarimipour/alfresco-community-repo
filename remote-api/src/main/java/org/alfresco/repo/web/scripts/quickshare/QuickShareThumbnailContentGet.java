@@ -45,6 +45,7 @@ import org.mozilla.javascript.Scriptable;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -61,27 +62,27 @@ public class QuickShareThumbnailContentGet extends QuickShareContentGet
 {
     private static final Log logger = LogFactory.getLog(QuickShareContentGet.class);
     
-    private ThumbnailService thumbnailService;
-    private ScriptThumbnailService scriptThumbnailService;
-    private ServiceRegistry serviceRegistry;
+    private @RUntainted ThumbnailService thumbnailService;
+    private @RUntainted ScriptThumbnailService scriptThumbnailService;
+    private @RUntainted ServiceRegistry serviceRegistry;
     
-    public void setThumbnailService(ThumbnailService thumbnailService)
+    public void setThumbnailService(@RUntainted ThumbnailService thumbnailService)
     {
         this.thumbnailService = thumbnailService;
     }
     
-    public void setScriptThumbnailService(ScriptThumbnailService scriptThumbnailService)
+    public void setScriptThumbnailService(@RUntainted ScriptThumbnailService scriptThumbnailService)
     {
         this.scriptThumbnailService = scriptThumbnailService;
     }
     
-    public void setServiceRegistry(ServiceRegistry services)
+    public void setServiceRegistry(@RUntainted ServiceRegistry services)
     {
         this.serviceRegistry = services;
     }
     
 	@Override
-	protected void executeImpl(NodeRef nodeRef, Map<String, String> templateVars, WebScriptRequest req, WebScriptResponse res, Map<String, Object> model, boolean attach) throws IOException
+	protected void executeImpl(@RUntainted NodeRef nodeRef, Map<String, @RUntainted String> templateVars, @RUntainted WebScriptRequest req, WebScriptResponse res, Map<String, @RUntainted Object> model, boolean attach) throws IOException
     {	
         String thumbnailName = templateVars.get("thumbnailname");
         if (thumbnailName == null)

@@ -38,6 +38,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * @author steveglover
@@ -45,7 +46,7 @@ import java.util.List;
  */
 public class Util
 {
-    public static PagingRequest getPagingRequest(Paging paging)
+    public static @RUntainted PagingRequest getPagingRequest(Paging paging)
     {
         PagingRequest pagingRequest = new PagingRequest(paging.getSkipCount(), paging.getMaxItems());
         pagingRequest.setRequestTotalCountMax(CannedQueryPageDetails.DEFAULT_PAGE_SIZE);

@@ -53,6 +53,7 @@ import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.webscripts.Status;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *
@@ -95,7 +96,7 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Rendition> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         String versionId = parameters.getRelationshipId();
 
@@ -104,7 +105,7 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
     }
 
     @Override
-    public Rendition readById(String nodeId, String versionId, Parameters parameters)
+    public Rendition readById(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         String renditionId = parameters.getRelationship2Id();
 
@@ -114,7 +115,7 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
 
     @WebApiDescription(title = "Create rendition", successStatus = Status.STATUS_ACCEPTED)
     @Override
-    public List<Rendition> create(String nodeId, List<Rendition> entity, Parameters parameters)
+    public List<Rendition> create(@RUntainted String nodeId, List<Rendition> entity, Parameters parameters)
     {
         String versionId = parameters.getRelationshipId();
 
@@ -126,7 +127,7 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
     @WebApiDescription(title = "Download rendition", description = "Download rendition")
     @BinaryProperties({ "content" })
     @Override
-    public BinaryResource readProperty(String nodeId, String versionId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         String renditionId = parameters.getRelationship2Id();
 
@@ -142,8 +143,8 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
     @WebApiDescription(title = "Request content url",
                        description="Generates a direct access URL.",
                        successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String nodeId,
-                                                   String versionId,
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId,
+                                                   @RUntainted String versionId,
                                                    DirectAccessUrlRequest directAccessUrlRequest,
                                                    Parameters parameters, WithResponse withResponse)
     {
@@ -166,7 +167,7 @@ public class NodeVersionRenditionsRelation implements RelationshipResourceAction
 
     @WebApiDescription(title = "Delete rendition")
     @Override
-    public void delete(String nodeId, String versionId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         String renditionId = parameters.getRelationship2Id();
 

@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.workflow.api.model.Item;
 import org.alfresco.rest.workflow.api.model.ProcessInfo;
 import org.alfresco.rest.workflow.api.model.Variable;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Processes
 {
@@ -61,5 +62,5 @@ public interface Processes
 
     void deleteVariable(String processId, String id);
 
-    BinaryResource getProcessImage(String processId);
+    BinaryResource getProcessImage(@RUntainted String processId);
 }

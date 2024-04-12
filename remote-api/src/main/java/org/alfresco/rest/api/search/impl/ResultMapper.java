@@ -99,6 +99,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Maps from a ResultSet to a json public api representation.
@@ -107,7 +108,7 @@ import org.json.JSONObject;
  */
 public class ResultMapper
 {
-    private ServiceRegistry serviceRegistry;
+    private @RUntainted ServiceRegistry serviceRegistry;
     private Nodes nodes;
     private NodeVersionsRelation nodeVersions;
     private PropertyLookupRegistry propertyLookup;
@@ -119,7 +120,7 @@ public class ResultMapper
     {
     }
 
-    public void setServiceRegistry(ServiceRegistry serviceRegistry)
+    public void setServiceRegistry(@RUntainted ServiceRegistry serviceRegistry)
     {
         this.serviceRegistry = serviceRegistry;
     }
@@ -155,7 +156,7 @@ public class ResultMapper
      * @param searchQuery
      * @param results  @return CollectionWithPagingInfo<Node>
      */
-    public CollectionWithPagingInfo<Node> toCollectionWithPagingInfo(Params params, SearchRequestContext searchRequestContext, SearchQuery searchQuery, ResultSet results)
+    public @RUntainted CollectionWithPagingInfo<Node> toCollectionWithPagingInfo(Params params, SearchRequestContext searchRequestContext, SearchQuery searchQuery, @RUntainted ResultSet results)
     {
         List<Node> noderesults = new ArrayList<>();
         Map<String, UserInfo> mapUserInfo = new HashMap<>(10);
@@ -208,7 +209,7 @@ public class ResultMapper
      * @param isHistory
      * @return The node object or null if the user does not have permission to view it.
      */
-    public Node getNode(ResultSetRow aRow, Params params, Map<String, UserInfo> mapUserInfo, boolean isHistory)
+    public Node getNode(@RUntainted ResultSetRow aRow, Params params, Map<String, UserInfo> mapUserInfo, boolean isHistory)
     {
         String nodeStore = isHistory ? HISTORY : storeMapper.getStore(aRow.getNodeRef());
 
@@ -224,7 +225,7 @@ public class ResultMapper
                     aNode = nodes.getFolderOrDocument(aRow.getNodeRef(), null, null, params.getInclude(), mapUserInfo);
                     break;
                 case VERSIONS:
-                    Map<QName, Serializable> properties = serviceRegistry.getNodeService().getProperties(aRow.getNodeRef());
+                    Map<QName, @RUntainted Serializable> properties = serviceRegistry.getNodeService().getProperties(aRow.getNodeRef());
                     NodeRef frozenNodeRef = ((NodeRef) properties.get(Version2Model.PROP_QNAME_FROZEN_NODE_REF));
                     String versionLabelId = (String) properties.get(Version2Model.PROP_QNAME_VERSION_LABEL);
                     Version version = null;
@@ -281,7 +282,7 @@ public class ResultMapper
      * @param results
      * @return An integer total
      */
-    public Integer setTotal(ResultSet results)
+    public @RUntainted Integer setTotal(ResultSet results)
     {
         Long totalItems = results.getNumberFound();
         Integer total = totalItems.intValue();
@@ -631,7 +632,7 @@ public class ResultMapper
      * Probably the code could be generalised better in order to scan a decorator
      * chain with an unlimited depth, but that would require a change in the ResultSet interface.
      */
-    protected Optional<SearchEngineResultSet> toSearchEngineResultSet(ResultSet results)
+    protected Optional<@RUntainted SearchEngineResultSet> toSearchEngineResultSet(ResultSet results)
     {
         if (results instanceof FilteringResultSet)
         {

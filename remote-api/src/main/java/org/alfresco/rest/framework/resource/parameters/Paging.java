@@ -28,6 +28,7 @@ package org.alfresco.rest.framework.resource.parameters;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.alfresco.rest.framework.core.exceptions.InvalidArgumentException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents paging of collections of resources. Set by the client request.<br/>
@@ -43,10 +44,10 @@ public class Paging
     public static final int DEFAULT_MAX_ITEMS = 100;
     public static final Paging DEFAULT = Paging.valueOf(DEFAULT_SKIP_COUNT, DEFAULT_MAX_ITEMS);
         
-    private final int skipCount;
-    private final int maxItems;
+    private final @RUntainted int skipCount;
+    private final @RUntainted int maxItems;
 
-    private Paging(int skipCount, int maxItems)
+    private Paging(@RUntainted int skipCount, @RUntainted int maxItems)
     {
         super();
         if(skipCount < 0)
@@ -65,7 +66,7 @@ public class Paging
      * How many entries exist in the entire collection before those included in the list
      * @return Integer
      */
-    public int getSkipCount()
+    public @RUntainted int getSkipCount()
     {
         return this.skipCount;
     }
@@ -74,7 +75,7 @@ public class Paging
      * The maximum number of items the client requires. Defaults to 100.
      * @return Integer
      */
-    public int getMaxItems()
+    public @RUntainted int getMaxItems()
     {
         return this.maxItems;
     }

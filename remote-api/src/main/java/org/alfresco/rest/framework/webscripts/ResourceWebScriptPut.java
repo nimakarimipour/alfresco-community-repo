@@ -55,6 +55,7 @@ import org.springframework.extensions.webscripts.WrappingWebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 /**
  * Handles the HTTP PUT for a Resource, equivalent to CRUD Update
  * 
@@ -74,9 +75,9 @@ public class ResourceWebScriptPut extends AbstractResourceWebScript implements P
     }
     
     @Override
-    public Params extractParams(ResourceMetadata resourceMeta, WebScriptRequest req)
+    public Params extractParams(ResourceMetadata resourceMeta, @RUntainted WebScriptRequest req)
     {
-        final Map<String, String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
+        final Map<String, @RUntainted String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
         final String entityId = resourceVars.get(ResourceLocator.ENTITY_ID);
         final String relationshipId = resourceVars.get(ResourceLocator.RELATIONSHIP_ID);
         final String relationship2Id = resourceVars.get(ResourceLocator.RELATIONSHIP2_ID);
@@ -194,7 +195,7 @@ public class ResourceWebScriptPut extends AbstractResourceWebScript implements P
      * @return anObject the result of the execute
      */
     @Override
-    public Object executeAction(ResourceWithMetadata resource, Params params, WithResponse withResponse) throws Throwable
+    public @RUntainted Object executeAction(ResourceWithMetadata resource, Params params, WithResponse withResponse) throws Throwable
     {
         switch (resource.getMetaData().getType())
         {

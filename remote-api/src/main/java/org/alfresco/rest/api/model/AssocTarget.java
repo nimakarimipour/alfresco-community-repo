@@ -24,13 +24,14 @@
  * #L%
  */
 package org.alfresco.rest.api.model;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * @author janv
  */
 public class AssocTarget extends Assoc
 {
-    private String targetId;
+    private @RUntainted String targetId;
 
     public AssocTarget()
     {
@@ -41,19 +42,19 @@ public class AssocTarget extends Assoc
         super(prefixAssocTypeQName);
     }
 
-    public AssocTarget(String targetId, String prefixAssocTypeQName)
+    public AssocTarget(@RUntainted String targetId, String prefixAssocTypeQName)
     {
         super(prefixAssocTypeQName);
 
         this.targetId = targetId;
     }
 
-    public String getTargetId()
+    public @RUntainted String getTargetId()
     {
         return targetId;
     }
 
-    public void setTargetId(String targetId)
+    public void setTargetId(@RUntainted String targetId)
     {
         this.targetId = targetId;
     }

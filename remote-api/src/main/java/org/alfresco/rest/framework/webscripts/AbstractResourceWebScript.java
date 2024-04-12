@@ -62,6 +62,8 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Webscript that handles the request for and execution of a Resource
@@ -91,7 +93,7 @@ public abstract class AbstractResourceWebScript extends ApiWebScript implements 
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void execute(final Api api, final WebScriptRequest req, final WebScriptResponse res) throws IOException
+    public void execute(final Api api, final @RUntainted WebScriptRequest req, final WebScriptResponse res) throws IOException
     {
         long startTime = System.currentTimeMillis();
         
@@ -248,14 +250,14 @@ public abstract class AbstractResourceWebScript extends ApiWebScript implements 
         return transHelper;
     }
 
-    protected void streamResponse(final WebScriptRequest req, final WebScriptResponse res, BinaryResource resource) throws IOException
+    protected void streamResponse(final @RUntainted WebScriptRequest req, final WebScriptResponse res, BinaryResource resource) throws IOException
     {
         if (resource instanceof FileBinaryResource)
         {
             FileBinaryResource fileResource = (FileBinaryResource) resource;
             // if requested, set attachment
             boolean attach = StringUtils.isNotEmpty(fileResource.getAttachFileName());
-            Map<String, Object> model = getModelForCacheDirective(fileResource.getCacheDirective());
+            Map<String, @RUntainted Object> model = getModelForCacheDirective(fileResource.getCacheDirective());
             streamer.streamContent(req, res, fileResource.getFile(), null, attach, fileResource.getAttachFileName(), model);
         }
         else if (resource instanceof NodeBinaryResource)
@@ -291,7 +293,7 @@ public abstract class AbstractResourceWebScript extends ApiWebScript implements 
         }
     }
 
-    private static Map<String, Object> getModelForCacheDirective(CacheDirective cacheDirective)
+    private static Map<String, @RPolyTainted Object> getModelForCacheDirective(@RPolyTainted CacheDirective cacheDirective)
     {
         if (cacheDirective != null)
         {

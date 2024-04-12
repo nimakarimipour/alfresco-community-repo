@@ -78,6 +78,7 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.util.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Public REST API: Centralises access to favourites functionality and maps between representations repository and api representations.
@@ -93,7 +94,7 @@ public class FavouritesImpl implements Favourites
 	private Sites sites;
 	private Nodes nodes;
 	private FavouritesService favouritesService;
-	private SiteService siteService;
+	private @RUntainted SiteService siteService;
     private NamespaceService namespaceService;
 
     // additional exclude properties for favourites as these can be already top-level properties
@@ -134,7 +135,7 @@ public class FavouritesImpl implements Favourites
         this.namespaceService = namespaceService;
     }
 
-	private Target getTarget(PersonFavourite personFavourite, Parameters parameters)
+	private Target getTarget(@RUntainted PersonFavourite personFavourite, Parameters parameters)
 	{
 		Target target = null;
 		NodeRef nodeRef = personFavourite.getNodeRef();
@@ -229,7 +230,7 @@ public class FavouritesImpl implements Favourites
     }
 
     @Override
-	public Favourite addFavourite(String personId, Favourite favourite)
+	public Favourite addFavourite(@RUntainted String personId, Favourite favourite)
     {
         Parameters parameters = getDefaultParameters(personId, null);
         return addFavourite(personId, favourite, parameters);
@@ -293,7 +294,7 @@ public class FavouritesImpl implements Favourites
     }
 
     @Override
-    public void removeFavourite(String personId, String id)
+    public void removeFavourite(String personId, @RUntainted String id)
     {
     	personId = people.validatePerson(personId, true);
     	NodeRef nodeRef = nodes.validateNode(id);
@@ -325,14 +326,14 @@ public class FavouritesImpl implements Favourites
     }
 
     @Override
-    public Favourite getFavourite(String personId, String favouriteId)
+    public Favourite getFavourite(@RUntainted String personId, @RUntainted String favouriteId)
     {
         Parameters parameters = getDefaultParameters(personId, favouriteId);
         return getFavourite(personId, favouriteId, parameters);
     }
 
     @Override
-    public Favourite getFavourite(String personId, String favouriteId, Parameters parameters)
+    public Favourite getFavourite(String personId, @RUntainted String favouriteId, Parameters parameters)
     {
         NodeRef nodeRef = nodes.validateNode(favouriteId);
         personId = people.validatePerson(personId, true);
@@ -413,7 +414,7 @@ public class FavouritesImpl implements Favourites
      * Returns a {@code {@link Parameters} object where almost all of its values are null.
      * the non-null value is the {@literal include} and whatever value is passed for {@code personId} and {@code favouriteId}
      */
-    private Parameters getDefaultParameters(String personId, String favouriteId)
+    private Parameters getDefaultParameters(@RUntainted String personId, @RUntainted String favouriteId)
     {
         Params.RecognizedParams recognizedParams = new Params.RecognizedParams(null, null, null, null, Collections.emptyList(), null, null, null,
                     false);

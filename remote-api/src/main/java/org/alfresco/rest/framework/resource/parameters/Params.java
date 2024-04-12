@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.where.QueryImpl;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Parameters passed in from a Rest client for use in calls to the rest api.
@@ -54,9 +55,9 @@ public class Params implements Parameters
     //            /entities/{entityAId}/relationship1/{entityBId}/relationship2
     private final boolean isCollectionResource;
 
-    private final String entityId;
-    private final String relationshipId;
-    private final String relationship2Id;
+    private final @RUntainted String entityId;
+    private final @RUntainted String relationshipId;
+    private final @RUntainted String relationship2Id;
 
     private final Object passedIn;
     private final InputStream stream;
@@ -69,7 +70,7 @@ public class Params implements Parameters
     private static final RecognizedParams NULL_PARAMS = new RecognizedParams(null, null, null, null, null, null, null, null, false);
     private static final BasicContentInfo DEFAULT_CONTENT_INFO = new ContentInfoImpl(MimetypeMap.MIMETYPE_BINARY, "UTF-8", -1, null);
     
-    protected Params(Boolean isCollectionResource, String entityId, String relationshipId, String relationship2Id, Object passedIn, InputStream stream, String addressedProperty, RecognizedParams recognizedParams, BasicContentInfo contentInfo, WebScriptRequest request)
+    protected Params(Boolean isCollectionResource, @RUntainted String entityId, @RUntainted String relationshipId, @RUntainted String relationship2Id, Object passedIn, InputStream stream, String addressedProperty, RecognizedParams recognizedParams, BasicContentInfo contentInfo, WebScriptRequest request)
     {
         super();
         this.isCollectionResource = (isCollectionResource != null ? isCollectionResource : (entityId == null));
@@ -84,44 +85,44 @@ public class Params implements Parameters
         this.contentInfo = contentInfo==null?DEFAULT_CONTENT_INFO:contentInfo;
     }
 
-    public static Params valueOf(BeanPropertiesFilter paramFilter, String entityId, WebScriptRequest request)
+    public static Params valueOf(BeanPropertiesFilter paramFilter, @RUntainted String entityId, WebScriptRequest request)
     {
         return new Params(null, entityId, null, null, null, null, null, new RecognizedParams(null, null, paramFilter, null, null, null, null, null, false), null, request);
     }
 
-    public static Params valueOf(String entityId, String relationshipId, WebScriptRequest request)
+    public static Params valueOf(@RUntainted String entityId, @RUntainted String relationshipId, WebScriptRequest request)
     {
         return new Params(null, entityId, relationshipId, null, null,null, null, NULL_PARAMS, null, request);
     }
     
-    public static Params valueOf(RecognizedParams recognizedParams, String entityId, String relationshipId, WebScriptRequest request)
+    public static Params valueOf(RecognizedParams recognizedParams, @RUntainted String entityId, @RUntainted String relationshipId, WebScriptRequest request)
     {
         return new Params(null, entityId, relationshipId, null, null, null, null, recognizedParams, null, request);
     }
     
-    public static Params valueOf(String entityId, RecognizedParams recognizedParams, Object passedIn, WebScriptRequest request)
+    public static Params valueOf(@RUntainted String entityId, RecognizedParams recognizedParams, Object passedIn, WebScriptRequest request)
     {
         return new Params(null, entityId, null, null, passedIn, null, null, recognizedParams, null, request);
     }
 
-    public static Params valueOf(String entityId, String relationshipId, RecognizedParams recognizedParams, Object passedIn, WebScriptRequest request)
+    public static Params valueOf(@RUntainted String entityId, @RUntainted String relationshipId, RecognizedParams recognizedParams, Object passedIn, WebScriptRequest request)
     {
         return new Params(null, entityId, relationshipId, null, passedIn, null, null, recognizedParams, null, request);
     }
 
-    public static Params valueOf(String entityId, String relationshipId, Object passedIn, InputStream stream,
+    public static Params valueOf(@RUntainted String entityId, @RUntainted String relationshipId, Object passedIn, InputStream stream,
                                  String addressedProperty, RecognizedParams recognizedParams, BasicContentInfo contentInfo, WebScriptRequest request)
     {
         return new Params(null, entityId, relationshipId, null, passedIn, stream, addressedProperty, recognizedParams, contentInfo, request);
     }
 
-    public static Params valueOf(boolean isCollectionResource, String entityId, String relationshipId, String relationship2Id, Object passedIn, InputStream stream,
+    public static Params valueOf(boolean isCollectionResource, @RUntainted String entityId, @RUntainted String relationshipId, @RUntainted String relationship2Id, Object passedIn, InputStream stream,
                                  String addressedProperty, RecognizedParams recognizedParams, BasicContentInfo contentInfo, WebScriptRequest request)
     {
         return new Params(isCollectionResource, entityId, relationshipId, relationship2Id, passedIn, stream, addressedProperty, recognizedParams, contentInfo, request);
     }
     
-    public String getEntityId()
+    public @RUntainted String getEntityId()
     {
         return this.entityId;
     }
@@ -131,12 +132,12 @@ public class Params implements Parameters
         return this.passedIn;
     }
 
-    public String getRelationshipId()
+    public @RUntainted String getRelationshipId()
     {
         return this.relationshipId;
     }
 
-    public String getRelationship2Id()
+    public @RUntainted String getRelationship2Id()
     {
         return this.relationship2Id;
     }
@@ -151,7 +152,7 @@ public class Params implements Parameters
         return this.recognizedParams.query;
     }
 
-    public Paging getPaging()
+    public @RUntainted Paging getPaging()
     {
         return this.recognizedParams.paging;
     }
@@ -218,11 +219,11 @@ public class Params implements Parameters
     /**
      * Similar to the standard HTTPRequest method.  Just returns the first parameter value or NULL.
      */
-    public String getParameter(String parameterName)
+    public @RUntainted @RUntainted String getParameter(String parameterName)
     {
         if (recognizedParams.requestParameters!= null && !recognizedParams.requestParameters.isEmpty())
         {
-            String[] vals = recognizedParams.requestParameters.get(parameterName);
+            @RUntainted String[] vals = recognizedParams.requestParameters.get(parameterName);
             if (vals!= null && vals.length>0)
             {
                 return vals[0]; //Just return the first element.

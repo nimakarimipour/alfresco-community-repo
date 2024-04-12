@@ -46,6 +46,7 @@ import org.alfresco.util.EqualsHelper;
 import org.apache.chemistry.opencmis.commons.data.PropertyData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Concrete class carrying general information for <b>alf_node</b> data
@@ -59,7 +60,7 @@ public class Node implements Comparable<Node>
     private static final Log logger = LogFactory.getLog(Node.class);
 
     protected NodeRef nodeRef;
-    protected String name;
+    protected @RUntainted String name;
 
     protected Date createdAt;
     protected Date modifiedAt;
@@ -126,7 +127,7 @@ public class Node implements Comparable<Node>
     {
     }
 
-    protected void mapMinimalInfo(Map<QName, Serializable> nodeProps,  Map<String, UserInfo> mapUserInfo, ServiceRegistry sr)
+    protected void mapMinimalInfo(Map<QName, @RUntainted Serializable> nodeProps,  Map<String, UserInfo> mapUserInfo, ServiceRegistry sr)
     {
         PersonService personService = sr.getPersonService();
 
@@ -238,12 +239,12 @@ public class Node implements Comparable<Node>
         this.createdByUser = createdByUser;
     }
 
-    public String getName()
+    public @RUntainted String getName()
     {
         return this.name;
     }
 
-    public void setName(String name)
+    public void setName(@RUntainted String name)
     {
         this.name = name;
     }
@@ -268,7 +269,7 @@ public class Node implements Comparable<Node>
         this.prefixTypeQName = prefixType;
     }
 
-    public Map<String, Object> getProperties() {
+    public @RUntainted Map<String, Object> getProperties() {
         return this.properties;
     }
 

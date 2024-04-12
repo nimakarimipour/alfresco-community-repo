@@ -45,6 +45,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.webscripts.Status;
 
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An implementation of an Entity Resource for Shared Links.
@@ -100,7 +101,7 @@ public class QuickShareLinkEntityResource implements EntityResourceAction.ReadBy
     @WebApiDescription(title = "Download shared link content", description = "Download content for shared link")
     @WebApiNoAuth
     @BinaryProperties({"content"})
-    public BinaryResource readProperty(String sharedId, Parameters parameters) throws EntityNotFoundException
+    public BinaryResource readProperty(@RUntainted String sharedId, Parameters parameters) throws EntityNotFoundException
     {
         return quickShareLinks.readProperty(sharedId, null, parameters);
     }

@@ -102,6 +102,7 @@ import org.alfresco.util.ISO8601DateFormat;
 import org.alfresco.util.TempFileProvider;
 import org.alfresco.util.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class ProcessesImpl extends WorkflowRestImpl implements Processes
 {
@@ -1033,7 +1034,7 @@ public class ProcessesImpl extends WorkflowRestImpl implements Processes
     }
     
     @Override
-    public BinaryResource getProcessImage(String processId)
+    public BinaryResource getProcessImage(@RUntainted String processId)
     {
         validateIfUserAllowedToWorkWithProcess(processId);
         

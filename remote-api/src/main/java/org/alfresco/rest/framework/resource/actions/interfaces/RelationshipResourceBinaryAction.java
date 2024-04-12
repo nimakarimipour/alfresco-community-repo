@@ -35,6 +35,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
 
 import java.io.InputStream;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Permissible actions for binary resources of an @RelationshipResource
@@ -61,7 +62,7 @@ public interface RelationshipResourceBinaryAction
          * @return BinaryResource  - Either {@link FileBinaryResource} or {@link NodeBinaryResource}
          * @throws EntityNotFoundException
          */
-        public BinaryResource readProperty(String entityId, String entityResourceId, Parameters parameters) throws EntityNotFoundException;
+        public BinaryResource readProperty(@RUntainted String entityId, @RUntainted String entityResourceId, Parameters parameters) throws EntityNotFoundException;
     }
 
     /**

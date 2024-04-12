@@ -77,6 +77,8 @@ import org.springframework.extensions.surf.util.URLDecoder;
 import org.springframework.extensions.surf.util.URLEncoder;
 import org.springframework.util.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * WebDAV Protocol Helper Class
@@ -718,7 +720,7 @@ public class WebDAVHelper
      * 
      * @param string        the String to convert
      */
-    public final static String encodeHTML(String string)
+    public final static @RPolyTainted String encodeHTML(@RPolyTainted String string)
     {
         if (string == null)
         {
@@ -957,7 +959,7 @@ public class WebDAVHelper
      * @param urlStr String
      * @exception WebDAVServerException
      */
-    public void checkDestinationURL(HttpServletRequest request, String urlStr) throws WebDAVServerException
+    public void checkDestinationURL(HttpServletRequest request, @RUntainted String urlStr) throws WebDAVServerException
     {
         try
         {

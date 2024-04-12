@@ -38,6 +38,8 @@ import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotationUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Generic methods used by ResourceInspector
@@ -121,10 +123,10 @@ public class ResourceInspectorUtil
      * @return - the List of Method or an empty List
      */
     @SuppressWarnings("rawtypes")
-    public static List<Method> findMethodsByAnnotation(Class objClass, Class<? extends Annotation> annotationType)
+    public static List<@RUntainted Method> findMethodsByAnnotation(Class objClass, Class<? extends Annotation> annotationType)
     {
     
-        List<Method> annotatedMethods = new ArrayList<Method>();
+        List<@RUntainted Method> annotatedMethods = new ArrayList<@RUntainted Method>();
         Method[] methods = objClass.getMethods();
         for (Method method : methods)
         {
@@ -145,7 +147,7 @@ public class ResourceInspectorUtil
      * @param obj Object
      * @return result of method call
      */
-    public static Object invokeMethod(Method annotatedMethod, Object obj)
+    public static @RPolyTainted Object invokeMethod(@RPolyTainted Method annotatedMethod, @RPolyTainted Object obj)
     {
         try
         {
@@ -164,7 +166,7 @@ public class ResourceInspectorUtil
      * @param obj Object
      * @return result of method call
      */
-    public static Object invokeMethod(Method annotatedMethod, Object obj, Object... args) throws Throwable
+    public static @RPolyTainted Object invokeMethod(@RPolyTainted Method annotatedMethod, @RPolyTainted Object obj, @RPolyTainted Object... args) throws Throwable
     {
         if (annotatedMethod != null)
         {

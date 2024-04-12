@@ -170,6 +170,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.extensions.surf.util.Content;
 import org.springframework.extensions.webscripts.servlet.FormData;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to file/folder/node services and maps between representations.
@@ -196,9 +197,9 @@ public class NodesImpl implements Nodes
         DOCUMENT, FOLDER
     }
 
-    private NodeService nodeService;
+    private @RUntainted NodeService nodeService;
     private DictionaryService dictionaryService;
-    private FileFolderService fileFolderService;
+    private @RUntainted FileFolderService fileFolderService;
     private NamespaceService namespaceService;
     private PermissionService permissionService;
     private MimetypeService mimetypeService;
@@ -227,8 +228,8 @@ public class NodesImpl implements Nodes
     // note: circular - Nodes/QuickShareLinks currently use each other (albeit for different methods)
     private QuickShareLinks quickShareLinks;
 
-    private Repository repositoryHelper;
-    private ServiceRegistry sr;
+    private @RUntainted Repository repositoryHelper;
+    private @RUntainted ServiceRegistry sr;
     private Set<String> defaultIgnoreTypesAndAspects;
     private Set<String> defaultPersonLookupProperties;
 
@@ -294,7 +295,7 @@ public class NodesImpl implements Nodes
         }
     }
 
-    public void setServiceRegistry(ServiceRegistry sr)
+    public void setServiceRegistry(@RUntainted ServiceRegistry sr)
     {
         this.sr = sr;
     }
@@ -304,7 +305,7 @@ public class NodesImpl implements Nodes
         this.behaviourFilter = behaviourFilter;
     }
 
-    public void setRepositoryHelper(Repository repositoryHelper)
+    public void setRepositoryHelper(@RUntainted Repository repositoryHelper)
     {
         this.repositoryHelper = repositoryHelper;
     }
@@ -386,7 +387,7 @@ public class NodesImpl implements Nodes
      * Note: assumes workspace://SpacesStore
      */
     @Override
-    public NodeRef validateNode(String nodeId)
+    public @RUntainted NodeRef validateNode(@RUntainted String nodeId)
     {
         //belts-and-braces
         if (nodeId == null)
@@ -398,7 +399,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public NodeRef validateNode(StoreRef storeRef, String nodeId)
+    public @RUntainted NodeRef validateNode(@RUntainted StoreRef storeRef, @RUntainted String nodeId)
     {
         int idx = nodeId.indexOf(";");
         if (idx != -1)
@@ -417,7 +418,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public NodeRef validateNode(NodeRef nodeRef)
+    public @RUntainted NodeRef validateNode(@RUntainted NodeRef nodeRef)
     {
         if (!nodeService.exists(nodeRef))
         {
@@ -437,7 +438,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public boolean isSubClass(NodeRef nodeRef, QName ofClassQName, boolean validateNodeRef)
+    public boolean isSubClass(@RUntainted NodeRef nodeRef, QName ofClassQName, boolean validateNodeRef)
     {
         if (validateNodeRef)
         {
@@ -502,7 +503,7 @@ public class NodesImpl implements Nodes
      * @deprecated review usage (backward compat')
      */
     @Override
-    public Node getNode(String nodeId)
+    public Node getNode(@RUntainted String nodeId)
     {
         NodeRef nodeRef = validateNode(nodeId);
 
@@ -649,7 +650,7 @@ public class NodesImpl implements Nodes
         return nodeService.getPrimaryParent(nodeRef).getParentRef();
     }
 
-    public NodeRef validateOrLookupNode(String nodeId, String path)
+    public @RUntainted NodeRef validateOrLookupNode(@RUntainted String nodeId, String path)
     {
         NodeRef parentNodeRef;
 
@@ -699,7 +700,7 @@ public class NodesImpl implements Nodes
         return parentNodeRef;
     }
 
-    protected NodeRef resolveNodeByPath(final NodeRef parentNodeRef, String path, boolean checkForCompanyHome)
+    protected @RUntainted NodeRef resolveNodeByPath(final @RUntainted NodeRef parentNodeRef, String path, boolean checkForCompanyHome)
     {
         final List<String> pathElements = getPathElements(path);
 
@@ -750,7 +751,7 @@ public class NodesImpl implements Nodes
         return fileInfo.getNodeRef();
     }
 
-    private List<String> getPathElements(String path)
+    private @RUntainted List<String> getPathElements(String path)
     {
         final List<String> pathElements = new ArrayList<>();
         if (path != null && path.trim().length() > 0)
@@ -765,7 +766,7 @@ public class NodesImpl implements Nodes
         return pathElements;
     }
 
-    private NodeRef makeFolders(NodeRef parentNodeRef, List<String> pathElements)
+    private @RUntainted NodeRef makeFolders(NodeRef parentNodeRef, List<String> pathElements)
     {
         NodeRef currentParentRef = parentNodeRef;
         // just loop and create if necessary
@@ -816,7 +817,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node getFolderOrDocument(String nodeId, Parameters parameters)
+    public Node getFolderOrDocument(@RUntainted String nodeId, Parameters parameters)
     {
         String path = parameters.getParameter(PARAM_RELATIVE_PATH);
         NodeRef nodeRef = validateOrLookupNode(nodeId, path);
@@ -1159,7 +1160,7 @@ public class NodesImpl implements Nodes
         return nodeAspects;
     }
 
-    public Map<QName, Serializable> mapToNodeProperties(Map<String, Object> props)
+    public @RUntainted Map<QName, Serializable> mapToNodeProperties(@RUntainted Map<String, Object> props)
     {
         Map<QName, Serializable> nodeProps = new HashMap<>(props.size());
 
@@ -1279,7 +1280,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public CollectionWithPagingInfo<Node> listChildren(String parentFolderNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> listChildren(@RUntainted String parentFolderNodeId, Parameters parameters)
     {
         String path = parameters.getParameter(PARAM_RELATIVE_PATH);
 
@@ -1354,7 +1355,7 @@ public class NodesImpl implements Nodes
                 return node;
             }
 
-            private void calculateRelativePath(String parentFolderNodeId, Node node)
+            private void calculateRelativePath(@RUntainted String parentFolderNodeId, Node node)
             {
                 NodeRef rootNodeRef = validateOrLookupNode(parentFolderNodeId);
                 try
@@ -1739,7 +1740,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public void deleteNode(String nodeId, Parameters parameters)
+    public void deleteNode(@RUntainted String nodeId, Parameters parameters)
     {
         NodeRef nodeRef = validateOrLookupNode(nodeId);
 
@@ -1775,7 +1776,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node createNode(String parentFolderNodeId, Node nodeInfo, Parameters parameters)
+    public Node createNode(@RUntainted String parentFolderNodeId, Node nodeInfo, Parameters parameters)
     {
         if (nodeInfo.getNodeRef() != null)
         {
@@ -1932,7 +1933,7 @@ public class NodesImpl implements Nodes
         }
     }
 
-    private NodeRef getOrCreatePath(NodeRef parentNodeRef, String relativePath)
+    private @RUntainted NodeRef getOrCreatePath(@RUntainted NodeRef parentNodeRef, String relativePath)
     {
         if (relativePath != null)
         {
@@ -1949,7 +1950,7 @@ public class NodesImpl implements Nodes
         return parentNodeRef;
     }
 
-    public List<AssocChild> addChildren(String parentNodeId, List<AssocChild> entities)
+    public List<AssocChild> addChildren(@RUntainted String parentNodeId, List<AssocChild> entities)
     {
         NodeRef parentNodeRef = validateNode(parentNodeId);
 
@@ -1989,7 +1990,7 @@ public class NodesImpl implements Nodes
         return result;
     }
 
-    public List<AssocTarget> addTargets(String sourceNodeId, List<AssocTarget> entities)
+    public List<AssocTarget> addTargets(@RUntainted String sourceNodeId, List<AssocTarget> entities)
     {
         List<AssocTarget> result = new ArrayList<>(entities.size());
 
@@ -2025,12 +2026,12 @@ public class NodesImpl implements Nodes
         return result;
     }
 
-    public QName getAssocType(String assocTypeQNameStr)
+    public @RUntainted QName getAssocType(String assocTypeQNameStr)
     {
         return getAssocType(assocTypeQNameStr, true);
     }
 
-    public QName getAssocType(String assocTypeQNameStr, boolean mandatory)
+    public @RUntainted QName getAssocType(String assocTypeQNameStr, boolean mandatory)
     {
         QName assocType = null;
 
@@ -2057,7 +2058,7 @@ public class NodesImpl implements Nodes
     }
 
 
-    private NodeRef createNodeImpl(NodeRef parentNodeRef, String nodeName, QName nodeTypeQName, Map<QName, Serializable> props, QName assocTypeQName)
+    private @RUntainted NodeRef createNodeImpl(@RUntainted NodeRef parentNodeRef, @RUntainted String nodeName, @RUntainted QName nodeTypeQName, @RUntainted Map<QName, Serializable> props, @RUntainted QName assocTypeQName)
     {
         NodeRef newNode = null;
         if (props == null)
@@ -2260,7 +2261,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node updateNode(String nodeId, Node nodeInfo, Parameters parameters)
+    public Node updateNode(@RUntainted String nodeId, Node nodeInfo, Parameters parameters)
     {
         retryingTransactionHelper.doInTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<Void>()
         {
@@ -2285,7 +2286,7 @@ public class NodesImpl implements Nodes
         }, false, false);
     }
     
-    protected NodeRef updateNodeImpl(String nodeId, Node nodeInfo, Parameters parameters)
+    protected NodeRef updateNodeImpl(@RUntainted String nodeId, Node nodeInfo, Parameters parameters)
     {
         validateAspects(nodeInfo.getAspectNames(), EXCLUDED_NS, EXCLUDED_ASPECTS);
         validateProperties(nodeInfo.getProperties(), EXCLUDED_NS,  Arrays.asList());
@@ -2511,7 +2512,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node moveOrCopyNode(String sourceNodeId, String targetParentId, String name, Parameters parameters, boolean isCopy)
+    public Node moveOrCopyNode(@RUntainted String sourceNodeId, @RUntainted String targetParentId, @RUntainted String name, Parameters parameters, boolean isCopy)
     {
         if ((sourceNodeId == null) || (sourceNodeId.isEmpty()))
         {
@@ -2621,7 +2622,7 @@ public class NodesImpl implements Nodes
         }
     }
 
-    protected FileInfo moveOrCopyImpl(NodeRef nodeRef, NodeRef parentNodeRef, String name, boolean isCopy)
+    protected @RUntainted FileInfo moveOrCopyImpl(@RUntainted NodeRef nodeRef, @RUntainted NodeRef parentNodeRef, @RUntainted String name, boolean isCopy)
     {
         String targetParentId = parentNodeRef.getId();
 
@@ -2673,14 +2674,14 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public BinaryResource getContent(String fileNodeId, Parameters parameters, boolean recordActivity)
+    public BinaryResource getContent(@RUntainted String fileNodeId, Parameters parameters, boolean recordActivity)
     {
         final NodeRef nodeRef = validateNode(fileNodeId);
         return getContent(nodeRef, parameters, recordActivity);
     }
 
     @Override
-    public BinaryResource getContent(NodeRef nodeRef, Parameters parameters, boolean recordActivity)
+    public BinaryResource getContent(@RUntainted NodeRef nodeRef, Parameters parameters, boolean recordActivity)
     {
         if (!nodeMatches(nodeRef, Collections.singleton(ContentModel.TYPE_CONTENT), null, false))
         {
@@ -2729,7 +2730,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node updateContent(String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
+    public Node updateContent(@RUntainted String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
     {
         if (contentInfo.getMimeType().toLowerCase().startsWith("multipart"))
         {
@@ -2947,7 +2948,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node upload(String parentFolderNodeId, FormData formData, Parameters parameters)
+    public Node upload(@RUntainted String parentFolderNodeId, FormData formData, Parameters parameters)
     {
         if (formData == null || !formData.getIsMultiPart())
         {
@@ -3146,7 +3147,7 @@ public class NodesImpl implements Nodes
          */
     }
 
-    private NodeRef createNewFile(NodeRef parentNodeRef, String fileName, QName nodeType, Content content, Map<QName, Serializable> props, QName assocTypeQName, Parameters params,
+    private @RUntainted NodeRef createNewFile(@RUntainted NodeRef parentNodeRef, @RUntainted String fileName, @RUntainted QName nodeType, Content content, @RUntainted Map<QName, Serializable> props, @RUntainted QName assocTypeQName, Parameters params,
                                   Boolean versionMajor, String versionComment)
     {
         NodeRef nodeRef = createNodeImpl(parentNodeRef, fileName, nodeType, props, assocTypeQName);
@@ -3290,7 +3291,7 @@ public class NodesImpl implements Nodes
      * @param fileName      the original fileName
      * @return a new file name
      */
-    private String findUniqueName(NodeRef parentNodeRef, String fileName)
+    private @RUntainted String findUniqueName(NodeRef parentNodeRef, String fileName)
     {
         int counter = 1;
         String tmpFilename;
@@ -3328,7 +3329,7 @@ public class NodesImpl implements Nodes
      * @param qnameStr Fully qualified or short-name QName string
      * @return QName
      */
-    public QName createQName(String qnameStr)
+    public @RUntainted QName createQName(String qnameStr)
     {
         try
         {
@@ -3383,7 +3384,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node lock(String nodeId, LockInfo lockInfo, Parameters parameters)
+    public Node lock(@RUntainted String nodeId, LockInfo lockInfo, Parameters parameters)
     {
         NodeRef nodeRef = validateOrLookupNode(nodeId);
 
@@ -3422,7 +3423,7 @@ public class NodesImpl implements Nodes
     }
 
     @Override
-    public Node unlock(String nodeId, Parameters parameters)
+    public Node unlock(@RUntainted String nodeId, Parameters parameters)
     {
         NodeRef nodeRef = validateOrLookupNode(nodeId);
 

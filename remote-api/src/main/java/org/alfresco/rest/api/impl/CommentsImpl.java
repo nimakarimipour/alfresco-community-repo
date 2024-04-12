@@ -57,6 +57,7 @@ import java.util.Set;
 
 import static org.alfresco.rest.api.People.PARAM_INCLUDE_ASPECTNAMES;
 import static org.alfresco.rest.api.People.PARAM_INCLUDE_PROPERTIES;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to comment services and maps between representations.
@@ -71,7 +72,7 @@ public class CommentsImpl implements Comments
 			PARAM_INCLUDE_PROPERTIES);
 	private Nodes nodes;
     private NodeService nodeService;
-    private CommentService commentService;
+    private @RUntainted CommentService commentService;
     private ContentService contentService;
     private TypeConstraint typeConstraint;
 	private People people;
@@ -106,7 +107,7 @@ public class CommentsImpl implements Comments
 		this.people = people;
 	}
 
-	private Comment toComment(NodeRef nodeRef, NodeRef commentNodeRef, List<String> include)
+	private Comment toComment(NodeRef nodeRef, @RUntainted NodeRef commentNodeRef, List<String> include)
     {
         Map<QName, Serializable> nodeProps = nodeService.getProperties(commentNodeRef);
 
@@ -146,7 +147,7 @@ public class CommentsImpl implements Comments
         return comment;
     }
     
-    public Comment createComment(String nodeId, Comment comment)
+    public Comment createComment(@RUntainted String nodeId, Comment comment)
     {
 		NodeRef nodeRef = nodes.validateNode(nodeId);
 
@@ -166,7 +167,7 @@ public class CommentsImpl implements Comments
 	    }
     }
 
-    public Comment updateComment(String nodeId, Comment comment)
+    public Comment updateComment(@RUntainted String nodeId, Comment comment)
     {
     	try
     	{
@@ -191,7 +192,7 @@ public class CommentsImpl implements Comments
 		}
     }
 
-    public CollectionWithPagingInfo<Comment> getComments(String nodeId, Paging paging, List<String> include)
+    public CollectionWithPagingInfo<Comment> getComments(@RUntainted String nodeId, Paging paging, List<String> include)
     {
 		final NodeRef nodeRef = nodes.validateNode(nodeId);
         
@@ -204,9 +205,9 @@ public class CommentsImpl implements Comments
         }
 
     	PagingRequest pagingRequest = Util.getPagingRequest(paging);
-        final PagingResults<NodeRef> pagingResults = commentService.listComments(nodeRef, pagingRequest);
+        final PagingResults<@RUntainted NodeRef> pagingResults = commentService.listComments(nodeRef, pagingRequest);
         
-		final List<NodeRef> page = pagingResults.getPage();
+		final List<@RUntainted NodeRef> page = pagingResults.getPage();
 		List<Comment> comments = new AbstractList<>()
 		{
 			@Override
@@ -226,7 +227,7 @@ public class CommentsImpl implements Comments
     }
 
     @Override
-    public void deleteComment(String nodeId, String commentNodeId)
+    public void deleteComment(@RUntainted String nodeId, @RUntainted String commentNodeId)
     {
     	try
     	{

@@ -41,6 +41,7 @@ import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Content Info Service Get info about content from the Repository.
@@ -50,12 +51,12 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 public class ContentInfo extends StreamContent
 {
     @Override
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // create empty map of args
-        Map<String, String> args = new HashMap<String, String>(0, 1.0f);
+        Map<String, @RUntainted String> args = new HashMap<String, @RUntainted String>(0, 1.0f);
         // create map of template vars
-        Map<String, String> templateVars = req.getServiceMatch().getTemplateVars();
+        Map<String, @RUntainted String> templateVars = req.getServiceMatch().getTemplateVars();
         // create object reference from url
         ObjectReference reference = createObjectReferenceFromUrl(args, templateVars);
         NodeRef nodeRef = reference.getNodeRef();

@@ -98,6 +98,7 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.util.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to site services and maps between representations.
@@ -153,7 +154,7 @@ public class SitesImpl implements Sites
     protected People people;
     protected NodeService nodeService;
     protected DictionaryService dictionaryService;
-    protected SiteService siteService;
+    protected @RUntainted SiteService siteService;
     protected FavouritesService favouritesService;
     protected PreferenceService preferenceService;
     protected ImporterService importerService;
@@ -227,7 +228,7 @@ public class SitesImpl implements Sites
         this.authorityService = authorityService;
     }
 
-    public SiteInfo validateSite(NodeRef guid)
+    public SiteInfo validateSite(@RUntainted NodeRef guid)
     {
         SiteInfo siteInfo = null;
 
@@ -256,7 +257,7 @@ public class SitesImpl implements Sites
         return siteInfo;
     }
 
-    public SiteInfo validateSite(String siteId)
+    public @RUntainted SiteInfo validateSite(String siteId)
     {
         if(siteId == null)
         {
@@ -332,7 +333,7 @@ public class SitesImpl implements Sites
         return getSite(siteInfo, includeRole);
     }
 
-    private Site getSite(SiteInfo siteInfo, boolean includeRole)
+    private Site getSite(@RUntainted SiteInfo siteInfo, boolean includeRole)
     {
         // set the site id to the short name (to deal with case sensitivity issues with using the siteId from the url)
         String siteId = siteInfo.getShortName();
@@ -727,8 +728,8 @@ public class SitesImpl implements Sites
 
         List<FilterProp> filterProps = getFilterPropListOfSites(parameters);
 
-        final PagingResults<SiteInfo> pagingResult = siteService.listSites(filterProps, sortProps, pagingRequest);
-        final List<SiteInfo> sites = pagingResult.getPage();
+        final PagingResults<@RUntainted SiteInfo> pagingResult = siteService.listSites(filterProps, sortProps, pagingRequest);
+        final List<@RUntainted SiteInfo> sites = pagingResult.getPage();
         int totalItems = pagingResult.getTotalResultCount().getFirst();
         final String personId = AuthenticationUtil.getFullyAuthenticatedUser();
         List<Site> page = new AbstractList<Site>()
@@ -772,7 +773,7 @@ public class SitesImpl implements Sites
         return visibility;
     }
 
-    private List<FilterProp> getFilterPropListOfSites(final Parameters parameters)
+    private @RUntainted List<FilterProp> getFilterPropListOfSites(final Parameters parameters)
     {
         List<FilterProp> filterProps = new ArrayList<FilterProp>();
         Query q = parameters.getQuery();

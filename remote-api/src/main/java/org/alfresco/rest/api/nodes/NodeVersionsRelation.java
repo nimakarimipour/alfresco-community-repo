@@ -71,6 +71,7 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.util.ParameterCheck;
 import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Versions - version history
@@ -85,7 +86,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
         RelationshipResourceAction.Delete,
         InitializingBean
 {
-    protected VersionService versionService;
+    protected @RUntainted VersionService versionService;
     protected BehaviourFilter behaviourFilter;
     private DirectAccessUrlHelper directAccessUrlHelper;
 
@@ -115,7 +116,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
      */
     @Override
     @WebApiDescription(title = "Return version history as a paged list of version node infos")
-    public CollectionWithPagingInfo<Node> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         NodeRef nodeRef = nodes.validateOrLookupNode(nodeId);
 
@@ -164,7 +165,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
 
     @Override
     @WebApiDescription(title="Get version node info", description = "Return metadata for a specific version node")
-    public Node readById(String nodeId, String versionId, Parameters parameters)
+    public Node readById(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         Version version = findVersion(nodeId, versionId);
 
@@ -181,7 +182,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
     @WebApiDescription(title = "Download version content", description = "Download version content")
     @BinaryProperties({ "content" })
     @Override
-    public BinaryResource readProperty(String nodeId, String versionId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         Version version = findVersion(nodeId, versionId);
 
@@ -198,7 +199,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
     @WebApiDescription(title = "Revert Version",
             description="Reverts (ie. promotes) specified version to become a new, most recent, version",
             successStatus = HttpServletResponse.SC_OK)
-    public Node revertById(String nodeId, String versionId, VersionOptions versionOptions, Parameters parameters, WithResponse withResponse)
+    public Node revertById(@RUntainted String nodeId, @RUntainted String versionId, VersionOptions versionOptions, Parameters parameters, WithResponse withResponse)
     {
         Version version = findVersion(nodeId, versionId);
 
@@ -250,7 +251,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
 
     @Override
     @WebApiDescription(title = "Delete version")
-    public void delete(String nodeId, String versionId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
     {
         Version version = findVersion(nodeId, versionId);
 
@@ -291,7 +292,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
         }
     }
 
-    public Version findVersion(String nodeId, String versionLabelId)
+    public @RUntainted Version findVersion(@RUntainted String nodeId, @RUntainted String versionLabelId)
     {
         NodeRef nodeRef = nodes.validateOrLookupNode(nodeId);
         VersionHistory vh = versionService.getVersionHistory(nodeRef);
@@ -307,7 +308,7 @@ public class NodeVersionsRelation extends AbstractNodeRelation implements
     @WebApiDescription(title = "Request content url",
             description="Generates a direct access URL.",
             successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String nodeId, String versionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, @RUntainted String versionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
     {
         boolean attachment = directAccessUrlHelper.getAttachment(directAccessUrlRequest);
         Long validFor = directAccessUrlHelper.getDefaultExpiryTimeInSec();

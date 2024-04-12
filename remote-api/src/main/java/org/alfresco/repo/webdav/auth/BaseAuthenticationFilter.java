@@ -51,6 +51,7 @@ import org.alfresco.service.transaction.TransactionService;
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A base class for authentication filters. Handles management of the session user.
@@ -312,7 +313,7 @@ public abstract class BaseAuthenticationFilter
      *            the callback
      * @return the return value from the callback
      */
-    protected <T> T doInSystemTransaction(final RetryingTransactionHelper.RetryingTransactionCallback<T> callback)
+    protected <T> @RUntainted T doInSystemTransaction(final RetryingTransactionHelper.RetryingTransactionCallback<T> callback)
     {
         return AuthenticationUtil.runAs(new AuthenticationUtil.RunAsWork<T>()
         {
@@ -328,7 +329,7 @@ public abstract class BaseAuthenticationFilter
      * 
      * @return the user object session attribute name
      */
-    protected final String getUserAttributeName()
+    protected final @RUntainted String getUserAttributeName()
     {
     	return userAttributeName;
     }

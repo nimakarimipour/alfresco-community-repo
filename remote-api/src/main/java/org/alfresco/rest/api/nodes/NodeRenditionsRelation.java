@@ -54,6 +54,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.webscripts.Status;
 
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node renditions.
@@ -89,14 +90,14 @@ public class NodeRenditionsRelation implements RelationshipResourceAction.Read<R
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Rendition> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         return renditions.getRenditions(nodeRef, parameters);
     }
 
     @Override
-    public Rendition readById(String nodeId, String renditionId, Parameters parameters)
+    public Rendition readById(@RUntainted String nodeId, @RUntainted String renditionId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         return renditions.getRendition(nodeRef, renditionId, parameters);
@@ -104,7 +105,7 @@ public class NodeRenditionsRelation implements RelationshipResourceAction.Read<R
 
     @WebApiDescription(title = "Create rendition", successStatus = Status.STATUS_ACCEPTED)
     @Override
-    public List<Rendition> create(String nodeId, List<Rendition> entity, Parameters parameters)
+    public List<Rendition> create(@RUntainted String nodeId, List<Rendition> entity, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         renditions.createRenditions(nodeRef, entity, parameters);
@@ -113,7 +114,7 @@ public class NodeRenditionsRelation implements RelationshipResourceAction.Read<R
 
     @WebApiDescription(title = "Delete rendition")
     @Override
-    public void delete(String nodeId, String renditionId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, @RUntainted String renditionId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         renditions.deleteRendition(nodeRef, renditionId, parameters);
@@ -122,7 +123,7 @@ public class NodeRenditionsRelation implements RelationshipResourceAction.Read<R
     @WebApiDescription(title = "Download rendition", description = "Download rendition")
     @BinaryProperties({ "content" })
     @Override
-    public BinaryResource readProperty(String nodeId, String renditionId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String nodeId, @RUntainted String renditionId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         return renditions.getContent(nodeRef, renditionId, parameters);
@@ -133,7 +134,7 @@ public class NodeRenditionsRelation implements RelationshipResourceAction.Read<R
     @WebApiDescription(title = "Request content url",
             description="Generates a direct access URL.",
             successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String nodeId, String renditionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, @RUntainted String renditionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
     {
         boolean attachment = directAccessUrlHelper.getAttachment(directAccessUrlRequest);
         Long validFor = directAccessUrlHelper.getDefaultExpiryTimeInSec();

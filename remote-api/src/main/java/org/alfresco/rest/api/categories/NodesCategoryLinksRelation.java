@@ -38,6 +38,7 @@ import org.alfresco.rest.framework.resource.actions.interfaces.RelationshipResou
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.ListPage;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "category-links", entityResource = NodesEntityResource.class, title = "Category links")
 public class NodesCategoryLinksRelation implements RelationshipResourceAction.Create<Category>,
@@ -61,7 +62,7 @@ public class NodesCategoryLinksRelation implements RelationshipResourceAction.Cr
         successStatus = HttpServletResponse.SC_OK
     )
     @Override
-    public CollectionWithPagingInfo<Category> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Category> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         return ListPage.of(categories.listCategoriesForNode(nodeId, parameters), parameters.getPaging());
     }

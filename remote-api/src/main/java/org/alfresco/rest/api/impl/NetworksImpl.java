@@ -38,6 +38,7 @@ import org.alfresco.rest.api.model.PersonNetwork;
 import org.alfresco.rest.framework.core.exceptions.EntityNotFoundException;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to network services and maps between representations.
@@ -84,7 +85,7 @@ public class NetworksImpl implements Networks
     	return network;
     }
     
-    public PersonNetwork getNetwork(String personId, String networkId)
+    public @RUntainted PersonNetwork getNetwork(String personId, String networkId)
     {
     	// check that personId is the current user
     	personId = people.validatePerson(personId, true);

@@ -51,6 +51,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.namespace.QName;
 import org.springframework.extensions.webscripts.servlet.FormData;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * File Folder (Nodes) API
@@ -68,7 +69,7 @@ public interface Nodes
      * @param nodeId String
      * @return Node
      */
-    Node getNode(String nodeId);
+    Node getNode(@RUntainted String nodeId);
     
     /**
      * Get the document representation for the given node.
@@ -95,7 +96,7 @@ public interface Nodes
      *        - incPrimaryParent
      * @return
      */
-    Node getFolderOrDocument(String nodeId, Parameters parameters);
+    Node getFolderOrDocument(@RUntainted String nodeId, Parameters parameters);
 
     Node getFolderOrDocumentFullInfo(NodeRef nodeRef, NodeRef parentNodeRef, QName nodeTypeQName, Parameters parameters, Map<String, UserInfo> mapUserInfo);
 
@@ -121,7 +122,7 @@ public interface Nodes
      *        - incFiles, incFolders (both true by default)
      * @return a paged list of {@code org.alfresco.rest.api.model.Node} objects
      */
-    CollectionWithPagingInfo<Node> listChildren(String parentFolderNodeId, Parameters parameters);
+    CollectionWithPagingInfo<Node> listChildren(@RUntainted String parentFolderNodeId, Parameters parameters);
     
     /**
      * Delete the given node. Note: will cascade delete for a folder.
@@ -130,7 +131,7 @@ public interface Nodes
      * @param parameters the {@link Parameters} object to get the parameters passed into the request
      *                   - permanent (default false)
      */
-    void deleteNode(String nodeId, Parameters parameters);
+    void deleteNode(@RUntainted String nodeId, Parameters parameters);
 
     /**
      * Create node - folder or (empty) file.
@@ -140,7 +141,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node createNode(String parentFolderNodeId, Node nodeInfo, Parameters parameters);
+    Node createNode(@RUntainted String parentFolderNodeId, Node nodeInfo, Parameters parameters);
 
     /**
      * Move or Copy node
@@ -151,7 +152,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node moveOrCopyNode(String sourceNodeId, String parentFolderNodeId, String name, Parameters parameters, boolean isCopy);
+    Node moveOrCopyNode(@RUntainted String sourceNodeId, @RUntainted String parentFolderNodeId, @RUntainted String name, Parameters parameters, boolean isCopy);
 
     /**
      * Update node meta-data.
@@ -161,7 +162,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node updateNode(String nodeId, Node entity, Parameters parameters);
+    Node updateNode(@RUntainted String nodeId, Node entity, Parameters parameters);
 
     /**
      * Download file content.
@@ -171,7 +172,7 @@ public interface Nodes
      * @param recordActivity true, if an activity post is required.
      * @return
      */
-    BinaryResource getContent(String fileNodeId, Parameters parameters, boolean recordActivity);
+    BinaryResource getContent(@RUntainted String fileNodeId, Parameters parameters, boolean recordActivity);
 
     /**
      * Download file content.
@@ -181,7 +182,7 @@ public interface Nodes
      * @param recordActivity true, if an activity post is required.
      * @return
      */
-    BinaryResource getContent(NodeRef nodeRef, Parameters parameters, boolean recordActivity);
+    BinaryResource getContent(@RUntainted NodeRef nodeRef, Parameters parameters, boolean recordActivity);
 
     /**
      * Uploads file content (updates existing node with new content).
@@ -194,7 +195,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node updateContent(String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters);
+    Node updateContent(@RUntainted String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters);
 
     /**
      * Uploads file content and meta-data into the repository.
@@ -204,12 +205,12 @@ public interface Nodes
      * @param parameters         the {@link Parameters} object to get the parameters passed into the request
      * @return {@code Node} if successful
      */
-    Node upload(String parentFolderNodeId, FormData formData, Parameters parameters);
+    Node upload(@RUntainted String parentFolderNodeId, FormData formData, Parameters parameters);
     
 
-    NodeRef validateNode(StoreRef storeRef, String nodeId);
-    NodeRef validateNode(String nodeId);
-    NodeRef validateNode(NodeRef nodeRef);
+    @RUntainted NodeRef validateNode(@RUntainted StoreRef storeRef, @RUntainted String nodeId);
+    @RUntainted NodeRef validateNode(@RUntainted String nodeId);
+    NodeRef validateNode(@RUntainted NodeRef nodeRef);
 
     /**
      * Check that the specified id refers to a valid node.
@@ -219,11 +220,11 @@ public interface Nodes
      * @throws InvalidArgumentException if the specified node id is not a valid format.
      * @throws EntityNotFoundException if the specified node was not found in the database.
      */
-    default NodeRef validateOrLookupNode(String nodeId)
+    default @RUntainted NodeRef validateOrLookupNode(@RUntainted String nodeId)
     {
         return validateOrLookupNode(nodeId, null);
     }
-    NodeRef validateOrLookupNode(String nodeId, String path);
+    @RUntainted NodeRef validateOrLookupNode(@RUntainted String nodeId, String path);
 
     boolean nodeMatches(NodeRef nodeRef, Set<QName> expectedTypes, Set<QName> excludedTypes);
 
@@ -235,7 +236,7 @@ public interface Nodes
      * @param validateNodeRef whether to validate the given source node or not
      * @return true if the type of the given nodeRef is a sub-class of another class, otherwise false
      */
-    boolean isSubClass(NodeRef nodeRef, QName ofClassQName, boolean validateNodeRef);
+    boolean isSubClass(@RUntainted NodeRef nodeRef, QName ofClassQName, boolean validateNodeRef);
 
     /**
      * Helper to create a QName from either a fully qualified or short-name QName string
@@ -255,7 +256,7 @@ public interface Nodes
      * @param entities
      * @return
      */
-    List<AssocChild> addChildren(String parentNodeId, List<AssocChild> entities);
+    List<AssocChild> addChildren(@RUntainted String parentNodeId, List<AssocChild> entities);
 
     /**
      *
@@ -263,7 +264,7 @@ public interface Nodes
      * @param entities
      * @return
      */
-    List<AssocTarget> addTargets(String sourceNodeId, List<AssocTarget> entities);
+    List<AssocTarget> addTargets(@RUntainted String sourceNodeId, List<AssocTarget> entities);
 
     /**
      * Lock a node
@@ -272,7 +273,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node lock(String nodeId, LockInfo lockInfo, Parameters parameters);
+    Node lock(@RUntainted String nodeId, LockInfo lockInfo, Parameters parameters);
 
     /**
      * Unlock a node
@@ -280,7 +281,7 @@ public interface Nodes
      * @param parameters
      * @return
      */
-    Node unlock(String nodeId, Parameters parameters);
+    Node unlock(@RUntainted String nodeId, Parameters parameters);
 
     /**
      * Gets a presigned URL to directly access content.
@@ -288,7 +289,7 @@ public interface Nodes
      * @param attachment {@code true} if an attachment {@code URL} is requested, {@code false} for an embedded {@code URL}.
      * @return A direct access {@code URL} object for the content.
      */
-    default DirectAccessUrl requestContentDirectUrl(String nodeId, boolean attachment)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, boolean attachment)
     {
         return requestContentDirectUrl(validateNode(nodeId), attachment);
     }
@@ -311,7 +312,7 @@ public interface Nodes
      * @param validFor The time at which the direct access {@code URL} will expire.
      * @return A direct access {@code URL} object for the content.
      */
-    default DirectAccessUrl requestContentDirectUrl(String nodeId, boolean attachment, Long validFor)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, boolean attachment, Long validFor)
     {
         return requestContentDirectUrl(validateNode(nodeId), attachment, validFor);
     }
@@ -348,7 +349,7 @@ public interface Nodes
      * @param props
      * @return
      */
-    Map<QName, Serializable> mapToNodeProperties(Map<String, Object> props);
+    Map<QName, Serializable> mapToNodeProperties(@RUntainted Map<String, Object> props);
 
     /**
      * Returns the path to the given nodeRef {@code nodeRefIn} or the archived nodeRef {@code archivedParentAssoc}.

@@ -31,6 +31,7 @@ import org.alfresco.rest.framework.core.exceptions.EntityNotFoundException;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Permissible actions for an Entity Resource
@@ -93,7 +94,7 @@ public interface EntityResourceAction
      */
     public static interface ReadById<E> extends ResourceAction
     {
-        public E readById (String id, Parameters parameters) throws EntityNotFoundException;
+        public E readById (@RUntainted String id, Parameters parameters) throws EntityNotFoundException;
     }
 
     /**
@@ -109,7 +110,7 @@ public interface EntityResourceAction
      */
     public static interface Update<E> extends ResourceAction
     {
-        public E update (String id, E entity,  Parameters parameters);
+        public E update (@RUntainted String id, E entity,  Parameters parameters);
     }
 
     /**
@@ -125,7 +126,7 @@ public interface EntityResourceAction
      */
     public static interface Delete extends ResourceAction
     {
-        public void delete (String id,  Parameters parameters);
+        public void delete (@RUntainted String id,  Parameters parameters);
     }
 
     /**

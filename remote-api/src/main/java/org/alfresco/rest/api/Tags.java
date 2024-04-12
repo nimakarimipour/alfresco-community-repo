@@ -33,15 +33,16 @@ import org.alfresco.rest.api.model.Tag;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.StoreRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Tags
 {
-    List<Tag> addTags(String nodeId, List<Tag> tags, Parameters parameters);
-    Tag getTag(StoreRef storeRef, String tagId, Parameters parameters);
-    void deleteTag(String nodeId, String tagId);
+    List<Tag> addTags(@RUntainted String nodeId, List<Tag> tags, Parameters parameters);
+    Tag getTag(@RUntainted StoreRef storeRef, @RUntainted String tagId, Parameters parameters);
+    void deleteTag(@RUntainted String nodeId, @RUntainted String tagId);
     CollectionWithPagingInfo<Tag> getTags(StoreRef storeRef, Parameters params);
-    Tag changeTag(StoreRef storeRef, String tagId, Tag tag, Parameters parameters);
-    CollectionWithPagingInfo<Tag> getTags(String nodeId, Parameters params);
+    Tag changeTag(@RUntainted StoreRef storeRef, @RUntainted String tagId, Tag tag, Parameters parameters);
+    CollectionWithPagingInfo<Tag> getTags(@RUntainted String nodeId, Parameters params);
 
     List<Tag> createTags(StoreRef storeRef, List<Tag> tags, Parameters parameters);
 
@@ -50,5 +51,5 @@ public interface Tags
         return createTags(STORE_REF_WORKSPACE_SPACESSTORE, tags, parameters);
     }
 
-    void deleteTagById(StoreRef storeRef, String tagId);
+    void deleteTagById(@RUntainted StoreRef storeRef, @RUntainted String tagId);
 }

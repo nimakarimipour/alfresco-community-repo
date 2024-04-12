@@ -39,6 +39,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.workflow.api.ProcessDefinitions;
 import org.alfresco.rest.workflow.api.model.ProcessDefinition;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name="process-definitions", title = "Process definitions")
 public class ProcessDefinitionsRestEntityResource implements EntityResourceAction.Read<ProcessDefinition>, 
@@ -74,7 +75,7 @@ public class ProcessDefinitionsRestEntityResource implements EntityResourceActio
     @Override
     @WebApiDescription(title = "Get a process definition image", description = "Get a process definition image")
     @BinaryProperties({"image"})
-    public BinaryResource readProperty(String id, Parameters parameters) throws EntityNotFoundException
+    public BinaryResource readProperty(@RUntainted String id, Parameters parameters) throws EntityNotFoundException
     {
         return processDefinitions.getProcessDefinitionImage(id);
     }

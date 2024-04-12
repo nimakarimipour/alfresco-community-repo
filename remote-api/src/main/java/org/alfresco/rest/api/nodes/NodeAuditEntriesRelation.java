@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node AuditEntries
@@ -65,7 +66,7 @@ public class NodeAuditEntriesRelation implements RelationshipResourceAction.Read
 
     @WebApiDescription(title = "Returns audit entries for node id")
     @Override
-    public CollectionWithPagingInfo<AuditEntry> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<AuditEntry> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         return audit.listAuditEntriesByNodeId(nodeId, parameters);
     }

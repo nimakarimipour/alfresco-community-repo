@@ -39,6 +39,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *
@@ -70,7 +71,7 @@ public class NodeCommentsRelation implements RelationshipResourceAction.Read<Com
 	 */
     @Override
     @WebApiDescription(title="Creates comments for the node 'nodeId'.")
-    public List<Comment> create(String nodeId, List<Comment> entity, Parameters parameters)
+    public List<Comment> create(@RUntainted String nodeId, List<Comment> entity, Parameters parameters)
     {
         List<Comment> result = new ArrayList<Comment>(entity.size());
         for (Comment comment : entity)
@@ -91,14 +92,14 @@ public class NodeCommentsRelation implements RelationshipResourceAction.Read<Com
      */
     @Override
     @WebApiDescription(title = "Returns a paged list of comments for the document/folder identified by nodeId, sorted chronologically with the newest first.")
-    public CollectionWithPagingInfo<Comment> readAll(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Comment> readAll(@RUntainted String nodeId, Parameters parameters)
     {
         return comments.getComments(nodeId, parameters.getPaging(), parameters.getInclude());
     }
 
 	@Override
     @WebApiDescription(title = "Updates the comment with the given id.")
-	public Comment update(String nodeId, Comment entity, Parameters parameters)
+	public Comment update(@RUntainted String nodeId, Comment entity, Parameters parameters)
 	{
 		return comments.updateComment(nodeId, entity);
 	}
@@ -108,7 +109,7 @@ public class NodeCommentsRelation implements RelationshipResourceAction.Read<Com
     @WebApiParameters({
                 @WebApiParam(name="nodeId", title="The unique id of the parent Node being addressed", description="A single node id"),
                 @WebApiParam(name="commentNodeId", title="The unique id of the comment Node being addressed", description="A single node id")})
-    public void delete(String nodeId, String commentNodeId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, @RUntainted String commentNodeId, Parameters parameters)
     {
         comments.deleteComment(nodeId, commentNodeId);
     }

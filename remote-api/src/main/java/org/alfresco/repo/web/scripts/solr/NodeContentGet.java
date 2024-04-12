@@ -54,6 +54,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A web service to return the text content (transformed if required) of a node's
@@ -76,7 +77,7 @@ public class NodeContentGet extends StreamContent
 
     private NodeDAO nodeDAO;
     private NodeService nodeService;
-    private ContentService contentService;
+    private @RUntainted ContentService contentService;
     private SynchronousTransformClient synchronousTransformClient;
 
     public void setNodeDAO(NodeDAO nodeDAO)
@@ -89,7 +90,7 @@ public class NodeContentGet extends StreamContent
         this.nodeService = nodeService;
     }
 
-    public void setContentService(ContentService contentService)
+    public void setContentService(@RUntainted ContentService contentService)
     {
         this.contentService = contentService;
     }
@@ -105,7 +106,7 @@ public class NodeContentGet extends StreamContent
      * @param res WebScriptResponse
      * @throws IOException
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         ContentReader textReader = null;
         Exception transformException = null;

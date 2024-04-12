@@ -42,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Entry point for API webscript.  Supports version/scope as well
@@ -57,7 +58,7 @@ public abstract class ApiWebScript extends AbstractWebScript
     protected String tempDirectoryName = null;
     protected int memoryThreshold = 4 * 1024 * 1024; // 4mb
     protected long maxContentSize = (long) 4 * 1024 * 1024 * 1024; // 4gb
-    protected Supplier<TempOutputStream> streamFactory = null;
+    protected @RUntainted Supplier<TempOutputStream> streamFactory = null;
     protected TransactionService transactionService;
 
     public void setTransactionService(TransactionService transactionService)
@@ -89,7 +90,7 @@ public abstract class ApiWebScript extends AbstractWebScript
         this.maxContentSize = maxContentSize;
     }
 
-    public void setStreamFactory(Supplier<TempOutputStream> streamFactory)
+    public void setStreamFactory(@RUntainted Supplier<TempOutputStream> streamFactory)
     {
         this.streamFactory = streamFactory;
     }
@@ -101,7 +102,7 @@ public abstract class ApiWebScript extends AbstractWebScript
     }
 
     @Override
-    public void execute(final WebScriptRequest req, final WebScriptResponse res) throws IOException
+    public void execute(final @RUntainted WebScriptRequest req, final WebScriptResponse res) throws IOException
     {
         final Map<String, String> templateVars = req.getServiceMatch().getTemplateVars();
         final Api api = ApiAssistant.determineApi(templateVars);
@@ -119,7 +120,7 @@ public abstract class ApiWebScript extends AbstractWebScript
         }
     }
 
-    protected BufferedRequest getRequest(final WebScriptRequest req)
+    protected @RUntainted BufferedRequest getRequest(final @RUntainted WebScriptRequest req)
     {
         // create buffered request and response that allow transaction retrying
         return new BufferedRequest(req, streamFactory);
@@ -131,6 +132,6 @@ public abstract class ApiWebScript extends AbstractWebScript
         return new BufferedResponse(resp, memoryThreshold, streamFactory);
     }
 
-    public abstract void execute(final Api api, WebScriptRequest req, WebScriptResponse res) throws IOException;
+    public abstract void execute(final Api api, @RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException;
 
 }

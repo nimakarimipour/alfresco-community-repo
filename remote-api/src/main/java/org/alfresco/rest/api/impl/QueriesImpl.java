@@ -79,6 +79,7 @@ import org.alfresco.util.ParameterCheck;
 import org.alfresco.util.SearchLanguageConversion;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.surf.util.I18NUtil;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Queries implementation
@@ -357,7 +358,7 @@ public class QueriesImpl implements Queries, InitializingBean
             }
 
             // note: see also Sites.getSite
-            private Site getSite(SiteInfo siteInfo, boolean includeRole)
+            private Site getSite(@RUntainted SiteInfo siteInfo, boolean includeRole)
             {
                 // set the site id to the short name (to deal with case sensitivity issues with using the siteId from the url)
                 String siteId = siteInfo.getShortName();

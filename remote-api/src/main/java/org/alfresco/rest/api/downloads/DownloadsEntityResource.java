@@ -41,6 +41,7 @@ import org.alfresco.rest.framework.resource.actions.interfaces.EntityResourceAct
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 
@@ -76,14 +77,14 @@ public class DownloadsEntityResource implements EntityResourceAction.Create<Down
     @Override
     @WebApiDescription(title = "Get download information", description = "Get information about the progress of the zip creation.")
     @WebApiParam(name = "nodeId", title = "Download nodeId")
-    public Download readById(String nodeId, Parameters parameters) throws EntityNotFoundException
+    public Download readById(@RUntainted String nodeId, Parameters parameters) throws EntityNotFoundException
     {
         return downloads.getDownloadStatus(nodeId);
     }
     
     @WebApiDescription(title = "Cancel download", description = "Stop the zip creation if still in progress.", successStatus = HttpServletResponse.SC_ACCEPTED)
     @Override
-    public void delete(String nodeId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, Parameters parameters)
     {
         downloads.cancel(nodeId);
     }

@@ -63,6 +63,7 @@ import org.alfresco.util.Pair;
 import org.alfresco.util.TypeConstraint;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class CategoriesImpl implements Categories
 {
@@ -77,11 +78,11 @@ public class CategoriesImpl implements Categories
     private final AuthorityService authorityService;
     private final CategoryService categoryService;
     private final Nodes nodes;
-    private final NodeService nodeService;
+    private final @RUntainted NodeService nodeService;
     private final PermissionService permissionService;
     private final TypeConstraint typeConstraint;
 
-    public CategoriesImpl(AuthorityService authorityService, CategoryService categoryService, Nodes nodes, NodeService nodeService,
+    public CategoriesImpl(AuthorityService authorityService, CategoryService categoryService, Nodes nodes, @RUntainted NodeService nodeService,
         PermissionService permissionService, TypeConstraint typeConstraint)
     {
         this.authorityService = authorityService;
@@ -93,7 +94,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public Category getCategoryById(final StoreRef storeRef, final String id, final Parameters parameters)
+    public Category getCategoryById(final StoreRef storeRef, final @RUntainted String id, final Parameters parameters)
     {
         final NodeRef nodeRef = getCategoryNodeRef(storeRef, id);
         if (isRootCategory(nodeRef))
@@ -118,7 +119,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public List<Category> createSubcategories(final StoreRef storeRef, final String parentCategoryId, final List<Category> categories, final Parameters parameters)
+    public List<Category> createSubcategories(final StoreRef storeRef, final @RUntainted String parentCategoryId, final List<Category> categories, final Parameters parameters)
     {
         verifyAdminAuthority();
         final NodeRef parentNodeRef = getCategoryNodeRef(storeRef, parentCategoryId);
@@ -140,7 +141,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public List<Category> getCategoryChildren(final StoreRef storeRef, final String parentCategoryId, final Parameters parameters)
+    public List<Category> getCategoryChildren(final StoreRef storeRef, final @RUntainted String parentCategoryId, final Parameters parameters)
     {
         final NodeRef parentNodeRef = getCategoryNodeRef(storeRef, parentCategoryId);
         final List<Category> categories = nodeService.getChildAssocs(parentNodeRef)
@@ -166,7 +167,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public Category updateCategoryById(final StoreRef storeRef, final String id, final Category fixedCategoryModel, final Parameters parameters)
+    public Category updateCategoryById(final StoreRef storeRef, final @RUntainted String id, final Category fixedCategoryModel, final Parameters parameters)
     {
         verifyAdminAuthority();
         final NodeRef categoryNodeRef = getCategoryNodeRef(storeRef, id);
@@ -193,7 +194,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public void deleteCategoryById(final StoreRef storeRef, final String id, final Parameters parameters)
+    public void deleteCategoryById(final StoreRef storeRef, final @RUntainted String id, final Parameters parameters)
     {
         verifyAdminAuthority();
         final NodeRef nodeRef = getCategoryNodeRef(storeRef, id);
@@ -206,7 +207,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public List<Category> listCategoriesForNode(final String nodeId, final Parameters parameters)
+    public List<Category> listCategoriesForNode(final @RUntainted String nodeId, final Parameters parameters)
     {
         final NodeRef contentNodeRef = nodes.validateOrLookupNode(nodeId);
         verifyReadPermission(contentNodeRef);
@@ -232,7 +233,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public List<Category> linkNodeToCategories(final StoreRef storeRef, final String nodeId, final List<Category> categoryLinks, final Parameters parameters)
+    public List<Category> linkNodeToCategories(final StoreRef storeRef, final @RUntainted String nodeId, final List<Category> categoryLinks, final Parameters parameters)
     {
         if (CollectionUtils.isEmpty(categoryLinks))
         {
@@ -271,7 +272,7 @@ public class CategoriesImpl implements Categories
     }
 
     @Override
-    public void unlinkNodeFromCategory(final StoreRef storeRef, final String nodeId, final String categoryId, final Parameters parameters)
+    public void unlinkNodeFromCategory(final StoreRef storeRef, final @RUntainted String nodeId, final @RUntainted String categoryId, final Parameters parameters)
     {
         final NodeRef categoryNodeRef = getCategoryNodeRef(storeRef, categoryId);
         final NodeRef contentNodeRef = nodes.validateOrLookupNode(nodeId);
@@ -339,7 +340,7 @@ public class CategoriesImpl implements Categories
      * @param nodeId category node id
      * @return NodRef of category node
      */
-    private NodeRef getCategoryNodeRef(StoreRef storeRef, String nodeId)
+    private @RUntainted NodeRef getCategoryNodeRef(StoreRef storeRef, @RUntainted String nodeId)
     {
         return PATH_ROOT.equals(nodeId) ?
                 categoryService.getRootCategoryNodeRef(storeRef)
@@ -352,7 +353,7 @@ public class CategoriesImpl implements Categories
      * @param nodeId (presumably) category node id
      * @return category NodeRef
      */
-    private NodeRef validateCategoryNode(String nodeId)
+    private @RUntainted NodeRef validateCategoryNode(@RUntainted String nodeId)
     {
         final NodeRef nodeRef = nodes.validateNode(nodeId);
         if (isNotACategory(nodeRef))
@@ -368,7 +369,7 @@ public class CategoriesImpl implements Categories
         return categoryService.createCategory(parentNodeRef, c.getName());
     }
 
-    private Category mapToCategory(NodeRef nodeRef)
+    private Category mapToCategory(@RUntainted NodeRef nodeRef)
     {
         final Node categoryNode = nodes.getNode(nodeRef.getId());
         final boolean hasChildren = CollectionUtils
@@ -381,7 +382,7 @@ public class CategoriesImpl implements Categories
                 .create();
     }
 
-    private boolean isNotACategory(NodeRef nodeRef)
+    private boolean isNotACategory(@RUntainted NodeRef nodeRef)
     {
         return !nodes.isSubClass(nodeRef, ContentModel.TYPE_CATEGORY, false);
     }
@@ -405,7 +406,7 @@ public class CategoriesImpl implements Categories
      * @param newName New name.
      * @return Updated category.
      */
-    private NodeRef changeCategoryName(final NodeRef categoryNodeRef, final String newName)
+    private @RUntainted NodeRef changeCategoryName(final @RUntainted NodeRef categoryNodeRef, final @RUntainted String newName)
     {
         final ChildAssociationRef parentAssociation = nodeService.getPrimaryParent(categoryNodeRef);
         if (parentAssociation == null)

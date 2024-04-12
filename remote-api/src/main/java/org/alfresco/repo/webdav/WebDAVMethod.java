@@ -84,6 +84,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -119,11 +120,11 @@ public abstract class WebDAVMethod
 
     // Servlet request/response
 
-    protected HttpServletRequest m_request;
+    protected @RUntainted HttpServletRequest m_request;
     protected HttpServletResponse m_response;
     private File m_requestBody;
     private ServletInputStream m_inputStream;
-    private CharArrayWriter m_xmlWriter;
+    private @RUntainted CharArrayWriter m_xmlWriter;
     private BufferedReader m_reader;
 
     // WebDAV helper
@@ -855,7 +856,7 @@ public abstract class WebDAVMethod
      * 
      * @return String
      */
-    public String getPath()
+    public @RUntainted String getPath()
     {
         return m_strPath;
     }

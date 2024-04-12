@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.core.exceptions.UnsupportedResourceOperationE
 import org.springframework.extensions.webscripts.Match;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Locates rest resources in the system.  It can locate Entity,Relationship and Action resources.  It can also find embedded resources on a
@@ -58,7 +59,7 @@ public interface ResourceLocator
      * @param templateVars
      * @return
      */
-    Map<String, String> parseTemplateVars(Map<String, String> templateVars);
+    Map<String, @RUntainted String> parseTemplateVars(@RUntainted Map<String, String> templateVars);
 
     /**
      * Finds an Entity Resource and returns it in ResourceWithMetadata wrapper. 
@@ -103,7 +104,7 @@ public interface ResourceLocator
      * @param httpMethod - A permitted HttpMethod
      * @return ResourceWithMetadata - The resource and its metadata.
      */
-    ResourceWithMetadata locateResource(Api api, Map<String, String> templateVars, HttpMethod httpMethod);
+    ResourceWithMetadata locateResource(Api api, @RUntainted Map<String, String> templateVars, HttpMethod httpMethod);
 
     /**
      * For a given Map finds any resources that should be embedded inside a class.

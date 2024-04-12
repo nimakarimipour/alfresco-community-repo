@@ -49,6 +49,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
 import org.alfresco.service.cmr.repository.DirectAccessUrl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An implementation of an Entity Resource for handling archived content
@@ -79,7 +80,7 @@ public class TrashcanEntityResource implements
     }
 
     @Override
-    public Node readById(String nodeId, Parameters parameters) throws EntityNotFoundException
+    public Node readById(@RUntainted String nodeId, Parameters parameters) throws EntityNotFoundException
     {
         return deletedNodes.getDeletedNode(nodeId, parameters, true, null);
     }
@@ -87,7 +88,7 @@ public class TrashcanEntityResource implements
     @Operation("restore")
     @WebApiDescription(title = "Restore deleted Node", description = "Restores an archived node", successStatus = HttpServletResponse.SC_OK)
     @WebApiParam(name = "nodeAssocTarget", title = "Target parent id and association type", description = "Target parent id and association type", kind = ResourceParameter.KIND.HTTP_BODY_OBJECT, required = false)
-    public Node restoreDeletedNode(String nodeId, NodeTargetAssoc nodeTargetAssoc, Parameters parameters, WithResponse withResponse)
+    public Node restoreDeletedNode(@RUntainted String nodeId, NodeTargetAssoc nodeTargetAssoc, Parameters parameters, WithResponse withResponse)
     {
         return deletedNodes.restoreArchivedNode(nodeId, nodeTargetAssoc);
     }
@@ -95,7 +96,7 @@ public class TrashcanEntityResource implements
     @Override
     @WebApiDescription(title = "Download content", description = "Download content")
     @BinaryProperties({ "content" })
-    public BinaryResource readProperty(String nodeId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String nodeId, Parameters parameters)
     {
         return deletedNodes.getContent(nodeId, null, parameters);
     }
@@ -105,7 +106,7 @@ public class TrashcanEntityResource implements
     @WebApiDescription(title = "Request content url",
             description="Generates a direct access URL.",
             successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String originalNodeId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String originalNodeId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
     {
         boolean attachment = directAccessUrlHelper.getAttachment(directAccessUrlRequest);
         Long validFor = directAccessUrlHelper.getDefaultExpiryTimeInSec();
@@ -122,7 +123,7 @@ public class TrashcanEntityResource implements
     }
 
     @Override
-    public void delete(String nodeId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, Parameters parameters)
     {
         deletedNodes.purgeArchivedNode(nodeId);
     }

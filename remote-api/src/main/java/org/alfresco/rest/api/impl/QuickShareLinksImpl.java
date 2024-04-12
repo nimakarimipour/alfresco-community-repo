@@ -100,6 +100,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to shared link (public "quick share") services and maps between representations.
@@ -117,7 +118,7 @@ public class QuickShareLinksImpl implements QuickShareLinks, RecognizedParamsExt
     private boolean enabled = true;
 
     private ServiceRegistry sr;
-    private QuickShareService quickShareService;
+    private @RUntainted QuickShareService quickShareService;
     private Nodes nodes;
     private Renditions renditions;
 
@@ -140,7 +141,7 @@ public class QuickShareLinksImpl implements QuickShareLinks, RecognizedParamsExt
     }
 
 
-    public void setQuickShareService(QuickShareService quickShareService)
+    public void setQuickShareService(@RUntainted QuickShareService quickShareService)
     {
         this.quickShareService = quickShareService;
     }
@@ -216,14 +217,14 @@ public class QuickShareLinksImpl implements QuickShareLinks, RecognizedParamsExt
      * @return
      * @throws EntityNotFoundException
      */
-    public BinaryResource readProperty(String sharedId, final String renditionId, final Parameters parameters) throws EntityNotFoundException
+    public BinaryResource readProperty(@RUntainted String sharedId, final @RUntainted String renditionId, final Parameters parameters) throws EntityNotFoundException
     {
         checkEnabled();
         checkValidShareId(sharedId);
 
         try
         {
-            Pair<String, NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
+            Pair<String, @RUntainted NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
 
             String networkTenantDomain = pair.getFirst();
             final NodeRef nodeRef = pair.getSecond();
@@ -404,14 +405,14 @@ public class QuickShareLinksImpl implements QuickShareLinks, RecognizedParamsExt
     }
 
     @Override
-    public Rendition getRendition(String sharedId, String renditionId)
+    public Rendition getRendition(@RUntainted String sharedId, @RUntainted String renditionId)
     {
         checkEnabled();
         checkValidShareId(sharedId);
 
         try
         {
-            Pair<String, NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
+            Pair<String, @RUntainted NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
 
             String networkTenantDomain = pair.getFirst();
             final NodeRef nodeRef = pair.getSecond();
@@ -436,14 +437,14 @@ public class QuickShareLinksImpl implements QuickShareLinks, RecognizedParamsExt
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> getRenditions(String sharedId)
+    public CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted String sharedId)
     {
         checkEnabled();
         checkValidShareId(sharedId);
 
         try
         {
-            Pair<String, NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
+            Pair<String, @RUntainted NodeRef> pair = quickShareService.getTenantNodeRefFromSharedId(sharedId);
 
             String networkTenantDomain = pair.getFirst();
             final NodeRef nodeRef = pair.getSecond();

@@ -31,6 +31,7 @@ import org.alfresco.service.cmr.site.SiteVisibility;
 
 import java.util.HashMap;
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents a site.
@@ -41,7 +42,7 @@ import java.util.Map;
 public class Site implements Comparable<Site>
 {
     protected String id; // site id (aka short name)
-    protected String guid; // site nodeId
+    protected @RUntainted String guid; // site nodeId
     protected String title;
     protected String description;
     protected SiteVisibility visibility;
@@ -62,7 +63,7 @@ public class Site implements Comparable<Site>
     {
     }
 
-    public Site(SiteInfo siteInfo, String role)
+    public Site(@RUntainted SiteInfo siteInfo, String role)
     {
         if (siteInfo == null)
         {
@@ -89,12 +90,12 @@ public class Site implements Comparable<Site>
         setFields.put(ID, true);
     }
 
-    public String getGuid()
+    public @RUntainted String getGuid()
     {
         return guid;
     }
 
-    public void setGuid(String guid)
+    public void setGuid(@RUntainted String guid)
     {
         this.guid = guid;
         setFields.put(GUID, true);

@@ -48,6 +48,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.web.context.ServletContextAware;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -66,7 +67,7 @@ public class ContentGet extends StreamContent implements ServletContextAware
     // Component dependencies
     private ServletContext servletContext;
     private DictionaryService dictionaryService;
-    private NamespaceService namespaceService;
+    private @RUntainted NamespaceService namespaceService;
     private ContentService contentService;
 
     private List<String> nonAttachContentTypes = Collections.emptyList();
@@ -101,7 +102,7 @@ public class ContentGet extends StreamContent implements ServletContextAware
     /**
      * @param namespaceService NamespaceService
      */
-    public void setNamespaceService(NamespaceService namespaceService)
+    public void setNamespaceService(@RUntainted NamespaceService namespaceService)
     {
         this.namespaceService = namespaceService; 
     }
@@ -117,19 +118,19 @@ public class ContentGet extends StreamContent implements ServletContextAware
     /**
      * @see org.springframework.extensions.webscripts.WebScript#execute(WebScriptRequest, WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res)
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res)
         throws IOException
     {
         // create map of args
-        String[] names = req.getParameterNames();
-        Map<String, String> args = new HashMap<String, String>(names.length, 1.0f);
+        @RUntainted String[] names = req.getParameterNames();
+        Map<String, @RUntainted String> args = new HashMap<String, @RUntainted String>(names.length, 1.0f);
         for (String name : names)
         {
             args.put(name, req.getParameter(name));
         }
         
         // create map of template vars
-        Map<String, String> templateVars = req.getServiceMatch().getTemplateVars();
+        Map<String, @RUntainted String> templateVars = req.getServiceMatch().getTemplateVars();
         
         // create object reference from url
         ObjectReference reference = createObjectReferenceFromUrl(args, templateVars);
@@ -173,7 +174,7 @@ public class ContentGet extends StreamContent implements ServletContextAware
         streamContentLocal(req, res, nodeRef, attach, propertyQName, null);
     }
 
-    protected void streamContentLocal(WebScriptRequest req, WebScriptResponse res, NodeRef nodeRef, boolean attach, QName propertyQName, Map<String, Object> model) throws IOException
+    protected void streamContentLocal(@RUntainted WebScriptRequest req, WebScriptResponse res, @RUntainted NodeRef nodeRef, boolean attach, @RUntainted QName propertyQName, Map<String, @RUntainted Object> model) throws IOException
     {
         String userAgent = req.getHeader("User-Agent");
         userAgent = userAgent != null ? userAgent.toLowerCase() : "";

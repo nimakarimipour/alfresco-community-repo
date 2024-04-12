@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "ratings", entityResource = NodesEntityResource.class, title = "Document or folder ratings")
 public class NodeRatingsRelation implements RelationshipResourceAction.Read<NodeRating>, RelationshipResourceAction.ReadById<NodeRating>, RelationshipResourceAction.Delete,
@@ -61,7 +62,7 @@ RelationshipResourceAction.Create<NodeRating>, InitializingBean
 	@Override
     @WebApiDescription(title="A paged list of ratings for node 'nodeId'.")
 	@WebApiParam(name="nodeId", title="The unique id of the Node being addressed", description="A single node id")
-	public CollectionWithPagingInfo<NodeRating> readAll(String nodeId, Parameters parameters)
+	public CollectionWithPagingInfo<NodeRating> readAll(@RUntainted String nodeId, Parameters parameters)
 	{
 		return nodeRatings.getNodeRatings(nodeId, parameters.getPaging());
 	}
@@ -74,7 +75,7 @@ RelationshipResourceAction.Create<NodeRating>, InitializingBean
     @WebApiDescription(title="Rate a node for 'nodeId'.")
 	@WebApiParam(name="ratingEntity", title="A single rating", description="A single node rating, multiple ratings are not supported.", 
 	             kind=ResourceParameter.KIND.HTTP_BODY_OBJECT, allowMultiple=false, required = true)
-	public List<NodeRating> create(String nodeId, List<NodeRating> ratingEntity, Parameters parameters)
+	public List<NodeRating> create(@RUntainted String nodeId, List<NodeRating> ratingEntity, Parameters parameters)
 	{
 	    //There will always be 1 value because allowMultiple=false
         NodeRating rating = ratingEntity.get(0);
@@ -92,14 +93,14 @@ RelationshipResourceAction.Create<NodeRating>, InitializingBean
 	   @WebApiParameters({
 	                @WebApiParam(name="nodeId", title="The unique id of the Node being addressed", description="A single node id"),
 	                @WebApiParam(name="ratingSchemeId", title="The rating scheme type", description="Possible values are likesRatingScheme.")})
-	public NodeRating readById(String nodeId, String ratingSchemeId, Parameters parameters)
+	public NodeRating readById(@RUntainted String nodeId, String ratingSchemeId, Parameters parameters)
 	{
 		return nodeRatings.getNodeRating(nodeId, ratingSchemeId);
 	}
 
 	@Override
     @WebApiDescription(title="Deletes a node rating")
-	public void delete(String nodeId, String ratingSchemeId, Parameters parameters)
+	public void delete(@RUntainted String nodeId, String ratingSchemeId, Parameters parameters)
 	{
 		nodeRatings.removeRating(nodeId, ratingSchemeId);		
 	}

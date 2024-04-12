@@ -25,6 +25,7 @@
  */
 
 package org.alfresco.rest.api.model;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Representation of a rendition.
@@ -39,16 +40,16 @@ public class Rendition
         NOT_CREATED
     }
 
-    private String id;
+    private @RUntainted String id;
     private RenditionStatus status;
     private ContentInfo contentInfo;
 
-    public String getId()
+    public @RUntainted String getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(@RUntainted String id)
     {
         this.id = id;
     }

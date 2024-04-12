@@ -25,6 +25,7 @@
  */
 
 package org.alfresco.rest.framework.resource.content;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An abstract binary resource.
@@ -34,9 +35,9 @@ package org.alfresco.rest.framework.resource.content;
 public class AbstractBinaryResource implements BinaryResource
 {
     final String attachFileName;
-    final CacheDirective cacheDirective;
+    final @RUntainted CacheDirective cacheDirective;
 
-    public AbstractBinaryResource(String attachFileName, CacheDirective cacheDirective)
+    public AbstractBinaryResource(String attachFileName, @RUntainted CacheDirective cacheDirective)
     {
         this.attachFileName = attachFileName;
         this.cacheDirective = cacheDirective;
@@ -47,7 +48,7 @@ public class AbstractBinaryResource implements BinaryResource
         return attachFileName;
     }
 
-    public CacheDirective getCacheDirective()
+    public @RUntainted CacheDirective getCacheDirective()
     {
         return cacheDirective;
     }

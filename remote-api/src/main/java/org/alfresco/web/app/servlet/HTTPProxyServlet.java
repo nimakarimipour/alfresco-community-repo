@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.extensions.surf.util.URLEncoder;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -75,9 +76,9 @@ public class HTTPProxyServlet extends HttpServlet
         StringBuilder args = new StringBuilder(32);
         
         Map<String, String[]> parameters = req.getParameterMap();
-        for (Map.Entry<String, String[]> parameter : parameters.entrySet())
+        for (Map.Entry<String, @RUntainted String[]> parameter : parameters.entrySet())
         {
-            String[] values = parameter.getValue();
+            @RUntainted String[] values = parameter.getValue();
             int startIdx = 0;
             
             if (parameter.getKey().equals(PARAM_ENDPOINT) && values.length != 0)

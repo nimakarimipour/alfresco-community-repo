@@ -56,6 +56,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Helps a Webscript with various tasks
@@ -131,7 +132,7 @@ public class ResourceWebScriptHelper
      * @param objectToWrap Object
      * @return Object - Either ExecutionResult or CollectionWithPagingInfo<ExecutionResult>
      */
-    public Object processAdditionsToTheResponse(WebScriptResponse res, Api api, String entityCollectionName, Params params, Object objectToWrap)
+    public Object processAdditionsToTheResponse(WebScriptResponse res, Api api, String entityCollectionName, Params params, @RUntainted Object objectToWrap)
     {
         PropertyCheck.mandatory(this, null, params);
         if (objectToWrap == null ) return null;
@@ -160,7 +161,7 @@ public class ResourceWebScriptHelper
 
             final ExecutionResult execRes = new ExecutionResult(objectToWrap, params.getFilter());
             
-            Map<String,Pair<String,Method>> embeddded = ResourceInspector.findEmbeddedResources(objectToWrap.getClass());
+            Map<String,Pair<String,@RUntainted Method>> embeddded = ResourceInspector.findEmbeddedResources(objectToWrap.getClass());
             if (embeddded != null && !embeddded.isEmpty())
             {
                 Map<String, Object> results = executeEmbeddedResources(api, params,objectToWrap, embeddded);
@@ -210,10 +211,10 @@ public class ResourceWebScriptHelper
      * @param embeddded Map<String, Pair<String, Method>>
      * @return Map
      */
-    private Map<String, Object> executeEmbeddedResources(Api api, Params params, Object objectToWrap, Map<String, Pair<String, Method>> embeddded)
+    private Map<String, Object> executeEmbeddedResources(Api api, Params params, @RUntainted Object objectToWrap, Map<String, Pair<String, @RUntainted Method>> embeddded)
     {
         final Map<String,Object> results = new HashMap<String,Object>(embeddded.size());
-        for (Entry<String, Pair<String,Method>> embeddedEntry : embeddded.entrySet())
+        for (Entry<String, Pair<String,@RUntainted Method>> embeddedEntry : embeddded.entrySet())
         {
             ResourceWithMetadata res = locator.locateEntityResource(api, embeddedEntry.getValue().getFirst(), HttpMethod.GET);
             if (res != null)
@@ -253,7 +254,7 @@ public class ResourceWebScriptHelper
      */
     private Map<String,Object> executeRelatedResources(final Api api, Params params,
                                                        Map<String, ResourceWithMetadata> relatedResources,
-                                                       String uniqueEntityId)
+                                                       @RUntainted String uniqueEntityId)
     {
         final Map<String,Object> results = new HashMap<String,Object>(relatedResources.size());
         for (final Entry<String, ResourceWithMetadata> relation : relatedResources.entrySet())
@@ -279,7 +280,7 @@ public class ResourceWebScriptHelper
      * @return Object
      */
     private Object executeResource(final Api api, Params params,
-                                   final String uniqueEntityId, final String resourceKey, final ResourceWithMetadata resource)
+                                   final @RUntainted String uniqueEntityId, final String resourceKey, final ResourceWithMetadata resource)
     {
         try
         {

@@ -27,6 +27,7 @@
 package org.alfresco.rest.framework.resource.content;
 
 import java.io.File;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A binary resource based on a File.
@@ -35,20 +36,20 @@ import java.io.File;
  */
 public class FileBinaryResource extends AbstractBinaryResource
 {
-    final File file;
+    final @RUntainted File file;
 
-    public FileBinaryResource(File file)
+    public FileBinaryResource(@RUntainted File file)
     {
         this(file, null);
     }
 
-    public FileBinaryResource(File file, String attachFileName)
+    public FileBinaryResource(@RUntainted File file, String attachFileName)
     {
         super(attachFileName, null);
         this.file = file;
     }
 
-    public File getFile()
+    public @RUntainted File getFile()
     {
         return this.file;
     }

@@ -45,6 +45,7 @@ import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QNamePattern;
 import org.alfresco.service.namespace.RegexQNamePattern;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Parents
@@ -65,7 +66,7 @@ public class NodeParentsRelation extends AbstractNodeRelation implements Relatio
      */
     @Override
     @WebApiDescription(title = "Return a list of parent nodes based on child assocs")
-    public CollectionWithPagingInfo<Node> readAll(String childNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String childNodeId, Parameters parameters)
     {
         NodeRef childNodeRef = nodes.validateOrLookupNode(childNodeId);
 

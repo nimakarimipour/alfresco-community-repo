@@ -48,6 +48,7 @@ import org.springframework.extensions.webscripts.Format;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class NetworkWebScriptGet extends ApiWebScript implements ResponseWriter
 {

@@ -61,6 +61,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles trashcan / deleted nodes
@@ -146,7 +147,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public Node getDeletedNode(String originalId, Parameters parameters, boolean fullnode, Map<String, UserInfo> mapUserInfo)
+    public Node getDeletedNode(@RUntainted String originalId, Parameters parameters, boolean fullnode, Map<String, UserInfo> mapUserInfo)
     {
         //First check the node is valid and has been archived.
         NodeRef validatedNodeRef = nodes.validateNode(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, originalId);
@@ -170,7 +171,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public Node restoreArchivedNode(String archivedId, NodeTargetAssoc nodeTargetAssoc)
+    public Node restoreArchivedNode(@RUntainted String archivedId, NodeTargetAssoc nodeTargetAssoc)
     {
         //First check the node is valid and has been archived.
         NodeRef validatedNodeRef = nodes.validateNode(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, archivedId);
@@ -208,7 +209,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public void purgeArchivedNode(String archivedId)
+    public void purgeArchivedNode(@RUntainted String archivedId)
     {
         //First check the node is valid and has been archived.
         NodeRef validatedNodeRef = nodes.validateNode(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, archivedId);
@@ -216,7 +217,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public BinaryResource getContent(String archivedId, String renditionId, Parameters parameters)
+    public BinaryResource getContent(@RUntainted String archivedId, @RUntainted String renditionId, Parameters parameters)
     {
         // First check if the archived node is valid
         NodeRef validatedNodeRef = nodes.validateNode(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, archivedId);
@@ -232,7 +233,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public Rendition getRendition(String archivedId, String renditionId, Parameters parameters)
+    public Rendition getRendition(@RUntainted String archivedId, @RUntainted String renditionId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, archivedId);
         Rendition rendition = renditions.getRendition(nodeRef, renditionId, parameters);
@@ -240,7 +241,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> getRenditions(String archivedId, Parameters parameters)
+    public CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted String archivedId, Parameters parameters)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, archivedId);
         return renditions.getRenditions(nodeRef, parameters);
@@ -250,7 +251,7 @@ public class DeletedNodesImpl implements DeletedNodes, RecognizedParamsExtractor
      * {@inheritDoc}
      */
     @Override
-    public DirectAccessUrl requestContentDirectUrl(String originalNodeId, String renditionId, boolean attachment, Long validFor)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String originalNodeId, @RUntainted String renditionId, boolean attachment, Long validFor)
     {
         //First check the node is valid and has been archived.
         NodeRef validatedNodeRef = nodes.validateNode(StoreRef.STORE_REF_ARCHIVE_SPACESSTORE, originalNodeId);

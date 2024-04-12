@@ -40,6 +40,7 @@ import org.alfresco.util.ParameterCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "favorites", entityResource = PeopleEntityResource.class, title = "Person Favorites")
 public class PersonFavouritesRelation implements RelationshipResourceAction.Read<Favourite>, RelationshipResourceAction.ReadById<Favourite>,
@@ -91,13 +92,13 @@ RelationshipResourceAction.Create<Favourite>,  RelationshipResourceAction.Delete
 
     @Override
     @WebApiDescription(title = "Remove Person Favorite", description = "Un-favorite something")
-    public void delete(String personId, String id, Parameters parameters)
+    public void delete(String personId, @RUntainted String id, Parameters parameters)
     {
         favourites.removeFavourite(personId, id);
     }
 
     @Override
-    public Favourite readById(String personId, String favouriteId, Parameters parameters)
+    public Favourite readById(String personId, @RUntainted String favouriteId, Parameters parameters)
             throws RelationshipResourceNotFoundException
     {
         return favourites.getFavourite(personId, favouriteId, parameters);

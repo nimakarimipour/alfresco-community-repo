@@ -32,13 +32,14 @@ import java.util.StringJoiner;
 
 import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.repository.NodeRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RuleSet
 {
     public static final String DEFAULT_ID = "-default-";
 
-    private String id;
+    private @RUntainted String id;
     private NodeRef owningFolder;
     private InclusionType inclusionType;
     private List<NodeRef> inheritedBy;
@@ -62,12 +63,12 @@ public class RuleSet
         return DEFAULT_ID.equals(id);
     }
 
-    public String getId()
+    public @RUntainted String getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(@RUntainted String id)
     {
         this.id = id;
     }

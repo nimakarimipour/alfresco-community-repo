@@ -32,11 +32,12 @@ import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.site.SiteInfo;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Sites
 {
 	SiteInfo validateSite(String siteShortName);
-	SiteInfo validateSite(NodeRef nodeRef);
+	SiteInfo validateSite(@RUntainted NodeRef nodeRef);
     CollectionWithPagingInfo<SiteMember> getSiteMembers(String siteShortName, Parameters parameters);
     Site getSite(String siteId);
 	void deleteSite(String siteId, Parameters parameters);

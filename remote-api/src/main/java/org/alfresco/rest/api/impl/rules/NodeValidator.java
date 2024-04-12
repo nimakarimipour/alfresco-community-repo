@@ -46,6 +46,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.rule.RuleService;
 import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /** Responsible for validating nodes when working with rules. */
 @Experimental
@@ -68,7 +69,7 @@ public class NodeValidator
      * @throws PermissionDeniedException if the user doesn't have the appropriate permission for the folder.
      * @throws EntityNotFoundException if the folder node isn't found
      */
-    public NodeRef validateFolderNode(final String folderNodeId, boolean requireChangePermission)
+    public NodeRef validateFolderNode(final @RUntainted String folderNodeId, boolean requireChangePermission)
     {
         try
         {
@@ -93,7 +94,7 @@ public class NodeValidator
      * @throws RelationshipResourceNotFoundException if the folder doesn't have a -default- rule set
      * @throws EntityNotFoundException if the rule set node isn't found
      */
-    public NodeRef validateRuleSetNode(final String ruleSetId, final NodeRef associatedFolderNodeRef)
+    public NodeRef validateRuleSetNode(final @RUntainted String ruleSetId, final NodeRef associatedFolderNodeRef)
     {
         if (RuleSet.isDefaultId(ruleSetId))
         {
@@ -120,7 +121,7 @@ public class NodeValidator
         }
     }
 
-    public NodeRef validateRuleSetNode(String linkToNodeId, boolean requireChangePermission)
+    public NodeRef validateRuleSetNode(@RUntainted String linkToNodeId, boolean requireChangePermission)
     {
         final Node ruleSetNode = nodes.getNode(linkToNodeId);
         final ChildAssociationRef primaryParent = nodeService.getPrimaryParent(ruleSetNode.getNodeRef());
@@ -138,7 +139,7 @@ public class NodeValidator
      * @return rule node reference
      * @throws InvalidArgumentException in case of not matching associated rule set node
      */
-    public NodeRef validateRuleNode(final String ruleId, final NodeRef associatedRuleSetNodeRef)
+    public NodeRef validateRuleNode(final @RUntainted String ruleId, final NodeRef associatedRuleSetNodeRef)
     {
         final NodeRef ruleNodeRef = validateNode(ruleId, RuleModel.TYPE_RULE, null);
         if (associatedRuleSetNodeRef != null && !ruleService.isRuleAssociatedWithRuleSet(ruleNodeRef, associatedRuleSetNodeRef))
@@ -149,7 +150,7 @@ public class NodeValidator
         return ruleNodeRef;
     }
 
-    private NodeRef validateNode(final String nodeId, final QName expectedType, final String expectedTypeName)
+    private NodeRef validateNode(final @RUntainted String nodeId, final QName expectedType, final String expectedTypeName)
     {
         final NodeRef nodeRef = nodes.validateNode(nodeId);
         verifyNodeType(nodeRef, expectedType, expectedTypeName);
@@ -185,7 +186,7 @@ public class NodeValidator
         }
     }
 
-    public boolean isRuleSetNode(String nodeId) {
+    public boolean isRuleSetNode(@RUntainted String nodeId) {
         try
         {
             validateNode(nodeId, ContentModel.TYPE_SYSTEM_FOLDER, RULE_SET_EXPECTED_TYPE_NAME);

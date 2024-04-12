@@ -41,6 +41,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.namespace.QNamePattern;
 import org.alfresco.service.namespace.RegexQNamePattern;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Targets
@@ -62,7 +63,7 @@ public class NodeTargetsRelation extends AbstractNodeRelation implements
      */
     @Override
     @WebApiDescription(title = "Return a paged list of target nodes based on (peer) assocs")
-    public CollectionWithPagingInfo<Node> readAll(String sourceNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String sourceNodeId, Parameters parameters)
     {
         NodeRef sourceNodeRef = nodes.validateOrLookupNode(sourceNodeId);
 
@@ -75,14 +76,14 @@ public class NodeTargetsRelation extends AbstractNodeRelation implements
 
     @Override
     @WebApiDescription(title="Add node assoc")
-    public List<AssocTarget> create(String sourceNodeId, List<AssocTarget> entities, Parameters parameters)
+    public List<AssocTarget> create(@RUntainted String sourceNodeId, List<AssocTarget> entities, Parameters parameters)
     {
         return nodes.addTargets(sourceNodeId, entities);
     }
 
     @Override
     @WebApiDescription(title = "Remove node assoc(s)")
-    public void delete(String sourceNodeId, String targetNodeId, Parameters parameters)
+    public void delete(@RUntainted String sourceNodeId, @RUntainted String targetNodeId, Parameters parameters)
     {
         NodeRef srcNodeRef = nodes.validateNode(sourceNodeId);
         NodeRef tgtNodeRef = nodes.validateNode(targetNodeId);
