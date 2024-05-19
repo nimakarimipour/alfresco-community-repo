@@ -67,6 +67,8 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.ReflectionUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Looks at resources to see what they can do

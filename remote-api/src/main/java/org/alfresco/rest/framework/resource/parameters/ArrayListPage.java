@@ -31,6 +31,7 @@ import org.alfresco.rest.api.search.context.SearchContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class ArrayListPage<E> extends ArrayList<E> implements ListPage<E>
 {
@@ -38,7 +39,7 @@ public class ArrayListPage<E> extends ArrayList<E> implements ListPage<E>
     private final int totalItems;
     private final boolean hasMore;
 
-    public ArrayListPage(final List<? extends E> list)
+    public ArrayListPage(final @RUntainted List<? extends E> list)
     {
         super(list != null ? list : Collections.emptyList());
         this.paging = null;

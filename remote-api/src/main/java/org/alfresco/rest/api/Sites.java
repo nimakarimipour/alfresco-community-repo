@@ -32,6 +32,7 @@ import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.site.SiteInfo;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Sites
 {

@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.Match;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Used for locating resources, implements ResourceLocator

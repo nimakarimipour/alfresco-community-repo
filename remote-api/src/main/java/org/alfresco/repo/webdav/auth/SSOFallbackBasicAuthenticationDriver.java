@@ -47,6 +47,7 @@ import org.alfresco.service.transaction.TransactionService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * <p>
@@ -64,7 +65,7 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
     private NodeService nodeService;
     private TransactionService transactionService;
     
-    private String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AuthenticationDriver.AUTHENTICATION_USER;
 
     public void setAuthenticationService(AuthenticationService authenticationService)
     {
@@ -86,7 +87,7 @@ public class SSOFallbackBasicAuthenticationDriver implements AuthenticationDrive
         this.transactionService = transactionService;
     }
 
-    public void setUserAttributeName(String userAttributeName)
+    public void setUserAttributeName(@RUntainted String userAttributeName)
     {
         this.userAttributeName = userAttributeName;
     }
