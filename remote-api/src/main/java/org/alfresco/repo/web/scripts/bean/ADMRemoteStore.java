@@ -93,6 +93,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * ADM Remote Store service.
@@ -129,16 +130,16 @@ public class ADMRemoteStore extends BaseRemoteStore
     
     
     // service beans
-    protected NodeService nodeService;
-    protected NodeService unprotNodeService;
-    protected FileFolderService fileFolderService;
+    protected @RUntainted NodeService nodeService;
+    protected @RUntainted NodeService unprotNodeService;
+    protected @RUntainted FileFolderService fileFolderService;
     protected NamespaceService namespaceService;
-    protected SiteService siteService;
+    protected @RUntainted SiteService siteService;
     protected ContentService contentService;
     protected HiddenAspect hiddenAspect;
     protected PermissionService permissionService;
     protected OwnableService ownableService;
-    private BehaviourFilter behaviourFilter;
+    private @RUntainted BehaviourFilter behaviourFilter;
     
     /**
      * Date format pattern used to parse HTTP date headers in RFC 1123 format.
@@ -150,7 +151,7 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @param nodeService       the NodeService to set
      */
-    public void setNodeService(NodeService nodeService)
+    public void setNodeService(@RUntainted NodeService nodeService)
     {
         this.nodeService = nodeService;
     }
@@ -158,7 +159,7 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @param nodeService       the NodeService to set
      */
-    public void setUnprotectedNodeService(NodeService nodeService)
+    public void setUnprotectedNodeService(@RUntainted NodeService nodeService)
     {
         this.unprotNodeService = nodeService;
     }
@@ -166,7 +167,7 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @param fileFolderService the FileFolderService to set
      */
-    public void setFileFolderService(FileFolderService fileFolderService)
+    public void setFileFolderService(@RUntainted FileFolderService fileFolderService)
     {
         this.fileFolderService = fileFolderService;
     }
@@ -182,7 +183,7 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @param siteService       the SiteService to set
      */
-    public void setSiteService(SiteService siteService)
+    public void setSiteService(@RUntainted SiteService siteService)
     {
         this.siteService = siteService;
     }
@@ -200,7 +201,7 @@ public class ADMRemoteStore extends BaseRemoteStore
         this.hiddenAspect = hiddenAspect;
     }
     
-    public void setBehaviourFilter(BehaviourFilter behaviourFilter)
+    public void setBehaviourFilter(@RUntainted BehaviourFilter behaviourFilter)
     {
         this.behaviourFilter = behaviourFilter;
     }
@@ -223,7 +224,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path to an existing document
      */
     @Override
-    protected void lastModified(final WebScriptResponse res, final String store, final String path)
+    protected void lastModified(final WebScriptResponse res, final String store, final @RUntainted String path)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -231,8 +232,8 @@ public class ADMRemoteStore extends BaseRemoteStore
             @SuppressWarnings("synthetic-access")
             public Void doWork() throws Exception
             {
-                final String encpath = encodePath(path);
-                final FileInfo fileInfo = resolveFilePath(encpath);
+                final @RUntainted String encpath = encodePath(path);
+                final @RUntainted FileInfo fileInfo = resolveFilePath(encpath);
                 if (fileInfo == null)
                 {
                     throw new WebScriptException("Unable to locate file: " + encpath);
@@ -256,14 +257,14 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void getDocument(final WebScriptResponse res, final String store, final String path)
+    protected void getDocument(final WebScriptResponse res, final String store, final @RUntainted String path)
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
         {
             @SuppressWarnings("synthetic-access")
             public Void doWork() throws Exception
             {
-                final String encpath = encodePath(path);
+                final @RUntainted String encpath = encodePath(path);
                 final FileInfo fileInfo = resolveFilePath(encpath);
                 if (fileInfo == null || fileInfo.isFolder())
                 {
@@ -358,15 +359,15 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void hasDocument(final WebScriptResponse res, final String store, final String path) throws IOException
+    protected void hasDocument(final WebScriptResponse res, final String store, final @RUntainted String path) throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
         {
             @SuppressWarnings("synthetic-access")
             public Void doWork() throws Exception
             {
-                final String encpath = encodePath(path);
-                final FileInfo fileInfo = resolveFilePath(encpath);
+                final @RUntainted String encpath = encodePath(path);
+                final @RUntainted FileInfo fileInfo = resolveFilePath(encpath);
                 
                 Writer out = res.getWriter();
                 out.write(Boolean.toString(fileInfo != null && !fileInfo.isFolder()));
@@ -388,7 +389,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param content       content of the document to write
      */
     @Override
-    protected void createDocument(final WebScriptResponse res, final String store, final String path, final InputStream content)
+    protected void createDocument(final WebScriptResponse res, final String store, final @RUntainted String path, final InputStream content)
     {
         try
         {
@@ -414,7 +415,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param in       XML document containing multiple document contents to write
      */
     @Override
-    protected void createDocuments(WebScriptResponse res, String store, InputStream in)
+    protected void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream in)
     {
         try
         {
@@ -469,9 +470,9 @@ public class ADMRemoteStore extends BaseRemoteStore
         }
     }
     
-    protected void writeDocument(final String path, final InputStream content)
+    protected void writeDocument(final @RUntainted String path, final InputStream content)
     {
-        final String encpath = encodePath(path);
+        final @RUntainted String encpath = encodePath(path);
         final int off = encpath.lastIndexOf('/');
         if (off != -1)
         {
@@ -574,7 +575,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param content       content to update the document with
      */
     @Override
-    protected void updateDocument(final WebScriptResponse res, String store, final String path, final InputStream content)
+    protected void updateDocument(final WebScriptResponse res, String store, final @RUntainted String path, final InputStream content)
     {
         final String runAsUser = getPathRunAsUser(path);
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -582,7 +583,7 @@ public class ADMRemoteStore extends BaseRemoteStore
             @SuppressWarnings("synthetic-access")
             public Void doWork() throws Exception
             {
-                final String encpath = encodePath(path);
+                final @RUntainted String encpath = encodePath(path);
                 final FileInfo fileInfo = resolveFilePath(encpath);
                 if (fileInfo == null || fileInfo.isFolder())
                 {
@@ -616,9 +617,9 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param path  document path
      */
     @Override
-    protected void deleteDocument(final WebScriptResponse res, final String store, final String path)
+    protected void deleteDocument(final WebScriptResponse res, final String store, final @RUntainted String path)
     {
-        final String encpath = encodePath(path);
+        final @RUntainted String encpath = encodePath(path);
         final FileInfo fileInfo = resolveFilePath(encpath);
         if (fileInfo == null || fileInfo.isFolder())
         {
@@ -676,7 +677,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @throws IOException if an error occurs listing the documents
      */
     @Override
-    protected void listDocuments(final WebScriptResponse res, final String store, final String path, final boolean recurse)
+    protected void listDocuments(final WebScriptResponse res, final String store, final @RUntainted String path, final boolean recurse)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -686,8 +687,8 @@ public class ADMRemoteStore extends BaseRemoteStore
             {
                 res.setContentType("text/plain;charset=UTF-8");
                 
-                final String encpath = encodePath(path);
-                final FileInfo fileInfo = resolveNodePath(encpath, false, true);
+                final @RUntainted String encpath = encodePath(path);
+                final @RUntainted FileInfo fileInfo = resolveNodePath(encpath, false, true);
                 if (fileInfo == null || !fileInfo.isFolder())
                 {
                     res.setStatus(Status.STATUS_NOT_FOUND);
@@ -723,7 +724,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @throws IOException if an error occurs listing the documents
      */
     @Override
-    protected void listDocuments(final WebScriptResponse res, final String store, final String path, final String pattern)
+    protected void listDocuments(final WebScriptResponse res, final String store, final @RUntainted String path, final @RUntainted String pattern)
         throws IOException
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
@@ -733,7 +734,7 @@ public class ADMRemoteStore extends BaseRemoteStore
             {
                 res.setContentType("text/plain;charset=UTF-8");
                 
-                String filePattern;
+                @RUntainted String filePattern;
                 if (pattern == null || pattern.length() == 0)
                 {
                     filePattern = "*";
@@ -741,7 +742,7 @@ public class ADMRemoteStore extends BaseRemoteStore
                 else
                 {
                     // need to ensure match pattern is path encoded - but don't encode * character!
-                    StringBuilder buf = new StringBuilder(pattern.length());
+                    @RUntainted StringBuilder buf = new StringBuilder(pattern.length());
                     for (StringTokenizer t = new StringTokenizer(pattern, "*"); t.hasMoreTokens(); /**/)
                     {
                         buf.append(encodePath(t.nextToken()));
@@ -756,8 +757,8 @@ public class ADMRemoteStore extends BaseRemoteStore
                 
                 // ensure we pass in the file pattern as it is used as part of the folder match - i.e.
                 // for a site component set e.g. /alfresco/site-data/components/page.*.site~xyz~dashboard.xml
-                final String encpath = encodePath(path);
-                final FileInfo fileInfo = resolveNodePath(encpath, filePattern, false, true);
+                final @RUntainted String encpath = encodePath(path);
+                final @RUntainted FileInfo fileInfo = resolveNodePath(encpath, filePattern, false, true);
                 if (fileInfo == null || !fileInfo.isFolder())
                 {
                     res.setStatus(Status.STATUS_NOT_FOUND);
@@ -794,7 +795,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location
      *         or null if the supplied path does not exist in the store
      */
-    private FileInfo resolveFilePath(final String path)
+    private @RUntainted FileInfo resolveFilePath(final @RUntainted String path)
     {
         return resolveNodePath(path, false, false);
     }
@@ -811,7 +812,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final @RUntainted String path, final boolean create, final boolean isFolder)
     {
         return resolveNodePath(path, null, create, isFolder);
     }
@@ -830,14 +831,14 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @return FileInfo representing the file/folder at the specified path location (see create
      *         parameter above) or null if the supplied path does not exist in the store.
      */
-    private FileInfo resolveNodePath(final String path, final String pattern, final boolean create, final boolean isFolder)
+    private @RUntainted FileInfo resolveNodePath(final @RUntainted String path, final @RUntainted String pattern, final boolean create, final boolean isFolder)
     {
         if (logger.isDebugEnabled())
             logger.debug("Resolving path: " + path);
 
         final String adminUserName = AuthenticationUtil.getAdminUserName();
 
-        FileInfo result = null;
+        @RUntainted FileInfo result = null;
         if (path != null)
         {
             // break down the path into its component elements
@@ -854,7 +855,7 @@ public class ADMRemoteStore extends BaseRemoteStore
                     pathElements.add(t.nextToken());
                 }
                 
-                NodeRef surfConfigRef = aquireSurfConfigRef(path + (pattern != null ? ("/" + pattern) : ""), create);
+                @RUntainted NodeRef surfConfigRef = aquireSurfConfigRef(path + (pattern != null ? ("/" + pattern) : ""), create);
                 try
                 {
                     if (surfConfigRef != null)
@@ -916,14 +917,14 @@ public class ADMRemoteStore extends BaseRemoteStore
      * 
      * @return NodeRef to the "surf-config" folder, or null if it does not exist yet.
      */
-    private NodeRef aquireSurfConfigRef(final String path, final boolean create)
+    private @RUntainted NodeRef aquireSurfConfigRef(final @RUntainted String path, final boolean create)
     {
         // remap the path into the appropriate Sites or site relative folder location
         // by first matching the path to appropriate user or site regex
         final boolean debug = logger.isDebugEnabled();
         String userId = null;
-        String siteName = null;
-        Matcher matcher;
+        @RUntainted String siteName = null;
+        @RUntainted Matcher matcher;
         if (debug)
         {
             // user data is stored directly under the Sites folder along with
@@ -959,7 +960,7 @@ public class ADMRemoteStore extends BaseRemoteStore
         if (siteName != null)
         {
             if (debug) logger.debug("...resolved site path id: " + siteName);
-            NodeRef siteRef = getSiteNodeRef(siteName);
+            @RUntainted NodeRef siteRef = getSiteNodeRef(siteName);
             if (siteRef != null)
             {
                 surfConfigRef = getSurfConfigNodeRef(siteRef, create);
@@ -991,7 +992,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * 
      * @return surf-config folder ref if found, null otherwise
      */
-    private NodeRef getSurfConfigNodeRef(final NodeRef rootRef)
+    private @RUntainted NodeRef getSurfConfigNodeRef(final @RUntainted NodeRef rootRef)
     {
         return getSurfConfigNodeRef(rootRef, false);
     }
@@ -1008,9 +1009,9 @@ public class ADMRemoteStore extends BaseRemoteStore
      * 
      * @return surf-config folder ref if found, null otherwise if not creating
      */
-    protected NodeRef getSurfConfigNodeRef(final NodeRef rootRef, final boolean create)
+    protected @RUntainted NodeRef getSurfConfigNodeRef(final @RUntainted NodeRef rootRef, final boolean create)
     {
-        NodeRef surfConfigRef = this.unprotNodeService.getChildByName(
+        @RUntainted NodeRef surfConfigRef = this.unprotNodeService.getChildByName(
                 rootRef, ContentModel.ASSOC_CONTAINS, SURF_CONFIG);
         if (create && surfConfigRef == null)
         {
@@ -1019,7 +1020,7 @@ public class ADMRemoteStore extends BaseRemoteStore
             QName assocQName = QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, SURF_CONFIG);
             Map<QName, Serializable> properties = new HashMap<QName, Serializable>(1, 1.0f);
             properties.put(ContentModel.PROP_NAME, (Serializable) SURF_CONFIG);
-            ChildAssociationRef ref = this.unprotNodeService.createNode(
+            @RUntainted ChildAssociationRef ref = this.unprotNodeService.createNode(
                     rootRef, ContentModel.ASSOC_CONTAINS, assocQName, ContentModel.TYPE_FOLDER, properties);
             surfConfigRef = ref.getChildRef();
             // surf-config needs to be hidden - applies index control aspect as part of the hidden aspect
@@ -1043,11 +1044,11 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @return NodeRef to the shared components config folder
      */
-    protected NodeRef getGlobalComponentsNodeRef()
+    protected @RUntainted NodeRef getGlobalComponentsNodeRef()
     {
-        NodeRef result = null;
+        @RUntainted NodeRef result = null;
         
-        NodeRef surfRef = getSurfConfigNodeRef(siteService.getSiteRoot());
+        @RUntainted NodeRef surfRef = getSurfConfigNodeRef(siteService.getSiteRoot());
         if (surfRef != null)
         {
             result = nodeService.getChildByName(surfRef, ContentModel.ASSOC_CONTAINS, PATH_COMPONENTS);
@@ -1082,7 +1083,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param userName  to build pattern for
      * @return the search pattern
      */
-    protected String buildUserConfigSearchPattern(String userName)
+    protected @RUntainted String buildUserConfigSearchPattern(@RUntainted String userName)
     {
         return USER_CONFIG_PATTERN.replace("(*)", encodePath(userName));
     }
@@ -1090,7 +1091,7 @@ public class ADMRemoteStore extends BaseRemoteStore
     /**
      * @return the Sites folder root node reference
      */
-    private NodeRef getRootNodeRef()
+    private @RUntainted NodeRef getRootNodeRef()
     {
         return this.siteService.getSiteRoot();
     }
@@ -1100,9 +1101,9 @@ public class ADMRemoteStore extends BaseRemoteStore
      * 
      * @return the given Site folder node reference
      */
-    private NodeRef getSiteNodeRef(String shortName)
+    private @RUntainted NodeRef getSiteNodeRef(@RUntainted String shortName)
     {
-        SiteInfo siteInfo = this.siteService.getSite(shortName); 
+        @RUntainted SiteInfo siteInfo = this.siteService.getSite(shortName); 
         return siteInfo != null ? siteInfo.getNodeRef() : null;
     }
     
@@ -1116,15 +1117,15 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param recurse True to recurse sub-directories
      * @throws IOException
      */
-    private void outputFileNodes(Writer out, FileInfo fileInfo, NodeRef surfConfigRef, String pattern, boolean recurse) throws IOException
+    private void outputFileNodes(Writer out, @RUntainted FileInfo fileInfo, NodeRef surfConfigRef, @RUntainted String pattern, boolean recurse) throws IOException
     {
         if (surfConfigRef != null)
         {
             final boolean debug = logger.isDebugEnabled();
-            PagingResults<FileInfo> files = getFileNodes(fileInfo, pattern, recurse);
+            PagingResults<@RUntainted FileInfo> files = getFileNodes(fileInfo, pattern, recurse);
             
             final Map<NodeRef, String> nameCache = new HashMap<NodeRef, String>();
-            for (final FileInfo file : files.getPage())
+            for (final @RUntainted FileInfo file : files.getPage())
             {
                 // walking up the parent tree manually until the "surf-config" parent is hit
                 // and manually appending the rest of the cm:name path down to the node.
@@ -1152,7 +1153,7 @@ public class ADMRemoteStore extends BaseRemoteStore
         }
     }
     
-    protected PagingResults<FileInfo> getFileNodes(FileInfo fileInfo, String pattern, boolean recurse)
+    protected PagingResults<@RUntainted FileInfo> getFileNodes(@RUntainted FileInfo fileInfo, @RUntainted String pattern, boolean recurse)
     {
         return fileFolderService.list(
                 fileInfo.getNodeRef(), true, false,

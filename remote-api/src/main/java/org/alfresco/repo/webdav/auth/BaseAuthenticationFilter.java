@@ -51,6 +51,7 @@ import org.alfresco.service.transaction.TransactionService;
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A base class for authentication filters. Handles management of the session user.
@@ -93,7 +94,7 @@ public abstract class BaseAuthenticationFilter
     protected AuthenticationListener authenticationListener;
 
     /** The configured user attribute name. */
-    private String userAttributeName = AUTHENTICATION_USER;
+    private @RUntainted String userAttributeName = AUTHENTICATION_USER;
 
     
 
@@ -312,7 +313,7 @@ public abstract class BaseAuthenticationFilter
      *            the callback
      * @return the return value from the callback
      */
-    protected <T> T doInSystemTransaction(final RetryingTransactionHelper.RetryingTransactionCallback<T> callback)
+    protected <T> @RUntainted T doInSystemTransaction(final RetryingTransactionHelper.RetryingTransactionCallback<T> callback)
     {
         return AuthenticationUtil.runAs(new AuthenticationUtil.RunAsWork<T>()
         {
@@ -328,7 +329,7 @@ public abstract class BaseAuthenticationFilter
      * 
      * @return the user object session attribute name
      */
-    protected final String getUserAttributeName()
+    protected final @RUntainted String getUserAttributeName()
     {
     	return userAttributeName;
     }
@@ -339,7 +340,7 @@ public abstract class BaseAuthenticationFilter
      * @param userAttr
      *            the user object session attribute name
      */
-    protected final void setUserAttributeName(String userAttr)
+    protected final void setUserAttributeName(@RUntainted String userAttr)
     {
     	userAttributeName = userAttr;
     }
@@ -368,7 +369,7 @@ public abstract class BaseAuthenticationFilter
         {
             getLogger().trace("Create the User environment for: " + AuthenticationUtil.maskUsername(userName));
         }
-        SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
+        @RUntainted SessionUser user = doInSystemTransaction(new RetryingTransactionHelper.RetryingTransactionCallback<SessionUser>()
         {
             public SessionUser execute() throws Throwable
             {

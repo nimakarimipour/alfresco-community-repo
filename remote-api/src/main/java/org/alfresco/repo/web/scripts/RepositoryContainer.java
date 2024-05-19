@@ -71,6 +71,7 @@ import org.springframework.extensions.webscripts.WebScript;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -301,7 +302,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.RuntimeContainer#executeScript(org.alfresco.web.scripts.WebScriptRequest, org.alfresco.web.scripts.WebScriptResponse, org.alfresco.web.scripts.Authenticator)
      */
-    public void executeScript(WebScriptRequest scriptReq, WebScriptResponse scriptRes, final Authenticator auth)
+    public void executeScript(@RUntainted WebScriptRequest scriptReq, WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         try
@@ -335,16 +336,16 @@ public class RepositoryContainer extends AbstractRuntimeContainer
         }
     }
     
-    protected void executeScriptInternal(final WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
+    protected void executeScriptInternal(final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
-        final WebScript script = scriptReq.getServiceMatch().getWebScript();
+        final @RUntainted WebScript script = scriptReq.getServiceMatch().getWebScript();
         final Description desc = script.getDescription();
         final boolean debug = logger.isDebugEnabled();
 
         // Escalate the webscript declared level of authentication to the container required authentication
         // eg. must be guest if MT is enabled unless credentials are empty
-        final RequiredAuthentication containerRequiredAuthentication = getRequiredAuthentication();
+        final @RUntainted RequiredAuthentication containerRequiredAuthentication = getRequiredAuthentication();
         final RequiredAuthentication required = (desc.getRequiredAuthentication().compareTo(containerRequiredAuthentication) < 0 && !auth.emptyCredentials() ? containerRequiredAuthentication : desc.getRequiredAuthentication());
         final boolean isGuest = scriptReq.isGuest();
 
@@ -494,10 +495,10 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param scriptRes WebScriptResponse
      * @throws IOException
      */
-    protected void transactionedExecute(final WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
+    protected void transactionedExecute(final @RUntainted WebScript script, final WebScriptRequest scriptReq, final WebScriptResponse scriptRes)
         throws IOException
     {
-        final Description description = script.getDescription();
+        final @RUntainted Description description = script.getDescription();
 
         try
         {
@@ -516,7 +517,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
             handleIOException(e);
         }
 
-        final RequiredTransactionParameters trxParams = description.getRequiredTransactionParameters();
+        final @RUntainted RequiredTransactionParameters trxParams = description.getRequiredTransactionParameters();
 
         try (final BufferedRequest bufferedReq = newBufferedRequest(trxParams, scriptReq, streamFactory);
              final BufferedResponse bufferedRes = newBufferedResponse(trxParams, scriptRes, streamFactory))
@@ -676,7 +677,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param scriptRes WebScriptResponse
      * @throws IOException
      */
-    private void transactionedExecuteAs(final WebScript script, final WebScriptRequest scriptReq,
+    private void transactionedExecuteAs(final @RUntainted WebScript script, final WebScriptRequest scriptReq,
             final WebScriptResponse scriptRes) throws IOException
     {
         final String runAs = script.getDescription().getRunAs();
@@ -702,7 +703,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @param requiredAuthentication Required authentication
      * @throws IOException
      */
-    private void transactionedExecuteAs(final WebScript script, final WebScriptRequest scriptReq,
+    private void transactionedExecuteAs(final @RUntainted WebScript script, final WebScriptRequest scriptReq,
                                         final WebScriptResponse scriptRes, RequiredAuthentication requiredAuthentication) throws IOException
     {
         // Execute as System if and only if, the current user is a member of System-Admin group, and he is not a super admin.
@@ -746,7 +747,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
      * @see org.alfresco.web.scripts.AbstractRuntimeContainer#getRequiredAuthentication()
      */
     @Override
-    public RequiredAuthentication getRequiredAuthentication()
+    public @RUntainted RequiredAuthentication getRequiredAuthentication()
     {
         if (AuthenticationUtil.isMtEnabled())
         {
@@ -808,7 +809,7 @@ public class RepositoryContainer extends AbstractRuntimeContainer
     }
 
     private static BufferedResponse newBufferedResponse(
-        final RequiredTransactionParameters trxParams,
+        final @RUntainted RequiredTransactionParameters trxParams,
         final WebScriptResponse scriptRes,
         final Supplier<TempOutputStream> streamFactory)
     {

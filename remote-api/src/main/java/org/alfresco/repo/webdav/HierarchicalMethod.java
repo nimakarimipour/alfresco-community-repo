@@ -26,6 +26,7 @@
 package org.alfresco.repo.webdav;
 
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Abstract base class for the hierarchical methods COPY and MOVE
@@ -36,7 +37,7 @@ public abstract class HierarchicalMethod extends WebDAVMethod
 {
     // Request parameters
 
-    protected String m_strDestinationPath;
+    protected @RUntainted String m_strDestinationPath;
     protected boolean m_overwrite = true;
 
     /**
@@ -51,7 +52,7 @@ public abstract class HierarchicalMethod extends WebDAVMethod
      * 
      * @return String
      */
-    public final String getDestinationPath()
+    public final @RUntainted String getDestinationPath()
     {
         return m_strDestinationPath;
     }
@@ -75,7 +76,7 @@ public abstract class HierarchicalMethod extends WebDAVMethod
     {
         // Get the destination path for the copy
 
-        String destURL = m_request.getHeader(WebDAV.HEADER_DESTINATION);
+        @RUntainted String destURL = m_request.getHeader(WebDAV.HEADER_DESTINATION);
 
         if (logger.isDebugEnabled())
             logger.debug("Parsing Destination header: " + destURL);

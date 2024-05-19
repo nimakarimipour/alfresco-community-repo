@@ -39,6 +39,7 @@ import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.ContentService;
 import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Implements the WebDAV MOVE method
@@ -67,7 +68,7 @@ public class MoveMethod extends HierarchicalMethod
      */
     protected final void executeImpl() throws WebDAVServerException, Exception
     {
-        NodeRef rootNodeRef = getRootNodeRef();
+        @RUntainted NodeRef rootNodeRef = getRootNodeRef();
         // Debug
         if (logger.isDebugEnabled())
         {
@@ -89,7 +90,7 @@ public class MoveMethod extends HierarchicalMethod
         FileInfo sourceParentInfo = getDAVHelper().getParentNodeForPath(rootNodeRef, sourcePath);
 
         // the destination parent must exist
-        String destPath = getDestinationPath();
+        @RUntainted String destPath = getDestinationPath();
         FileInfo destParentInfo = null;
         try
         {

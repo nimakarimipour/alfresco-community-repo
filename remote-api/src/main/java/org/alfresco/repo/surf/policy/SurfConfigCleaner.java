@@ -34,6 +34,7 @@ import org.alfresco.repo.policy.PolicyComponent;
 import org.alfresco.repo.web.scripts.bean.ADMRemoteStore;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.NodeRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Delete Node Policy to remove surf-config files for a deleted user.
@@ -54,10 +55,10 @@ public class SurfConfigCleaner extends ADMRemoteStore implements BeforeDeleteNod
     }
 
     @Override
-    public void beforeDeleteNode(NodeRef nodeRef)
+    public void beforeDeleteNode(@RUntainted NodeRef nodeRef)
     {
-        final String userName = (String) nodeService.getProperty(nodeRef, ContentModel.PROP_USERNAME);
-        final NodeRef componentsRef = getGlobalComponentsNodeRef();
+        final @RUntainted String userName = (String) nodeService.getProperty(nodeRef, ContentModel.PROP_USERNAME);
+        final @RUntainted NodeRef componentsRef = getGlobalComponentsNodeRef();
         final NodeRef usersFolderRef = getGlobalUserFolderNodeRef();
         
         // Remove the user Surf config folder, contains dynamic page definitions such as dashboard.xml
@@ -81,7 +82,7 @@ public class SurfConfigCleaner extends ADMRemoteStore implements BeforeDeleteNod
         //                                                                                     ^^^^^ encoded username
         if (componentsRef != null)
         {
-            List<FileInfo> configNodes = getFileNodes(
+            List<@RUntainted FileInfo> configNodes = getFileNodes(
                     fileFolderService.getFileInfo(componentsRef),
                     buildUserConfigSearchPattern(userName),
                     true).getPage();

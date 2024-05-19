@@ -61,6 +61,7 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.FormData;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Custom model upload POST. This class is the controller for the
@@ -89,14 +90,14 @@ public class CustomModelUploadPost extends DeclarativeWebScript
     }
 
     @Override
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache)
+    protected Map<String, Object> executeImpl(@RUntainted WebScriptRequest req, Status status, Cache cache)
     {
         if (!customModelService.isModelAdmin(AuthenticationUtil.getFullyAuthenticatedUser()))
         {
             throw new WebScriptException(Status.STATUS_FORBIDDEN, PermissionDeniedException.DEFAULT_MESSAGE_ID);
         }
 
-        FormData formData = (FormData) req.parseContent();
+        @RUntainted FormData formData = (FormData) req.parseContent();
         if (formData == null || !formData.getIsMultiPart())
         {
             throw new WebScriptException(Status.STATUS_BAD_REQUEST, "cmm.rest_api.model.import_not_multi_part_req");
@@ -104,13 +105,13 @@ public class CustomModelUploadPost extends DeclarativeWebScript
 
         ImportResult resultData = null;
         boolean processed = false;
-        for (FormData.FormField field : formData.getFields())
+        for (FormData.@RUntainted FormField field : formData.getFields())
         {
             if (field.getIsFile())
             {
                 final String fileName = field.getFilename();
-                File tempFile = createTempFile(field.getInputStream());
-                try (ZipFile zipFile = new ZipFile(tempFile, StandardCharsets.UTF_8))
+                @RUntainted File tempFile = createTempFile(field.getInputStream());
+                try (@RUntainted ZipFile zipFile = new ZipFile(tempFile, StandardCharsets.UTF_8))
                 {
                     resultData = processUpload(zipFile, field.getFilename());
                 }
@@ -146,11 +147,11 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         return model;
     }
 
-    protected File createTempFile(InputStream inputStream)
+    protected @RUntainted File createTempFile(@RUntainted InputStream inputStream)
     {
         try
         {
-            File tempFile = TempFileProvider.createTempFile(inputStream, TEMP_FILE_PREFIX, TEMP_FILE_SUFFIX);
+            @RUntainted File tempFile = TempFileProvider.createTempFile(inputStream, TEMP_FILE_PREFIX, TEMP_FILE_SUFFIX);
             return tempFile;
         }
         catch (Exception ex)
@@ -159,7 +160,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         }
     }
 
-    protected ImportResult processUpload(ZipFile zipFile, String filename) throws IOException
+    protected ImportResult processUpload(@RUntainted ZipFile zipFile, String filename) throws IOException
     {
         if (zipFile.size() > 2)
         {
@@ -168,15 +169,15 @@ public class CustomModelUploadPost extends DeclarativeWebScript
 
         CustomModel customModel = null;
         String shareExtModule = null;
-        Enumeration<? extends ZipEntry> entries = zipFile.entries();
+        Enumeration<? extends @RUntainted ZipEntry> entries = zipFile.entries();
         while (entries.hasMoreElements())
         {
-            ZipEntry entry = entries.nextElement();
+            @RUntainted ZipEntry entry = entries.nextElement();
 
             if (!entry.isDirectory())
             {
                 final String entryName = entry.getName();
-                try (InputStream input = new BufferedInputStream(zipFile.getInputStream(entry), BUFFER_SIZE))
+                try (@RUntainted InputStream input = new BufferedInputStream(zipFile.getInputStream(entry), BUFFER_SIZE))
                 {
                     if (!(entryName.endsWith(CustomModelServiceImpl.SHARE_EXT_MODULE_SUFFIX)) && customModel == null)
                     {
@@ -190,7 +191,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
                             if (shareExtModule == null)
                             {
                                 // Get the input stream again, as the zip file doesn't support reset.
-                                try (InputStream moduleInputStream = new BufferedInputStream(zipFile.getInputStream(entry), BUFFER_SIZE))
+                                try (@RUntainted InputStream moduleInputStream = new BufferedInputStream(zipFile.getInputStream(entry), BUFFER_SIZE))
                                 {
                                     shareExtModule = getExtensionModule(moduleInputStream, entryName);
                                 }
@@ -253,7 +254,7 @@ public class CustomModelUploadPost extends DeclarativeWebScript
         return model;
     }
 
-    protected String getExtensionModule(InputStream inputStream, String fileName)
+    protected String getExtensionModule(@RUntainted InputStream inputStream, String fileName)
     {
         Element rootElement = null;
         try

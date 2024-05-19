@@ -50,6 +50,7 @@ import org.springframework.extensions.webscripts.Description.RequiredAuthenticat
 import org.springframework.extensions.webscripts.Description.RequiredTransaction;
 import org.springframework.extensions.webscripts.Description.TransactionCapability;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *

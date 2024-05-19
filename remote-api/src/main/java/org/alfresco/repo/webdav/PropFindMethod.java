@@ -57,6 +57,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Implements the WebDAV PROPFIND method
@@ -242,7 +243,7 @@ public class PropFindMethod extends WebDAVMethod
         if (getDepth() != WebDAV.DEPTH_0 && pathNodeInfo.isFolder())
         {
             // Create the initial list of nodes to report
-            List<FileInfo> nodeInfos = new ArrayList<FileInfo>(10);
+            List<@RUntainted FileInfo> nodeInfos = new ArrayList<@RUntainted FileInfo>(10);
             nodeInfos.add(pathNodeInfo);
 
             int curDepth = WebDAV.DEPTH_1;
@@ -251,7 +252,7 @@ public class PropFindMethod extends WebDAVMethod
             int baseLen = baseBuild.length();
 
             // List of next level of nodes to report
-            List<FileInfo> nextNodeInfos = null;
+            List<@RUntainted FileInfo> nextNodeInfos = null;
             if (getDepth() > WebDAV.DEPTH_1)
             {
                 nextNodeInfos = new ArrayList<FileInfo>(10);
@@ -269,10 +270,10 @@ public class PropFindMethod extends WebDAVMethod
                 // Output the current level of node(s), the node list should
                 // only contain folder nodes
 
-                for (FileInfo curNodeInfo : nodeInfos)
+                for (@RUntainted FileInfo curNodeInfo : nodeInfos)
                 {
                     // Get the list of child nodes for the current node
-                    List<FileInfo> childNodeInfos = getDAVHelper().getChildren(curNodeInfo);
+                    List<@RUntainted FileInfo> childNodeInfos = getDAVHelper().getChildren(curNodeInfo);
                     
                     // can skip the current node if it doesn't have children
                     if (childNodeInfos.size() == 0)

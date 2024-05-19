@@ -62,6 +62,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRuntime;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -121,7 +122,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.WebScript#execute(org.alfresco.web.scripts.WebScriptRequest, org.alfresco.web.scripts.WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res)
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res)
         throws IOException
     {
         String extensionPath = req.getExtensionPath();
@@ -146,15 +147,15 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
         {
             throw new WebScriptException("Format '" + format + "' does not map to a registered mimetype");
         }
-        Map<String, String> engineUrls = engineConfig.getUrls();
-        String engineUrl = engineUrls.get(mimetype);
+        Map<String, @RUntainted String> engineUrls = engineConfig.getUrls();
+        @RUntainted String engineUrl = engineUrls.get(mimetype);
         if (engineUrl == null)
         {
             throw new WebScriptException("Url mimetype '" + mimetype + "' does not exist for engine '" + engine + "'");
         }
 
         // replace template url arguments with actual arguments specified on request
-        int engineUrlArgIdx = engineUrl.indexOf("?");
+        @RUntainted int engineUrlArgIdx = engineUrl.indexOf("?");
         if (engineUrlArgIdx != -1)
         {
             engineUrl = engineUrl.substring(0, engineUrlArgIdx);
@@ -206,7 +207,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
          * @param headers request headers
          * @throws MalformedURLException
          */
-        public SearchEngineHttpProxy(String rootPath, String engine, String engineUrl, HttpServletResponse response, Map<String, String> headers)
+        public SearchEngineHttpProxy(@RUntainted String rootPath, String engine, @RUntainted String engineUrl, HttpServletResponse response, Map<String, String> headers)
             throws MalformedURLException
         {
             super(engineUrl.startsWith("/") ? rootPath + engineUrl : engineUrl, response);
@@ -298,7 +299,7 @@ public class SearchProxy extends AbstractWebScript implements InitializingBean
      */
     public String createUrl(OpenSearchConfigElement.EngineConfig engine, String mimetype)
     {
-        Map<String, String> urls = engine.getUrls();
+        Map<String, @RUntainted String> urls = engine.getUrls();
         String url = urls.get(mimetype);
         if (url != null)
         {

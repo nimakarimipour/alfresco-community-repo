@@ -76,6 +76,7 @@ import org.alfresco.service.cmr.site.SiteVisibility;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Public REST API: centralises access to site membership requests and maps between representations.
