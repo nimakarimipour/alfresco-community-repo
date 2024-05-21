@@ -30,6 +30,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 
@@ -38,8 +39,8 @@ import java.util.List;
  */
 public interface Comments
 {
-    public Comment createComment(String nodeId, Comment comment);
-    public Comment updateComment(String nodeId, Comment comment);
-    public void deleteComment(String nodeId, String commentNodeId);
-    public CollectionWithPagingInfo<Comment> getComments(String nodeId, Paging paging, List<String> include);
+    public Comment createComment(@RUntainted String nodeId, Comment comment);
+    public Comment updateComment(@RUntainted String nodeId, Comment comment);
+    public void deleteComment(@RUntainted String nodeId, @RUntainted String commentNodeId);
+    public CollectionWithPagingInfo<Comment> getComments(@RUntainted String nodeId, Paging paging, List<String> include);
 }

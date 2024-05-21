@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.core.exceptions.NotFoundException;
 import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RuleSettingsImpl implements RuleSettings
@@ -44,7 +45,7 @@ public class RuleSettingsImpl implements RuleSettings
     private NodeService nodeService;
 
     @Override
-    public RuleSetting getRuleSetting(String folderId, String ruleSettingKey)
+    public RuleSetting getRuleSetting(@RUntainted String folderId, String ruleSettingKey)
     {
         NodeRef folderNode = validator.validateFolderNode(folderId, false);
         switch (ruleSettingKey)
@@ -63,7 +64,7 @@ public class RuleSettingsImpl implements RuleSettings
     }
 
     @Override
-    public RuleSetting setRuleSetting(String folderId, RuleSetting ruleSetting)
+    public RuleSetting setRuleSetting(@RUntainted String folderId, RuleSetting ruleSetting)
     {
         NodeRef folderNode = validator.validateFolderNode(folderId, true);
 

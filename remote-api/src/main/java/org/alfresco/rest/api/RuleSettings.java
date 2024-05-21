@@ -27,6 +27,7 @@ package org.alfresco.rest.api;
 
 import org.alfresco.rest.api.model.rules.RuleSetting;
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Rule settings API.
@@ -41,7 +42,7 @@ public interface RuleSettings
      * @param ruleSettingKey Rule setting key
      * @return {@link RuleSetting} The retrieved rule setting object.
      */
-    RuleSetting getRuleSetting(String folderId, String ruleSettingKey);
+    RuleSetting getRuleSetting(@RUntainted String folderId, String ruleSettingKey);
 
     /**
      * Set the rule setting against the specified folder.
@@ -50,5 +51,5 @@ public interface RuleSettings
      * @param ruleSetting The new rule setting.
      * @return The updated rule setting object.
      */
-    RuleSetting setRuleSetting(String folderId, RuleSetting ruleSetting);
+    RuleSetting setRuleSetting(@RUntainted String folderId, RuleSetting ruleSetting);
 }

@@ -26,6 +26,7 @@
 package org.alfresco.rest.api.model;
 
 import org.alfresco.service.cmr.site.SiteInfo;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents a user's favourite site.
@@ -41,7 +42,7 @@ public class FavouriteSite extends Site
 	{
 	}
 	
-	public FavouriteSite(SiteInfo siteInfo, String role)
+	public FavouriteSite(@RUntainted SiteInfo siteInfo, String role)
 	{
 		super(siteInfo, role);
 	}

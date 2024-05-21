@@ -31,6 +31,7 @@ import org.alfresco.rest.framework.core.exceptions.RelationshipResourceNotFoundE
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Permissible actions for an Relationship Resources
@@ -53,7 +54,7 @@ public interface RelationshipResourceAction
          * @param entityResourceId Entity resource context for this relationship
          * @param params - will never be null and will have the PAGING default values
          */
-        public CollectionWithPagingInfo<E> readAll(String entityResourceId, Parameters params);
+        public CollectionWithPagingInfo<E> readAll(@RUntainted String entityResourceId, Parameters params);
     }
 
     /**
@@ -77,7 +78,7 @@ public interface RelationshipResourceAction
      */
     public static interface ReadById<E> extends ResourceAction
     {
-        public E readById(String entityResourceId, String id,  Parameters parameters) throws RelationshipResourceNotFoundException;
+        public E readById(@RUntainted String entityResourceId, @RUntainted String id,  Parameters parameters) throws RelationshipResourceNotFoundException;
     }
 
     /**
@@ -93,7 +94,7 @@ public interface RelationshipResourceAction
      */
     public static interface Update<E> extends ResourceAction
     {
-        public E update(String entityResourceId, E entity,  Parameters parameters);
+        public E update(@RUntainted String entityResourceId, E entity,  Parameters parameters);
     }
 
     /**
@@ -109,7 +110,7 @@ public interface RelationshipResourceAction
      */
     public static interface Create<E> extends ResourceAction
     {
-        public List<E> create(String entityResourceId, List<E> entity,  Parameters parameters);
+        public List<E> create(@RUntainted String entityResourceId, List<E> entity,  Parameters parameters);
     }
 
     /**
@@ -125,7 +126,7 @@ public interface RelationshipResourceAction
      */
     public static interface Delete extends ResourceAction
     {
-        public void delete(String entityResourceId, String id,  Parameters parameters);
+        public void delete(@RUntainted String entityResourceId, @RUntainted String id,  Parameters parameters);
     }
 
     /**

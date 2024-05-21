@@ -51,6 +51,7 @@ import org.springframework.extensions.webscripts.Format;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A webscript that returns the authenticated user's network memberships.
@@ -99,7 +100,7 @@ public class NetworksWebScriptGet extends ApiWebScript implements RecognizedPara
             
                             String personId = AuthenticationUtil.getFullyAuthenticatedUser();
                             
-                            CollectionWithPagingInfo<PersonNetwork> networkMemberships = networks.getNetworks(personId, paging);
+                            CollectionWithPagingInfo<@RUntainted PersonNetwork> networkMemberships = networks.getNetworks(personId, paging);
                             for (PersonNetwork networkMember : networkMemberships.getCollection())
                             {
                                 // TODO this is not ideal, but the only way to populate the embedded network entities (this would normally be

@@ -56,6 +56,7 @@ import org.alfresco.util.PropertyCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An implementation of an Entity Resource for a Person
@@ -193,7 +194,7 @@ public class PeopleEntityResource implements EntityResourceAction.ReadById<Perso
     @Override
     @WebApiDescription(title = "Download avatar", description = "Download avatar")
     @BinaryProperties({"avatar"})
-    public BinaryResource readProperty(String personId, Parameters parameters) throws EntityNotFoundException
+    public BinaryResource readProperty(@RUntainted String personId, Parameters parameters) throws EntityNotFoundException
     {
         return people.downloadAvatarContent(personId, parameters);
     }
@@ -210,7 +211,7 @@ public class PeopleEntityResource implements EntityResourceAction.ReadById<Perso
     @Override
     @WebApiDescription(title = "Upload avatar", description = "Upload avatar")
     @BinaryProperties({"avatar"})
-    public Person updateProperty(String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
+    public Person updateProperty(@RUntainted String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
     {
         return people.uploadAvatarContent(personId, contentInfo, stream, parameters);
     }
@@ -225,7 +226,7 @@ public class PeopleEntityResource implements EntityResourceAction.ReadById<Perso
     @Override
     @WebApiDescription(title = "Delete avatar image", description = "Delete avatar image")
     @BinaryProperties({ "avatar" })
-    public void deleteProperty(String personId, Parameters parameters)
+    public void deleteProperty(@RUntainted String personId, Parameters parameters)
     {
         people.deleteAvatarContent(personId);
     }

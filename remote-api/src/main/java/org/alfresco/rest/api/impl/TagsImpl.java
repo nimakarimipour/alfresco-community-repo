@@ -72,6 +72,7 @@ import org.alfresco.service.cmr.tagging.TaggingService;
 import org.alfresco.util.Pair;
 import org.alfresco.util.TypeConstraint;
 import org.apache.commons.collections.CollectionUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to tag services and maps between representations.
@@ -116,7 +117,7 @@ public class TagsImpl implements Tags
         this.authorityService = authorityService;
     }
 
-    public List<Tag> addTags(String nodeId, final List<Tag> tags, final Parameters parameters)
+    public List<Tag> addTags(@RUntainted String nodeId, final List<Tag> tags, final Parameters parameters)
     {
         NodeRef nodeRef = nodes.validateOrLookupNode(nodeId);
         if (!typeConstraint.matches(nodeRef))
@@ -148,7 +149,7 @@ public class TagsImpl implements Tags
         }
     }
 
-    public void deleteTag(String nodeId, String tagId)
+    public void deleteTag(@RUntainted String nodeId, @RUntainted String tagId)
     {
         NodeRef nodeRef = nodes.validateNode(nodeId);
         getTag(STORE_REF_WORKSPACE_SPACESSTORE, tagId, null);
@@ -158,7 +159,7 @@ public class TagsImpl implements Tags
     }
 
     @Override
-    public void deleteTagById(StoreRef storeRef, String tagId) {
+    public void deleteTagById(@RUntainted StoreRef storeRef, @RUntainted String tagId) {
         verifyAdminAuthority();
 
         NodeRef tagNodeRef = validateTag(storeRef, tagId);
@@ -187,13 +188,13 @@ public class TagsImpl implements Tags
         return CollectionWithPagingInfo.asPaged(paging, listBackedPagingResults.getPage(), listBackedPagingResults.hasMoreItems(), (Integer) listBackedPagingResults.getTotalResultCount().getFirst());
     }
 
-    public NodeRef validateTag(String tagId)
+    public NodeRef validateTag(@RUntainted String tagId)
     {
         NodeRef tagNodeRef = nodes.validateNode(tagId);
         return checkTagRootAsNodePrimaryParent(tagId, tagNodeRef);
     }
     
-    public NodeRef validateTag(StoreRef storeRef, String tagId)
+    public NodeRef validateTag(@RUntainted StoreRef storeRef, @RUntainted String tagId)
     {
         NodeRef tagNodeRef = nodes.validateNode(storeRef, tagId);
         return checkTagRootAsNodePrimaryParent(tagId, tagNodeRef);
@@ -218,7 +219,7 @@ public class TagsImpl implements Tags
     }
 
     @Override
-    public Tag changeTag(StoreRef storeRef, String tagId, Tag tag, Parameters parameters)
+    public Tag changeTag(@RUntainted StoreRef storeRef, @RUntainted String tagId, Tag tag, Parameters parameters)
     {
         try
         {
@@ -244,7 +245,7 @@ public class TagsImpl implements Tags
     }
 
     @Override
-    public Tag getTag(StoreRef storeRef, String tagId, Parameters parameters)
+    public Tag getTag(@RUntainted StoreRef storeRef, @RUntainted String tagId, Parameters parameters)
     {
         NodeRef tagNodeRef = validateTag(storeRef, tagId);
         String tagName = taggingService.getTagName(tagNodeRef);
@@ -253,7 +254,7 @@ public class TagsImpl implements Tags
     }
 
     @Override
-    public CollectionWithPagingInfo<Tag> getTags(String nodeId, Parameters params)
+    public CollectionWithPagingInfo<Tag> getTags(@RUntainted String nodeId, Parameters params)
     {
         NodeRef nodeRef = nodes.validateOrLookupNode(nodeId);
         PagingResults<Pair<NodeRef, String>> results = taggingService.getTags(nodeRef, Util.getPagingRequest(params.getPaging()));

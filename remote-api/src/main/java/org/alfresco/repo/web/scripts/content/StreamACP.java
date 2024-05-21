@@ -52,6 +52,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Base class for Java backed webscripts that wish to generate an ACP and 
@@ -88,7 +89,7 @@ public class StreamACP extends StreamContent
     /**
      * @see org.springframework.extensions.webscripts.WebScript#execute(org.springframework.extensions.webscripts.WebScriptRequest, org.springframework.extensions.webscripts.WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         File tempACPFile = null;
         try
@@ -212,7 +213,7 @@ public class StreamACP extends StreamContent
      *        the content inside the ACP file
      * @return File object representing the created ACP
      */
-    protected File createACP(ExporterCrawlerParameters params, String extension, boolean keepFolderStructure)
+    protected @RUntainted File createACP(ExporterCrawlerParameters params, @RUntainted String extension, boolean keepFolderStructure)
     {
         try
         {

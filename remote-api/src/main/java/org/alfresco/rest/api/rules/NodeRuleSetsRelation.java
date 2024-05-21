@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.Experimental;
 import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Folder node rule sets.
@@ -96,7 +97,7 @@ public class NodeRuleSetsRelation implements RelationshipResourceAction.Read<Rul
             successStatus = HttpServletResponse.SC_OK
     )
     @Override
-    public RuleSet readById(String folderNodeId, String ruleSetId, Parameters parameters) throws RelationshipResourceNotFoundException
+    public RuleSet readById(String folderNodeId, @RUntainted String ruleSetId, Parameters parameters) throws RelationshipResourceNotFoundException
     {
         return ruleSets.getRuleSetById(folderNodeId, ruleSetId, parameters.getInclude());
     }

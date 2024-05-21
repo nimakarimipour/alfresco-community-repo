@@ -50,6 +50,7 @@ import org.springframework.extensions.webscripts.Description.RequiredAuthenticat
 import org.springframework.extensions.webscripts.Description.RequiredTransaction;
 import org.springframework.extensions.webscripts.Description.TransactionCapability;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  *
@@ -60,8 +61,8 @@ import org.springframework.http.HttpMethod;
  */
 public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
 {
-    private WebScript getNetworksWebScript;
-    private WebScript getNetworkWebScript;
+    private @RUntainted WebScript getNetworksWebScript;
+    private @RUntainted WebScript getNetworkWebScript;
     private Container container;
 
     private ResourceLocator locator;
@@ -71,12 +72,12 @@ public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
         this.locator = locator;
     }
 
-    public void setGetNetworksWebScript(WebScript getNetworksWebScript)
+    public void setGetNetworksWebScript(@RUntainted WebScript getNetworksWebScript)
     {
         this.getNetworksWebScript = getNetworksWebScript;
     }
 
-    public void setGetNetworkWebScript(WebScript getNetworkWebScript)
+    public void setGetNetworkWebScript(@RUntainted WebScript getNetworkWebScript)
     {
         this.getNetworkWebScript = getNetworkWebScript;
     }
@@ -90,7 +91,7 @@ public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
     /* (non-Javadoc)
      * @see org.alfresco.web.scripts.Registry#findWebScript(java.lang.String, java.lang.String)
      */
-    public Match findWebScript(String method, String uri)
+    public Match findWebScript(@RUntainted String method, @RUntainted String uri)
     {
         Match match;
 
@@ -126,7 +127,7 @@ public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
                 {
                     Class<? extends ResourceAction> resAction = null;
 
-                    final Map<String, String> resourceVars = locator.parseTemplateVars(templateVars);
+                    final Map<String, @RUntainted String> resourceVars = locator.parseTemplateVars(templateVars);
                     final String entityId = resourceVars.get(ResourceLocator.ENTITY_ID);
                     final String relationshipId = resourceVars.get(ResourceLocator.RELATIONSHIP_ID);
 
@@ -253,7 +254,7 @@ public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
         return match;
     }
 
-    private ResourceWithMetadata getResourceWithMetadataOrNull(Map<String, String> templateVars, HttpMethod method)
+    private ResourceWithMetadata getResourceWithMetadataOrNull(@RUntainted Map<String, String> templateVars, HttpMethod method)
     {
         if (templateVars.get("apiName") != null)
         {
@@ -266,7 +267,7 @@ public class PublicApiDeclarativeRegistry extends DeclarativeRegistry
         return null;
     }
 
-    private Match overrideMatch(final Match match)
+    private @RUntainted Match overrideMatch(final @RUntainted Match match)
     {
         // TODO is there a better way (to dynamically override "requiredAuthentication") or handle noAuth check earlier ?
         WebScript noAuthWebScriptWrapper = new WebScript()

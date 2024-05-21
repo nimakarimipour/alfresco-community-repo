@@ -46,6 +46,7 @@ import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Versions storage information.
@@ -77,7 +78,7 @@ public class NodeVersionsStorageInfoRelation implements RelationshipResourceActi
             description = "Retrieves storage properties for given node version content",
             successStatus = HttpServletResponse.SC_OK)
     @Override
-    public ContentStorageInfo readById(String nodeId, String versionId, Parameters parameters)
+    public ContentStorageInfo readById(@RUntainted String nodeId, @RUntainted String versionId, Parameters parameters)
             throws RelationshipResourceNotFoundException
     {
         String contentPropQNameId = parameters.getRelationship2Id();
@@ -93,7 +94,7 @@ public class NodeVersionsStorageInfoRelation implements RelationshipResourceActi
     @WebApiDescription(title = "Request send version content to archive",
             description = "Submits a request to send version content to archive",
             successStatus = HttpServletResponse.SC_OK)
-    public void requestArchiveContent(String nodeId, String versionId, ArchiveContentRequest archiveContentRequest, Parameters parameters,
+    public void requestArchiveContent(@RUntainted String nodeId, @RUntainted String versionId, ArchiveContentRequest archiveContentRequest, Parameters parameters,
                                       WithResponse withResponse) 
     {
         String contentPropQNameId = parameters.getRelationship2Id();
@@ -117,7 +118,7 @@ public class NodeVersionsStorageInfoRelation implements RelationshipResourceActi
     @WebApiDescription(title = "Request restore version content from archive",
             description = "Submits a request to restore version content from archive",
             successStatus = HttpServletResponse.SC_ACCEPTED)
-    public void requestRestoreContentFromArchive(String nodeId, String versionId, RestoreArchivedContentRequest restoreArchivedContentRequest,
+    public void requestRestoreContentFromArchive(@RUntainted String nodeId, @RUntainted String versionId, RestoreArchivedContentRequest restoreArchivedContentRequest,
                                                  Parameters parameters, WithResponse withResponse)
     {
         String contentPropQNameId = parameters.getRelationship2Id();
@@ -135,7 +136,7 @@ public class NodeVersionsStorageInfoRelation implements RelationshipResourceActi
         }
     }
 
-    private NodeRef findVersionNodeRef(String nodeId, String versionId)
+    private NodeRef findVersionNodeRef(@RUntainted String nodeId, @RUntainted String versionId)
     {
         Version version = nodeVersions.findVersion(nodeId, versionId);
         if (version == null)

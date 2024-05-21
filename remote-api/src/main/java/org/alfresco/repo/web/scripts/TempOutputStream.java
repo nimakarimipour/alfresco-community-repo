@@ -48,6 +48,7 @@ import org.alfresco.repo.content.ContentLimitViolationException;
 import org.alfresco.util.TempFileProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An output stream implementation that keeps the data in memory if is less then
@@ -360,7 +361,7 @@ public class TempOutputStream extends OutputStream
      * @param encrypt
      *            true if temp files should be encrypted
      */
-    public static Supplier<TempOutputStream> factory(final File tempDir, final int memoryThreshold,
+    public static @RUntainted Supplier<TempOutputStream> factory(final File tempDir, final int memoryThreshold,
         final long maxContentSize, final boolean encrypt)
     {
         return () -> new TempOutputStream(tempDir, memoryThreshold, maxContentSize, encrypt);

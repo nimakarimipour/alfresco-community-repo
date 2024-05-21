@@ -36,6 +36,7 @@ import org.alfresco.util.ParameterCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 
@@ -62,7 +63,7 @@ public class PersonNetworksRelation implements RelationshipResourceAction.Read<P
 
     @Override
     @WebApiDescription(title = "A paged list of the person's network memberships.")
-    public CollectionWithPagingInfo<PersonNetwork> readAll(String personId, Parameters parameters)
+    public CollectionWithPagingInfo<@RUntainted PersonNetwork> readAll(String personId, Parameters parameters)
 	{
         return networks.getNetworks(personId, parameters.getPaging());
 	}

@@ -48,6 +48,7 @@ import org.alfresco.rest.framework.webscripts.WithResponse;
 import org.alfresco.service.cmr.repository.DirectAccessUrl;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "renditions", entityResource = TrashcanEntityResource.class, title = "Node renditions via archived node")
 public class TrashcanRenditionsRelation
@@ -76,7 +77,7 @@ public class TrashcanRenditionsRelation
 
     @WebApiDescription(title = "Retrieve rendition information", description = "Retrieve (created) rendition information")
     @Override
-    public Rendition readById(String nodeId, String renditionId, Parameters parameters)
+    public Rendition readById(String nodeId, @RUntainted String renditionId, Parameters parameters)
     {
         return deletedNodes.getRendition(nodeId, renditionId, parameters);
     }
@@ -84,7 +85,7 @@ public class TrashcanRenditionsRelation
     @WebApiDescription(title = "Download archived node rendition", description = "Download rendition for an archived node")
     @BinaryProperties({ "content" })
     @Override
-    public BinaryResource readProperty(String nodeId, String renditionId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String nodeId, @RUntainted String renditionId, Parameters parameters)
     {
         return deletedNodes.getContent(nodeId, renditionId, parameters);
     }
@@ -94,7 +95,7 @@ public class TrashcanRenditionsRelation
     @WebApiDescription(title = "Request content url",
             description="Generates a direct access URL.",
             successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String originalNodeId, String renditionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String originalNodeId, @RUntainted String renditionId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
     {
         boolean attachment = directAccessUrlHelper.getAttachment(directAccessUrlRequest);
         Long validFor = directAccessUrlHelper.getDefaultExpiryTimeInSec();

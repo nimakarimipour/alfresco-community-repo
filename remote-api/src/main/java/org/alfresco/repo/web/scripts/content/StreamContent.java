@@ -51,6 +51,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WebScriptStatus;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Web script 'type' that can be used when the binary data of a content property needs to be streamed back to the client
@@ -70,7 +71,7 @@ public class StreamContent extends AbstractWebScript
     protected NodeService nodeService;
     protected MimetypeService mimetypeService;
     protected ContentStreamer delegate;
-    protected Repository repository;
+    protected @RUntainted Repository repository;
     
     /**
      * @param mimetypeService MimetypeService
@@ -106,7 +107,7 @@ public class StreamContent extends AbstractWebScript
     /**
      * @param repository Repository
      */
-    public void setRepository(Repository repository)
+    public void setRepository(@RUntainted Repository repository)
     {
         this.repository = repository;
     }
@@ -114,7 +115,7 @@ public class StreamContent extends AbstractWebScript
     /**
      * @see org.springframework.extensions.webscripts.WebScript#execute(org.springframework.extensions.webscripts.WebScriptRequest, org.springframework.extensions.webscripts.WebScriptResponse)
      */
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // retrieve requested format
         String format = req.getFormat();
@@ -124,7 +125,7 @@ public class StreamContent extends AbstractWebScript
             // construct model for script / template
             Status status = new Status();
             Cache cache = new Cache(getDescription().getRequiredCache());
-            Map<String, Object> model = executeImpl(req, status, cache);
+            Map<String, @RUntainted Object> model = executeImpl(req, status, cache);
             if (model == null)
             {
                 model = new HashMap<String, Object>(8, 1.0f);
@@ -141,7 +142,7 @@ public class StreamContent extends AbstractWebScript
                 
                 Map<String, Object> scriptModel = createScriptParameters(req, res, executeScript, model);
                 // add return model allowing script to add items to template model
-                Map<String, Object> returnModel = new HashMap<String, Object>(8, 1.0f);
+                Map<String, @RUntainted Object> returnModel = new HashMap<String, @RUntainted Object>(8, 1.0f);
                 scriptModel.put("model", returnModel);
                 executeScript(executeScript.getContent(), scriptModel);
                 mergeScriptModelIntoTemplateModel(executeScript.getContent().getPath(), returnModel, model);
@@ -224,7 +225,7 @@ public class StreamContent extends AbstractWebScript
      * @param file              The file whose content is to be streamed.
      * @throws IOException
      */
-    protected void streamContent(WebScriptRequest req, WebScriptResponse res, File file) throws IOException {
+    protected void streamContent(@RUntainted WebScriptRequest req, WebScriptResponse res, @RUntainted File file) throws IOException {
         streamContent(req, res, file, false, null, null);
     }
     
@@ -239,12 +240,12 @@ public class StreamContent extends AbstractWebScript
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    protected void streamContent(WebScriptRequest req,
+    protected void streamContent(@RUntainted WebScriptRequest req,
                                  WebScriptResponse res, 
-                                 File file, 
+                                 @RUntainted File file, 
                                  boolean attach,
                                  String attachFileName,
-                                 Map<String, Object> model) throws IOException
+                                 Map<String, @RUntainted Object> model) throws IOException
     {
         delegate.streamContent(req, res, file, null, attach, attachFileName, model);
     }
@@ -260,13 +261,13 @@ public class StreamContent extends AbstractWebScript
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException 
      */
-    protected void streamContent(WebScriptRequest req, 
+    protected void streamContent(@RUntainted WebScriptRequest req, 
                                  WebScriptResponse res, 
-                                 NodeRef nodeRef, 
-                                 QName propertyQName,
+                                 @RUntainted NodeRef nodeRef, 
+                                 @RUntainted QName propertyQName,
                                  boolean attach, 
                                  String attachFileName,
-                                 Map<String, Object> model) throws IOException
+                                 Map<String, @RUntainted Object> model) throws IOException
      {
         delegate.streamContent(req, res, nodeRef, propertyQName, attach, attachFileName, model);
      }
@@ -285,16 +286,16 @@ public class StreamContent extends AbstractWebScript
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    protected void streamContentImpl(WebScriptRequest req, 
+    protected void streamContentImpl(@RUntainted WebScriptRequest req, 
                                     WebScriptResponse res, 
-                                    ContentReader reader, 
+                                    @RUntainted ContentReader reader, 
                                     NodeRef nodeRef,
                                     QName propertyQName,
                                     boolean attach,
                                     Date modified, 
                                     String eTag, 
                                     String attachFileName, 
-                                    Map<String, Object> model) throws IOException
+                                    Map<String, @RUntainted Object> model) throws IOException
     {
         delegate.streamContentImpl(req, res, reader, nodeRef, propertyQName, attach, modified, eTag, attachFileName, model);
     }
@@ -306,7 +307,7 @@ public class StreamContent extends AbstractWebScript
      * @param scriptModel  script model
      * @param templateModel  template model
      */
-    final private void mergeScriptModelIntoTemplateModel(String scriptPath, Map<String, Object> scriptModel, Map<String, Object> templateModel)
+    final private void mergeScriptModelIntoTemplateModel(@RUntainted String scriptPath, Map<String, @RUntainted Object> scriptModel, Map<String, @RUntainted Object> templateModel)
     {
         int i = scriptPath.lastIndexOf(".");
         if (i != -1)
@@ -315,7 +316,7 @@ public class StreamContent extends AbstractWebScript
             ScriptProcessor processor = getContainer().getScriptProcessorRegistry().getScriptProcessorByExtension(extension);
             if (processor != null)
             {
-                for (Map.Entry<String, Object> entry : scriptModel.entrySet())
+                for (Map.Entry<String, @RUntainted Object> entry : scriptModel.entrySet())
                 {
                     // retrieve script model value
                     Object value = entry.getValue();
@@ -334,7 +335,7 @@ public class StreamContent extends AbstractWebScript
      * @return  custom service model
      * @deprecated
      */
-    protected Map<String, Object> executeImpl(WebScriptRequest req, WebScriptStatus status)
+    protected Map<String, @RUntainted Object> executeImpl(WebScriptRequest req, WebScriptStatus status)
     {
         return null;
     }
@@ -347,7 +348,7 @@ public class StreamContent extends AbstractWebScript
      * @return  custom service model
      * @deprecated
      */
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status)
+    protected Map<String, @RUntainted Object> executeImpl(WebScriptRequest req, Status status)
     {
         return executeImpl(req, new WebScriptStatus(status));
     }
@@ -360,7 +361,7 @@ public class StreamContent extends AbstractWebScript
      * @param  cache  Web Script cache
      * @return  custom service model
      */
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache)
+    protected Map<String, @RUntainted Object> executeImpl(WebScriptRequest req, Status status, Cache cache)
     {
         // NOTE: Redirect to those web scripts implemented before cache support and v2.9
         return executeImpl(req, status);
@@ -384,7 +385,7 @@ public class StreamContent extends AbstractWebScript
         renderTemplate(templatePath, model, writer);
     }
 
-    protected ObjectReference createObjectReferenceFromUrl(Map<String, String> args, Map<String, String> templateArgs)
+    protected ObjectReference createObjectReferenceFromUrl(Map<String, @RUntainted String> args, Map<String, @RUntainted String> templateArgs)
     {
         String objectId = args.get("noderef");
         if (objectId != null)
@@ -422,14 +423,14 @@ public class StreamContent extends AbstractWebScript
     
     class ObjectReference
     {
-        private NodeRef ref;
+        private @RUntainted NodeRef ref;
         
-        ObjectReference(String nodeRef)
+        ObjectReference(@RUntainted String nodeRef)
         {
             this.ref = new NodeRef(nodeRef);
         }
 
-        ObjectReference(StoreRef ref, String id)
+        ObjectReference(@RUntainted StoreRef ref, @RUntainted String id)
         {
             String[] relativePath = id.split("/");
 
@@ -446,7 +447,7 @@ public class StreamContent extends AbstractWebScript
             }
             else
             {
-                String[] reference = new String[relativePath.length + 2];
+                @RUntainted String[] reference = new String[relativePath.length + 2];
                 reference[0] = ref.getProtocol();
                 reference[1] = ref.getIdentifier();
                 System.arraycopy(relativePath, 0, reference, 2, relativePath.length);
@@ -454,16 +455,16 @@ public class StreamContent extends AbstractWebScript
             }
         }
         
-        ObjectReference(StoreRef ref, String[] path)
+        ObjectReference(@RUntainted StoreRef ref, String[] path)
         {
-            String[] reference = new String[path.length + 2];
+            @RUntainted String[] reference = new String[path.length + 2];
             reference[0] = ref.getProtocol();
             reference[1] = ref.getIdentifier();
             System.arraycopy(path, 0, reference, 2, path.length);
             this.ref = repository.findNodeRef("path", reference);
         }
         
-        public NodeRef getNodeRef()
+        public @RUntainted NodeRef getNodeRef()
         {
             return this.ref;
         }

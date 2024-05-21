@@ -60,6 +60,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * @author janv
@@ -72,7 +73,7 @@ public class AbstractNodeRelation implements InitializingBean
     private final static Set<String> WHERE_PARAMS_ASSOC_TYPE =
             new HashSet<>(Arrays.asList(new String[] {Nodes.PARAM_ASSOC_TYPE}));
 
-    protected ServiceRegistry sr;
+    protected @RUntainted ServiceRegistry sr;
     protected NodeService nodeService;
     protected NamespaceService namespaceService;
     protected DictionaryService dictionaryService;
@@ -83,7 +84,7 @@ public class AbstractNodeRelation implements InitializingBean
         this.nodes = nodes;
     }
 
-    public void setServiceRegistry(ServiceRegistry sr)
+    public void setServiceRegistry(@RUntainted ServiceRegistry sr)
     {
         this.sr = sr;
     }

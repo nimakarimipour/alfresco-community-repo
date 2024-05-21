@@ -42,6 +42,7 @@ import org.alfresco.rest.framework.resource.actions.interfaces.RelationshipResou
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 @RelationshipResource(name = "rule-set-links", entityResource = NodesEntityResource.class, title = "Rule set links")
@@ -83,7 +84,7 @@ public class NodeRuleSetLinksRelation implements InitializingBean, RelationshipR
             description = "Submits a request to unlink a rule set from a folder",
             successStatus = HttpServletResponse.SC_NO_CONTENT)
     @Override
-    public void delete(String folderNodeId, String ruleSetNodeId, Parameters parameters)
+    public void delete(String folderNodeId, @RUntainted String ruleSetNodeId, Parameters parameters)
     {
         ruleSets.unlinkRuleSet(folderNodeId, ruleSetNodeId);
     }

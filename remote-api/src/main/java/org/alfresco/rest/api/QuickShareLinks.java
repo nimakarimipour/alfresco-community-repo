@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to quick share services and maps between representations.
@@ -63,7 +64,7 @@ public interface QuickShareLinks
      * @return
      * @throws EntityNotFoundException
      */
-    BinaryResource readProperty(String sharedId, String renditionId, Parameters parameters) throws EntityNotFoundException;
+    BinaryResource readProperty(@RUntainted String sharedId, @RUntainted String renditionId, Parameters parameters) throws EntityNotFoundException;
 
     /**
      * Gets information about a rendition of a shared link.
@@ -72,7 +73,7 @@ public interface QuickShareLinks
      * @param renditionId
      * @return the {@link Rendition} object
      */
-    Rendition getRendition(String shareId, String renditionId);
+    Rendition getRendition(@RUntainted String shareId, @RUntainted String renditionId);
 
     /**
      * List renditions info - note: only returns available (=> created) renditions.
@@ -82,7 +83,7 @@ public interface QuickShareLinks
      * @param sharedId
      * @return
      */
-    CollectionWithPagingInfo<Rendition> getRenditions(String sharedId);
+    CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted String sharedId);
 
     /**
      * Delete the shared link.

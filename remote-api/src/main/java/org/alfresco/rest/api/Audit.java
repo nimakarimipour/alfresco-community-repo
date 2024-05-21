@@ -30,6 +30,7 @@ import org.alfresco.rest.api.model.AuditEntry;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles audit (applications & entries)
@@ -117,5 +118,5 @@ public interface Audit
      * @param parameters
      * @return
      */
-    CollectionWithPagingInfo<AuditEntry> listAuditEntriesByNodeId(String nodeId, Parameters parameters);
+    CollectionWithPagingInfo<AuditEntry> listAuditEntriesByNodeId(@RUntainted String nodeId, Parameters parameters);
 }

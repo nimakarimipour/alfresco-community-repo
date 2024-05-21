@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.AssociationRef;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QNamePattern;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Sources - list node (peer) associations from target to sources
@@ -52,7 +53,7 @@ public class NodeSourcesRelation extends AbstractNodeRelation implements Relatio
      */
     @Override
     @WebApiDescription(title = "Return a paged list of sources nodes based on (peer) assocs")
-    public CollectionWithPagingInfo<Node> readAll(String targetNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String targetNodeId, Parameters parameters)
     {
         NodeRef targetNodeRef = nodes.validateOrLookupNode(targetNodeId);
 

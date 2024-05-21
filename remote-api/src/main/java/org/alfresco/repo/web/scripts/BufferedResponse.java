@@ -39,6 +39,7 @@ import org.springframework.extensions.webscripts.Runtime;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptResponse;
 import org.springframework.util.FileCopyUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Transactional Buffered Response
@@ -52,7 +53,7 @@ public class BufferedResponse implements WrappingWebScriptResponse, AutoCloseabl
     private final WebScriptResponse res;
     private final int bufferSize;
     private TempOutputStream outputStream;
-    private StringBuilderWriter outputWriter;
+    private @RUntainted StringBuilderWriter outputWriter;
 
     /**
      * Construct

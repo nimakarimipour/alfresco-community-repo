@@ -31,12 +31,13 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class Action
 {
     private String actionDefinitionId;
-    private Map<String, Serializable> params;
+    private Map<String, @RUntainted Serializable> params;
 
     public String getActionDefinitionId()
     {
@@ -48,12 +49,12 @@ public class Action
         this.actionDefinitionId = actionDefinitionId;
     }
 
-    public Map<String, Serializable> getParams()
+    public Map<String, @RUntainted Serializable> getParams()
     {
         return params;
     }
 
-    public void setParams(Map<String, Serializable> params)
+    public void setParams(Map<String, @RUntainted Serializable> params)
     {
         this.params = params;
     }
@@ -89,7 +90,7 @@ public class Action
     public static class Builder
     {
         private String actionDefinitionId;
-        private Map<String, Serializable> params;
+        private Map<String, @RUntainted Serializable> params;
 
         public Builder actionDefinitionId(String actionDefinitionId)
         {
@@ -97,7 +98,7 @@ public class Action
             return this;
         }
 
-        public Builder params(Map<String, Serializable> params)
+        public Builder params(Map<String, @RUntainted Serializable> params)
         {
             this.params = params;
             return this;

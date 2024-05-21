@@ -42,6 +42,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.QNamePattern;
 import org.alfresco.service.namespace.RegexQNamePattern;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Secondary Children
@@ -69,7 +70,7 @@ public class NodeSecondaryChildrenRelation extends AbstractNodeRelation implemen
      */
     @Override
     @WebApiDescription(title = "Return a paged list of secondary child nodes based on child assocs")
-    public CollectionWithPagingInfo<Node> readAll(String parentNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String parentNodeId, Parameters parameters)
     {
         NodeRef parentNodeRef = nodes.validateOrLookupNode(parentNodeId);
 
@@ -90,14 +91,14 @@ public class NodeSecondaryChildrenRelation extends AbstractNodeRelation implemen
 
     @Override
     @WebApiDescription(title="Add secondary child assoc")
-    public List<AssocChild> create(String parentNodeId, List<AssocChild> entities, Parameters parameters)
+    public List<AssocChild> create(@RUntainted String parentNodeId, List<AssocChild> entities, Parameters parameters)
     {
         return nodes.addChildren(parentNodeId, entities);
     }
 
     @Override
     @WebApiDescription(title = "Remove secondary child assoc(s)")
-    public void delete(String parentNodeId, String childNodeId, Parameters parameters)
+    public void delete(@RUntainted String parentNodeId, @RUntainted String childNodeId, Parameters parameters)
     {
         NodeRef parentNodeRef = nodes.validateNode(parentNodeId);
         NodeRef childNodeRef = nodes.validateNode(childNodeId);

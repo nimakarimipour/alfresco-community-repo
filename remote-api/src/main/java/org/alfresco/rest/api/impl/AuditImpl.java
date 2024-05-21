@@ -71,6 +71,7 @@ import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.util.ISO8601DateFormat;
 import org.alfresco.util.ISO9075;
 import org.alfresco.util.Pair;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles audit (applications & entries)
@@ -708,7 +709,7 @@ public class AuditImpl implements Audit
     }
 
     @Override
-    public CollectionWithPagingInfo<AuditEntry> listAuditEntriesByNodeId(String nodeId, Parameters parameters)
+    public CollectionWithPagingInfo<AuditEntry> listAuditEntriesByNodeId(@RUntainted String nodeId, Parameters parameters)
     {
         AuthenticationUtil.runAs(new RunAsWork<Void>()
         {

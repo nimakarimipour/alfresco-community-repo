@@ -56,6 +56,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class ActionParameterConverter
@@ -78,7 +79,7 @@ public class ActionParameterConverter
         this.nodes = nodes;
     }
 
-    public Map<String, Serializable> getConvertedParams(Map<String, Serializable> params, String name)
+    public Map<String, Serializable> getConvertedParams(Map<String, @RUntainted Serializable> params, String name)
     {
         final Map<String, Serializable> parameters = new HashMap<>(params.size());
         final ParameterizedItemDefinition definition;
@@ -95,7 +96,7 @@ public class ActionParameterConverter
             throw new NotFoundException(DEFAULT_MESSAGE_ID, new String[]{name});
         }
 
-        for (Map.Entry<String, Serializable> param : params.entrySet())
+        for (Map.Entry<String, @RUntainted Serializable> param : params.entrySet())
         {
             if (Objects.toString(param.getValue(), Strings.EMPTY).isEmpty()) {
                 throw new InvalidArgumentException(ACTION_PARAMETER_SHOULD_NOT_HAVE_EMPTY_OR_NULL_VALUE, new String[] {param.getKey()});
@@ -134,7 +135,7 @@ public class ActionParameterConverter
         }
     }
 
-    private Serializable convertValue(QName typeQName, Object propertyValue) throws JSONException
+    private Serializable convertValue(QName typeQName, @RUntainted Object propertyValue) throws JSONException
     {
         Serializable value;
 

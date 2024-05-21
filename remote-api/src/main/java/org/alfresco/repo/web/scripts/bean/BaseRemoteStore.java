@@ -45,6 +45,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptRequest;
 import org.springframework.extensions.webscripts.servlet.WebScriptServletRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Remote Store service.
@@ -405,7 +407,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
      * 
      * @throws IOException if an error occurs listing the documents
      */
-    protected abstract void listDocuments(WebScriptResponse res, String store, String path, String pattern)
+    protected abstract void listDocuments(WebScriptResponse res, String store, String path, @RUntainted String pattern)
         throws IOException;
     
     /**
@@ -466,7 +468,7 @@ public abstract class BaseRemoteStore extends AbstractWebScript
     };
     
     
-    protected static String encodePath(final String s)
+    protected static @RPolyTainted String encodePath(final @RPolyTainted String s)
     {
         StringBuilder sb = null;      //create on demand
         char ch;

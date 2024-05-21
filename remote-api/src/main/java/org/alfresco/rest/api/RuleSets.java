@@ -32,6 +32,7 @@ import org.alfresco.rest.api.model.rules.RuleSetLink;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Rule sets API.
@@ -47,7 +48,7 @@ public interface RuleSets
      * @param includes List of fields to include in the rule set
      * @return {@link CollectionWithPagingInfo} containing a list page of rule sets
      */
-    CollectionWithPagingInfo<RuleSet> getRuleSets(String folderNodeId, List<String> includes, Paging paging);
+    CollectionWithPagingInfo<RuleSet> getRuleSets(@RUntainted String folderNodeId, List<String> includes, Paging paging);
 
     /**
      * Get the rule set with the given ID and check associations with the folder node.
@@ -57,7 +58,7 @@ public interface RuleSets
      * @param includes List of fields to include in the rule set
      * @return {@link RuleSet} definition
      */
-    RuleSet getRuleSetById(String folderNodeId, String ruleSetId, List<String> includes);
+    RuleSet getRuleSetById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, List<String> includes);
 
     /**
      * Update a rule set - for example to reorder the rules within it.
@@ -67,15 +68,15 @@ public interface RuleSets
      * @param includes List of fields to include in the response.
      * @return The updated rule set from the server.
      */
-    RuleSet updateRuleSet(String folderNodeId, RuleSet ruleSet, List<String> includes);
+    RuleSet updateRuleSet(@RUntainted String folderNodeId, RuleSet ruleSet, List<String> includes);
 
     /**
      * Link a rule set to a folder
      */
-    RuleSetLink linkToRuleSet(String folderNodeId, String linkToNodeId);
+    RuleSetLink linkToRuleSet(@RUntainted String folderNodeId, @RUntainted String linkToNodeId);
 
     /**
      * Removes the link between a rule set and a folder
      */
-    void unlinkRuleSet(String folderNodeId, String ruleSetId);
+    void unlinkRuleSet(@RUntainted String folderNodeId, @RUntainted String ruleSetId);
 }

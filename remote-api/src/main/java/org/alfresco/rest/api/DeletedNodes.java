@@ -35,6 +35,7 @@ import org.alfresco.rest.framework.resource.content.BinaryResource;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.DirectAccessUrl;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles trashcan / deleted nodes
@@ -58,7 +59,7 @@ public interface DeletedNodes
      * @param mapUserInfo
      * @return a deleted node
      */
-    Node getDeletedNode(String originalId, Parameters parameters, boolean fullnode, Map<String, UserInfo> mapUserInfo);
+    Node getDeletedNode(@RUntainted String originalId, Parameters parameters, boolean fullnode, Map<String, UserInfo> mapUserInfo);
 
     /**
      * Restores a deleted node and returns it.
@@ -68,13 +69,13 @@ public interface DeletedNodes
      *            - optional
      * @return the new undeleted node.
      */
-    Node restoreArchivedNode(String archivedId, NodeTargetAssoc nodeTargetAssoc);
+    Node restoreArchivedNode(@RUntainted String archivedId, NodeTargetAssoc nodeTargetAssoc);
 
     /**
      * Permanently delete the node.
      * @param archivedId
      */
-    void purgeArchivedNode(String archivedId);
+    void purgeArchivedNode(@RUntainted String archivedId);
 
     /**
      * Download file content (or rendition content) via archived node.
@@ -86,20 +87,20 @@ public interface DeletedNodes
      *            {@link Parameters}
      * @return
      */
-    BinaryResource getContent(String archivedId, String renditionId, Parameters parameters);
+    BinaryResource getContent(@RUntainted String archivedId, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * @param archivedId
      * @param renditionId
      * @return
      */
-    Rendition getRendition(String archivedId, String renditionId, Parameters parameters);
+    Rendition getRendition(@RUntainted String archivedId, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * @param archivedId
      * @return
      */
-    CollectionWithPagingInfo<Rendition> getRenditions(String archivedId, Parameters parameters);
+    CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted String archivedId, Parameters parameters);
 
     /**
     * Gets a presigned URL to directly access content.
@@ -109,7 +110,7 @@ public interface DeletedNodes
     * @param attachment {@code true} if an attachment {@code URL} is requested, {@code false} for an embedded {@code URL}, {@code true} by default.
     * @return A direct access {@code URL} object for the content.
     */
-    default DirectAccessUrl requestContentDirectUrl(String archivedId, String renditionId, boolean attachment)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted String archivedId, @RUntainted String renditionId, boolean attachment)
     {
         return requestContentDirectUrl(archivedId, renditionId, attachment, null);
     }
@@ -123,6 +124,6 @@ public interface DeletedNodes
      * @param validFor The time at which the direct access {@code URL} will expire.
      * @return A direct access {@code URL} object for the content.
      */
-    DirectAccessUrl requestContentDirectUrl(String archivedId, String renditionId, boolean attachment, Long validFor);
+    DirectAccessUrl requestContentDirectUrl(@RUntainted String archivedId, @RUntainted String renditionId, boolean attachment, Long validFor);
 
 }

@@ -41,6 +41,7 @@ import org.alfresco.rest.framework.webscripts.WithResponse;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.extensions.webscripts.servlet.FormData;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Node Children
@@ -93,7 +94,7 @@ public class NodeChildrenRelation implements
      */
     @Override
     @WebApiDescription(title = "Return a paged list of nodes for the document/folder identified by parentFolderNodeId")
-    public CollectionWithPagingInfo<Node> readAll(String parentFolderNodeId, Parameters parameters)
+    public CollectionWithPagingInfo<Node> readAll(@RUntainted String parentFolderNodeId, Parameters parameters)
     {
         return nodes.listChildren(parentFolderNodeId, parameters);
     }
@@ -108,7 +109,7 @@ public class NodeChildrenRelation implements
      */
     @Override
     @WebApiDescription(title="Create one (or more) nodes as children of folder identified by parentFolderNodeId")
-    public List<Node> create(String parentFolderNodeId, List<Node> nodeInfos, Parameters parameters)
+    public List<Node> create(@RUntainted String parentFolderNodeId, List<Node> nodeInfos, Parameters parameters)
     {
         List<Node> result = new ArrayList<>(nodeInfos.size());
 
@@ -123,7 +124,7 @@ public class NodeChildrenRelation implements
     @Override
     @WebApiDescription(title = "Upload file content and meta-data into the repository.")
     @WebApiParam(name = "formData", title = "A single form data", description = "A single form data which holds FormFields.")
-    public Node create(String parentFolderNodeId, FormData formData, Parameters parameters, WithResponse withResponse)
+    public Node create(@RUntainted String parentFolderNodeId, FormData formData, Parameters parameters, WithResponse withResponse)
     {
         return nodes.upload(parentFolderNodeId, formData, parameters);
     }

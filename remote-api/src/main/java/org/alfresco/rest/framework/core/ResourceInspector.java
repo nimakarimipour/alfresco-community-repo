@@ -67,6 +67,8 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.ReflectionUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Looks at resources to see what they can do
@@ -639,9 +641,9 @@ public class ResourceInspector
      * a Map of the property name key and the entity key
      * @return A map of property key name and a value of the entity path name
      */
-    public static Map<String,Pair<String,Method>> findEmbeddedResources(Class<?> anyClass)
+    public static Map<String,Pair<String,@RUntainted Method>> findEmbeddedResources(Class<?> anyClass)
     {
-        Map<String, Pair<String,Method>> embeds = new HashMap<String, Pair<String,Method>>();
+        Map<String, Pair<String,@RUntainted Method>> embeds = new HashMap<String, Pair<String,@RUntainted Method>>();
         List<Method> annotatedMethods = ResourceInspectorUtil.findMethodsByAnnotation(anyClass, EmbeddedEntityResource.class);
         if (annotatedMethods != null && !annotatedMethods.isEmpty())
         {
@@ -762,7 +764,7 @@ public class ResourceInspector
      * @param obj any object
      * @return a String object with the entity id set
      */
-    public static String findUniqueId(Object obj)
+    public static @RPolyTainted String findUniqueId(@RPolyTainted Object obj)
     {
         @SuppressWarnings("rawtypes")
         Class objClass = obj.getClass();
@@ -792,9 +794,9 @@ public class ResourceInspector
      * @return the Method
      * @throws IllegalArgumentException if there is is more than 1 method annotated with @UniqueId
      */
-    public static Method findUniqueIdMethod(Class<?> objClass) throws IllegalArgumentException
+    public static @RUntainted Method findUniqueIdMethod(Class<?> objClass) throws IllegalArgumentException
     {
-        List<Method> annotatedMethods = ResourceInspectorUtil.findMethodsByAnnotation(objClass, UniqueId.class);
+        List<@RUntainted Method> annotatedMethods = ResourceInspectorUtil.findMethodsByAnnotation(objClass, UniqueId.class);
         if (annotatedMethods != null && !annotatedMethods.isEmpty())
         {
             if (annotatedMethods.size() != 1)

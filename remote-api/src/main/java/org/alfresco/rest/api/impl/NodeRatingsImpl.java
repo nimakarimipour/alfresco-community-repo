@@ -45,6 +45,7 @@ import org.alfresco.util.TypeConstraint;
 import org.alfresco.util.registry.NamedObjectRegistry;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to node ratings services and maps between representations.
@@ -93,14 +94,14 @@ public class NodeRatingsImpl implements NodeRatings
 	}
 	
 	// TODO deal with fractional ratings - InvalidArgumentException
-	public NodeRating getNodeRating(String nodeId, String ratingSchemeId)
+	public NodeRating getNodeRating(@RUntainted String nodeId, String ratingSchemeId)
 	{
 		NodeRef nodeRef = nodes.validateNode(nodeId);
 		RatingScheme ratingScheme = validateRatingScheme(ratingSchemeId);
 		return ratingScheme.getNodeRating(nodeRef);
 	}
 
-	public CollectionWithPagingInfo<NodeRating> getNodeRatings(String nodeId, Paging paging)
+	public CollectionWithPagingInfo<NodeRating> getNodeRatings(@RUntainted String nodeId, Paging paging)
 	{
 		NodeRef nodeRef = nodes.validateNode(nodeId);
 		Set<String> schemes = new TreeSet<String>(ratingService.getRatingSchemes().keySet());
@@ -137,7 +138,7 @@ public class NodeRatingsImpl implements NodeRatings
         return CollectionWithPagingInfo.asPaged(paging, ratings, hasMoreItems, totalSize);
 	}
 
-	public void addRating(String nodeId, String ratingSchemeId, Object rating)
+	public void addRating(@RUntainted String nodeId, String ratingSchemeId, Object rating)
 	{
 		NodeRef nodeRef = nodes.validateNode(nodeId);
 		
@@ -151,7 +152,7 @@ public class NodeRatingsImpl implements NodeRatings
 		ratingScheme.applyRating(nodeRef, rating);
 	}
 
-	public void removeRating(String nodeId, String ratingSchemeId)
+	public void removeRating(@RUntainted String nodeId, String ratingSchemeId)
 	{
 		RatingScheme ratingScheme = validateRatingScheme(ratingSchemeId);
 		NodeRef nodeRef = nodes.validateNode(nodeId);

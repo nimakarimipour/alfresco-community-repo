@@ -50,6 +50,7 @@ import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.QName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 
@@ -131,7 +132,7 @@ public class DownloadsImpl implements Downloads
     }
 
     @Override
-    public Download getDownloadStatus(String downloadNodeId)
+    public Download getDownloadStatus(@RUntainted String downloadNodeId)
     {
         NodeRef downloadNodeRef = nodes.validateNode(downloadNodeId);
         
@@ -142,7 +143,7 @@ public class DownloadsImpl implements Downloads
     }
 
     @Override
-    public void cancel(String downloadNodeId)
+    public void cancel(@RUntainted String downloadNodeId)
     {
         NodeRef downloadNodeRef = nodes.validateNode(downloadNodeId);
         checkIsDownloadNodeType(downloadNodeRef);

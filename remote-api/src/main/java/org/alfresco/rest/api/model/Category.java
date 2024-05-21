@@ -27,32 +27,33 @@
 package org.alfresco.rest.api.model;
 
 import java.util.Objects;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class Category
 {
-    private String id;
+    private @RUntainted String id;
     private String name;
     private String parentId;
     private boolean hasChildren;
     private Integer count;
     private String path;
 
-    public String getId()
+    public @RUntainted String getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(@RUntainted String id)
     {
         this.id = id;
     }
 
-    public void setCategoryId(String categoryId)
+    public void setCategoryId(@RUntainted String categoryId)
     {
         this.id = categoryId;
     }
 
-    public String getName()
+    public @RUntainted String getName()
     {
         return name;
     }
@@ -132,7 +133,7 @@ public class Category
 
     public static class Builder
     {
-        private String id;
+        private @RUntainted String id;
         private String name;
         private String parentId;
         private boolean hasChildren;

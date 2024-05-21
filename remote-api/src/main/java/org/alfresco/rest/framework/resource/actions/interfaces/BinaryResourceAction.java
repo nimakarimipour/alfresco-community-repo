@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.resource.content.FileBinaryResource;
 import org.alfresco.rest.framework.resource.content.NodeBinaryResource;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Permissible actions for binary resources of an Entity Resource
@@ -59,7 +60,7 @@ public interface BinaryResourceAction
          * @return BinaryResource  - Either {@link FileBinaryResource} or {@link NodeBinaryResource}
          * @throws EntityNotFoundException
          */
-        public BinaryResource readProperty (String entityId,  Parameters parameters) throws EntityNotFoundException;
+        public BinaryResource readProperty (@RUntainted String entityId,  Parameters parameters) throws EntityNotFoundException;
     }
 
     /**
@@ -90,7 +91,7 @@ public interface BinaryResourceAction
          * @param entityId unique id
          * @param parameters {@link Parameters}
          */
-        public void deleteProperty (String entityId, Parameters parameters);
+        public void deleteProperty (@RUntainted String entityId, Parameters parameters);
     }
 
     /**
@@ -122,7 +123,7 @@ public interface BinaryResourceAction
          * @param contentInfo Basic information about the content stream
          * @param params {@link Parameters}
          */
-        public E updateProperty (String entityId, BasicContentInfo contentInfo, InputStream stream, Parameters params);
+        public E updateProperty (@RUntainted String entityId, BasicContentInfo contentInfo, InputStream stream, Parameters params);
     }
 
     /**

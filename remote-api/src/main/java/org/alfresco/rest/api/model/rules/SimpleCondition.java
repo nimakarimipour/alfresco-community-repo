@@ -55,13 +55,14 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.collections.CollectionUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class SimpleCondition
 {
     private String field;
     private String comparator;
-    private String parameter;
+    private @RUntainted String parameter;
 
     public String getField()
     {
@@ -83,12 +84,12 @@ public class SimpleCondition
         this.comparator = comparator;
     }
 
-    public String getParameter()
+    public @RUntainted String getParameter()
     {
         return parameter;
     }
 
-    public void setParameter(String parameter)
+    public void setParameter(@RUntainted String parameter)
     {
         this.parameter = parameter;
     }

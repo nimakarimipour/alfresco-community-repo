@@ -48,6 +48,7 @@ import org.alfresco.rest.api.model.rules.Action;
 import org.alfresco.service.Experimental;
 import org.alfresco.util.GUID;
 import org.apache.commons.collections.CollectionUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RestRuleActionModelMapper implements RestModelMapper<Action, org.alfresco.service.cmr.action.Action>
@@ -110,7 +111,7 @@ public class RestRuleActionModelMapper implements RestModelMapper<Action, org.al
 
     private org.alfresco.service.cmr.action.Action toServiceAction(Action action)
     {
-        final Map<String, Serializable> params = Optional.ofNullable(action.getParams()).orElse(emptyMap());
+        final Map<String, @RUntainted Serializable> params = Optional.ofNullable(action.getParams()).orElse(emptyMap());
         validateAction(action);
         final Map<String, Serializable> convertedParams =
                 parameterConverter.getConvertedParams(params, action.getActionDefinitionId());

@@ -88,6 +88,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to people services and maps between representations.
@@ -115,8 +116,8 @@ public class PeopleImpl implements People
     protected Nodes nodes;
 	protected Sites sites;
 	protected SiteService siteService;
-	protected NodeService nodeService;
-    protected PersonService personService;
+	protected @RUntainted NodeService nodeService;
+    protected @RUntainted PersonService personService;
     protected AuthenticationService authenticationService;
     protected AuthorityService authorityService;
     protected ContentUsageService contentUsageService;
@@ -152,12 +153,12 @@ public class PeopleImpl implements People
 		this.nodes = nodes;
 	}
 
-	public void setNodeService(NodeService nodeService)
+	public void setNodeService(@RUntainted NodeService nodeService)
     {
         this.nodeService = nodeService;
     }
 	
-	public void setPersonService(PersonService personService)
+	public void setPersonService(@RUntainted PersonService personService)
     {
 		this.personService = personService;
 	}
@@ -209,13 +210,13 @@ public class PeopleImpl implements People
      * @return The validated and processed ID.
      */
     @Override
-	public String validatePerson(String personId)
+	public @RUntainted String validatePerson(@RUntainted String personId)
 	{
 		return validatePerson(personId, false);
 	}
 
     @Override
-	public String validatePerson(final String requestedPersonId, boolean validateIsCurrentUser)
+	public @RUntainted String validatePerson(final @RUntainted String requestedPersonId, boolean validateIsCurrentUser)
 	{
         String personId = requestedPersonId;
 		if(personId == null)
@@ -282,13 +283,13 @@ public class PeopleImpl implements People
 		}
     }
 
-    public boolean hasAvatar(NodeRef personNodeRef)
+    public boolean hasAvatar(@RUntainted NodeRef personNodeRef)
     {
     	return (getAvatarOriginal(personNodeRef) != null);
     }
 
     @Override
-    public NodeRef getAvatar(String personId)
+    public NodeRef getAvatar(@RUntainted String personId)
     {
     	NodeRef avatar = null;
     	personId = validatePerson(personId);
@@ -307,10 +308,10 @@ public class PeopleImpl implements People
     	return avatar;
     }
 
-    private NodeRef getAvatarOriginal(NodeRef personNode)
+    private @RUntainted NodeRef getAvatarOriginal(@RUntainted NodeRef personNode)
     {
         NodeRef avatarOrigNodeRef = null;
-        List<ChildAssociationRef> avatarChildAssocs = nodeService.getChildAssocs(personNode, Collections.singleton(ContentModel.ASSOC_PREFERENCE_IMAGE));
+        List<@RUntainted ChildAssociationRef> avatarChildAssocs = nodeService.getChildAssocs(personNode, Collections.singleton(ContentModel.ASSOC_PREFERENCE_IMAGE));
         if (avatarChildAssocs.size() > 0)
         {
             ChildAssociationRef ref = avatarChildAssocs.get(0);
@@ -319,7 +320,7 @@ public class PeopleImpl implements People
         else
         {
             // TODO do we still need this ? - backward compatible with JSF web-client avatar
-            List<AssociationRef> avatorAssocs = nodeService.getTargetAssocs(personNode, ContentModel.ASSOC_AVATAR);
+            List<@RUntainted AssociationRef> avatorAssocs = nodeService.getTargetAssocs(personNode, ContentModel.ASSOC_AVATAR);
             if (avatorAssocs.size() > 0)
             {
                 AssociationRef ref = avatorAssocs.get(0);
@@ -330,7 +331,7 @@ public class PeopleImpl implements People
     }
 
     @Override
-    public BinaryResource downloadAvatarContent(String personId, Parameters parameters)
+    public BinaryResource downloadAvatarContent(@RUntainted String personId, Parameters parameters)
     {
         personId = validatePerson(personId);
         NodeRef personNode = personService.getPerson(personId);
@@ -340,7 +341,7 @@ public class PeopleImpl implements People
     }
 
     @Override
-    public Person uploadAvatarContent(String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
+    public Person uploadAvatarContent(@RUntainted String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
     {
         if (!thumbnailService.getThumbnailsEnabled())
         {
@@ -390,7 +391,7 @@ public class PeopleImpl implements People
     }
 
     @Override
-    public void deleteAvatarContent(String personId)
+    public void deleteAvatarContent(@RUntainted String personId)
     {
         personId = validatePerson(personId);
         checkCurrentUserOrAdmin(personId);
@@ -419,7 +420,7 @@ public class PeopleImpl implements People
      *             if personId does not exist
      */
     @Override
-    public Person getPerson(String personId)
+    public Person getPerson(@RUntainted String personId)
     {
         personId = validatePerson(personId);
         List<String> include = Arrays.asList(
@@ -431,7 +432,7 @@ public class PeopleImpl implements People
         return person;
     }
     
-    public Person getPerson(String personId, List<String> include)
+    public Person getPerson(@RUntainted String personId, List<String> include)
     {
         personId = validatePerson(personId);
         Person person = getPersonWithProperties(personId, include);
@@ -449,9 +450,9 @@ public class PeopleImpl implements People
 
         // For now the results are not filtered
         // please see REPO-555
-        final PagingResults<PersonService.PersonInfo> pagingResult = personService.getPeople(null, null, sortProps, pagingRequest);
+        final PagingResults<PersonService.@RUntainted PersonInfo> pagingResult = personService.getPeople(null, null, sortProps, pagingRequest);
 
-        final List<PersonService.PersonInfo> page = pagingResult.getPage();
+        final List<PersonService.@RUntainted PersonInfo> page = pagingResult.getPage();
         int totalItems = pagingResult.getTotalResultCount().getFirst();
         final String personId = AuthenticationUtil.getFullyAuthenticatedUser();
         List<Person> people = new AbstractList<Person>()
@@ -474,7 +475,7 @@ public class PeopleImpl implements People
         return CollectionWithPagingInfo.asPaged(paging, people, pagingResult.hasMoreItems(), totalItems);
     }
 
-    private List<Pair<QName, Boolean>> getSortProps(Parameters parameters)
+    private @RUntainted List<Pair<QName, Boolean>> getSortProps(Parameters parameters)
     {
         List<Pair<QName, Boolean>> sortProps = new ArrayList<>();
         List<SortColumn> sortCols = parameters.getSorting();
@@ -498,7 +499,7 @@ public class PeopleImpl implements People
         return sortProps;
     }
 
-    private Person getPersonWithProperties(String personId, List<String> include)
+    private Person getPersonWithProperties(@RUntainted String personId, List<String> include)
     {
         Person person = null;
         NodeRef personNode = personService.getPerson(personId, false);
@@ -693,7 +694,7 @@ public class PeopleImpl implements People
 	}
 
     @Override
-    public Person update(String personId, final Person person)
+    public Person update(@RUntainted String personId, final Person person)
     {
         // Validate, perform -me- substitution and canonicalize the person ID.
         personId = validatePerson(personId);

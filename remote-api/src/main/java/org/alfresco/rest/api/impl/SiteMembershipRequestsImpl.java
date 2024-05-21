@@ -76,6 +76,7 @@ import org.alfresco.service.cmr.site.SiteVisibility;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Public REST API: centralises access to site membership requests and maps between representations.
@@ -218,7 +219,7 @@ public class SiteMembershipRequestsImpl implements SiteMembershipRequests
 	}
 
     @Override
-	public SiteMembershipRequest createSiteMembershipRequest(String inviteeId, final SiteMembershipRequest siteInvite)
+	public SiteMembershipRequest createSiteMembershipRequest(@RUntainted String inviteeId, final SiteMembershipRequest siteInvite)
 	{
     	SiteMembershipRequest request = null;
 
@@ -286,7 +287,7 @@ public class SiteMembershipRequestsImpl implements SiteMembershipRequests
 	}
 
 	@Override
-	public SiteMembershipRequest createSiteMembershipRequest(String inviteeId, SiteMembershipRequest siteInvite, String client)
+	public SiteMembershipRequest createSiteMembershipRequest(@RUntainted String inviteeId, SiteMembershipRequest siteInvite, String client)
 	{
 		SiteMembershipRequest request = null;
 
@@ -355,7 +356,7 @@ public class SiteMembershipRequestsImpl implements SiteMembershipRequests
 	}
 
     @Override
-	public SiteMembershipRequest updateSiteMembershipRequest(String inviteeId, final SiteMembershipRequest siteInvite)
+	public SiteMembershipRequest updateSiteMembershipRequest(@RUntainted String inviteeId, final SiteMembershipRequest siteInvite)
 	{
     	SiteMembershipRequest updatedSiteInvite = null;
 
@@ -586,7 +587,7 @@ public class SiteMembershipRequestsImpl implements SiteMembershipRequests
     }
 
     @Override
-    public CollectionWithPagingInfo<SiteMembershipRequest> getPagedSiteMembershipRequests(String personId, Paging paging)
+    public CollectionWithPagingInfo<SiteMembershipRequest> getPagedSiteMembershipRequests(@RUntainted String personId, Paging paging)
     {
         personId = people.validatePerson(personId, true);
 

@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.Match;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Used for locating resources, implements ResourceLocator
@@ -54,7 +55,7 @@ public class ResourceLookupDictionary implements ResourceLocator
     private ResourceDictionary dictionary;
 
     @Override
-    public Map<String, String> parseTemplateVars(Map<String, String> templateVars)
+    public Map<String, @RUntainted String> parseTemplateVars(Map<String, @RUntainted String> templateVars)
     {
         if ("preferences".equals(templateVars.get(ResourceLocator.RELATIONSHIP_RESOURCE)))
         {
@@ -65,10 +66,10 @@ public class ResourceLookupDictionary implements ResourceLocator
         String leftover = templateVars.get(ResourceLocator.LEFTOVER);
         if (StringUtils.isNotBlank(leftover))
         {
-            Map<String, String> templateVars2 = new HashMap<>();
+            Map<String, @RUntainted String> templateVars2 = new HashMap<>();
             templateVars2.putAll(templateVars);
 
-            String[] split = leftover.split("/");
+            @RUntainted String[] split = leftover.split("/");
             if (split.length > 0)
             {
                 // eg. r1 in /nodes/n1/versions/v1/renditions/r1
@@ -179,9 +180,9 @@ public class ResourceLookupDictionary implements ResourceLocator
      * a new instance every time.
      */
     @Override
-    public ResourceWithMetadata locateResource(Api api,Map<String, String> templateVars, HttpMethod httpMethod)
+    public ResourceWithMetadata locateResource(Api api,Map<String, @RUntainted String> templateVars, HttpMethod httpMethod)
     {
-        Map<String, String> resourceVars = parseTemplateVars(templateVars);
+        Map<String, @RUntainted String> resourceVars = parseTemplateVars(templateVars);
 
         String collectionName = resourceVars.get(COLLECTION_RESOURCE);
         String entityId = resourceVars.get(ENTITY_ID);

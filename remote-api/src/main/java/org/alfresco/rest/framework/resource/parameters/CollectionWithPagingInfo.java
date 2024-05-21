@@ -31,6 +31,7 @@ import org.alfresco.rest.framework.resource.SerializablePagedCollection;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * A wrapper around Collection that supports paging information.
@@ -161,7 +162,7 @@ public class CollectionWithPagingInfo<T> implements SerializablePagedCollection<
      * @param context - The search context
      * @return CollectionWithPagingInfo
      */
-    public static <T> CollectionWithPagingInfo<T> asPaged(Paging paging, Collection<T> aCollection, boolean hasMoreItems, Integer totalItems, Object sourceEntity, SearchContext context)
+    public static <T> @RPolyTainted CollectionWithPagingInfo<T> asPaged(@RPolyTainted Paging paging, @RPolyTainted Collection<T> aCollection, @RPolyTainted boolean hasMoreItems, @RPolyTainted Integer totalItems, @RPolyTainted Object sourceEntity, @RPolyTainted SearchContext context)
     {
         return new CollectionWithPagingInfo<T>(aCollection, paging, hasMoreItems, totalItems, sourceEntity, context);
     }

@@ -24,6 +24,7 @@
  * #L%
  */
 package org.alfresco.rest.api.model;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A target object.
@@ -39,7 +40,7 @@ public class NodeTarget
     {
     }
 
-    public String getTargetParentId()
+    public @RUntainted String getTargetParentId()
     {
         return targetParentId;
     }

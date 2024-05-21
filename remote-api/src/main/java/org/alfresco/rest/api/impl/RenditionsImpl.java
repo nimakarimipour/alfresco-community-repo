@@ -91,6 +91,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * @author Jamal Kaabi-Mofrad, janv
@@ -102,43 +103,43 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     private static final Set<String> RENDITION_STATUS_COLLECTION_EQUALS_QUERY_PROPERTIES = Collections.singleton(PARAM_STATUS);
 
     private Nodes nodes;
-    private NodeService nodeService;
-    private ScriptThumbnailService scriptThumbnailService;
+    private @RUntainted NodeService nodeService;
+    private @RUntainted ScriptThumbnailService scriptThumbnailService;
     private MimetypeService mimetypeService;
-    private ServiceRegistry serviceRegistry;
-    private ResourceLoader resourceLoader;
-    private TenantService tenantService;
-    private RenditionService2 renditionService2;
+    private @RUntainted ServiceRegistry serviceRegistry;
+    private @RUntainted ResourceLoader resourceLoader;
+    private @RUntainted TenantService tenantService;
+    private @RUntainted RenditionService2 renditionService2;
     private RenditionsDataCollector renditionsDataCollector;
-    private VersionService versionService;
+    private @RUntainted VersionService versionService;
 
     public void setNodes(Nodes nodes)
     {
         this.nodes = nodes;
     }
 
-    public void setScriptThumbnailService(ScriptThumbnailService scriptThumbnailService)
+    public void setScriptThumbnailService(@RUntainted ScriptThumbnailService scriptThumbnailService)
     {
         this.scriptThumbnailService = scriptThumbnailService;
     }
 
-    public void setServiceRegistry(ServiceRegistry serviceRegistry)
+    public void setServiceRegistry(@RUntainted ServiceRegistry serviceRegistry)
     {
         this.serviceRegistry = serviceRegistry;
     }
 
     @Override
-    public void setResourceLoader(ResourceLoader resourceLoader)
+    public void setResourceLoader(@RUntainted ResourceLoader resourceLoader)
     {
         this.resourceLoader = resourceLoader;
     }
 
-    public void setTenantService(TenantService tenantService)
+    public void setTenantService(@RUntainted TenantService tenantService)
     {
         this.tenantService = tenantService;
     }
 
-    public void setRenditionService2(RenditionService2 renditionService2)
+    public void setRenditionService2(@RUntainted RenditionService2 renditionService2)
     {
         this.renditionService2 = renditionService2;
     }
@@ -163,13 +164,13 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> getRenditions(NodeRef nodeRef, Parameters parameters)
+    public CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted NodeRef nodeRef, Parameters parameters)
     {
         return getRenditions(nodeRef, null, parameters);
     }
 
     @Override
-    public CollectionWithPagingInfo<Rendition> getRenditions(NodeRef nodeRef, String versionLabelId, Parameters parameters)
+    public CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, Parameters parameters)
     {
         final NodeRef validatedNodeRef = validateNode(nodeRef.getStoreRef(), nodeRef.getId(), versionLabelId, parameters);
         ContentData contentData = getContentData(validatedNodeRef, true);
@@ -187,7 +188,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         // List all available rendition definitions
         long size = contentData.getSize();
         RenditionDefinitionRegistry2 renditionDefinitionRegistry2 = renditionService2.getRenditionDefinitionRegistry2();
-        Set<String> renditionNames = renditionDefinitionRegistry2.getRenditionNamesFrom(sourceMimetype, size);
+        Set<@RUntainted String> renditionNames = renditionDefinitionRegistry2.getRenditionNamesFrom(sourceMimetype, size);
 
         Map<String, Rendition> apiRenditions = new TreeMap<>();
         if (includeNotCreated)
@@ -198,7 +199,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
             }
         }
 
-        List<ChildAssociationRef> nodeRefRenditions = renditionService2.getRenditions(validatedNodeRef);
+        List<@RUntainted ChildAssociationRef> nodeRefRenditions = renditionService2.getRenditions(validatedNodeRef);
         if (!nodeRefRenditions.isEmpty())
         {
             for (ChildAssociationRef childAssociationRef : nodeRefRenditions)
@@ -238,13 +239,13 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public Rendition getRendition(NodeRef nodeRef, String renditionId, Parameters parameters)
+    public Rendition getRendition(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         return getRendition(nodeRef, null, renditionId, parameters);
     }
 
     @Override
-    public Rendition getRendition(NodeRef nodeRef, String versionLabelId, String renditionId, Parameters parameters)
+    public Rendition getRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, @RUntainted String renditionId, Parameters parameters)
     {
         final NodeRef validatedNodeRef = validateNode(nodeRef.getStoreRef(), nodeRef.getId(), versionLabelId, parameters);
         NodeRef renditionNodeRef = getRenditionByName(validatedNodeRef, renditionId, parameters);
@@ -297,19 +298,19 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public void createRendition(NodeRef nodeRef, Rendition rendition, Parameters parameters)
+    public void createRendition(@RUntainted NodeRef nodeRef, Rendition rendition, Parameters parameters)
     {
         createRendition(nodeRef, rendition, true, parameters);
     }
 
     @Override
-    public void createRendition(NodeRef nodeRef, Rendition rendition, boolean executeAsync, Parameters parameters)
+    public void createRendition(@RUntainted NodeRef nodeRef, Rendition rendition, boolean executeAsync, Parameters parameters)
     {
         createRendition(nodeRef, null, rendition, executeAsync, parameters);
     }
 
     @Override
-    public void createRendition(NodeRef nodeRef, String versionLabelId, Rendition rendition, boolean executeAsync, Parameters parameters)
+    public void createRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, Rendition rendition, boolean executeAsync, Parameters parameters)
     {
         // If thumbnail generation has been configured off, then don't bother.
         if (!renditionService2.isEnabled())
@@ -343,14 +344,14 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public void createRenditions(NodeRef nodeRef, List<Rendition> renditions, Parameters parameters)
+    public void createRenditions(@RUntainted NodeRef nodeRef, List<Rendition> renditions, Parameters parameters)
             throws NotFoundException, ConstraintViolatedException
     {
         createRenditions(nodeRef, null, renditions, parameters);
     }
 
     @Override
-    public void createRenditions(NodeRef nodeRef, String versionLabelId, List<Rendition> renditions, Parameters parameters)
+    public void createRenditions(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, List<Rendition> renditions, Parameters parameters)
             throws NotFoundException, ConstraintViolatedException
     {
         if (renditions.isEmpty())
@@ -374,11 +375,11 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         //  { "id": "doclib" },
         //  { "id": "avatar,avatar32" }
         // ]
-        Set<String> renditionNames = new HashSet<>();
+        Set<@RUntainted String> renditionNames = new HashSet<>();
         for (Rendition rendition : renditions)
         {
             String name = getName(rendition);
-            Set<String> requestedRenditions = NodesImpl.getRequestedRenditions(name);
+            Set<@RUntainted String> requestedRenditions = NodesImpl.getRequestedRenditions(name);
             if (requestedRenditions == null)
             {
                 renditionNames.add(null);
@@ -391,7 +392,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
 
         StringJoiner renditionNamesAlreadyExist = new StringJoiner(",");
         StringJoiner renditionNamesNotRegistered = new StringJoiner(",");
-        List<String> renditionNamesToCreate = new ArrayList<>();
+        List<@RUntainted String> renditionNamesToCreate = new ArrayList<>();
         for (String renditionName : renditionNames)
         {
             if (renditionName == null)
@@ -445,13 +446,13 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public void deleteRendition(NodeRef nodeRef, String renditionId, Parameters parameters)
+    public void deleteRendition(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         deleteRendition(nodeRef, null, renditionId, parameters);
     }
 
     @Override
-    public void deleteRendition(NodeRef nodeRef, String versionId, String renditionId, Parameters parameters)
+    public void deleteRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, Parameters parameters)
     {
         if (!renditionService2.isEnabled())
         {
@@ -484,26 +485,26 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     }
 
     @Override
-    public BinaryResource getContent(NodeRef nodeRef, String renditionId, Parameters parameters)
+    public BinaryResource getContent(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         return getContent(nodeRef, null, renditionId, parameters);
     }
 
     @Override
-    public BinaryResource getContent(NodeRef nodeRef, String versionLabelId, String renditionId, Parameters parameters)
+    public BinaryResource getContent(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, @RUntainted String renditionId, Parameters parameters)
     {
         final NodeRef validatedNodeRef = validateNode(nodeRef.getStoreRef(), nodeRef.getId(), versionLabelId, parameters);
         return getContentImpl(validatedNodeRef, renditionId, parameters);
     }
 
     @Override
-    public BinaryResource getContentNoValidation(NodeRef nodeRef, String renditionId, Parameters parameters)
+    public BinaryResource getContentNoValidation(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         return getContentNoValidation(nodeRef, null, renditionId, parameters);
     }
 
     @Override
-    public BinaryResource getContentNoValidation(NodeRef nodeRef, String versionLabelId, String renditionId, Parameters parameters)
+    public BinaryResource getContentNoValidation(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId, @RUntainted String renditionId, Parameters parameters)
     {
         nodeRef = findVersionIfApplicable(nodeRef, versionLabelId);
         return getContentImpl(nodeRef, renditionId, parameters);
@@ -512,7 +513,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
     /**
      * {@inheritDoc}
      */
-    public DirectAccessUrl requestContentDirectUrl(NodeRef nodeRef, String versionId, String renditionId, boolean attachment, Long validFor)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, boolean attachment, Long validFor)
     {
         final NodeRef validatedNodeRef = validateNode(nodeRef.getStoreRef(), nodeRef.getId(), versionId, null);
         NodeRef renditionNodeRef = getRenditionByName(validatedNodeRef, renditionId, null);
@@ -525,7 +526,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return nodes.requestContentDirectUrl(renditionNodeRef, attachment, validFor);
     }
 
-    private BinaryResource getContentImpl(NodeRef nodeRef, String renditionId, Parameters parameters)
+    private BinaryResource getContentImpl(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         NodeRef renditionNodeRef = getRenditionByName(nodeRef, renditionId, parameters);
 
@@ -615,7 +616,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return new NodeBinaryResource(renditionNodeRef, ContentModel.PROP_CONTENT, contentInfo, attachFileName, cacheDirective);
     }
 
-    protected NodeRef getRenditionByName(NodeRef nodeRef, String renditionId, Parameters parameters)
+    protected @RUntainted NodeRef getRenditionByName(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters)
     {
         if (nodeRef != null)
         {
@@ -638,7 +639,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return null;
     }
 
-    protected Rendition toApiRendition(NodeRef renditionNodeRef)
+    protected Rendition toApiRendition(@RUntainted NodeRef renditionNodeRef)
     {
         Rendition apiRendition = new Rendition();
 
@@ -660,7 +661,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return apiRendition;
     }
 
-    protected Rendition toApiRendition(String renditionName)
+    protected Rendition toApiRendition(@RUntainted String renditionName)
     {
         RenditionDefinitionRegistry2 renditionDefinitionRegistry2 = renditionService2.getRenditionDefinitionRegistry2();
         RenditionDefinition2 renditionDefinition = renditionDefinitionRegistry2.getRenditionDefinition(renditionName);
@@ -675,7 +676,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return apiRendition;
     }
 
-    private NodeRef validateNode(StoreRef storeRef, final String nodeId, String versionLabelId, Parameters parameters)
+    private @RUntainted NodeRef validateNode(@RUntainted StoreRef storeRef, final @RUntainted String nodeId, @RUntainted String versionLabelId, Parameters parameters)
     {
         if (nodeId == null)
         {
@@ -691,7 +692,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return nodeRef;
     }
 
-    private NodeRef findVersionIfApplicable(NodeRef nodeRef, String versionLabelId)
+    private @RUntainted NodeRef findVersionIfApplicable(@RUntainted NodeRef nodeRef, @RUntainted String versionLabelId)
     {
         if (versionLabelId != null)
         {
@@ -714,7 +715,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return nodeRef;
     }
 
-    private void isContentFile(NodeRef nodeRef)
+    private void isContentFile(@RUntainted NodeRef nodeRef)
     {
         if (!nodes.isSubClass(nodeRef, ContentModel.PROP_CONTENT, false))
         {
@@ -727,7 +728,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return mimetypeService.getDisplaysByMimetype().get(mimeType);
     }
 
-    private ContentData getContentData(NodeRef nodeRef, boolean validate)
+    private @RUntainted ContentData getContentData(@RUntainted NodeRef nodeRef, boolean validate)
     {
         ContentData contentData = (ContentData) nodeService.getProperty(nodeRef, ContentModel.PROP_CONTENT);
         if (validate && !ContentData.hasContent(contentData))
@@ -737,7 +738,7 @@ public class RenditionsImpl implements Renditions, ResourceLoaderAware
         return contentData;
     }
 
-    private String getMimeType(NodeRef nodeRef)
+    private @RUntainted String getMimeType(@RUntainted NodeRef nodeRef)
     {
         ContentData contentData = getContentData(nodeRef, true);
         return contentData.getMimetype();

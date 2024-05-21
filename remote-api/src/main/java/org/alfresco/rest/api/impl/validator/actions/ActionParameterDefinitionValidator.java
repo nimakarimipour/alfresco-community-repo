@@ -44,6 +44,7 @@ import org.alfresco.service.Experimental;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.logging.log4j.util.Strings;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This class will validate all action types against action parameters definitions (mandatory parameters, parameter constraints)
@@ -89,7 +90,7 @@ public class ActionParameterDefinitionValidator implements ActionValidator
             throw new InvalidArgumentException(String.format(INVALID_ACTION_DEFINITION, actionDefinitionId));
         }
         validateParametersSize(action.getParams(), actionDefinition);
-        final Map<String, Serializable> params = action.getParams();
+        final Map<String, @RUntainted Serializable> params = action.getParams();
         if (MapUtils.isNotEmpty(params))
         {
             params.forEach((key, value) -> checkParameterShouldExist(key, actionDefinition));
@@ -119,7 +120,7 @@ public class ActionParameterDefinitionValidator implements ActionValidator
         return Integer.MIN_VALUE;
     }
 
-    private void validateParametersSize(final Map<String, Serializable> params, final ActionDefinition actionDefinition)
+    private void validateParametersSize(final Map<String, @RUntainted Serializable> params, final ActionDefinition actionDefinition)
     {
         final List<ActionDefinition.ParameterDefinition> parameterDefinitions = getParameterDefinitions(actionDefinition);
         if (CollectionUtils.isNotEmpty(
@@ -136,7 +137,7 @@ public class ActionParameterDefinitionValidator implements ActionValidator
     }
 
     private void validateParameterDefinitions(final ActionDefinition.ParameterDefinition parameterDefinition,
-                                              final Map<String, Serializable> params)
+                                              final Map<String, @RUntainted Serializable> params)
     {
         final Serializable parameterValue = params.get(parameterDefinition.getName());
         if (parameterDefinition.isMandatory() && parameterValue == null)

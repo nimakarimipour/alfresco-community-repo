@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "tags", entityResource = NodesEntityResource.class, title = "Document or folder tags")
 public class NodeTagsRelation implements RelationshipResourceAction.Create<Tag>, RelationshipResourceAction.Delete, RelationshipResourceAction.Read<Tag>, InitializingBean
@@ -59,21 +60,21 @@ public class NodeTagsRelation implements RelationshipResourceAction.Create<Tag>,
 	 */
 	@Override
 	@WebApiDescription(title="Adds one or more tags to the node with id 'nodeId'.")
-    public List<Tag> create(String nodeId, List<Tag> tagsToCreate, Parameters parameters)
+    public List<Tag> create(@RUntainted String nodeId, List<Tag> tagsToCreate, Parameters parameters)
 	{
 	    return tags.addTags(nodeId, tagsToCreate, parameters);
 	}
 
 	@Override
 	@WebApiDescription(title="Remove the tag from the node with id 'nodeId'.")
-	public void delete(String nodeId, String tagId, Parameters parameters)
+	public void delete(@RUntainted String nodeId, @RUntainted String tagId, Parameters parameters)
 	{
 		tags.deleteTag(nodeId, tagId);
 	}
 
 	@Override
 	@WebApiDescription(title="A paged list of tags on the node 'nodeId'.")
-	public CollectionWithPagingInfo<Tag> readAll(String nodeId, Parameters params)
+	public CollectionWithPagingInfo<Tag> readAll(@RUntainted String nodeId, Parameters params)
 	{
 		return tags.getTags(nodeId, params);
 	}

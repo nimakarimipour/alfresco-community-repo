@@ -38,6 +38,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Enable rendition(s) to be download via Shared Link
@@ -68,7 +69,7 @@ public class QuickShareLinkRenditionsRelation implements
     @WebApiNoAuth
     @BinaryProperties({"content"})
     @Override
-    public BinaryResource readProperty(String sharedId, String renditionId, Parameters parameters)
+    public BinaryResource readProperty(@RUntainted String sharedId, @RUntainted String renditionId, Parameters parameters)
     {
         return quickShareLinks.readProperty(sharedId, renditionId, parameters);
     }
@@ -84,7 +85,7 @@ public class QuickShareLinkRenditionsRelation implements
     @WebApiDescription(title = "Retrieve rendition information", description = "Retrieve (created) rendition information")
     @WebApiNoAuth
     @Override
-    public Rendition readById(String entityResourceId, String id, Parameters parameters)
+    public Rendition readById(String entityResourceId, @RUntainted String id, Parameters parameters)
     {
         return quickShareLinks.getRendition(entityResourceId, id);
     }

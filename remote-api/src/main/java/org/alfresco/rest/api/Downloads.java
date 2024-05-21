@@ -26,6 +26,7 @@
 package org.alfresco.rest.api;
 
 import org.alfresco.rest.api.model.Download;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * downloads API
@@ -49,11 +50,11 @@ public interface Downloads
      * @param downloadNodeId
      * @return status info about a download:download node
      */
-    Download getDownloadStatus(String downloadNodeId);
+    Download getDownloadStatus(@RUntainted String downloadNodeId);
     
     /**
      * Stop the zip creation if still in progress
      * @param downloadNodeId
      */
-    void cancel(String downloadNodeId);
+    void cancel(@RUntainted String downloadNodeId);
 }

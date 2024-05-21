@@ -88,6 +88,7 @@ import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Maps from a json request and a solr SearchParameters object.
@@ -111,7 +112,7 @@ public class SearchMapper
      * @param params
      * @return SearchParameters
      */
-    public SearchParameters toSearchParameters(Params params, SearchQuery searchQuery, SearchRequestContext searchRequestContext)
+    public @RUntainted SearchParameters toSearchParameters(Params params, SearchQuery searchQuery, SearchRequestContext searchRequestContext)
     {
         ParameterCheck.mandatory("query", searchQuery.getQuery());
 

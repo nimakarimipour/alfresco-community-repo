@@ -55,6 +55,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.alfresco.rest.api.impl.rules.RuleSetLoader.INCLUSION_TYPE;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RulesImpl implements Rules
@@ -71,8 +72,8 @@ public class RulesImpl implements Rules
     private RestModelMapper<Rule, org.alfresco.service.cmr.rule.Rule> ruleMapper;
 
     @Override
-    public CollectionWithPagingInfo<Rule> getRules(final String folderNodeId,
-                                                   final String ruleSetId,
+    public CollectionWithPagingInfo<Rule> getRules(final @RUntainted String folderNodeId,
+                                                   final @RUntainted String ruleSetId,
                                                    final List<String> includes,
                                                    final Paging paging)
     {
@@ -90,7 +91,7 @@ public class RulesImpl implements Rules
     }
 
     @Override
-    public Rule getRuleById(final String folderNodeId, final String ruleSetId, final String ruleId, final List<String> includes)
+    public Rule getRuleById(final @RUntainted String folderNodeId, final @RUntainted String ruleSetId, final @RUntainted String ruleId, final List<String> includes)
     {
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId, false);
         final NodeRef ruleSetNodeRef = validator.validateRuleSetNode(ruleSetId, folderNodeRef);
@@ -100,7 +101,7 @@ public class RulesImpl implements Rules
     }
 
     @Override
-    public List<Rule> createRules(final String folderNodeId, final String ruleSetId, final List<Rule> rules, final List<String> includes)
+    public List<Rule> createRules(final @RUntainted String folderNodeId, final @RUntainted String ruleSetId, final List<Rule> rules, final List<String> includes)
     {
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId, true);
         // Don't validate the ruleset node if -default- is passed since we may need to create it.
@@ -117,7 +118,7 @@ public class RulesImpl implements Rules
     }
 
     @Override
-    public Rule updateRuleById(String folderNodeId, String ruleSetId, String ruleId, Rule rule, List<String> includes)
+    public Rule updateRuleById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, @RUntainted String ruleId, Rule rule, List<String> includes)
     {
         LOGGER.debug("Updating rule in folder {}, rule set {}, rule {} to {}", folderNodeId, ruleSetId, ruleId, rule);
 
@@ -129,7 +130,7 @@ public class RulesImpl implements Rules
     }
 
     @Override
-    public void deleteRuleById(String folderNodeId, String ruleSetId, String ruleId)
+    public void deleteRuleById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, @RUntainted String ruleId)
     {
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId, true);
         final NodeRef ruleSetNodeRef = validator.validateRuleSetNode(ruleSetId, folderNodeRef);
@@ -139,7 +140,7 @@ public class RulesImpl implements Rules
     }
 
     @Override
-    public RuleExecution executeRules(final String folderNodeId, final boolean eachSubFolderIncluded)
+    public RuleExecution executeRules(final @RUntainted String folderNodeId, final boolean eachSubFolderIncluded)
     {
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId, false);
         final Map<String, Serializable> parameterValues = new HashMap<>();

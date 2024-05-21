@@ -28,6 +28,7 @@ package org.alfresco.rest.api;
 import org.alfresco.rest.api.model.Favourite;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to favourites functionality and maps between representations repository and api representations.
@@ -47,7 +48,7 @@ public interface Favourites
      * @param personId the personId for which the favourite is to be added
      * @param favourite the favourite to add
      */
-    Favourite addFavourite(String personId, Favourite favourite);
+    Favourite addFavourite(@RUntainted String personId, Favourite favourite);
 
     /**
      * Add a favourite for user personId taking parameters into account
@@ -64,7 +65,7 @@ public interface Favourites
      * @param personId the personId for which the favourite is to be removed
      * @param id the id of the favourite to remove (id is a uuid)
      */
-    void removeFavourite(String personId, String id);
+    void removeFavourite(String personId, @RUntainted String id);
 
     /**
      * Get a paged list of favourites for user personId
@@ -82,7 +83,7 @@ public interface Favourites
      * @param favouriteId the favourite id
      * @return the favourite
      */
-    Favourite getFavourite(String personId, String favouriteId);
+    Favourite getFavourite(@RUntainted String personId, @RUntainted String favouriteId);
 
     /**
      * Get a specific favourite for user personId taking parameters into account
@@ -92,5 +93,5 @@ public interface Favourites
      * @param parameters  the parameters
      * @return the favourite
      */
-    Favourite getFavourite(String personId, String favouriteId, Parameters parameters);
+    Favourite getFavourite(String personId, @RUntainted String favouriteId, Parameters parameters);
 }

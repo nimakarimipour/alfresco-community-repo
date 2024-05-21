@@ -46,6 +46,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.http.HttpMethod;
 
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Handles the HTTP DELETE for a Resource
@@ -63,9 +64,9 @@ public class ResourceWebScriptDelete extends AbstractResourceWebScript implement
     }
 
     @Override
-    public Params extractParams(ResourceMetadata resourceMeta, WebScriptRequest req)
+    public Params extractParams(ResourceMetadata resourceMeta, @RUntainted WebScriptRequest req)
     {
-        final Map<String, String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
+        final Map<String, @RUntainted String> resourceVars = locator.parseTemplateVars(req.getServiceMatch().getTemplateVars());
         final String entityId = resourceVars.get(ResourceLocator.ENTITY_ID);
         final String relationshipId = resourceVars.get(ResourceLocator.RELATIONSHIP_ID);
         final String relationship2Id = resourceVars.get(ResourceLocator.RELATIONSHIP2_ID);
@@ -116,7 +117,7 @@ public class ResourceWebScriptDelete extends AbstractResourceWebScript implement
      * @return anObject the result of the execute
      */
     @Override
-    public Object executeAction(ResourceWithMetadata resource, Params params, WithResponse withResponse)
+    public @RUntainted Object executeAction(ResourceWithMetadata resource, Params params, WithResponse withResponse)
     {
         switch (resource.getMetaData().getType())
         {

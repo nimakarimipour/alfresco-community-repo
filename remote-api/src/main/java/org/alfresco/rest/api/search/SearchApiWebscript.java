@@ -53,6 +53,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An implementation of the {{baseUrl}}/{{networkId}}/public/search/versions/1/search endpoint
@@ -62,8 +63,8 @@ import java.util.List;
 public class SearchApiWebscript extends AbstractWebScript implements RecognizedParamsExtractor, RequestReader, ResponseWriter,
                                                                 InitializingBean
 {
-    private ServiceRegistry serviceRegistry;
-    private SearchService searchService;
+    private @RUntainted ServiceRegistry serviceRegistry;
+    private @RUntainted SearchService searchService;
     private SearchMapper searchMapper;
     private ResultMapper resultMapper;
     protected ApiAssistant assistant;
@@ -156,7 +157,7 @@ public class SearchApiWebscript extends AbstractWebScript implements RecognizedP
         this.assistant = assistant;
     }
 
-    public void setServiceRegistry(ServiceRegistry serviceRegistry) {
+    public void setServiceRegistry(@RUntainted ServiceRegistry serviceRegistry) {
         this.serviceRegistry = serviceRegistry;
     }
 

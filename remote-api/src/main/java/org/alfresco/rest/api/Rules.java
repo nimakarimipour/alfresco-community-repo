@@ -35,6 +35,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.rule.RuleServiceException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Folder node rules API.
@@ -52,7 +53,7 @@ public interface Rules
      * @param paging - {@link Paging} information
      * @return {@link CollectionWithPagingInfo} containing a list page of folder rules
      */
-    CollectionWithPagingInfo<Rule> getRules(String folderNodeId, String ruleSetId, List<String> includes, Paging paging);
+    CollectionWithPagingInfo<Rule> getRules(@RUntainted String folderNodeId, @RUntainted String ruleSetId, List<String> includes, Paging paging);
 
     /**
      * Get rule for rule's ID and check associations with folder node and rule set node
@@ -63,7 +64,7 @@ public interface Rules
      * @param includes - The list of optional fields to include in the response.
      * @return {@link Rule} definition
      */
-    Rule getRuleById(String folderNodeId, String ruleSetId, String ruleId, List<String> includes);
+    Rule getRuleById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, @RUntainted String ruleId, List<String> includes);
 
     /**
      * Create new rules (and potentially a rule set if "-default-" is supplied).
@@ -76,7 +77,7 @@ public interface Rules
      * @throws InvalidArgumentException If the nodes are not the expected types, or the rule set does not correspond to the folder.
      * @throws RuleServiceException If the folder is already linked to another rule set.
      */
-    List<Rule> createRules(String folderNodeId, String ruleSetId, List<Rule> rule, List<String> includes);
+    List<Rule> createRules(@RUntainted String folderNodeId, @RUntainted String ruleSetId, List<Rule> rule, List<String> includes);
 
     /**
      * Update a rule.
@@ -88,7 +89,7 @@ public interface Rules
      * @param includes The list of optional fields to include in the response.
      * @return The newly updated rule.
      */
-    Rule updateRuleById(String folderNodeId, String ruleSetId, String ruleId, Rule rule, List<String> includes);
+    Rule updateRuleById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, @RUntainted String ruleId, Rule rule, List<String> includes);
 
     /**
      * Delete rule for rule's ID and check associations with folder node and rule set node
@@ -97,7 +98,7 @@ public interface Rules
      * @param ruleSetId - rule set ID
      * @param ruleId - rule ID
      */
-    void deleteRuleById(String folderNodeId, String ruleSetId, String ruleId);
+    void deleteRuleById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, @RUntainted String ruleId);
 
     /**
      * Execute rules for given folder node.
@@ -105,5 +106,5 @@ public interface Rules
      * @param folderNodeId - the ID of a folder
      * @param eachSubFolderIncluded - indicates if rules should be executed also on sub-folders
      */
-    RuleExecution executeRules(final String folderNodeId, final boolean eachSubFolderIncluded);
+    RuleExecution executeRules(final @RUntainted String folderNodeId, final boolean eachSubFolderIncluded);
 }

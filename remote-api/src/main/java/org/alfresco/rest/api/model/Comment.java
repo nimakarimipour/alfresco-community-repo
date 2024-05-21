@@ -34,6 +34,7 @@ import org.alfresco.rest.api.people.PeopleEntityResource;
 import org.alfresco.rest.framework.resource.EmbeddedEntityResource;
 import org.alfresco.rest.framework.resource.UniqueId;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A representation of a Comment in the system.
@@ -48,7 +49,7 @@ public class Comment
     public static final QName PROP_COMMENT_CREATED_BY = QName.createQName("RestApi", "createdBy");
     public static final QName PROP_COMMENT_MODIFIED_BY = QName.createQName("RestApi", "modifiedBy");
 
-	private String id;
+	private @RUntainted String id;
     private String title;
     private String content;
     private Date createdAt;
@@ -66,7 +67,7 @@ public class Comment
         super();
     }
 
-    public Comment(String id, Map<QName, Serializable> nodeProps, boolean canEdit, boolean canDelete)
+    public Comment(@RUntainted String id, Map<QName, Serializable> nodeProps, boolean canEdit, boolean canDelete)
     {
     	if(id == null)
     	{
@@ -80,12 +81,12 @@ public class Comment
     }
 
     @UniqueId
-    public String getId()
+    public @RUntainted String getId()
     {
 		return id;
 	}
 
-    public void setId(String id)
+    public void setId(@RUntainted String id)
     {
     	this.id = id;
     }
@@ -100,12 +101,12 @@ public class Comment
 		return canDelete;
 	}
 
-	public String getTitle()
+	public @RUntainted String getTitle()
     {
         return this.title;
     }
     
-    public String getContent()
+    public @RUntainted String getContent()
     {
         return this.content;
     }

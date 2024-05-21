@@ -51,6 +51,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.web.context.ServletContextAware;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -68,8 +69,8 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
     private static final Log logger = LogFactory.getLog(QuickShareContentGet.class);
     
     private NodeService nodeService;
-    private NamespaceService namespaceService;
-    private QuickShareService quickShareSerivce;
+    private @RUntainted NamespaceService namespaceService;
+    private @RUntainted QuickShareService quickShareSerivce;
     
     private boolean enabled = true;
     
@@ -84,12 +85,12 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
         super.setNodeService(nodeService);
     }
     
-    public void setNamespaceService(NamespaceService namespaceService)
+    public void setNamespaceService(@RUntainted NamespaceService namespaceService)
     {
         this.namespaceService = namespaceService;
     }
     
-    public void setQuickShareService(QuickShareService quickShareService)
+    public void setQuickShareService(@RUntainted QuickShareService quickShareService)
     {
         this.quickShareSerivce = quickShareService;
     }
@@ -106,7 +107,7 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
     
     
     @Override
-    public void execute(final WebScriptRequest req, final WebScriptResponse res) throws IOException
+    public void execute(final @RUntainted WebScriptRequest req, final WebScriptResponse res) throws IOException
     {
         if (! isEnabled())
         {
@@ -114,7 +115,7 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
         }
         
         // create map of template vars (params)
-        final Map<String, String> params = req.getServiceMatch().getTemplateVars();
+        final Map<String, @RUntainted String> params = req.getServiceMatch().getTemplateVars();
         final String sharedId = params.get("shared_id");
         if (sharedId == null)
         {
@@ -123,7 +124,7 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
         
         try
         {
-            Pair<String, NodeRef> pair = quickShareSerivce.getTenantNodeRefFromSharedId(sharedId);
+            Pair<String, @RUntainted NodeRef> pair = quickShareSerivce.getTenantNodeRefFromSharedId(sharedId);
             final String tenantDomain = pair.getFirst();
             final NodeRef nodeRef = pair.getSecond();
 
@@ -163,7 +164,7 @@ public class QuickShareContentGet extends ContentGet implements ServletContextAw
         }
     }
 	
-	protected void executeImpl(NodeRef nodeRef, Map<String, String> templateVars, WebScriptRequest req, WebScriptResponse res, Map<String, Object> model, boolean attach) throws IOException
+	protected void executeImpl(@RUntainted NodeRef nodeRef, Map<String, @RUntainted String> templateVars, @RUntainted WebScriptRequest req, WebScriptResponse res, Map<String, @RUntainted Object> model, boolean attach) throws IOException
 	{
 	    // render content
         QName propertyQName = ContentModel.PROP_CONTENT;

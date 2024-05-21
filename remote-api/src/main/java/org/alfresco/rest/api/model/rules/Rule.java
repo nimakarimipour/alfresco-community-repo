@@ -32,11 +32,12 @@ import java.util.stream.Collectors;
 
 import org.alfresco.rest.framework.resource.UniqueId;
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class Rule
 {
-    private String id;
+    private @RUntainted String id;
     private String name;
     private String description;
     private boolean isEnabled;
@@ -49,12 +50,12 @@ public class Rule
     private List<Action> actions;
 
     @UniqueId
-    public String getId()
+    public @RUntainted String getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(@RUntainted String id)
     {
         this.id = id;
     }

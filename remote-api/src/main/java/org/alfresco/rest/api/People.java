@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.security.NoSuchPersonException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface People
 {
@@ -47,9 +48,9 @@ public interface People
     String PARAM_LAST_NAME = "lastName";
     String PARAM_ID = "id";
 
-    String validatePerson(String personId);
-    String validatePerson(String personId, boolean validateIsCurrentUser);
-    NodeRef getAvatar(String personId);
+    String validatePerson(@RUntainted String personId);
+    String validatePerson(@RUntainted String personId, boolean validateIsCurrentUser);
+    NodeRef getAvatar(@RUntainted String personId);
 
     /**
      * Get a person. This included a full representation of the person.
@@ -117,7 +118,7 @@ public interface People
      * @param parameters
      * @return
      */
-    BinaryResource downloadAvatarContent(String personId, Parameters parameters);
+    BinaryResource downloadAvatarContent(@RUntainted String personId, Parameters parameters);
 
     /**
      *
@@ -127,11 +128,11 @@ public interface People
      * @param parameters
      * @return
      */
-    Person uploadAvatarContent(String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters);
+    Person uploadAvatarContent(@RUntainted String personId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters);
 
     /**
      *
      * @param personId
      */
-    void deleteAvatarContent(String personId);
+    void deleteAvatarContent(@RUntainted String personId);
 }

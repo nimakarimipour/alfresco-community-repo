@@ -54,6 +54,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.util.ParameterCheck;
 
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An implementation of an Entity Resource for a Node (file or folder)
@@ -96,7 +97,7 @@ public class NodesEntityResource implements
      */
     @WebApiDescription(title = "Get Node Information", description = "Get information for the node with id 'nodeId'")
     @WebApiParam(name = "nodeId", title = "The node id")
-    public Node readById(String nodeId, Parameters parameters)
+    public Node readById(@RUntainted String nodeId, Parameters parameters)
     {
     	return nodes.getFolderOrDocument(nodeId, parameters);
     }
@@ -112,7 +113,7 @@ public class NodesEntityResource implements
     @Override
     @WebApiDescription(title = "Download content", description = "Download content")
     @BinaryProperties({"content"})
-    public BinaryResource readProperty(String fileNodeId, Parameters parameters) throws EntityNotFoundException
+    public BinaryResource readProperty(@RUntainted String fileNodeId, Parameters parameters) throws EntityNotFoundException
     {
         return nodes.getContent(fileNodeId, parameters, true);
     }
@@ -133,7 +134,7 @@ public class NodesEntityResource implements
     @Override
     @WebApiDescription(title = "Upload content", description = "Upload content")
     @BinaryProperties({"content"})
-    public Node updateProperty(String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
+    public Node updateProperty(@RUntainted String fileNodeId, BasicContentInfo contentInfo, InputStream stream, Parameters parameters)
     {
         return nodes.updateContent(fileNodeId, contentInfo, stream, parameters);
     }
@@ -151,7 +152,7 @@ public class NodesEntityResource implements
      */
     @Override
     @WebApiDescription(title="Updates a node (file or folder) with id 'nodeId'")
-    public Node update(String nodeId, Node nodeInfo, Parameters parameters)
+    public Node update(@RUntainted String nodeId, Node nodeInfo, Parameters parameters)
     {
         return nodes.updateNode(nodeId, nodeInfo, parameters);
     }
@@ -163,14 +164,14 @@ public class NodesEntityResource implements
      */
     @Override
     @WebApiDescription(title = "Delete Node", description="Delete the file or folder with id 'nodeId'. Folder will cascade delete")
-    public void delete(String nodeId, Parameters parameters)
+    public void delete(@RUntainted String nodeId, Parameters parameters)
     {
         nodes.deleteNode(nodeId, parameters);
     }
 
     @Operation("copy")
     @WebApiDescription(title = "Copy Node", description="Copy one or more nodes (files or folders) to a new target folder, with option to rename.")
-    public Node copyById(String nodeId, NodeTarget target, Parameters parameters, WithResponse withResponse)
+    public Node copyById(@RUntainted String nodeId, NodeTarget target, Parameters parameters, WithResponse withResponse)
     {
        return nodes.moveOrCopyNode(nodeId, target.getTargetParentId(), target.getName(), parameters, true);
     }
@@ -179,7 +180,7 @@ public class NodesEntityResource implements
     @WebApiDescription(title = "Move Node",
             description="Moves one or more nodes (files or folders) to a new target folder, with option to rename.",
             successStatus = HttpServletResponse.SC_OK)
-    public Node moveById(String nodeId, NodeTarget target, Parameters parameters, WithResponse withResponse)
+    public Node moveById(@RUntainted String nodeId, NodeTarget target, Parameters parameters, WithResponse withResponse)
     {
         return nodes.moveOrCopyNode(nodeId, target.getTargetParentId(), target.getName(), parameters, false);
     }
@@ -188,7 +189,7 @@ public class NodesEntityResource implements
     @WebApiDescription(title = "Lock Node",
             description="Places a lock on a node.",
             successStatus = HttpServletResponse.SC_OK)
-    public Node lock(String nodeId, LockInfo lockInfo, Parameters parameters, WithResponse withResponse)
+    public Node lock(@RUntainted String nodeId, LockInfo lockInfo, Parameters parameters, WithResponse withResponse)
     {
         return nodes.lock(nodeId, lockInfo, parameters);
     }
@@ -197,7 +198,7 @@ public class NodesEntityResource implements
     @WebApiDescription(title = "Unlock Node",
             description="Removes a lock on a node.",
             successStatus = HttpServletResponse.SC_OK)
-    public Node unlock(String nodeId, Void ignore, Parameters parameters, WithResponse withResponse)
+    public Node unlock(@RUntainted String nodeId, Void ignore, Parameters parameters, WithResponse withResponse)
     {
         return nodes.unlock(nodeId, parameters);
     }
@@ -207,7 +208,7 @@ public class NodesEntityResource implements
     @WebApiDescription(title = "Request content url",
             description="Generates a direct access URL.",
             successStatus = HttpServletResponse.SC_OK)
-    public DirectAccessUrl requestContentDirectUrl(String nodeId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
+    public DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, DirectAccessUrlRequest directAccessUrlRequest, Parameters parameters, WithResponse withResponse)
     {
         boolean attachment = directAccessUrlHelper.getAttachment(directAccessUrlRequest);
         Long validFor = directAccessUrlHelper.getDefaultExpiryTimeInSec();

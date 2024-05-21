@@ -84,6 +84,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -119,11 +120,11 @@ public abstract class WebDAVMethod
 
     // Servlet request/response
 
-    protected HttpServletRequest m_request;
+    protected @RUntainted HttpServletRequest m_request;
     protected HttpServletResponse m_response;
     private File m_requestBody;
     private ServletInputStream m_inputStream;
-    private CharArrayWriter m_xmlWriter;
+    private @RUntainted CharArrayWriter m_xmlWriter;
     private BufferedReader m_reader;
 
     // WebDAV helper
@@ -132,11 +133,11 @@ public abstract class WebDAVMethod
 
     // Root node
 
-    protected NodeRef m_rootNodeRef;
+    protected @RUntainted NodeRef m_rootNodeRef;
 
     // Repository path
 
-    protected String m_strPath = null;
+    protected @RUntainted String m_strPath = null;
 
     // User Agent
     
@@ -182,7 +183,7 @@ public abstract class WebDAVMethod
      *            NodeRef
      */
     public void setDetails(final HttpServletRequest req, HttpServletResponse resp, WebDAVHelper davHelper,
-            NodeRef rootNode)
+            @RUntainted NodeRef rootNode)
     {
         // Wrap the request so that it is 'retryable'. Calls to getInputStream() and getReader() will result in the
         // request body being read into an intermediate file.
@@ -731,7 +732,7 @@ public abstract class WebDAVMethod
      * 
      * @return NodeService
      */
-    protected final NodeService getNodeService()
+    protected final @RUntainted NodeService getNodeService()
     {
         return m_davHelper.getNodeService();
     }
@@ -759,7 +760,7 @@ public abstract class WebDAVMethod
     /**
      * @return Returns the general file/folder manipulation service
      */
-    protected final FileFolderService getFileFolderService()
+    protected final @RUntainted FileFolderService getFileFolderService()
     {
         return m_davHelper.getFileFolderService();
     }
@@ -779,7 +780,7 @@ public abstract class WebDAVMethod
      * 
      * @return MimetypeService
      */
-    protected final MimetypeService getMimetypeService()
+    protected final @RUntainted MimetypeService getMimetypeService()
     {
         return m_davHelper.getMimetypeService();
     }
@@ -827,7 +828,7 @@ public abstract class WebDAVMethod
     /**
      * @return Returns the path of the servlet, e.g. /webdav
      */
-    protected final String getServletPath()
+    protected final @RUntainted String getServletPath()
     {
         return m_request.getServletPath();
     }
@@ -835,7 +836,7 @@ public abstract class WebDAVMethod
     /**
      * @return Returns the context path of the servlet, e.g. /alfresco
      */
-    protected final String getContextPath()
+    protected final @RUntainted String getContextPath()
     {
         return m_request.getContextPath();
     }
@@ -845,7 +846,7 @@ public abstract class WebDAVMethod
      * 
      * @return NodeRef
      */
-    protected final NodeRef getRootNodeRef()
+    protected final @RUntainted NodeRef getRootNodeRef()
     {
         return m_rootNodeRef;
     }
@@ -855,7 +856,7 @@ public abstract class WebDAVMethod
      * 
      * @return String
      */
-    public String getPath()
+    public @RUntainted String getPath()
     {
         return m_strPath;
     }
@@ -1389,7 +1390,7 @@ public abstract class WebDAVMethod
      * @return Return the file info for the path
      * @throws FileNotFoundException if the path doesn't refer to a valid node
      */
-    protected FileInfo getNodeForPath(NodeRef rootNodeRef, String path) throws FileNotFoundException
+    protected FileInfo getNodeForPath(@RUntainted NodeRef rootNodeRef, String path) throws FileNotFoundException
     {
         return getDAVHelper().getNodeForPath(rootNodeRef, path);
     }
@@ -1401,7 +1402,7 @@ public abstract class WebDAVMethod
      * @param isFolder indicates file or folder is requested
      * @return URL that could be used to access the given path
      */
-    protected String getURLForPath(HttpServletRequest request, String path, boolean isFolder)
+    protected @RUntainted String getURLForPath(HttpServletRequest request, String path, boolean isFolder)
     {
         return getDAVHelper().getURLForPath(request, path, isFolder, m_userAgent);
     }

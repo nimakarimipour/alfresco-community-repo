@@ -53,6 +53,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.rule.RuleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RuleSetsImpl implements RuleSets
@@ -66,7 +67,7 @@ public class RuleSetsImpl implements RuleSets
     private RuntimeRuleService runtimeRuleService;
 
     @Override
-    public CollectionWithPagingInfo<RuleSet> getRuleSets(String folderNodeId, List<String> includes, Paging paging)
+    public CollectionWithPagingInfo<RuleSet> getRuleSets(@RUntainted String folderNodeId, List<String> includes, Paging paging)
     {
         NodeRef folderNode = validator.validateFolderNode(folderNodeId, false);
 
@@ -109,7 +110,7 @@ public class RuleSetsImpl implements RuleSets
     }
 
     @Override
-    public RuleSet getRuleSetById(String folderNodeId, String ruleSetId, List<String> includes)
+    public RuleSet getRuleSetById(@RUntainted String folderNodeId, @RUntainted String ruleSetId, List<String> includes)
     {
         NodeRef folderNode = validator.validateFolderNode(folderNodeId, false);
         NodeRef ruleSetNode = validator.validateRuleSetNode(ruleSetId, folderNode);
@@ -118,7 +119,7 @@ public class RuleSetsImpl implements RuleSets
     }
 
     @Override
-    public RuleSet updateRuleSet(String folderNodeId, RuleSet ruleSet, List<String> includes)
+    public RuleSet updateRuleSet(@RUntainted String folderNodeId, RuleSet ruleSet, List<String> includes)
     {
         // Editing the order of the rules doesn't require permission to edit the rule set itself.
         NodeRef folderNode = validator.validateFolderNode(folderNodeId, false);
@@ -155,7 +156,7 @@ public class RuleSetsImpl implements RuleSets
     }
 
     @Override
-    public RuleSetLink linkToRuleSet(String folderNodeId, String linkToNodeId)
+    public RuleSetLink linkToRuleSet(@RUntainted String folderNodeId, @RUntainted String linkToNodeId)
     {
 
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId,true);
@@ -186,7 +187,7 @@ public class RuleSetsImpl implements RuleSets
     }
 
     @Override
-    public void unlinkRuleSet(String folderNodeId, String ruleSetId)
+    public void unlinkRuleSet(@RUntainted String folderNodeId, @RUntainted String ruleSetId)
     {
         final NodeRef folderNodeRef = validator.validateFolderNode(folderNodeId,true);
         final NodeRef ruleSetNodeRef = validator.validateRuleSetNode(ruleSetId, folderNodeRef);

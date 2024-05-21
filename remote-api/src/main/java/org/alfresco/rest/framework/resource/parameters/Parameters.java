@@ -33,6 +33,7 @@ import org.alfresco.rest.framework.resource.content.BasicContentInfo;
 import org.alfresco.rest.framework.resource.parameters.where.Query;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -43,8 +44,8 @@ import org.springframework.extensions.webscripts.WebScriptRequest;
 public interface Parameters
 {
     String getEntityId();
-    String getRelationshipId();
-    String getRelationship2Id();
+    @RUntainted String getRelationshipId();
+    @RUntainted String getRelationship2Id();
     boolean isCollectionResource();
 
     /**
@@ -53,7 +54,7 @@ public interface Parameters
      * @param parameterName String
      * @return String The Parameter value
      */
-    String getParameter(String parameterName);
+    @RUntainted String getParameter(String parameterName);
     
     /**
      * Gets a single request parameter passed in by the user.

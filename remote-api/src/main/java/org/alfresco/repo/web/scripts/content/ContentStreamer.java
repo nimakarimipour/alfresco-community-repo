@@ -68,6 +68,7 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.util.FileCopyUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -102,8 +103,8 @@ public class ContentStreamer implements ResourceLoaderAware
      */
     // protected PermissionService permissionService;
     protected NodeService nodeService;
-    protected ContentService contentService;
-    protected MimetypeService mimetypeService;
+    protected @RUntainted ContentService contentService;
+    protected @RUntainted MimetypeService mimetypeService;
     protected ResourceLoader resourceLoader;
     protected EventPublisher eventPublisher;
     protected SiteService siteService;
@@ -111,7 +112,7 @@ public class ContentStreamer implements ResourceLoaderAware
     /**
      * @param mimetypeService MimetypeService
      */
-    public void setMimetypeService(MimetypeService mimetypeService)
+    public void setMimetypeService(@RUntainted MimetypeService mimetypeService)
     {
         this.mimetypeService = mimetypeService;
     }
@@ -149,7 +150,7 @@ public class ContentStreamer implements ResourceLoaderAware
     /**
      * @param contentService ContentService
      */
-    public void setContentService(ContentService contentService)
+    public void setContentService(@RUntainted ContentService contentService)
 
     {
         this.contentService = contentService;
@@ -168,13 +169,13 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    public void streamContent(WebScriptRequest req, 
+    public void streamContent(@RUntainted WebScriptRequest req, 
                                  WebScriptResponse res, 
-                                 File file, 
+                                 @RUntainted File file, 
                                  Long modifiedTime,
                                  boolean attach, 
                                  String attachFileName,
-                                 Map<String, Object> model) throws IOException
+                                 Map<String, @RUntainted Object> model) throws IOException
     {
         if (logger.isDebugEnabled())
             logger.debug("Retrieving content from file " + file.getAbsolutePath() + " (attach: " + attach + ")");
@@ -210,13 +211,13 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param attachFileName Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    public void streamContent(WebScriptRequest req,
+    public void streamContent(@RUntainted WebScriptRequest req,
                 WebScriptResponse res,
-                NodeRef nodeRef,
-                QName propertyQName,
+                @RUntainted NodeRef nodeRef,
+                @RUntainted QName propertyQName,
                 boolean attach,
                 String attachFileName,
-                Map<String, Object> model) throws IOException
+                Map<String, @RUntainted Object> model) throws IOException
     {
         if (logger.isDebugEnabled())
             logger.debug("Retrieving content from node ref " + nodeRef.toString() + " (property: " + propertyQName.toString() + ") (attach: " + attach + ")");
@@ -282,11 +283,11 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param attach            Indicates whether the content should be streamed as an attachment or not
      * @throws IOException
      */
-    public void streamContent(WebScriptRequest req, 
+    public void streamContent(@RUntainted WebScriptRequest req, 
                                  WebScriptResponse res, 
-                                 String resourcePath,
+                                 @RUntainted String resourcePath,
                                  boolean attach,
-                                 Map<String, Object> model) throws IOException
+                                 Map<String, @RUntainted Object> model) throws IOException
     {
         streamContent(req, res, resourcePath, attach, null, model);
     }
@@ -301,12 +302,12 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    protected void streamContent(WebScriptRequest req, 
+    protected void streamContent(@RUntainted WebScriptRequest req, 
                                  WebScriptResponse res, 
-                                 String resourcePath,
+                                 @RUntainted String resourcePath,
                                  boolean attach, 
                                  String attachFileName,
-                                 Map<String, Object> model) throws IOException
+                                 Map<String, @RUntainted Object> model) throws IOException
     {
         if (logger.isDebugEnabled())
             logger.debug("Retrieving content from resource path " + resourcePath + " (attach: " + attach + ")");
@@ -350,16 +351,16 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param attachFileName    Optional file name to use when attach is <code>true</code>
      * @throws IOException
      */
-    public void streamContentImpl(WebScriptRequest req, 
+    public void streamContentImpl(@RUntainted WebScriptRequest req, 
                                     WebScriptResponse res, 
-                                    ContentReader reader, 
+                                    @RUntainted ContentReader reader, 
                                     final NodeRef nodeRef,
                                     final QName propertyQName,
                                     final boolean attach,
                                     final Date modified, 
                                     String eTag, 
                                     final String attachFileName, 
-                                    Map<String, Object> model) throws IOException
+                                    Map<String, @RUntainted Object> model) throws IOException
     {
         setAttachment(req, res, attach, attachFileName);
     
@@ -553,7 +554,7 @@ public class ContentStreamer implements ResourceLoaderAware
      * @param modified Date
      * @param eTag String
      */
-    protected void setResponseCache(WebScriptResponse res, Date modified, String eTag, Map<String, Object> model)
+    protected void setResponseCache(WebScriptResponse res, Date modified, String eTag, Map<String, @RUntainted Object> model)
     {
         Cache cache = new Cache();
 

@@ -24,6 +24,7 @@
  * #L%
  */
 package org.alfresco.rest.framework.resource.parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Search sort column 
@@ -45,7 +46,7 @@ public class SortColumn
         this.asc = asc;
     }
     
-    public String column;
+    public @RUntainted String column;
     public boolean asc;
     
     @Override

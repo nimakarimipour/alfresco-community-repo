@@ -31,6 +31,7 @@ import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.workflow.api.model.FormModelElement;
 import org.alfresco.rest.workflow.api.model.ProcessDefinition;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface ProcessDefinitions
 {
@@ -38,7 +39,7 @@ public interface ProcessDefinitions
     
     public ProcessDefinition getProcessDefinition(String definitionId);
     
-    public BinaryResource getProcessDefinitionImage(String definitionId);
+    public BinaryResource getProcessDefinitionImage(@RUntainted String definitionId);
     
     public CollectionWithPagingInfo<FormModelElement> getStartFormModel(String definitionId, Paging paging);
 }

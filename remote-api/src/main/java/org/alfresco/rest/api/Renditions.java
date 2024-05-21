@@ -37,6 +37,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.StoreRef;
 
 import java.util.List;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Renditions API
@@ -57,7 +58,7 @@ public interface Renditions
      * @param parameters the {@link Parameters} object to get the parameters passed into the request
      * @return the rendition results
      */
-    CollectionWithPagingInfo<Rendition> getRenditions(NodeRef nodeRef, Parameters parameters);
+    CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted NodeRef nodeRef, Parameters parameters);
 
     /**
      * Lists all available renditions includes those that have been created and those that are yet to be created.
@@ -67,7 +68,7 @@ public interface Renditions
      * @param parameters  the {@link Parameters} object to get the parameters passed into the request
      * @return the rendition results
      */
-    CollectionWithPagingInfo<Rendition> getRenditions(NodeRef nodeRef, String versionId, Parameters parameters);
+    CollectionWithPagingInfo<Rendition> getRenditions(@RUntainted NodeRef nodeRef, @RUntainted String versionId, Parameters parameters);
 
     /**
      * Gets information about a rendition of a node in the repository.
@@ -78,7 +79,7 @@ public interface Renditions
      * @param parameters  the {@link Parameters} object to get the parameters passed into the request
      * @return the {@link Rendition} object
      */
-    Rendition getRendition(NodeRef nodeRef, String renditionId, Parameters parameters);
+    Rendition getRendition(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Gets information about a rendition of a node in the repository.
@@ -90,7 +91,7 @@ public interface Renditions
      * @param parameters  the {@link Parameters} object to get the parameters passed into the request
      * @return the {@link Rendition} object
      */
-    Rendition getRendition(NodeRef nodeRef, String versionId, String renditionId, Parameters parameters);
+    Rendition getRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Creates a rendition for the given node asynchronously.
@@ -99,7 +100,7 @@ public interface Renditions
      * @param rendition  the {@link Rendition} request
      * @param parameters the {@link Parameters} object to get the parameters passed into the request
      */
-    void createRendition(NodeRef nodeRef, Rendition rendition, Parameters parameters);
+    void createRendition(@RUntainted NodeRef nodeRef, Rendition rendition, Parameters parameters);
 
     /**
      * Creates a rendition for the given node - either async r sync
@@ -109,7 +110,7 @@ public interface Renditions
      * @param executeAsync
      * @param parameters
      */
-    void createRendition(NodeRef nodeRef, Rendition rendition, boolean executeAsync, Parameters parameters);
+    void createRendition(@RUntainted NodeRef nodeRef, Rendition rendition, boolean executeAsync, Parameters parameters);
 
     /**
      * Creates a rendition for the given node - either async r sync
@@ -120,7 +121,7 @@ public interface Renditions
      * @param executeAsync
      * @param parameters
      */
-    void createRendition(NodeRef nodeRef, String versionId, Rendition rendition, boolean executeAsync, Parameters parameters);
+    void createRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionId, Rendition rendition, boolean executeAsync, Parameters parameters);
 
     /**
      * Creates renditions that don't already exist for the given node asynchronously.
@@ -131,7 +132,7 @@ public interface Renditions
      * @throws NotFoundException if any of the rendition id do not exist.
      * @throws ConstraintViolatedException if all of the renditions already exist.
      */
-    void createRenditions(NodeRef nodeRef, List<Rendition> renditions, Parameters parameters)
+    void createRenditions(@RUntainted NodeRef nodeRef, List<Rendition> renditions, Parameters parameters)
             throws NotFoundException, ConstraintViolatedException;
 
     /**
@@ -144,7 +145,7 @@ public interface Renditions
      * @throws NotFoundException if any of the rendition id do not exist.
      * @throws ConstraintViolatedException if all of the renditions already exist.
      */
-    void createRenditions(NodeRef nodeRef, String versionId, List<Rendition> renditions, Parameters parameters)
+    void createRenditions(@RUntainted NodeRef nodeRef, @RUntainted String versionId, List<Rendition> renditions, Parameters parameters)
             throws NotFoundException, ConstraintViolatedException;
 
     /**
@@ -154,7 +155,7 @@ public interface Renditions
      * @param renditionId   the rendition id
      * @param parameters    the {@link Parameters} object to get the parameters passed into the request
      */
-    void deleteRendition(NodeRef nodeRef, String renditionId, Parameters parameters);
+    void deleteRendition(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Delete the rendition node.
@@ -164,7 +165,7 @@ public interface Renditions
      * @param renditionId   the rendition id
      * @param parameters    the {@link Parameters} object to get the parameters passed into the request
      */
-    void deleteRendition(NodeRef nodeRef, String versionId, String renditionId, Parameters parameters);
+    void deleteRendition(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Downloads rendition.
@@ -174,28 +175,7 @@ public interface Renditions
      * @param parameters  the {@link Parameters} object to get the parameters passed into the request
      * @return the rendition stream
      */
-    BinaryResource getContent(NodeRef nodeRef, String renditionId, Parameters parameters);
-
-    /**
-     * Downloads rendition.
-     *
-     * @param nodeRef     the source nodeRef, ie. live node
-     * @param versionId   the version id (aka version label)
-     * @param renditionId the rendition id
-     * @param parameters  the {@link Parameters} object to get the parameters passed into the request
-     * @return the rendition stream
-     */
-    BinaryResource getContent(NodeRef nodeRef, String versionId, String renditionId, Parameters parameters);
-
-    /**
-     * Downloads rendition.
-     *
-     * @param nodeRef     the source nodeRef, ie. live node
-     * @param renditionId the rendition id
-     * @param parameters  the {@link Parameters} object to get the parameters passed into the request
-     * @return the rendition stream
-     */
-    BinaryResource getContentNoValidation(NodeRef nodeRef, String renditionId, Parameters parameters);
+    BinaryResource getContent(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Downloads rendition.
@@ -206,7 +186,28 @@ public interface Renditions
      * @param parameters  the {@link Parameters} object to get the parameters passed into the request
      * @return the rendition stream
      */
-    BinaryResource getContentNoValidation(NodeRef nodeRef, String versionId, String renditionId, Parameters parameters);
+    BinaryResource getContent(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, Parameters parameters);
+
+    /**
+     * Downloads rendition.
+     *
+     * @param nodeRef     the source nodeRef, ie. live node
+     * @param renditionId the rendition id
+     * @param parameters  the {@link Parameters} object to get the parameters passed into the request
+     * @return the rendition stream
+     */
+    BinaryResource getContentNoValidation(@RUntainted NodeRef nodeRef, @RUntainted String renditionId, Parameters parameters);
+
+    /**
+     * Downloads rendition.
+     *
+     * @param nodeRef     the source nodeRef, ie. live node
+     * @param versionId   the version id (aka version label)
+     * @param renditionId the rendition id
+     * @param parameters  the {@link Parameters} object to get the parameters passed into the request
+     * @return the rendition stream
+     */
+    BinaryResource getContentNoValidation(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, Parameters parameters);
 
     /**
      * Gets a presigned URL to directly access content.
@@ -216,7 +217,7 @@ public interface Renditions
      * @param attachment  {@code true} if an attachment {@code URL} is requested, {@code false} for an embedded {@code URL}
      * @return            a direct access {@code URL} object for the content
      */
-    default DirectAccessUrl requestContentDirectUrl(String nodeId, String versionId, String renditionId, boolean attachment)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, @RUntainted String versionId, @RUntainted String renditionId, boolean attachment)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         return requestContentDirectUrl(nodeRef, versionId, renditionId, attachment);
@@ -231,7 +232,7 @@ public interface Renditions
      * @param validFor    the time at which the direct access {@code URL} will expire
      * @return            a direct access {@code URL} object for the content
      */
-    default DirectAccessUrl requestContentDirectUrl(String nodeId, String versionId, String renditionId, boolean attachment, Long validFor)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted String nodeId, @RUntainted String versionId, @RUntainted String renditionId, boolean attachment, Long validFor)
     {
         NodeRef nodeRef = new NodeRef(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, nodeId);
         return requestContentDirectUrl(nodeRef, versionId, renditionId, attachment, validFor);
@@ -245,7 +246,7 @@ public interface Renditions
      * @param attachment  {@code true} if an attachment {@code URL} is requested, {@code false} for an embedded {@code URL}
      * @return            a direct access {@code URL} object for the content.
      */
-    default DirectAccessUrl requestContentDirectUrl(NodeRef nodeRef, String versionId, String renditionId, boolean attachment)
+    default DirectAccessUrl requestContentDirectUrl(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, boolean attachment)
     {
         return requestContentDirectUrl(nodeRef, versionId, renditionId, attachment, null);
     }
@@ -259,6 +260,6 @@ public interface Renditions
      * @param validFor    the time at which the direct access {@code URL} will expire
      * @return            a direct access {@code URL} object for the content.
      */
-    DirectAccessUrl requestContentDirectUrl(NodeRef nodeRef, String versionId, String renditionId, boolean attachment, Long validFor);
+    DirectAccessUrl requestContentDirectUrl(@RUntainted NodeRef nodeRef, @RUntainted String versionId, @RUntainted String renditionId, boolean attachment, Long validFor);
 }
 

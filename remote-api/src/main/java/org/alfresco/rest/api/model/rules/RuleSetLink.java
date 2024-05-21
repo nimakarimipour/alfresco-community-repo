@@ -25,6 +25,7 @@
  */
 
 package org.alfresco.rest.api.model.rules;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class RuleSetLink
 {
@@ -39,7 +40,7 @@ public class RuleSetLink
         this.id = id;
     }
 
-    public String getId()
+    public @RUntainted String getId()
     {
         return id;
     }
