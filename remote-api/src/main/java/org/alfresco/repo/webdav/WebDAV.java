@@ -44,6 +44,7 @@ import org.alfresco.util.ISO9075;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Helper class used by the WebDAV protocol handling classes

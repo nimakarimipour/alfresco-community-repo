@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "tags", entityResource = NodesEntityResource.class, title = "Document or folder tags")
 public class NodeTagsRelation implements RelationshipResourceAction.Create<Tag>, RelationshipResourceAction.Delete, RelationshipResourceAction.Read<Tag>, InitializingBean

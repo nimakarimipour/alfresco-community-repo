@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 
 import org.alfresco.rest.framework.resource.UniqueId;
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class Rule

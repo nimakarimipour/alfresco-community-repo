@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.where.QueryImpl;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Parameters passed in from a Rest client for use in calls to the rest api.
@@ -218,7 +219,7 @@ public class Params implements Parameters
     /**
      * Similar to the standard HTTPRequest method.  Just returns the first parameter value or NULL.
      */
-    public String getParameter(String parameterName)
+    public @RUntainted String getParameter(String parameterName)
     {
         if (recognizedParams.requestParameters!= null && !recognizedParams.requestParameters.isEmpty())
         {

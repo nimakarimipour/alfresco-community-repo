@@ -29,6 +29,7 @@ import org.alfresco.rest.api.impl.node.ratings.RatingScheme;
 import org.alfresco.rest.api.model.NodeRating;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface NodeRatings
 {

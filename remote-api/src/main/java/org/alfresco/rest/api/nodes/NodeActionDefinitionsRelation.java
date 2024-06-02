@@ -33,6 +33,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.util.ParameterCheck;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "action-definitions",  entityResource = NodesEntityResource.class, title = "Node action definitions")
 public class NodeActionDefinitionsRelation extends AbstractNodeRelation

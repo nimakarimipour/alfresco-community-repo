@@ -26,6 +26,7 @@
 package org.alfresco.rest.api;
 
 import org.alfresco.rest.api.model.Download;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * downloads API

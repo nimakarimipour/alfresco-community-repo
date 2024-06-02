@@ -29,6 +29,7 @@ import org.alfresco.rest.api.model.Network;
 import org.alfresco.rest.api.model.PersonNetwork;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Networks
 {

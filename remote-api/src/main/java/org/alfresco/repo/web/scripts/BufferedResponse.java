@@ -39,6 +39,7 @@ import org.springframework.extensions.webscripts.Runtime;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.extensions.webscripts.WrappingWebScriptResponse;
 import org.springframework.util.FileCopyUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Transactional Buffered Response

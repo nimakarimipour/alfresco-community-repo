@@ -25,6 +25,7 @@
  */
 
 package org.alfresco.rest.framework.resource.content;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An abstract binary resource.

@@ -60,6 +60,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.extensions.webscripts.Description.RequiredAuthentication;
 import org.springframework.extensions.surf.util.URLDecoder;
 import org.springframework.extensions.webscripts.Match;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Base class with common code and initialisation for single signon authentication filters.
