@@ -33,6 +33,7 @@ import java.util.List;
 import org.alfresco.rest.api.model.Category;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.StoreRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Categories
 {

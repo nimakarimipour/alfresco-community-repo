@@ -38,6 +38,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "group-members", entityResource = SiteEntityResource.class, title = "Site Groups")
 public class SiteGroupsRelation implements RelationshipResourceAction.Read<SiteGroup>,

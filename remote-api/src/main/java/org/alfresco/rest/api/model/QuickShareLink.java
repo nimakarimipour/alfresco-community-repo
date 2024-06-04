@@ -28,6 +28,7 @@ package org.alfresco.rest.api.model;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Representation of quick share link

@@ -29,6 +29,7 @@ package org.alfresco.rest.api;
 import org.alfresco.rest.api.model.Aspect;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Aspect API

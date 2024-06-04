@@ -46,6 +46,7 @@ import org.alfresco.util.EqualsHelper;
 import org.apache.chemistry.opencmis.commons.data.PropertyData;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Concrete class carrying general information for <b>alf_node</b> data

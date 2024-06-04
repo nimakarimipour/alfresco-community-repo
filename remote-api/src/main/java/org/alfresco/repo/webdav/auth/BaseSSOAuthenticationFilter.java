@@ -60,6 +60,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.extensions.webscripts.Description.RequiredAuthentication;
 import org.springframework.extensions.surf.util.URLDecoder;
 import org.springframework.extensions.webscripts.Match;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Base class with common code and initialisation for single signon authentication filters.
@@ -77,7 +78,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
     
     // Various services required by NTLM authenticator
 
-    private String m_loginPage;
+    private @RUntainted String m_loginPage;
     
     // Indicate whether ticket based logons are supported
     
@@ -421,7 +422,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * 
      * @return String
      */
-    protected final String getLoginPage()
+    protected final @RUntainted String getLoginPage()
     {
         return m_loginPage;
     }
@@ -431,7 +432,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
      * 
      * @param loginPage String
      */
-    protected final void setLoginPage( String loginPage)
+    protected final void setLoginPage( @RUntainted String loginPage)
     {
         m_loginPage = loginPage;
     }

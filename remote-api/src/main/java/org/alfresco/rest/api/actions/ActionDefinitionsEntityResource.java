@@ -32,6 +32,7 @@ import org.alfresco.rest.framework.resource.EntityResource;
 import org.alfresco.rest.framework.resource.actions.interfaces.EntityResourceAction;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name="action-definitions", title = "Actions")
 public class ActionDefinitionsEntityResource implements EntityResourceAction.Read<ActionDefinition>, EntityResourceAction.ReadById<ActionDefinition>

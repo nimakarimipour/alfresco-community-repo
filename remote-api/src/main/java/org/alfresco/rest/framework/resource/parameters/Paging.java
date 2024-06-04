@@ -28,6 +28,7 @@ package org.alfresco.rest.framework.resource.parameters;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.alfresco.rest.framework.core.exceptions.InvalidArgumentException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents paging of collections of resources. Set by the client request.<br/>

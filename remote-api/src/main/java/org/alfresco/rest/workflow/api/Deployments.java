@@ -28,6 +28,7 @@ package org.alfresco.rest.workflow.api;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.workflow.api.model.Deployment;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Deployments
 {

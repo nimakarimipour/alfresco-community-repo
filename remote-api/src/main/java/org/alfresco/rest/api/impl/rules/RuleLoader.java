@@ -35,6 +35,7 @@ import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.action.ActionCondition;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.rule.RuleService;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /** Responsible for creating {@link Rule} objects. */
 @Experimental

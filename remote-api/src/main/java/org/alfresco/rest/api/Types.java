@@ -29,6 +29,7 @@ package org.alfresco.rest.api;
 import org.alfresco.rest.api.model.Type;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Types API

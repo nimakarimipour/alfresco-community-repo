@@ -32,6 +32,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.workflow.api.Deployments;
 import org.alfresco.rest.workflow.api.model.Deployment;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name="deployments", title = "Deployments")
 public class DeploymentsRestEntityResource implements EntityResourceAction.Read<Deployment>,  

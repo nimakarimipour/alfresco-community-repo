@@ -47,6 +47,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.activities.ActivityService;
 import org.alfresco.service.cmr.site.SiteInfo;
 import org.json.JSONException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to activities services and maps between representations.

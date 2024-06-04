@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Representation of a folder node.

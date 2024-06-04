@@ -62,6 +62,8 @@ import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.springframework.http.HttpMethod;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Webscript that handles the request for and execution of a Resource
@@ -91,7 +93,7 @@ public abstract class AbstractResourceWebScript extends ApiWebScript implements 
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void execute(final Api api, final WebScriptRequest req, final WebScriptResponse res) throws IOException
+    public void execute(final Api api, final @RUntainted WebScriptRequest req, final WebScriptResponse res) throws IOException
     {
         long startTime = System.currentTimeMillis();
         

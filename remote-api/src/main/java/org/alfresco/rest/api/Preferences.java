@@ -28,6 +28,7 @@ package org.alfresco.rest.api;
 import org.alfresco.rest.api.model.Preference;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Preferences
 {

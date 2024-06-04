@@ -54,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /*
  * Extracts recognized parameters from the HTTP request.
@@ -90,13 +91,13 @@ public interface RecognizedParamsExtractor
      * @param req WebScriptRequest
      * @return RecognizedParams a POJO containing the params for use with the Params objects
      */
-    default Params.RecognizedParams getRecognizedParams(WebScriptRequest req)
+    default Params.RecognizedParams getRecognizedParams(@RUntainted WebScriptRequest req)
     {
         Paging paging = findPaging(req);
         List<SortColumn> sorting = getSort(req.getParameter(PARAM_ORDERBY));
         Map<String, BeanPropertiesFilter> relationFilter = getRelationFilter(req.getParameter(PARAM_RELATIONS));
         Query whereQuery = getWhereClause(req.getParameter(PARAM_WHERE));
-        Map<String, String[]> requestParams = getRequestParameters(req);
+        Map<String, @RUntainted String[]> requestParams = getRequestParameters(req);
         boolean includeSource = Boolean.valueOf(req.getParameter(PARAM_INCLUDE_SOURCE_ENTITY));
 
         List<String> includedFields = getIncludeClause(req.getParameter(PARAM_INCLUDE));
@@ -456,21 +457,21 @@ public interface RecognizedParamsExtractor
      * @param req - the WebScriptRequest object
      * @return the request parameters
      */
-    default Map<String, String[]> getRequestParameters(WebScriptRequest req)
+    default Map<String, @RUntainted String[]> getRequestParameters(@RUntainted WebScriptRequest req)
     {
         if (req != null)
         {
-            String[] paramNames = req.getParameterNames();
+            @RUntainted String[] paramNames = req.getParameterNames();
             if (paramNames != null)
             {
-                Map<String, String[]> requestParameteters = new HashMap<String, String[]>(paramNames.length);
+                Map<String, @RUntainted String[]> requestParameteters = new HashMap<String, @RUntainted String[]>(paramNames.length);
 
                 for (int i = 0; i < paramNames.length; i++)
                 {
                     String paramName = paramNames[i];
                     if (!KNOWN_PARAMS.contains(paramName))
                     {
-                        String[] vals = req.getParameterValues(paramName);
+                        @RUntainted String[] vals = req.getParameterValues(paramName);
                         requestParameteters.put(paramName, vals);
                     }
                 }

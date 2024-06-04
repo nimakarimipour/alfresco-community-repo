@@ -47,6 +47,7 @@ import org.alfresco.util.GUID;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RestRuleModelMapper implements RestModelMapper<Rule, org.alfresco.service.cmr.rule.Rule>
