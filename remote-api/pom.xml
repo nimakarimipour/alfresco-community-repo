@@ -329,7 +329,7 @@
                                 <path>
                                     <groupId>edu.ucr.cs.riple.taint</groupId>
                                     <artifactId>ucrtainting-checker</artifactId>
-                                    <version>${env.UCRT_VERSION}</version>
+                                    <version>0.3-SNAPSHOT</version>
                                 </path>
                                 <!-- <path>
                                     <groupId>edu.ucr.cs.riple.annotator</groupId>
@@ -350,17 +350,13 @@
                                 <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                                 <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
                                 <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-                                <!-- <arg>-Awarns</arg> -->
                                 <arg>-nowarn</arg>
                                 <arg>-AannotatedPackages=org.alfresco.heartbeat,org.alfresco.opencmis,org.alfresco.repo,org.alfresco.rest,org.alfresco.web</arg>
-                                <arg>-AenableSerialization</arg>
-                                <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
-                                <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
-                                <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
-                                <arg>-AserializationConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/remote-api/checker.xml</arg>
+                                <arg>-AenableLibraryCheck=true</arg>
+                                <arg>-AenablePolyTaintInference=true</arg>
+                                <arg>-AenableTypeArgumentInference=true</arg>
                                 <arg>-XDcompilePolicy=simple</arg>
                                 <arg>-parameters</arg>
-                                <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/nima/Developer/taint-benchmarks/alfresco-community-repo/annotator-out/remote-api/scanner.xml</arg> -->
                             </compilerArgs>
                         </configuration>
                     </plugin>
@@ -370,7 +366,7 @@
                 <dependency>
                     <groupId>org.checkerframework</groupId>
                     <artifactId>checker</artifactId>
-                    <version>${env.CF_VERSION}</version>
+                    <version>3.42.0</version>
                 </dependency>
             </dependencies>
         </profile>
