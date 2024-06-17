@@ -181,27 +181,14 @@
                         <Xmaxwarns>10000</Xmaxwarns>
                      </compilerArguments>
                      <annotationProcessorPaths>
-                        <!-- <path>
-                           <groupId>com.google.errorprone</groupId>
-                           <artifactId>error_prone_core</artifactId>
-                           <version>2.20.0</version>
-                        </path> -->
                         <path>
                            <groupId>edu.ucr.cs.riple.taint</groupId>
                            <artifactId>ucrtainting-checker</artifactId>
-                           <version>${env.UCRT_VERSION}</version>
+                           <version>0.3-SNAPSHOT</version>
                         </path>
-                        <!-- <path>
-                           <groupId>edu.ucr.cs.riple.annotator</groupId>
-                           <artifactId>annotator-scanner</artifactId>
-                           <version>1.3.9-SNAPSHOT</version>
-                        </path> -->
                      </annotationProcessorPaths>
                         <annotationProcessors>
-                        <!-- Add all the checkers you want to enable here -->
                            <annotationProcessor>edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker</annotationProcessor>
-                        <!-- original checker -->
-                        <!-- <annotationProcessor>org.checkerframework.checker.tainting.TaintingChecker</annotationProcessor> -->
                         </annotationProcessors>
                      <compilerArgs>
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
@@ -213,17 +200,13 @@
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-                        <!-- <arg>-Awarns</arg> -->
                         <arg>-nowarn</arg>
                         <arg>-AannotatedPackages=org.alfresco.api,org.alfresco.config,org.alfresco.encoding,org.alfresco.encryption,org.alfresco.encryption,org.alfresco.error,org.alfresco.httpclient,org.alfresco.i18n,org.alfresco.processor,org.alfresco.query,org.alfresco.scripts,org.alfresco.util,org.alfresco.web</arg>
-                        <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
-                        <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
-                        <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
-                        <arg>-AenableSerialization</arg>
-                        <arg>-AserializationConfigPath=/home/kdas006/annotation_dataset/alfresco-community-repo/annotator-out/core/checker.xml</arg>
+                        <arg>-AenableLibraryCheck=true</arg>
+                        <arg>-AenablePolyTaintInference=true</arg>
+                        <arg>-AenableTypeArgumentInference=true</arg>
                         <arg>-XDcompilePolicy=simple</arg>
                         <arg>-parameters</arg>
-                        <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/home/kdas006/annotation_dataset/alfresco-community-repo/annotator-out/core/scanner.xml</arg> -->
                      </compilerArgs>
                   </configuration>
                </plugin>
@@ -233,7 +216,7 @@
             <dependency>
                <groupId>org.checkerframework</groupId>
                <artifactId>checker</artifactId>
-               <version>${env.CF_VERSION}</version>
+               <version>3.42.0</version>
             </dependency>
          </dependencies>
       </profile>
