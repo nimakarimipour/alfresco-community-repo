@@ -37,6 +37,7 @@ import org.alfresco.rest.workflow.api.Tasks;
 import org.alfresco.rest.workflow.api.impl.TaskVariablesWalkerCallback;
 import org.alfresco.rest.workflow.api.model.TaskVariable;
 import org.alfresco.rest.workflow.api.model.VariableScope;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * 

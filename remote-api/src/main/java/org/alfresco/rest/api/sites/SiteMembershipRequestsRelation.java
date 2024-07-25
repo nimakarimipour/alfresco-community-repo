@@ -39,6 +39,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.rest.framework.webscripts.WithResponse;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "site-membership-requests", entityResource = SiteEntityResource.class, title = "Site Membership Requests")
 public class SiteMembershipRequestsRelation implements InitializingBean

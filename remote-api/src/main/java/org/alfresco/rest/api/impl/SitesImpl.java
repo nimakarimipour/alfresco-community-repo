@@ -98,6 +98,7 @@ import org.alfresco.service.namespace.QName;
 import org.alfresco.util.Pair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Centralises access to site services and maps between representations.

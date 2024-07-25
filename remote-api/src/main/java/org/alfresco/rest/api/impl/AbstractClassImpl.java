@@ -60,6 +60,7 @@ import java.util.stream.Collectors;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class AbstractClassImpl<T extends AbstractClass> {
     static String PARAM_MODEL_IDS = "modelId";

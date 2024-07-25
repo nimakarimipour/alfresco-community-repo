@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.core.exceptions.EntityNotFoundException;
 import org.alfresco.rest.framework.resource.EntityResource;
 import org.alfresco.rest.framework.resource.actions.interfaces.EntityResourceAction;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Entity Resource for Categories

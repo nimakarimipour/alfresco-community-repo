@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.Experimental;
 import org.alfresco.util.PropertyCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Folder node's rules.

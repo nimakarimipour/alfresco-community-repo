@@ -36,6 +36,7 @@ import org.alfresco.util.ParameterCheck;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "sites", entityResource = PeopleEntityResource.class, title = "Person Sites")
 public class PersonSitesRelation implements RelationshipResourceAction.Read<MemberOfSite>, RelationshipResourceAction.ReadById<MemberOfSite>, 

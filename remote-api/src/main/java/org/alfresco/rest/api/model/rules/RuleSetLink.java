@@ -25,6 +25,7 @@
  */
 
 package org.alfresco.rest.api.model.rules;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class RuleSetLink
 {

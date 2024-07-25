@@ -27,6 +27,7 @@ package org.alfresco.rest.api;
 
 import org.alfresco.rest.api.model.rules.RuleSetting;
 import org.alfresco.service.Experimental;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Rule settings API.

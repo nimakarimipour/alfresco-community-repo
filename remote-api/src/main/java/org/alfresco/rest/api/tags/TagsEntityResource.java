@@ -39,6 +39,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name="tags", title = "Tags")
 public class TagsEntityResource implements EntityResourceAction.Read<Tag>,

@@ -31,6 +31,7 @@ import org.alfresco.rest.api.model.SiteMembershipRequest;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Paging;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Public REST API: centralises access to site membership requests and maps between representations.

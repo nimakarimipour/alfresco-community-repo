@@ -40,6 +40,7 @@ import org.alfresco.rest.framework.resource.parameters.where.QueryImpl;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Parameters passed in from a Rest client for use in calls to the rest api.
@@ -218,11 +219,11 @@ public class Params implements Parameters
     /**
      * Similar to the standard HTTPRequest method.  Just returns the first parameter value or NULL.
      */
-    public String getParameter(String parameterName)
+    public @RUntainted String getParameter(String parameterName)
     {
         if (recognizedParams.requestParameters!= null && !recognizedParams.requestParameters.isEmpty())
         {
-            String[] vals = recognizedParams.requestParameters.get(parameterName);
+            @RUntainted String[] vals = recognizedParams.requestParameters.get(parameterName);
             if (vals!= null && vals.length>0)
             {
                 return vals[0]; //Just return the first element.
@@ -293,7 +294,7 @@ public class Params implements Parameters
         final Paging paging;
         private final BeanPropertiesFilter filter;
         private final Map<String, BeanPropertiesFilter> relationshipFilter;
-        private final Map<String, String[]> requestParameters;
+        private final Map<String, @RUntainted String[]> requestParameters;
         private final Query query;
 
         private final List<String> include;
@@ -304,7 +305,7 @@ public class Params implements Parameters
         private final boolean includeSource;
         
         @SuppressWarnings("unchecked")
-        public RecognizedParams(Map<String, String[]> requestParameters, Paging paging, BeanPropertiesFilter filter,
+        public RecognizedParams(Map<String, @RUntainted String[]> requestParameters, Paging paging, BeanPropertiesFilter filter,
                                 Map<String, BeanPropertiesFilter> relationshipFilter, List<String> include, List<String> select,
                                 Query query, List<SortColumn> sorting, boolean includeSource)
         {

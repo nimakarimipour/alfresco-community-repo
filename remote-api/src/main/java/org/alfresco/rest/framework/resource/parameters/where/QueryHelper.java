@@ -43,6 +43,8 @@ import org.alfresco.rest.antlr.WhereClauseParser;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 import org.apache.commons.lang3.StringUtils;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RPolyTainted;
 
 /**
  * Provides helper methods for handling a WHERE query.

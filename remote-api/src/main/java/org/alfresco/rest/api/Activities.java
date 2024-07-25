@@ -33,6 +33,7 @@ import org.alfresco.rest.api.model.Activity;
 import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.json.JSONException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Activities
 {

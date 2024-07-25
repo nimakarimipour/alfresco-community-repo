@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 import org.alfresco.service.Experimental;
 import org.apache.commons.lang3.NotImplementedException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public interface RestModelMapper<R, S>

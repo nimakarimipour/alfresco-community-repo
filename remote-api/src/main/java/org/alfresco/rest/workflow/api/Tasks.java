@@ -37,6 +37,7 @@ import org.alfresco.rest.workflow.api.model.TaskCandidate;
 import org.alfresco.rest.workflow.api.model.TaskVariable;
 import org.alfresco.rest.workflow.api.model.Variable;
 import org.alfresco.rest.workflow.api.model.VariableScope;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public interface Tasks
 {

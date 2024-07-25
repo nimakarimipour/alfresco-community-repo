@@ -36,6 +36,7 @@ import org.alfresco.rest.framework.core.exceptions.NotFoundException;
 import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RuleSettingsImpl implements RuleSettings

@@ -39,6 +39,7 @@ import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "site-membership-requests", entityResource = PeopleEntityResource.class, title = "Site Membership Requests")
 public class PersonSiteMembershipRequestsRelation implements RelationshipResourceAction.Read<SiteMembershipRequest>, RelationshipResourceAction.Delete, RelationshipResourceAction.Update<SiteMembershipRequest>, 

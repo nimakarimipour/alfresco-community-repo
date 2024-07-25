@@ -32,6 +32,7 @@ import java.util.StringJoiner;
 
 import org.alfresco.service.Experimental;
 import org.alfresco.service.cmr.repository.NodeRef;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @Experimental
 public class RuleSet

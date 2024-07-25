@@ -26,6 +26,7 @@
 package org.alfresco.rest.api.model;
 
 import org.alfresco.service.cmr.site.SiteInfo;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Represents a user's favourite site.

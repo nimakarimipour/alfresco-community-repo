@@ -34,6 +34,7 @@ import org.alfresco.rest.framework.resource.parameters.CollectionWithPagingInfo;
 import org.alfresco.rest.framework.resource.parameters.Parameters;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @EntityResource(name = "aspects", title = "Aspects")
 public class AspectEntityResource implements EntityResourceAction.ReadById<Aspect>, EntityResourceAction.Read<Aspect>, InitializingBean
