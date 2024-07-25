@@ -1,4 +1,4 @@
-args: -d /home/nima/Developer/taint-benchmarks/cxf/annotator-out -bc cd /home/nima/Developer/taint-benchmarks/cxf && ./annotator-command.sh -cp /home/nima/Developer/taint-benchmarks/cxf/annotator-out/paths.tsv -n edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted -i edu.ucr.cs.riple.taint.ucrtainting.qual.Init -cn UCRTaint -rboserr --depth 10
+args: -d /home/kdas006/annotation_dataset/cxf/annotator-out -bc cd /home/kdas006/annotation_dataset/cxf && ./annotator-command.sh -cp /home/kdas006/annotation_dataset/cxf/annotator-out/paths.tsv -n edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted -i edu.ucr.cs.riple.taint.ucrtainting.qual.Init -cn UCRTaint -rboserr --depth 10
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ----------------------< org.apache.cxf:cxf-core >-----------------------
@@ -34,11 +34,11 @@ args: -d /home/nima/Developer/taint-benchmarks/cxf/annotator-out -bc cd /home/ni
 [INFO] --- buildnumber:3.2.0:create-timestamp (create-noncanonicalrev) @ cxf-core ---
 [INFO] 
 [INFO] --- buildnumber:3.2.0:create (create-buildnumber) @ cxf-core ---
-[INFO] Executing: /bin/sh -c cd '/home/nima/Developer/taint-benchmarks/cxf/core' && 'git' 'rev-parse' '--verify' 'HEAD'
-[INFO] Working directory: /home/nima/Developer/taint-benchmarks/cxf/core
+[INFO] Executing: /bin/sh -c cd '/home/kdas006/annotation_dataset/cxf/core' && 'git' 'rev-parse' '--verify' 'HEAD'
+[INFO] Working directory: /home/kdas006/annotation_dataset/cxf/core
 [INFO] Storing buildNumber: 35767894d6f17c59a11981c4c5f2761398afe8b4 at timestamp: 1711667629837
-[INFO] Executing: /bin/sh -c cd '/home/nima/Developer/taint-benchmarks/cxf/core' && 'git' 'symbolic-ref' 'HEAD'
-[INFO] Working directory: /home/nima/Developer/taint-benchmarks/cxf/core
+[INFO] Executing: /bin/sh -c cd '/home/kdas006/annotation_dataset/cxf/core' && 'git' 'symbolic-ref' 'HEAD'
+[INFO] Working directory: /home/kdas006/annotation_dataset/cxf/core
 [INFO] Storing scmBranch: nimak/debug-2
 [INFO] 
 [INFO] --- cxf-xjc:4.0.0:xsdtojava (generate-sources) @ cxf-core ---
