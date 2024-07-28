@@ -48,7 +48,7 @@ def run_annotator():
     # Uncomment to disable cache
     # commands += ['-dc']
     # Uncomment to disable outer loop
-    # commands += ['-dol']
+    commands += ['-dlo']
     # Uncomment to disable parallel processing
     # commands += ['--disable-parallel-processing']
 
