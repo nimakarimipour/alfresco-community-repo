@@ -1,0 +1,18 @@
+Timing execution of annotator.py on branch gcp-anno-15-dpp for project alfresco-community-repo
+Annotator extended search version 3
+Preprocessing...
+Max Depth level: 15, chain: true
+Triggered Errors in this iteration: 0
+End
+Doing additional search...
+Setting Chain from true to true
+Triggered Errors in this iteration: 0
+End
+Doing final search...
+
+Finished annotating.
+Cleaning up...
+
+real	0m47.265s
+user	4m10.701s
+sys	0m5.438s
