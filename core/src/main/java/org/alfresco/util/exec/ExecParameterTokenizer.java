@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.alfresco.util.Pair;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This class is used to tokenize strings used as parameters for {@link RuntimeExec} objects.
@@ -55,14 +56,14 @@ public class ExecParameterTokenizer
     /**
      * The string to be tokenized.
      */
-    private final String str;
+    private final @RUntainted String str;
 
     /**
      * The list of tokens, which will take account of quoted sections.
      */
-    private List<String> tokens;
+    private List<@RUntainted String> tokens;
 
-    public ExecParameterTokenizer(String str)
+    public ExecParameterTokenizer(@RUntainted String str)
     {
         this.str = str;
     }
@@ -78,7 +79,7 @@ public class ExecParameterTokenizer
      *
      * @throws NullPointerException if the string to be tokenized was null.
      */
-    public List<String> getAllTokens()
+    public List<@RUntainted String> getAllTokens()
     {
         if (this.str == null)
         {
@@ -102,9 +103,9 @@ public class ExecParameterTokenizer
             {
                 // There are either single or double quotes or both.
                 // So we need to identify the quoted regions within the string.
-                List<Pair<Integer, Integer>> quotedRegions = new ArrayList<>();
+                List<Pair<@RUntainted Integer, @RUntainted Integer>> quotedRegions = new ArrayList<>();
 
-                for (Pair<Integer, Integer> next = identifyNextQuotedRegion(str, 0); next != null; )
+                for (Pair<@RUntainted Integer, @RUntainted Integer> next = identifyNextQuotedRegion(str, 0); next != null; )
                 {
                     quotedRegions.add(next);
                     next = identifyNextQuotedRegion(str, next.getSecond() + 1);
@@ -129,12 +130,12 @@ public class ExecParameterTokenizer
      * The unquoted ones need to be further tokenized in the normal way.
      * The quoted ones must not be tokenized, but need their quotes stripped off.
      */
-    private List<Substring> getSubstrings(String str, List<Pair<Integer, Integer>> quotedRegionIndices)
+    private List<Substring> getSubstrings(@RUntainted String str, List<Pair<@RUntainted Integer, @RUntainted Integer>> quotedRegionIndices)
     {
         List<Substring> result = new ArrayList<Substring>();
 
         int cursorPosition = 0;
-        for (Pair<Integer, Integer> nextQuotedRegionIndices : quotedRegionIndices)
+        for (Pair<@RUntainted Integer, @RUntainted Integer> nextQuotedRegionIndices : quotedRegionIndices)
         {
             if (cursorPosition < nextQuotedRegionIndices.getFirst())
             {
@@ -155,7 +156,7 @@ public class ExecParameterTokenizer
         return result;
     }
 
-    private Pair<Integer, Integer> identifyNextQuotedRegion(String str, int startingIndex)
+    private Pair<@RUntainted Integer, @RUntainted Integer> identifyNextQuotedRegion(@RUntainted String str, @RUntainted int startingIndex)
     {
         int indexOfNextSingleQuote = str.indexOf('\'', startingIndex);
         int indexOfNextDoubleQuote = str.indexOf('"', startingIndex);
@@ -185,7 +186,7 @@ public class ExecParameterTokenizer
         }
     }
 
-    private Pair<Integer, Integer> findIndexOfClosingQuote(String str, int indexOfStartingQuote, char quoteChar)
+    private Pair<@RUntainted Integer, @RUntainted Integer> findIndexOfClosingQuote(@RUntainted String str, @RUntainted int indexOfStartingQuote, @RUntainted char quoteChar)
     {
         // So we know which type of quote char we're dealing with. Either ' or ".
         // Now we need to find the closing quote.
@@ -208,7 +209,7 @@ public class ExecParameterTokenizer
         /**
          * Gets all the tokens in a parameter string.
          */
-        public List<String> getTokens();
+        public List<@RUntainted String> getTokens();
     }
 
     /**
@@ -216,16 +217,16 @@ public class ExecParameterTokenizer
      */
     public class UnquotedSubstring implements Substring
     {
-        private final String regionString;
-        public UnquotedSubstring(String str)
+        private final @RUntainted String regionString;
+        public UnquotedSubstring(@RUntainted String str)
         {
             this.regionString = str;
         }
 
-        public List<String> getTokens()
+        public List<@RUntainted String> getTokens()
         {
             StringTokenizer t = new StringTokenizer(regionString);
-            List<String> result = new ArrayList<>();
+            List<@RUntainted String> result = new ArrayList<>();
             while (t.hasMoreTokens())
             {
                 result.add(t.nextToken());
@@ -244,13 +245,13 @@ public class ExecParameterTokenizer
      */
     public class QuotedSubstring implements Substring
     {
-        private final String regionString;
-        public QuotedSubstring(String str)
+        private final @RUntainted String regionString;
+        public QuotedSubstring(@RUntainted String str)
         {
             this.regionString = str;
         }
 
-        public List<String> getTokens()
+        public List<@RUntainted String> getTokens()
         {
             String stringWithoutQuotes = regionString.substring(1, regionString.length() -1);
             return Arrays.asList(stringWithoutQuotes);
