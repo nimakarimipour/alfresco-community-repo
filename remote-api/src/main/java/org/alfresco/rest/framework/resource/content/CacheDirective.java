@@ -27,6 +27,7 @@
 package org.alfresco.rest.framework.resource.content;
 
 import java.util.Date;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * An immutable builder for setting the HTTP cache.

@@ -27,6 +27,7 @@
 package org.alfresco.rest.framework.resource.content;
 
 import java.io.File;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A binary resource based on a File.
