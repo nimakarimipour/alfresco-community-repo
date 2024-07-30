@@ -48,6 +48,7 @@ import org.alfresco.rest.framework.webscripts.WithResponse;
 import org.alfresco.service.cmr.repository.DirectAccessUrl;
 import org.alfresco.util.ParameterCheck;
 import org.springframework.beans.factory.InitializingBean;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 @RelationshipResource(name = "renditions", entityResource = TrashcanEntityResource.class, title = "Node renditions via archived node")
 public class TrashcanRenditionsRelation
