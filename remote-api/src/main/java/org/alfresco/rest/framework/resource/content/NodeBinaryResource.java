@@ -27,6 +27,7 @@ package org.alfresco.rest.framework.resource.content;
 
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A binary resource based on a Node reference.
