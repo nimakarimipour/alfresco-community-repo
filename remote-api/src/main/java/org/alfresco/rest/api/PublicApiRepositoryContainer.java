@@ -37,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.Authenticator;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Repository (server-tier) container for public api
@@ -49,7 +50,7 @@ public class PublicApiRepositoryContainer extends TenantRepositoryContainer
     protected static final Log logger = LogFactory.getLog(PublicApiRepositoryContainer.class);
 
     @Override
-    public void executeScript(final WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
+    public void executeScript(final @RUntainted WebScriptRequest scriptReq, final WebScriptResponse scriptRes, final Authenticator auth)
         throws IOException
     {
         String tenant = ((PublicApiTenantWebScriptServletRequest)scriptReq).getTenant();
