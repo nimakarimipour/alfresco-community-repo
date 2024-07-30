@@ -93,6 +93,7 @@ import org.springframework.extensions.webscripts.WebScriptResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * ADM Remote Store service.
@@ -414,7 +415,7 @@ public class ADMRemoteStore extends BaseRemoteStore
      * @param in       XML document containing multiple document contents to write
      */
     @Override
-    protected void createDocuments(WebScriptResponse res, String store, InputStream in)
+    protected void createDocuments(WebScriptResponse res, String store, @RUntainted InputStream in)
     {
         try
         {

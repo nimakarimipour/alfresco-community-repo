@@ -84,6 +84,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -136,7 +137,7 @@ public abstract class WebDAVMethod
 
     // Repository path
 
-    protected String m_strPath = null;
+    protected @RUntainted String m_strPath = null;
 
     // User Agent
     
@@ -855,7 +856,7 @@ public abstract class WebDAVMethod
      * 
      * @return String
      */
-    public String getPath()
+    public @RUntainted String getPath()
     {
         return m_strPath;
     }
@@ -1401,7 +1402,7 @@ public abstract class WebDAVMethod
      * @param isFolder indicates file or folder is requested
      * @return URL that could be used to access the given path
      */
-    protected String getURLForPath(HttpServletRequest request, String path, boolean isFolder)
+    protected @RUntainted String getURLForPath(HttpServletRequest request, String path, boolean isFolder)
     {
         return getDAVHelper().getURLForPath(request, path, isFolder, m_userAgent);
     }

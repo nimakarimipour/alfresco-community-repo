@@ -55,6 +55,7 @@ import org.alfresco.service.cmr.repository.datatype.TypeConverter;
 import org.alfresco.service.namespace.QName;
 import org.springframework.extensions.surf.util.I18NUtil;
 import org.springframework.extensions.surf.util.URLEncoder;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Implements the WebDAV GET method
@@ -719,14 +720,14 @@ public class GetMethod extends WebDAVMethod
      * @param path The path to return the parent of - must be non-null.
      * @return String - parent path.
      */
-    private String parentFolder(String path)
+    private @RUntainted String parentFolder(String path)
     {
         if (path.endsWith(WebDAVHelper.PathSeperator))
         {
             // Strip trailing slash.
             path = path.substring(0, path.length() - 1);
         }
-        String[] paths = getDAVHelper().splitPath(path);
+        @RUntainted String[] paths = getDAVHelper().splitPath(path);
         String parent = paths[0];
         if (parent.equals(""))
         {
@@ -741,7 +742,7 @@ public class GetMethod extends WebDAVMethod
      * @param strSize The content size
      * @return The formatted size
      */
-    private String formatSize(String strSize)
+    private @RUntainted String formatSize(String strSize)
     {
         String strFormattedSize = strSize;
 

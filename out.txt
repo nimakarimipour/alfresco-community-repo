@@ -1,0 +1,552 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Alfresco Community Repo Parent                                     [pom]
+[INFO] Alfresco Core                                                      [jar]
+[INFO] Alfresco Remote API                                                [jar]
+[INFO] 
+[INFO] ----------------< org.alfresco:alfresco-community-repo >----------------
+[INFO] Building Alfresco Community Repo Parent 23.1.0.143-SNAPSHOT        [1/3]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- license:2.0.1:add-third-party (third-party-licenses) @ alfresco-community-repo ---
+[WARNING] Parameter 'failIfWarning' (user property 'license.failIfWarning') is deprecated: since 1.14, use now failOnMissing or failOnBlacklist.
+[WARNING] The goal is skip due to packaging 'pom'
+[INFO] 
+[INFO] ---------------------< org.alfresco:alfresco-core >---------------------
+[INFO] Building Alfresco Core 23.1.0.143-SNAPSHOT                         [2/3]
+[INFO]   from core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- license:2.0.1:add-third-party (third-party-licenses) @ alfresco-core ---
+[WARNING] Parameter 'failIfWarning' (user property 'license.failIfWarning') is deprecated: since 1.14, use now failOnMissing or failOnBlacklist.
+[WARNING] There is 1 dependency with no license :
+[WARNING]  - edu.ucr.cs.riple.taint--ucrtainting-checker-qual--0.1-alpha-3-SNAPSHOT
+[INFO] Included licenses (whitelist): [ANTLR-PD, Apache 1.1 (ORO License), Apache Variant (JDOM License), Apache-2.0, BSD Variant (dom4j License), BSD Variant (FreeMarker License), BSD Variant (JCraft License), BSD-2-Clause, BSD-3-Clause, BSD-3-Clause-No-Nuclear-Warranty, CC-BY-2.5, CC0-1.0, CDDL-1.0, CDDL-1.1, CPL-1.0, EDL-1.0, Elastic-2.0, EPL-1.0, EPL-2.0, GeoAPI, GOLICENSE, ICU, JSON, LGPL-2.0-only, LGPL-2.0-or-later, LGPL-2.1-only, LGPL-2.1-or-later, LGPL-3.0-only, LGPL-3.0-or-later, MIT, MIT-0, MPL-1.0, MPL-1.1, MPL-2.0, Plexus, PostgreSQL, Public-Domain, Unidata, UnRAR, UPL-1.0, WTFPL, xpp, Zlib]
+[WARNING] There are 2 forbidden licenses used:
+[WARNING] License: 'Unknown license' used by 1 dependencies:
+ -ucrtainting-checker-qual (edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.1-alpha-3-SNAPSHOT - no url defined)
+[WARNING] License: 'GNU General Public License, version 2 (GPL2), with the classpath exception' used by 1 dependencies:
+ -Checker Framework (org.checkerframework:checker:3.42.0 - https://checkerframework.org/)
+[INFO] Writing third-party file to /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/target/generated-sources/license/THIRD-PARTY.txt
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ alfresco-core ---
+[INFO] skip non existing resourceDirectory /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/resources
+[INFO] Copying 1 resource from target/generated-sources/license to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ alfresco-core ---
+[WARNING] Parameter 'compilerArguments' is deprecated: use compilerArgs instead.
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< org.alfresco:alfresco-remote-api >------------------
+[INFO] Building Alfresco Remote API 23.1.0.143-SNAPSHOT                   [3/3]
+[INFO]   from remote-api/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- build-helper:3.0.0:add-source (add-source) @ alfresco-remote-api ---
+[INFO] Source directory: /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/generated added.
+[INFO] 
+[INFO] --- antrun:1.8:run (duplicate-english-messages) @ alfresco-remote-api ---
+[INFO] Executing tasks
+
+main:
+     [copy] Copying 19 files to /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/target/classes
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- license:2.0.1:add-third-party (third-party-licenses) @ alfresco-remote-api ---
+[WARNING] Parameter 'failIfWarning' (user property 'license.failIfWarning') is deprecated: since 1.14, use now failOnMissing or failOnBlacklist.
+[WARNING] Could not transfer metadata edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.1-alpha-3-SNAPSHOT/maven-metadata.xml from/to maven-default-http-blocker (http://0.0.0.0/): Blocked mirror for repositories: [apache.snapshots (http://repository.apache.org/snapshots, default, snapshots)]
+[WARNING] There is 1 dependency with no license :
+[WARNING]  - edu.ucr.cs.riple.taint--ucrtainting-checker-qual--0.1-alpha-3-SNAPSHOT
+[INFO] Included licenses (whitelist): [ANTLR-PD, Apache 1.1 (ORO License), Apache Variant (JDOM License), Apache-2.0, BSD Variant (dom4j License), BSD Variant (FreeMarker License), BSD Variant (JCraft License), BSD-2-Clause, BSD-3-Clause, BSD-3-Clause-No-Nuclear-Warranty, CC-BY-2.5, CC0-1.0, CDDL-1.0, CDDL-1.1, CPL-1.0, EDL-1.0, Elastic-2.0, EPL-1.0, EPL-2.0, GeoAPI, GOLICENSE, ICU, JSON, LGPL-2.0-only, LGPL-2.0-or-later, LGPL-2.1-only, LGPL-2.1-or-later, LGPL-3.0-only, LGPL-3.0-or-later, MIT, MIT-0, MPL-1.0, MPL-1.1, MPL-2.0, Plexus, PostgreSQL, Public-Domain, Unidata, UnRAR, UPL-1.0, WTFPL, xpp, Zlib]
+[INFO] License: 'GPL-2.0-only' for 'MavenProject: jakarta.xml.rpc:jakarta.xml.rpc-api:1.1.4 @ ' is OK since it is also licensed under 'EPL-2.0'
+[INFO] License: 'LGPL, v2.1 or later' for 'MavenProject: org.codelibs:jhighlight:1.1.0 @ ' is OK since it is also licensed under 'CDDL-1.0'
+[WARNING] There are 2 forbidden licenses used:
+[WARNING] License: 'Unknown license' used by 1 dependencies:
+ -ucrtainting-checker-qual (edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.1-alpha-3-SNAPSHOT - no url defined)
+[WARNING] License: 'GNU General Public License, version 2 (GPL2), with the classpath exception' used by 1 dependencies:
+ -Checker Framework (org.checkerframework:checker:3.42.0 - https://checkerframework.org/)
+[INFO] Writing third-party file to /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/target/generated-sources/license/THIRD-PARTY.txt
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ alfresco-remote-api ---
+[INFO] Copying 1060 resources from src/main/resources to target/classes
+[INFO] Copying 1 resource from target/generated-sources/license to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ alfresco-remote-api ---
+[WARNING] Parameter 'compilerArguments' is deprecated: use compilerArgs instead.
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 863 source files with javac [forked debug target 17] to target/classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/calendar/AbstractCalendarListingWebScript.java:[263,28] [cast.unsafe] cast from "@RTainted Object" to "@RTainted Date @RUntainted []" cannot be statically verified
+[WARNING] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/core/ResourceInspector.java:[411,38] [cast.unsafe] cast from "@RTainted Object" to "@RTainted WebApiParam @RUntainted []" cannot be statically verified
+[WARNING] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/core/ResourceInspector.java:[855,33] [cast.unsafe] cast from "@RTainted Object" to "@RTainted String @RUntainted []" cannot be statically verified
+[WARNING] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/workflow/AbstractWorkflowWebscript.java:[274,16] [cast.unsafe] cast from "@RTainted Object" to "@RTainted Object @RUntainted []" cannot be statically verified
+[WARNING] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/DeclarativeSpreadsheetWebScript.java:[422,31] [cast.unsafe] cast from "@RTainted Object" to "@RTainted byte @RUntainted []" cannot be statically verified
+[INFO] 5 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR]  Library: false, Poly: true, Type Argument: true, Validation: false, Side Effect: false
+/home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,27] error: [argument] incompatible argument for parameter c of ArrayList constructor.
+  found   : @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>
+  required: @RTainted Collection<?[ extends E[ extends @RTainted Object super @RUntainted Void] super @RUntainted Void]>, index: 1
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,29] error: [conditional] incompatible types in conditional expression.
+  found   : @RTainted List<capture#02[ extends E[ extends @RTainted Object super @RUntainted Void] super @RUntainted Void]>
+  required: @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>, index: 2
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,57] error: [conditional] incompatible types in conditional expression.
+  found   : @RTainted List<E[ extends @RTainted Object super @RUntainted Void]>
+  required: @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>, index: 3
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/web/app/servlet/HTTPProxy.java:[60,27] error: [argument] incompatible argument for parameter spec of URL constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 4
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/web/app/servlet/HTTPProxy.java:[124,36] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+  found   : @RTainted String
+  required: @RUntainted String, index: 5
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[242,39] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 6
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[372,42] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 7
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[423,45] error: [argument] incompatible argument for parameter is of DocumentBuilder.parse.
+  found   : @RTainted InputStream
+  required: @RUntainted InputStream, index: 8
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[1147,43] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 9
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[1148,43] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 10
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/AbortTransferCommandProcessor.java:[122,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 11
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/BufferedResponse.java:[262,59] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 12
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bulkimport/copy/BulkFilesystemImportWebScript.java:[80,69] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 13
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[550,41] error: [argument] incompatible argument for parameter arg0 of DocumentBuilder.parse.
+  found   : @RTainted InputSource
+  required: @RUntainted InputSource, index: 14
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[554,41] error: [argument] incompatible argument for parameter arg0 of DocumentBuilder.parse.
+  found   : @RTainted InputSource
+  required: @RUntainted InputSource, index: 15
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[1430,60] error: [argument] incompatible argument for parameter buf of PrintWriter.write.
+  found   : @RTainted char @RUntainted []
+  required: @RUntainted char @RUntainted [], index: 16
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVHelper.java:[966,30] error: [argument] incompatible argument for parameter spec of URL constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 17
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/facet/AbstractSolrFacetConfigAdminWebScript.java:[132,29] error: [return] incompatible types in return.
+  type of expression: T[ extends @RTainted Object super @RTainted Void]
+  method return type: T[ extends @RTainted Object super @RUntainted Void], index: 18
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/impl/AbstractClassImpl.java:[173,47] error: [assignment] incompatible types in assignment.
+  found   : @RTainted String
+  required: @RUntainted String, index: 19
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseSSOAuthenticationFilter.java:[406,61] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+  found   : @RTainted String
+  required: @RUntainted String, index: 20
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[387,49] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+  found   : @RTainted String
+  required: @RUntainted String, index: 21
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[387,53] error: [argument] incompatible argument for parameter arg1 of HttpSession.setAttribute.
+  found   : @RTainted SessionUser
+  required: @RUntainted Object, index: 22
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[518,97] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.sendError.
+  found   : @RTainted String
+  required: @RUntainted String, index: 23
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[186,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 24
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[187,42] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 25
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[208,49] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 26
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[209,49] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 27
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[348,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 28
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[349,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String, index: 29
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/custommodel/CustomModelUploadPost.java:[262,35] error: [argument] incompatible argument for parameter is of DocumentBuilder.parse.
+  found   : @RTainted InputStream
+  required: @RUntainted InputStream, index: 30
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[67,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addCookie.
+  found   : @RTainted Cookie
+  required: @RUntainted Cookie, index: 31
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[103,31] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.sendError.
+  found   : @RTainted String
+  required: @RUntainted String, index: 32
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[115,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+  found   : @RTainted String
+  required: @RUntainted String, index: 33
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[121,31] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setDateHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 34
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[127,31] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addDateHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 35
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[133,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 36
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[139,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 37
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[139,53] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.addHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 38
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[168,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setIntHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 39
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[174,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addIntHeader.
+  found   : @RTainted String
+  required: @RUntainted String, index: 40
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[240,38] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setCharacterEncoding.
+  found   : @RTainted String
+  required: @RUntainted String, index: 41
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[252,32] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+  found   : @RTainted String
+  required: @RUntainted String, index: 42
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/CommitTransferCommandProcessor.java:[117,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 43
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/BeginTransferCommandProcessor.java:[154,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 44
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/PrepareTransferCommandProcessor.java:[118,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 45
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[505,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 46
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[524,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 47
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[526,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 48
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[532,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 49
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[535,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 50
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[538,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 51
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[541,48] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 52
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[576,29] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 53
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[580,52] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 54
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[602,29] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 55
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[607,51] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 56
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[609,52] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 57
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[642,47] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 58
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[670,33] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 59
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[678,56] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 60
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[704,56] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 61
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/TransferWebScript.java:[122,46] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 62
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/search/SearchSQLApiWebscript.java:[92,58] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 63
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/search/impl/SearchMapper.java:[752,76] error: [assignment] incompatible types in assignment.
+  found   : @RTainted String
+  required: @RUntainted String, index: 64
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/StatusCommandProcessor.java:[126,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 65
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[205,45] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+  found   : @RTainted String
+  required: @RUntainted String, index: 66
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[609,25] error: [argument] incompatible argument for parameter s of ServletOutputStream.println.
+  found   : @RTainted String
+  required: @RUntainted String, index: 67
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[610,36] error: [argument] incompatible argument for parameter s of ServletOutputStream.println.
+  found   : @RTainted String
+  required: @RUntainted String, index: 68
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/SSOFallbackBasicAuthenticationDriver.java:[164,54] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+  found   : @RTainted String
+  required: @RUntainted String, index: 69
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/SSOFallbackBasicAuthenticationDriver.java:[164,73] error: [argument] incompatible argument for parameter arg1 of HttpSession.setAttribute.
+  found   : @RTainted SessionUser
+  required: @RUntainted Object, index: 70
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/MessagesTransferCommandProcessor.java:[86,35] error: [argument] incompatible argument for parameter str of Writer.write.
+  found   : @RTainted String
+  required: @RUntainted String, index: 71
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVLockServiceImpl.java:[415,37] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+  found   : @RTainted String
+  required: @RUntainted String, index: 72
+[INFO] 72 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Alfresco Community Repo Parent 23.1.0.143-SNAPSHOT:
+[INFO] 
+[INFO] Alfresco Community Repo Parent ..................... SUCCESS [  0.391 s]
+[INFO] Alfresco Core ...................................... SUCCESS [  0.363 s]
+[INFO] Alfresco Remote API ................................ FAILURE [ 38.589 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  39.403 s
+[INFO] Finished at: 2024-07-30T11:36:49-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project alfresco-remote-api: Compilation failure: Compilation failure: 
+[ERROR]  Library: false, Poly: true, Type Argument: true, Validation: false, Side Effect: false
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,27] error: [argument] incompatible argument for parameter c of ArrayList constructor.
+[ERROR]   found   : @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>
+[ERROR]   required: @RTainted Collection<?[ extends E[ extends @RTainted Object super @RUntainted Void] super @RUntainted Void]>, index: 1
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,29] error: [conditional] incompatible types in conditional expression.
+[ERROR]   found   : @RTainted List<capture#02[ extends E[ extends @RTainted Object super @RUntainted Void] super @RUntainted Void]>
+[ERROR]   required: @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>, index: 2
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/framework/resource/parameters/ArrayListPage.java:[43,57] error: [conditional] incompatible types in conditional expression.
+[ERROR]   found   : @RTainted List<E[ extends @RTainted Object super @RUntainted Void]>
+[ERROR]   required: @RTainted Collection<capture#01[ extends E[ extends @RTainted Object super @RTainted Void] super @RUntainted Void]>, index: 3
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/web/app/servlet/HTTPProxy.java:[60,27] error: [argument] incompatible argument for parameter spec of URL constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 4
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/web/app/servlet/HTTPProxy.java:[124,36] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 5
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[242,39] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 6
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[372,42] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 7
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[423,45] error: [argument] incompatible argument for parameter is of DocumentBuilder.parse.
+[ERROR]   found   : @RTainted InputStream
+[ERROR]   required: @RUntainted InputStream, index: 8
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[1147,43] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 9
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bean/ADMRemoteStore.java:[1148,43] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 10
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/AbortTransferCommandProcessor.java:[122,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 11
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/BufferedResponse.java:[262,59] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 12
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/bulkimport/copy/BulkFilesystemImportWebScript.java:[80,69] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 13
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[550,41] error: [argument] incompatible argument for parameter arg0 of DocumentBuilder.parse.
+[ERROR]   found   : @RTainted InputSource
+[ERROR]   required: @RUntainted InputSource, index: 14
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[554,41] error: [argument] incompatible argument for parameter arg0 of DocumentBuilder.parse.
+[ERROR]   found   : @RTainted InputSource
+[ERROR]   required: @RUntainted InputSource, index: 15
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVMethod.java:[1430,60] error: [argument] incompatible argument for parameter buf of PrintWriter.write.
+[ERROR]   found   : @RTainted char @RUntainted []
+[ERROR]   required: @RUntainted char @RUntainted [], index: 16
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVHelper.java:[966,30] error: [argument] incompatible argument for parameter spec of URL constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 17
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/facet/AbstractSolrFacetConfigAdminWebScript.java:[132,29] error: [return] incompatible types in return.
+[ERROR]   type of expression: T[ extends @RTainted Object super @RTainted Void]
+[ERROR]   method return type: T[ extends @RTainted Object super @RUntainted Void], index: 18
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/impl/AbstractClassImpl.java:[173,47] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 19
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseSSOAuthenticationFilter.java:[406,61] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 20
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[387,49] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 21
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[387,53] error: [argument] incompatible argument for parameter arg1 of HttpSession.setAttribute.
+[ERROR]   found   : @RTainted SessionUser
+[ERROR]   required: @RUntainted Object, index: 22
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/BaseAuthenticationFilter.java:[518,97] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.sendError.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 23
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[186,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 24
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[187,42] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 25
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[208,49] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 26
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[209,49] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 27
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[348,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 28
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/site/SiteExportGet.java:[349,45] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 29
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/custommodel/CustomModelUploadPost.java:[262,35] error: [argument] incompatible argument for parameter is of DocumentBuilder.parse.
+[ERROR]   found   : @RTainted InputStream
+[ERROR]   required: @RUntainted InputStream, index: 30
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[67,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addCookie.
+[ERROR]   found   : @RTainted Cookie
+[ERROR]   required: @RUntainted Cookie, index: 31
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[103,31] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.sendError.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 32
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[115,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 33
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[121,31] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setDateHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 34
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[127,31] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addDateHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 35
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[133,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 36
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[139,27] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 37
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[139,53] error: [argument] incompatible argument for parameter arg1 of HttpServletResponse.addHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 38
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[168,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.setIntHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 39
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[174,30] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.addIntHeader.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 40
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[240,38] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setCharacterEncoding.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 41
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/opencmis/CMISHttpServletResponse.java:[252,32] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 42
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/CommitTransferCommandProcessor.java:[117,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 43
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/BeginTransferCommandProcessor.java:[154,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 44
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/PrepareTransferCommandProcessor.java:[118,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 45
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[505,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 46
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[524,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 47
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[526,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 48
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[532,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 49
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[535,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 50
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[538,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 51
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[541,48] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 52
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[576,29] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 53
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[580,52] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 54
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[602,29] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 55
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[607,51] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 56
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[609,52] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 57
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[642,47] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 58
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[670,33] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 59
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[678,56] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 60
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/GetMethod.java:[704,56] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 61
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/TransferWebScript.java:[122,46] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 62
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/search/SearchSQLApiWebscript.java:[92,58] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 63
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/rest/api/search/impl/SearchMapper.java:[752,76] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 64
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/StatusCommandProcessor.java:[126,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 65
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[205,45] error: [argument] incompatible argument for parameter arg0 of ServletResponse.setContentType.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 66
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[609,25] error: [argument] incompatible argument for parameter s of ServletOutputStream.println.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 67
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/util/HttpRangeProcessor.java:[610,36] error: [argument] incompatible argument for parameter s of ServletOutputStream.println.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 68
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/SSOFallbackBasicAuthenticationDriver.java:[164,54] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 69
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/auth/SSOFallbackBasicAuthenticationDriver.java:[164,73] error: [argument] incompatible argument for parameter arg1 of HttpSession.setAttribute.
+[ERROR]   found   : @RTainted SessionUser
+[ERROR]   required: @RUntainted Object, index: 70
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/web/scripts/transfer/MessagesTransferCommandProcessor.java:[86,35] error: [argument] incompatible argument for parameter str of Writer.write.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 71
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/remote-api/src/main/java/org/alfresco/repo/webdav/WebDAVLockServiceImpl.java:[415,37] error: [argument] incompatible argument for parameter arg0 of HttpSession.setAttribute.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String, index: 72
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :alfresco-remote-api
