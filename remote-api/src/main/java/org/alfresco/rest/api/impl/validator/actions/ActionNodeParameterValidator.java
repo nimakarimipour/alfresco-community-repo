@@ -60,6 +60,7 @@ import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.apache.commons.collections.MapUtils;
 import org.apache.logging.log4j.util.Strings;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * This class provides logic for validation of permissions for action parameters which reference node.
