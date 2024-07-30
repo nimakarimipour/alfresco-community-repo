@@ -41,6 +41,7 @@ import org.springframework.extensions.webscripts.AbstractWebScript;
 import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * @author brian
@@ -52,7 +53,7 @@ public class TransferWebScript extends AbstractWebScript
     
     private boolean enabled = true;
     private Map<String, CommandProcessor> processors = new TreeMap<String, CommandProcessor>();
-    private JsonSerializer<Throwable, JSONObject> errorSerializer = new ExceptionJsonSerializer();
+    private JsonSerializer<Throwable, @RUntainted JSONObject> errorSerializer = new ExceptionJsonSerializer();
     
     public void setEnabled(boolean enabled)
     {
