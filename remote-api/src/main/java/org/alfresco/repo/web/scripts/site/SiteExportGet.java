@@ -60,6 +60,7 @@ import org.springframework.extensions.webscripts.Status;
 import org.springframework.extensions.webscripts.WebScriptException;
 import org.springframework.extensions.webscripts.WebScriptRequest;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Exports a Site as a zip of ACPs.
@@ -72,14 +73,14 @@ public class SiteExportGet extends AbstractWebScript
     private static final List<String> USERS_NOT_TO_EXPORT = Arrays.asList(
             new String[] { "admin", "guest" });
     
-    private SiteService siteService;
+    private @RUntainted SiteService siteService;
     private ExporterService exporterService;
     private MimetypeService mimetypeService;
     private AuthorityService authorityService;
     private ChildApplicationContextManager authenticationContextManager;
     
     @Override
-    public void execute(WebScriptRequest req, WebScriptResponse res) throws IOException
+    public void execute(@RUntainted WebScriptRequest req, WebScriptResponse res) throws IOException
     {
         // Grab the site
         String siteName = 
@@ -171,7 +172,7 @@ public class SiteExportGet extends AbstractWebScript
         mainZip.close();
     }
     
-    protected void doSiteACPExport(SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
+    protected void doSiteACPExport(@RUntainted SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
     {
         // Build the parameters
         ExporterCrawlerParameters parameters = new ExporterCrawlerParameters();
@@ -191,7 +192,7 @@ public class SiteExportGet extends AbstractWebScript
         exporterService.exportView(handler, parameters, null);
     }
     
-    protected void doPeopleACPExport(final List<NodeRef> peopleNodes, SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
+    protected void doPeopleACPExport(final List<NodeRef> peopleNodes, @RUntainted SiteInfo site, CloseIgnoringOutputStream writeTo) throws IOException
     {
         if (!peopleNodes.isEmpty())
         {
@@ -332,7 +333,7 @@ public class SiteExportGet extends AbstractWebScript
         out.close();
     }
     
-    protected void doUserACPExport(List<NodeRef> userNodes, SiteInfo site,
+    protected void doUserACPExport(List<NodeRef> userNodes, @RUntainted SiteInfo site,
             CloseIgnoringOutputStream writeTo) throws IOException
     {
         // Build the parameters
@@ -368,7 +369,7 @@ public class SiteExportGet extends AbstractWebScript
         }
     }
     
-    public void setSiteService(SiteService siteService)
+    public void setSiteService(@RUntainted SiteService siteService)
     {
         this.siteService = siteService;
     }

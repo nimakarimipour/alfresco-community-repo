@@ -34,6 +34,7 @@ import java.util.Set;
 import org.springframework.extensions.config.ConfigElement;
 import org.springframework.extensions.config.ConfigException;
 import org.springframework.extensions.config.element.ConfigElementAdapter;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 
 /**
@@ -169,7 +170,7 @@ public class OpenSearchConfigElement extends ConfigElementAdapter
         protected String label;
         protected String labelId;
         protected String proxy;
-        protected Map<String, String> urls = new HashMap<String, String>(8, 10f);
+        protected Map<String, @RUntainted String> urls = new HashMap<String, @RUntainted String>(8, 10f);
 
         
         /**
@@ -230,7 +231,7 @@ public class OpenSearchConfigElement extends ConfigElementAdapter
          * 
          * @return  urls
          */
-        public Map<String, String> getUrls()
+        public Map<String, @RUntainted String> getUrls()
         {
             return urls;
         }
@@ -241,7 +242,7 @@ public class OpenSearchConfigElement extends ConfigElementAdapter
          * @param mimetype  mime type
          * @param uri  uri
          */
-        /*package*/ void addUrl(String mimetype, String uri)
+        /*package*/ void addUrl(String mimetype, @RUntainted String uri)
         {
             this.urls.put(mimetype, uri);
         }
