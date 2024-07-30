@@ -31,6 +31,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A general interface for servlet-based authentication. Allows code to be shared by Web Client, WebDAV and Sharepoint
@@ -40,7 +41,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthenticationDriver
 {
-    public static final String AUTHENTICATION_USER = "_alfAuthTicket";
+    public static final @RUntainted String AUTHENTICATION_USER = "_alfAuthTicket";
     
     /**
      * Authenticate user based on information in http request such as Authorization header or cached session

@@ -29,6 +29,7 @@ import org.alfresco.repo.content.MimetypeMap;
 import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.MimetypeService;
 import org.springframework.extensions.webscripts.WebScriptRequest;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 public class MimeTypeUtil
 {
@@ -44,7 +45,7 @@ public class MimeTypeUtil
      *
      * @return  mimetype of the file as a string
      */
-    public static String determineMimetype(ContentReader reader, WebScriptRequest req, MimetypeService mimetypeService)
+    public static @RUntainted String determineMimetype(ContentReader reader, WebScriptRequest req, MimetypeService mimetypeService)
     {
         String mimetype = reader.getMimetype();
         if (mimetype == null || mimetype.length() == 0)

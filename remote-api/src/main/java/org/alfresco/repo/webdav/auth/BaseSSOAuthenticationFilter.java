@@ -60,6 +60,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.extensions.webscripts.Description.RequiredAuthentication;
 import org.springframework.extensions.surf.util.URLDecoder;
 import org.springframework.extensions.webscripts.Match;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Base class with common code and initialisation for single signon authentication filters.
@@ -93,7 +94,7 @@ public abstract class BaseSSOAuthenticationFilter extends BaseAuthenticationFilt
     private AuthenticationDriver fallbackDelegate;
     private boolean m_isFallbackEnabled = true;
             
-    protected static final String MIME_HTML_TEXT = "text/html";
+    protected static final @RUntainted String MIME_HTML_TEXT = "text/html";
 
     protected String loginPageLink;
 

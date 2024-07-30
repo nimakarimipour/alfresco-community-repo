@@ -44,6 +44,7 @@ import org.alfresco.util.ISO9075;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Helper class used by the WebDAV protocol handling classes
@@ -104,11 +105,11 @@ public class WebDAV
 
     // HTTP headers
     
-    public static final String HEADER_CONTENT_LENGTH = "Content-Length";
-    public static final String HEADER_CONTENT_TYPE = "Content-Type";
+    public static final @RUntainted String HEADER_CONTENT_LENGTH = "Content-Length";
+    public static final @RUntainted String HEADER_CONTENT_TYPE = "Content-Type";
     public static final String HEADER_DEPTH = "Depth";
     public static final String HEADER_DESTINATION = "Destination";
-    public static final String HEADER_ETAG = "ETag";
+    public static final @RUntainted String HEADER_ETAG = "ETag";
     public static final String HEADER_EXPECT = "Expect";
     public static final String HEADER_EXPECT_CONTENT = "100-continue";
     public static final String HEADER_IF = "If";
@@ -117,8 +118,8 @@ public class WebDAV
     public static final String HEADER_IF_NONE_MATCH = "If-None-Match";
     public static final String HEADER_IF_RANGE = "If-Range";
     public static final String HEADER_IF_UNMODIFIED_SINCE = "If-Unmodified-Since";
-    public static final String HEADER_LAST_MODIFIED = "Last-Modified";
-    public static final String HEADER_LOCK_TOKEN = "Lock-Token";
+    public static final @RUntainted String HEADER_LAST_MODIFIED = "Last-Modified";
+    public static final @RUntainted String HEADER_LOCK_TOKEN = "Lock-Token";
     public static final String HEADER_OVERWRITE = "Overwrite";
     public static final String HEADER_RANGE = "Range";
     public static final String HEADER_TIMEOUT = "Timeout";
@@ -226,7 +227,7 @@ public class WebDAV
     public static final String XML_NS_CANNOT_MODIFY_PROTECTED_PROPERTY = DAV_NS_PREFIX + "cannot-modify-protected-property";
     
     
-    public static final String XML_CONTENT_TYPE = "text/xml; charset=UTF-8";
+    public static final @RUntainted String XML_CONTENT_TYPE = "text/xml; charset=UTF-8";
     
     // Alfresco specific properties
     
@@ -318,7 +319,7 @@ public class WebDAV
      * @param ldate long
      * @return String
      */
-    public static String formatHeaderDate(long ldate)
+    public static @RUntainted String formatHeaderDate(long ldate)
     {
         // HTTP header date/time format
         // NOTE: According to RFC2616 dates should always be in English and in
