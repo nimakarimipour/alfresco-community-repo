@@ -1,0 +1,299 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Alfresco Community Repo Parent                                     [pom]
+[INFO] Alfresco Core                                                      [jar]
+[INFO] 
+[INFO] ----------------< org.alfresco:alfresco-community-repo >----------------
+[INFO] Building Alfresco Community Repo Parent 23.1.0.143-SNAPSHOT        [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- license:2.0.1:add-third-party (third-party-licenses) @ alfresco-community-repo ---
+[WARNING] Parameter 'failIfWarning' (user property 'license.failIfWarning') is deprecated: since 1.14, use now failOnMissing or failOnBlacklist.
+[WARNING] The goal is skip due to packaging 'pom'
+[INFO] 
+[INFO] ---------------------< org.alfresco:alfresco-core >---------------------
+[INFO] Building Alfresco Core 23.1.0.143-SNAPSHOT                         [2/2]
+[INFO]   from core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- license:2.0.1:add-third-party (third-party-licenses) @ alfresco-core ---
+[WARNING] Parameter 'failIfWarning' (user property 'license.failIfWarning') is deprecated: since 1.14, use now failOnMissing or failOnBlacklist.
+[WARNING] Could not transfer metadata edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.3-ENHANCE-OFF-SNAPSHOT/maven-metadata.xml from/to maven-default-http-blocker (http://0.0.0.0/): Blocked mirror for repositories: [apache.snapshots (http://repository.apache.org/snapshots, default, snapshots)]
+[WARNING] There is 1 dependency with no license :
+[WARNING]  - edu.ucr.cs.riple.taint--ucrtainting-checker-qual--0.3-ENHANCE-OFF-SNAPSHOT
+[INFO] Included licenses (whitelist): [ANTLR-PD, Apache 1.1 (ORO License), Apache Variant (JDOM License), Apache-2.0, BSD Variant (dom4j License), BSD Variant (FreeMarker License), BSD Variant (JCraft License), BSD-2-Clause, BSD-3-Clause, BSD-3-Clause-No-Nuclear-Warranty, CC-BY-2.5, CC0-1.0, CDDL-1.0, CDDL-1.1, CPL-1.0, EDL-1.0, Elastic-2.0, EPL-1.0, EPL-2.0, GeoAPI, GOLICENSE, ICU, JSON, LGPL-2.0-only, LGPL-2.0-or-later, LGPL-2.1-only, LGPL-2.1-or-later, LGPL-3.0-only, LGPL-3.0-or-later, MIT, MIT-0, MPL-1.0, MPL-1.1, MPL-2.0, Plexus, PostgreSQL, Public-Domain, Unidata, UnRAR, UPL-1.0, WTFPL, xpp, Zlib]
+[WARNING] There are 2 forbidden licenses used:
+[WARNING] License: 'Unknown license' used by 1 dependencies:
+ -ucrtainting-checker-qual (edu.ucr.cs.riple.taint:ucrtainting-checker-qual:0.3-ENHANCE-OFF-SNAPSHOT - no url defined)
+[WARNING] License: 'GNU General Public License, version 2 (GPL2), with the classpath exception' used by 1 dependencies:
+ -Checker Framework (org.checkerframework:checker:3.42.0 - https://checkerframework.org/)
+[INFO] Writing third-party file to /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/target/generated-sources/license/THIRD-PARTY.txt
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ alfresco-core ---
+[INFO] skip non existing resourceDirectory /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/resources
+[INFO] Copying 1 resource from target/generated-sources/license to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ alfresco-core ---
+[WARNING] Parameter 'compilerArguments' is deprecated: use compilerArgs instead.
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 159 source files with javac [forked debug target 17] to target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR]  Unannotated Code Handling: true, Poly: true, Type Argument: true, Validation: false, Side Effect: false
+Error in computing required fixes: new File(processDirectory) assignment, exception:java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "c" is null
+At path: /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java
+Last visited tree: this.processDirectory = new File(processDirectory)
+java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "c" is null
+	at java.base/java.util.HashSet.<init>(HashSet.java:120)
+	at edu.ucr.cs.riple.taint.ucrtainting.serialization.SerializationService.generateFixesForError(SerializationService.java:163)
+	at edu.ucr.cs.riple.taint.ucrtainting.serialization.SerializationService.serializeError(SerializationService.java:118)
+	at edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker.detailedReportError(UCRTaintingChecker.java:95)
+	at edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingVisitor.commonAssignmentCheck(UCRTaintingVisitor.java:76)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.commonAssignmentCheck(BaseTypeVisitor.java:3037)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.commonAssignmentCheck(BaseTypeVisitor.java:2956)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitAssignment(BaseTypeVisitor.java:1735)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitAssignment(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCAssign.accept(JCTree.java:2051)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitExpressionStatement(TreeScanner.java:502)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCExpressionStatement.accept(JCTree.java:1592)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitBlock(TreeScanner.java:272)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1103)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitIf(TreeScanner.java:487)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCIf.accept(JCTree.java:1565)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitBlock(TreeScanner.java:272)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1103)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitMethod(TreeScanner.java:224)
+	at org.checkerframework.framework.source.SourceVisitor.visitMethod(SourceVisitor.java:110)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitMethod(BaseTypeVisitor.java:1048)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitMethod(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(JCTree.java:953)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:119)
+	at jdk.compiler/com.sun.source.util.TreeScanner.visitClass(TreeScanner.java:203)
+	at org.checkerframework.framework.source.SourceVisitor.visitClass(SourceVisitor.java:98)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.processClassTree(BaseTypeVisitor.java:617)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitClass(BaseTypeVisitor.java:563)
+	at org.checkerframework.common.basetype.BaseTypeVisitor.visitClass(BaseTypeVisitor.java:187)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:860)
+	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:60)
+	at org.checkerframework.framework.source.SourceVisitor.visit(SourceVisitor.java:86)
+	at org.checkerframework.framework.source.SourceChecker.typeProcess(SourceChecker.java:1050)
+	at org.checkerframework.common.basetype.BaseTypeChecker.typeProcess(BaseTypeChecker.java:558)
+	at org.checkerframework.javacutil.AbstractTypeProcessor$AttributionTaskListener.finished(AbstractTypeProcessor.java:188)
+	at jdk.compiler/com.sun.tools.javac.api.ClientCodeWrapper$WrappedTaskListener.finished(ClientCodeWrapper.java:854)
+	at jdk.compiler/com.sun.tools.javac.api.MultiTaskListener.finished(MultiTaskListener.java:132)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:1397)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:1344)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:933)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:317)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:176)
+	at jdk.compiler/com.sun.tools.javac.Main.compile(Main.java:64)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:50)
+/home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[443,36] error: [assignment] incompatible types in assignment.
+  found   : @RTainted File
+  required: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[535,71] error: [argument] incompatible argument for parameter envp of Runtime.exec.
+  found   : @RTainted String @RTainted []
+  required: @RUntainted String @RTainted []
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[736,46] error: [return] incompatible types in return.
+  type of expression: @RTainted String @RTainted []
+  method return type: @RUntainted String @RTainted []
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/web/scripts/servlet/X509ServletFilterBase.java:[182,50] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+  found   : @RTainted String
+  required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[103,38] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[108,15] error: [return] incompatible types in return.
+  type of expression: @RTainted File
+  method return type: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[162,15] error: [return] incompatible types in return.
+  type of expression: @RTainted File
+  method return type: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[188,45] error: [argument] incompatible argument for parameter child of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[443,55] error: [argument] incompatible argument for parameter dirName of TempFileProvider.getTempDir.
+  found   : @RTainted String
+  required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[145,61] error: [assignment] incompatible types in assignment.
+  found   : @RTainted List<@RTainted String>
+  required: @RTainted List<@RUntainted String>
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[352,37] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[477,50] error: [argument] incompatible argument for parameter pathname of File constructor.
+  found   : @RTainted String
+  required: @RUntainted String
+[INFO] 12 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Alfresco Community Repo Parent 23.1.0.143-SNAPSHOT:
+[INFO] 
+[INFO] Alfresco Community Repo Parent ..................... SUCCESS [  0.391 s]
+[INFO] Alfresco Core ...................................... FAILURE [  6.386 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.838 s
+[INFO] Finished at: 2024-07-31T09:42:07-07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project alfresco-core: Compilation failure: Compilation failure: 
+[ERROR]  Unannotated Code Handling: true, Poly: true, Type Argument: true, Validation: false, Side Effect: false
+[ERROR] Error in computing required fixes: new File(processDirectory) assignment, exception:java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "c" is null
+[ERROR] At path: /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java
+[ERROR] Last visited tree: this.processDirectory = new File(processDirectory)
+[ERROR] java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "c" is null
+[ERROR] 	at java.base/java.util.HashSet.<init>(HashSet.java:120)
+[ERROR] 	at edu.ucr.cs.riple.taint.ucrtainting.serialization.SerializationService.generateFixesForError(SerializationService.java:163)
+[ERROR] 	at edu.ucr.cs.riple.taint.ucrtainting.serialization.SerializationService.serializeError(SerializationService.java:118)
+[ERROR] 	at edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker.detailedReportError(UCRTaintingChecker.java:95)
+[ERROR] 	at edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingVisitor.commonAssignmentCheck(UCRTaintingVisitor.java:76)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.commonAssignmentCheck(BaseTypeVisitor.java:3037)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.commonAssignmentCheck(BaseTypeVisitor.java:2956)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitAssignment(BaseTypeVisitor.java:1735)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitAssignment(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCAssign.accept(JCTree.java:2051)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitExpressionStatement(TreeScanner.java:502)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCExpressionStatement.accept(JCTree.java:1592)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitBlock(TreeScanner.java:272)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1103)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitIf(TreeScanner.java:487)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCIf.accept(JCTree.java:1565)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitBlock(TreeScanner.java:272)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBlock.accept(JCTree.java:1103)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitMethod(TreeScanner.java:224)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.visitMethod(SourceVisitor.java:110)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitMethod(BaseTypeVisitor.java:1048)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitMethod(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodDecl.accept(JCTree.java:953)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.scan(SourceVisitor.java:92)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:410)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.scan(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:96)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scan(TreeScanner.java:111)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.scanAndReduce(TreeScanner.java:119)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreeScanner.visitClass(TreeScanner.java:203)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.visitClass(SourceVisitor.java:98)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.processClassTree(BaseTypeVisitor.java:617)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitClass(BaseTypeVisitor.java:563)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeVisitor.visitClass(BaseTypeVisitor.java:187)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:860)
+[ERROR] 	at jdk.compiler/com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:60)
+[ERROR] 	at org.checkerframework.framework.source.SourceVisitor.visit(SourceVisitor.java:86)
+[ERROR] 	at org.checkerframework.framework.source.SourceChecker.typeProcess(SourceChecker.java:1050)
+[ERROR] 	at org.checkerframework.common.basetype.BaseTypeChecker.typeProcess(BaseTypeChecker.java:558)
+[ERROR] 	at org.checkerframework.javacutil.AbstractTypeProcessor$AttributionTaskListener.finished(AbstractTypeProcessor.java:188)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.api.ClientCodeWrapper$WrappedTaskListener.finished(ClientCodeWrapper.java:854)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.api.MultiTaskListener.finished(MultiTaskListener.java:132)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:1397)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.flow(JavaCompiler.java:1344)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:933)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:317)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:176)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.Main.compile(Main.java:64)
+[ERROR] 	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:50)
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[443,36] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : @RTainted File
+[ERROR]   required: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[535,71] error: [argument] incompatible argument for parameter envp of Runtime.exec.
+[ERROR]   found   : @RTainted String @RTainted []
+[ERROR]   required: @RUntainted String @RTainted []
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/exec/RuntimeExec.java:[736,46] error: [return] incompatible types in return.
+[ERROR]   type of expression: @RTainted String @RTainted []
+[ERROR]   method return type: @RUntainted String @RTainted []
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/web/scripts/servlet/X509ServletFilterBase.java:[182,50] error: [argument] incompatible argument for parameter arg0 of HttpServletResponse.sendRedirect.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[103,38] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[108,15] error: [return] incompatible types in return.
+[ERROR]   type of expression: @RTainted File
+[ERROR]   method return type: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[162,15] error: [return] incompatible types in return.
+[ERROR]   type of expression: @RTainted File
+[ERROR]   method return type: @RUntainted File
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[188,45] error: [argument] incompatible argument for parameter child of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/TempFileProvider.java:[443,55] error: [argument] incompatible argument for parameter dirName of TempFileProvider.getTempDir.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[145,61] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : @RTainted List<@RTainted String>
+[ERROR]   required: @RTainted List<@RUntainted String>
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[352,37] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] /home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/Convert.java:[477,50] error: [argument] incompatible argument for parameter pathname of File constructor.
+[ERROR]   found   : @RTainted String
+[ERROR]   required: @RUntainted String
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :alfresco-core

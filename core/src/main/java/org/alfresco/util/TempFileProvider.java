@@ -34,6 +34,7 @@ import org.apache.commons.logging.LogFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * A helper class that provides temporary files, providing a common point to clean
@@ -66,7 +67,7 @@ public class TempFileProvider
     /** 
      * subdirectory in the temp directory where Alfresco temporary files will go 
      */
-    public static final String ALFRESCO_TEMP_FILE_DIR = "Alfresco";
+    public static final @RUntainted String ALFRESCO_TEMP_FILE_DIR = "Alfresco";
     
     /**
      * The prefix for the long life temporary files.
@@ -92,7 +93,7 @@ public class TempFileProvider
      * 
      * @return Returns the system temporary directory i.e. <code>isDir == true</code>
      */
-    public static File getSystemTempDir()
+    public static @RUntainted File getSystemTempDir()
     {
         String systemTempDirPath = System.getProperty(SYSTEM_KEY_TEMP_DIR);
         if (systemTempDirPath == null)
@@ -113,7 +114,7 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir()
+    public static @RUntainted File getTempDir()
     {
         return getTempDir(ALFRESCO_TEMP_FILE_DIR);
     }
@@ -126,7 +127,7 @@ public class TempFileProvider
      * 
      * @return Returns a temporary directory, i.e. <code>isDir == true</code>
      */
-    public static File getTempDir(String dirName)
+    public static @RUntainted File getTempDir(@RUntainted String dirName)
     {
         File systemTempDir = getSystemTempDir();
         // append the Alfresco directory

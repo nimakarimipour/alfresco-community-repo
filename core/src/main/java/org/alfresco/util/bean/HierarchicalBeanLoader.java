@@ -24,6 +24,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Factory bean to find beans using a class hierarchy to drive the lookup. The well-known
@@ -67,7 +68,7 @@ public class HierarchicalBeanLoader
     implements InitializingBean, FactoryBean, ApplicationContextAware
 {
     public static final String DEFAULT_DIALECT_PLACEHOLDER = "#bean.dialect#";
-    public static final String DEFAULT_DIALECT_REGEX = "\\#bean\\.dialect\\#";
+    public static final @RUntainted String DEFAULT_DIALECT_REGEX = "\\#bean\\.dialect\\#";
     
     private ApplicationContext ctx;
     private String targetBeanName;
