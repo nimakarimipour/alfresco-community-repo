@@ -43,6 +43,7 @@ import org.alfresco.service.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.extensions.webscripts.WebScriptResponse;
+import edu.ucr.cs.riple.taint.ucrtainting.qual.RUntainted;
 
 /**
  * Generates HTTP response for "Range" scoped HTTP requests for content.
@@ -86,7 +87,7 @@ public class HttpRangeProcessor
      * @throws IOException
      */
     public boolean processRange(HttpServletResponse res, ContentReader reader, String range,
-          NodeRef ref, QName property, String mimetype, String userAgent)
+          NodeRef ref, QName property, @RUntainted String mimetype, String userAgent)
        throws IOException
     {
        // test for multiple byte ranges present in header
@@ -114,7 +115,7 @@ public class HttpRangeProcessor
      * @throws IOException
      */
     public boolean processRange(WebScriptResponse res, ContentReader reader, String range,
-          NodeRef ref, QName property, String mimetype, String userAgent)
+          NodeRef ref, QName property, @RUntainted String mimetype, String userAgent)
        throws IOException
     {
        // test for multiple byte ranges present in header
@@ -138,7 +139,7 @@ public class HttpRangeProcessor
      * 
      * @return true if processed range, false otherwise
      */
-    private boolean processSingleRange(Object res, ContentReader reader, String range, String mimetype)
+    private boolean processSingleRange(Object res, ContentReader reader, String range, @RUntainted String mimetype)
        throws IOException
     {
         // Handle either HttpServletResponse or WebScriptResponse
@@ -264,7 +265,7 @@ public class HttpRangeProcessor
      * @return true if processed range, false otherwise
      */
     private boolean processMultiRange(
-          Object res, String range, NodeRef ref, QName property, String mimetype, String userAgent)
+          Object res, String range, NodeRef ref, QName property, @RUntainted String mimetype, String userAgent)
        throws IOException
     {
        final Log logger = getLogger();
@@ -520,8 +521,8 @@ public class HttpRangeProcessor
        private long start;
        private long end;
        private long entityLength;
-       private String contentType;
-       private String contentRange;
+       private @RUntainted String contentType;
+       private @RUntainted String contentRange;
        
        /**
         * Constructor
@@ -531,7 +532,7 @@ public class HttpRangeProcessor
         * @param end              End position in the parent entity
         * @param entityLength     Length of the parent entity
         */
-       Range(String contentType, long start, long end, long entityLength)
+       Range(@RUntainted String contentType, long start, long end, long entityLength)
        {
           this.contentType = HEADER_CONTENT_TYPE + ": " + contentType;
           this.start = start;
@@ -550,7 +551,7 @@ public class HttpRangeProcessor
         * 
         * @throws IllegalArgumentException for an invalid range
         */
-       static Range constructRange(String range, String contentType, long entityLength)
+       static Range constructRange(String range, @RUntainted String contentType, long entityLength)
        {
           if (range == null)
           {
@@ -625,7 +626,7 @@ public class HttpRangeProcessor
        /**
         * @return the Content-Range header string value for this byte range
         */
-       private String getContentRange()
+       private @RUntainted String getContentRange()
        {
           if (this.contentRange == null)
           {
