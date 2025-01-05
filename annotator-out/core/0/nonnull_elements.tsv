@@ -1,2 +1,2 @@
 kind	class	method	param	index	uri
-FIELD	org.alfresco.util.transaction.TransactionSupportUtil$ResourcesHolder	null	resources	null	/home/nima/Developer/taint-benchmarks/alfresco-community-repo/core/src/main/java/org/alfresco/util/transaction/TransactionSupportUtil.java
+FIELD	org.alfresco.util.transaction.TransactionSupportUtil$ResourcesHolder	null	resources	null	/home/kdas006/annotation_dataset/alfresco-community-repo/core/src/main/java/org/alfresco/util/transaction/TransactionSupportUtil.java
