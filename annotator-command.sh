@@ -1,3 +1,4 @@
+#!/bin/bash
 lib=true
 arg=true
 poly=false
