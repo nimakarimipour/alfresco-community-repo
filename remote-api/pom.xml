@@ -357,7 +357,7 @@
                                 <arg>-AenableLibraryCheck=${env.ANNOTATOR_LIBRARY}</arg>
                                 <arg>-AenablePolyTaintInference=${env.ANNOTATOR_POLY}</arg>
                                 <arg>-AenableTypeArgumentInference=${env.ANNOTATOR_TYPE_ARG}</arg>
-                                <arg>-AserializationConfigPath=/opt/table4/tainttyper_unannotated/alfresco-community-repo/annotator-out/remote-api/checker.xml</arg>
+                                <arg>-AserializationConfigPath=/home/nima/Desktop/taint-docker/table4/annotator/alfresco-remote-api/annotator-out/remote-api/checker.xml</arg>
                                 <arg>-XDcompilePolicy=simple</arg>
                                 <arg>-parameters</arg>
                                 <!-- <arg>-Xplugin:ErrorProne -XepDisableAllChecks -Xep:AnnotatorScanner:ERROR -XepOpt:AnnotatorScanner:ConfigPath=/opt/table4/tainttyper_unannotated/alfresco-community-repo/annotator-out/remote-api/scanner.xml</arg> -->
